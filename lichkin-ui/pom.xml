@@ -5,6 +5,21 @@
   <packaging>jar</packaging>
 
   <artifactId>lichkin-ui</artifactId>
+  <version>1.0.0.RELEASE</version>
+
+  <name>lichkin-ui</name>
+  <description>使用springboot基础封装</description>
+  <url>http://codes.lichkin.com/lichkin-ui</url>
+  <organization>
+    <name>SuZhou LichKin Information Technology Co., Ltd.</name>
+    <url>http://www.lichkin.com</url>
+  </organization>
+  <developers>
+    <developer>
+      <name>XuXin Zhuang</name>
+      <email>zhuangxuxin@hotmail.com</email>
+    </developer>
+  </developers>
 
   <parent>
     <groupId>com.lichkin.ui</groupId>
@@ -12,5 +27,29 @@
     <version>1.0.0.RELEASE</version>
     <relativePath>../lichkin-ui-parent</relativePath>
   </parent>
+
+  <dependencies>
+    <!-- lichkin ui -->
+    <dependency>
+      <groupId>com.lichkin.ui</groupId>
+      <artifactId>lichkin-ui-jquery</artifactId>
+      <version>3.3.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.lichkin.ui</groupId>
+      <artifactId>lichkin-ui-jquery-mobile</artifactId>
+      <version>1.4.5</version>
+    </dependency>
+    <dependency>
+      <groupId>com.lichkin.ui</groupId>
+      <artifactId>lichkin-ui-semantic-ui</artifactId>
+      <version>20180319</version>
+    </dependency>
+    <dependency>
+      <groupId>com.lichkin.ui</groupId>
+      <artifactId>lichkin-ui-zepto</artifactId>
+      <version>1.2.0</version>
+    </dependency>
+  </dependencies>
 
 </project>
