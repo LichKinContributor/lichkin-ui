@@ -1,1 +1,33 @@
 @charset "UTF-8";
+:root {
+    --lichkin-body-background-color: #e0e0e0;
+    --lichkin-inputs-background-color: #ffffff;
+    --lichkin-inputs-padding: 3px 8px 3px 8px;
+}
+
+.lichkin-body {
+    background-color: var(--lichkin-body-background-color);
+}
+
+.lichkin-img {
+    vertical-align: middle;
+}
+
+.lichkin-textbox {
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding: var(--lichkin-inputs-padding);
+    margin: 0px;
+    background-color: var(--lichkin-inputs-background-color);
+}
+
+.lichkin-textarea {
+    resize: none;
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding: var(--lichkin-inputs-padding);
+    margin: 0px;
+    background-color: var(--lichkin-inputs-background-color);
+}
