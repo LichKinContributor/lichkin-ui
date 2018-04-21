@@ -8,6 +8,7 @@
 	</#if>
 	<#if section="link">
 		<@lichkin@cssTag url="${ctx}/webjars/dist/semantic${compressSuffix}.css" />
+		<@lichkin@cssTag url="${ctx}/webjars/lichkin-web-semantic-ui${compressSuffix}.css" />
 		<#nested "link"/>
 	</#if>
 	<#if section="style">
@@ -19,6 +20,7 @@
 	</#if>
 	<#if section="javascript-links">
 		<@lichkin@jsTag url="${ctx}/webjars/dist/semantic${compressSuffix}.js"/>
+		<@lichkin@jsTag url="${ctx}/webjars/lichkin-web-semantic-ui${compressSuffix}.js" />
 		<#nested "javascript-links"/>
 	</#if>
 	<#if section="javascript-contents">
