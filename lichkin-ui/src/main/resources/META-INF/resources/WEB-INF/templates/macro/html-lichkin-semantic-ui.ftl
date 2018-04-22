@@ -7,7 +7,7 @@
 		<#nested "meta"/>
 	</#if>
 	<#if section="link">
-		<@lichkin@cssTag url="${ctx}/webjars/dist/semantic${compressSuffix}.css" />
+		<@lichkin@cssTag url="${ctx}/webjars/Semantic-UI/2.3.1/semantic${compressSuffix}.css" />
 		<@lichkin@cssTag url="${ctx}/webjars/lichkin-web-semantic-ui${compressSuffix}.css" />
 		<#nested "link"/>
 	</#if>
@@ -19,7 +19,7 @@
 		<#nested "body-content"/>
 	</#if>
 	<#if section="javascript-links">
-		<@lichkin@jsTag url="${ctx}/webjars/dist/semantic${compressSuffix}.js"/>
+		<@lichkin@jsTag url="${ctx}/webjars/Semantic-UI/2.3.1/semantic${compressSuffix}.js"/>
 		<@lichkin@jsTag url="${ctx}/webjars/lichkin-web-semantic-ui${compressSuffix}.js" />
 		<#nested "javascript-links"/>
 	</#if>

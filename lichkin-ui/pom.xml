@@ -31,24 +31,19 @@
   <dependencies>
     <!-- lichkin ui -->
     <dependency>
-      <groupId>com.lichkin.ui</groupId>
-      <artifactId>lichkin-ui-jquery</artifactId>
+      <groupId>org.webjars</groupId>
+      <artifactId>jquery</artifactId>
       <version>3.3.1</version>
     </dependency>
     <dependency>
-      <groupId>com.lichkin.ui</groupId>
-      <artifactId>lichkin-ui-jquery-mobile</artifactId>
+      <groupId>org.webjars</groupId>
+      <artifactId>jquery-mobile</artifactId>
       <version>1.4.5</version>
     </dependency>
     <dependency>
-      <groupId>com.lichkin.ui</groupId>
-      <artifactId>lichkin-ui-semantic-ui</artifactId>
-      <version>20180319</version>
-    </dependency>
-    <dependency>
-      <groupId>com.lichkin.ui</groupId>
-      <artifactId>lichkin-ui-zepto</artifactId>
-      <version>1.2.0</version>
+      <groupId>org.webjars</groupId>
+      <artifactId>Semantic-UI</artifactId>
+      <version>2.3.1</version>
     </dependency>
   </dependencies>
 
