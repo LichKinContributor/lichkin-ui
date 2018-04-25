@@ -11,41 +11,66 @@ let LK = {
    * 基于JQuery.ajax实现动态加载内嵌式页面
    * @param options 自定义的参数
    * @param options[$obj] 页面内容要写入的DOM元素对应的JQuery对象
-   * @param options[url] 页面地址
+   * @param options[method] GET/POST
+   * @param options[url] 拼接前缀与后缀
+   * @param options[data] 当method='POST'时，自动转换为RequestBody内容。
    */
   loadPage : function(options) {
-    // JQuery提供的load、html等方法读取内容后会使用同步方式加载脚本文件，已经明确给出了不建议使用，也许未来就不给用了。
-    // 这样做的主要原因是，因为毕竟动态加载的过程不是主页面的加载进行。
-    // 那么前置脚本如果没有加载完成，后续的所有操作都可能会产生问题。
-    // 样式文件虽然加载不会引起同步问题的产生，但是也同样存在该问题。
-    // 规避该问题可以使用约定的方式避免。
-    // 1、内嵌页面需要的样式都在页面顶端使用style定义。
-    // 2、内嵌页面需要的脚本都写在单独的脚本文件中。
-    // 3、内嵌页面中不允许直接书写脚本代码。
-    $.ajax({
-      method : 'GET',// 内嵌页面必须是GET请求内容
-      url : options.url,
-      dataType : 'text',// 内嵌页面必须的不能包含脚本文件，因而其本质就是个文本内容。
+    options = $.extend({
+      method : 'POST',
+      dataType : 'text',
+      contentType : 'text/html;charset=UTF-8',
+      headers : {
+        'Accept-Language' : _LANG
+      }
+    }, options, {
+      data : $.extend({}, options.data)
+    }, {
+      url : _CTX + options.url + _MAPPING_PAGES,
+      data : (options.method == 'GET') ? options.data : JSON.stringify(options.data),
       success : function(text) {
         var $obj = options.$obj;
-        // 请求成功后将文本内容加入到DOM元素上
         $obj[0].innerHTML = text;
-        // 动态加载脚本文件
         var head = document.getElementsByTagName("head")[0];
         $obj.find('script').each(function() {
-          var $this = $(this).remove()[0];
-          var src = $this.src;
+          var that = $(this).remove()[0];
+          var src = that.src;
           var script = document.createElement("script");
           script.type = "text/javascript";
           if (src) {
             script.src = src;
           } else {
-            script.innerHTML = $this.innerHTML;
+            script.innerHTML = that.innerHTML;
           }
           head.appendChild(script);
         });
       }
     });
+
+    $.ajax(options);
+  },
+
+  /**
+   * AJAX请求
+   * @param options 自定义的参数
+   * @param options[url] 拼接前缀与后缀
+   * @param options[data] 转换为RequestBody内容
+   * @param $options JQuery定义的参数
+   */
+  ajax : function(options, $options) {
+    options = $.extend({
+      method : 'POST',
+      dataType : 'json',
+      contentType : 'application/json;charset=UTF-8',
+      headers : {
+        'Accept-Language' : _LANG
+      }
+    }, options, {
+      url : _CTX + options.url + _MAPPING_DATAS,
+      data : JSON.stringify($.extend({}, options.data))
+    }, $options);
+
+    $.ajax(options);
   }
 
 };
