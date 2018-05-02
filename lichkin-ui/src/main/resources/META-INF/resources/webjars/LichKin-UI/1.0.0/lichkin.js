@@ -71,6 +71,40 @@ let LK = {
     }, $options);
 
     $.ajax(options);
+  },
+
+  /**
+   * 识别身份证（汉王云）
+   * @param options 自定义的参数
+   * @param options[uid] 服务器IP地址
+   * @param options[key] 汉王云Key
+   * @param options[$image] 读取图片的input
+   * @param options[callback] 回调方法
+   */
+  readIDCard : function(options) {
+    var reader = new FileReader();
+    reader.readAsDataURL(options.$image[0].files[0]);
+    reader.onload = function(e) {
+      var str = reader.result;
+      str = str.substring(str.indexOf(',') + 1);
+      data = {
+        uid : options.uid,
+        image : str
+      };
+      $.ajax({
+        type : "POST",
+        contentType : "application/octet-stream",
+        datatype : "json",
+        crossDomain : false,
+        jsonp : 'callback',
+        url : "http://api.hanvon.com/rt/ws/v1/ocr/idcard/recg?key=" + options.key + "&code=8d497db3-7341-4f1f-875a-2f5444884515",
+        data : JSON.stringify(data),
+        async : true,
+        success : function(data) {
+          options.callback(data);
+        }
+      });
+    }
   }
 
 };
