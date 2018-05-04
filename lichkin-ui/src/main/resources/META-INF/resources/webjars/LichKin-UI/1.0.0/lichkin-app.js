@@ -31,6 +31,16 @@ LK.app = {
 
   toast : function(options) {
     window.WebViewJavascriptBridge.callHandler('toast', options);
+  },
+
+  alert : function(options, callback) {
+    if (typeof callback == 'function') {
+      window.WebViewJavascriptBridge.callHandler('alert', options, function(responseData) {
+        callback();
+      });
+    } else {
+      window.WebViewJavascriptBridge.callHandler('alert', options);
+    }
   }
 
 };

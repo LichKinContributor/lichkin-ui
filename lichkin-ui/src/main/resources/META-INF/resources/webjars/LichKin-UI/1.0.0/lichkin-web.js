@@ -49,6 +49,13 @@ LK.web = {
         }, options.timeout);
       }
     }, 200);
+  },
+
+  alert : function(options, callback) {
+    alert(options.msg);
+    if (typeof callback == 'function') {
+      callback();
+    }
   }
 
 };
