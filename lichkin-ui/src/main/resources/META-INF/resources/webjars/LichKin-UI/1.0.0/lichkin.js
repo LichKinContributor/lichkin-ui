@@ -8,6 +8,134 @@
 let LK = {
 
   /**
+   * 判断是否为JSON对象
+   * @param json JSON对象
+   */
+  isJSON : function(json) {
+    return (typeof json == 'object') && Object.prototype.toString.call(json).toLowerCase() == "[object object]" && !json.length;
+  },
+
+  /**
+   * 判断是否为字符串
+   * @param str 字符串
+   */
+  isString : function(str) {
+    return typeof str == 'string';
+  },
+
+  /**
+   * 判断是否为数字
+   * @param number 数字
+   */
+  isNumber : function(number) {
+    return typeof number == 'number';
+  },
+
+  /**
+   * 输出日志
+   * @param options [string|number|JSON] 自定义的参数
+   * @param options.type [string] 日志类型。debug;info;warn;error.
+   * @param options.msg [string|number|JSON] 日志内容。字符串类型或JSON字符串。
+   * @param options.jsonMsg [boolean] 参数msg为JSON格式时true，参数msg为字符串时false。
+   */
+  log : function(options) {
+    // 根据各种支持的类型将options转换为标准JSON格式
+    if (typeof options == 'undefined') {
+      // 没有传入参数，则全部设置成默认值。
+      options = {
+        type : 'debug',
+        msg : 'undefined',
+        jsonMsg : false
+      };
+    } else if (this.isNumber(options)) {
+      // 传入的是数字，则转换为标准格式。
+      options = {
+        type : 'debug',
+        msg : String(options),
+        jsonMsg : false
+      };
+    } else if (this.isString(options)) {
+      // 传入的是字符串，则转换为标准格式。
+      options = {
+        type : 'debug',
+        msg : options,
+        jsonMsg : false
+      };
+    } else if (this.isJSON(options)) {
+      // 传入的是JOSN数据格式
+      // 处理type参数
+      if (typeof options.type == 'undefined') {
+        // 处理msg参数
+        if (typeof options.msg == 'undefined') {
+          // 没有传入msg参数
+          options.type = 'debug';
+          options.msg = 'undefined';
+          options.jsonMsg = false;
+        } else if (this.isNumber(options.msg)) {
+          // 传入的msg是数字类型，则将数字转为字符串。
+          options.type = 'debug';
+          options.msg = String(options.msg);
+          options.jsonMsg = false;
+        } else if (this.isString(options.msg)) {
+          // 传入的msg是字符串类型，不做处理。
+          options.type = 'debug';
+          options.jsonMsg = false;
+        } else if (this.isJSON(options.msg)) {
+          // 传入的msg是JSON类型，则将msg转为JSON对应的字符串。
+          options.type = 'debug';
+          options.msg = JSON.stringify(options.msg);
+          options.jsonMsg = true;
+        } else {
+          // 传入的msg参数不支持。
+          options = {
+            type : 'assert',
+            msg : 'Invalid format for param options.msg when invoke LK.log',
+            jsonMsg : false
+          };
+        }
+      } else {
+        // 有type类型，则判断type类型是否在显示范围内。
+        if (options.type != 'verbose' && options.type != 'debug' && options.type != 'info' && options.type != 'warn' && options.type != 'error' && options.type != 'assert') {
+          // 不在实现范围内，则将type参数设置成默认值。
+          options.type = 'debug';
+        }
+        // 处理msg参数
+        if (typeof options.msg == 'undefined') {
+          // 没有传入msg参数
+          options.msg = 'undefined';
+          options.jsonMsg = false;
+        } else if (this.isNumber(options.msg)) {
+          // 传入的msg是数字类型，则将数字转为字符串。
+          options.msg = String(options.msg);
+          options.jsonMsg = false;
+        } else if (this.isString(options.msg)) {
+          // 传入的msg是字符串类型，不做处理。
+          options.jsonMsg = false;
+        } else if (this.isJSON(options.msg)) {
+          // 传入的msg是JSON类型，则将msg转为JSON对应的字符串。
+          options.msg = JSON.stringify(options.msg);
+          options.jsonMsg = true;
+        } else {
+          // 传入的msg参数不支持。
+          options.type = 'assert';
+          options.msg = 'Invalid format for param options.msg when invoke LK.log';
+          options.jsonMsg = false;
+        }
+      }
+    } else {
+      // 传入的参数不支持，转换成标准格式。
+      options = {
+        type : 'assert',
+        msg : 'Invalid format for param options when invoke LK.log',
+        jsonMsg : false
+      };
+    }
+
+    // 调用具体实现方法
+    LK[this.type].log(options);
+  },
+
+  /**
    * 基于JQuery.ajax实现动态加载内嵌式页面
    * @param options 自定义的参数
    * @param options[$obj] 页面内容要写入的DOM元素对应的JQuery对象
