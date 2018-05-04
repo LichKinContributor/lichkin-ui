@@ -136,6 +136,102 @@ let LK = {
   },
 
   /**
+   * 显示提示窗
+   * @param options [string|number|JSON] 自定义的参数
+   * @param options.timeout [number] 弹出时长，单位：毫秒。
+   * @param options.msg [string|number|JSON] 日志内容。字符串类型或JSON字符串。
+   * @param options.jsonMsg [boolean] 参数msg为JSON格式时true，参数msg为字符串时false。
+   */
+  toast : function(options) {
+    // 根据各种支持的类型将options转换为标准JSON格式
+    if (typeof options == 'undefined') {
+      // 没有传入参数，则全部设置成默认值。
+      options = {
+        timeout : 1000,
+        msg : 'undefined',
+        jsonMsg : false
+      };
+    } else if (this.isNumber(options)) {
+      // 传入的是数字，则转换为标准格式。
+      options = {
+        timeout : 1000,
+        msg : String(options),
+        jsonMsg : false
+      };
+    } else if (this.isString(options)) {
+      // 传入的是字符串，则转换为标准格式。
+      options = {
+        timeout : 1000,
+        msg : options,
+        jsonMsg : false
+      };
+    } else if (this.isJSON(options)) {
+      // 传入的是JOSN数据格式
+      // 处理msg参数
+      if (typeof options.msg == 'undefined') {
+        // 没有传入msg参数
+        options.msg = JSON.stringify(options);
+        options.jsonMsg = true;
+        for ( var key in options) {
+          if (key != 'msg' && key != 'jsonMsg' && key != 'timeout') {
+            delete options[key];
+          }
+        }
+      } else if (this.isNumber(options.msg)) {
+        // 传入的msg是数字类型，则将数字转为字符串。
+        options.msg = String(options.msg);
+        options.jsonMsg = false;
+      } else if (this.isString(options.msg)) {
+        // 传入的msg是字符串类型，不做处理。
+        options.jsonMsg = false;
+      } else if (this.isJSON(options.msg)) {
+        // 传入的msg是JSON类型，则将msg转为JSON对应的字符串。
+        options.msg = JSON.stringify(options.msg);
+        options.jsonMsg = true;
+      } else {
+        // 传入的参数不支持，报错！
+        this.log({
+          type : 'assert',
+          msg : 'Invalid format for param options.msg when invoke LK.toast'
+        });
+        return;
+      }
+      // 处理timeout参数
+      if (typeof options.timeout == 'undefined') {
+        options.timeout = 1000;
+      } else if (this.isNumber(options.timeout)) {
+      } else if (this.isString(options.timeout)) {
+        options.timeout = parseInt(options.timeout);
+        if (options.timeout == 'NaN') {
+          // 传入的参数不支持，报错！
+          this.log({
+            type : 'assert',
+            msg : 'Invalid format for param options.timeout when invoke LK.toast'
+          });
+          return;
+        }
+      } else {
+        // 传入的参数不支持，报错！
+        this.log({
+          type : 'assert',
+          msg : 'Invalid format for param options.timeout when invoke LK.toast'
+        });
+        return;
+      }
+    } else {
+      // 传入的参数不支持，报错！
+      this.log({
+        type : 'assert',
+        msg : 'Invalid format for param options when invoke LK.toast'
+      });
+      return;
+    }
+
+    // 调用具体实现方法
+    LK[this.type].toast(options);
+  },
+
+  /**
    * 基于JQuery.ajax实现动态加载内嵌式页面
    * @param options 自定义的参数
    * @param options[$obj] 页面内容要写入的DOM元素对应的JQuery对象

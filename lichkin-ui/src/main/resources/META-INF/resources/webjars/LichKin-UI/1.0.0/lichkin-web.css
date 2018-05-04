@@ -47,3 +47,17 @@
   background-color: #67a029;
   border: 1px solid #548421;
 }
+
+.lichkin-toast {
+  display: none;
+  width: 100%;
+  text-align: center;
+  position: fixed;
+  bottom: 18px;
+}
+
+.lichkin-toast span {
+  padding: 3px 8px 3px 8px;
+  background-color: #656464;
+  color: #ffffff;
+}

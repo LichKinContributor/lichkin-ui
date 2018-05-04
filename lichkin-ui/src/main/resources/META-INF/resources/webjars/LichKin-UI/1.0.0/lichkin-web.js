@@ -34,6 +34,21 @@ LK.web = {
     } else {
       console.log('%c%s', styles[options.type], options.msg);
     }
+  },
+
+  toast : function(options) {
+    var id = setInterval(function() {
+      if ($('.lichkin-toast').length == 0) {
+        var toast = $('<div class="lichkin-toast"><span>' + options.msg + '</span></div>').appendTo('body');
+        toast.fadeIn(500);
+        setTimeout(function() {
+          toast.fadeOut(500, function() {
+            toast.remove();
+            clearInterval(id);
+          });
+        }, options.timeout);
+      }
+    }, 200);
   }
 
 };

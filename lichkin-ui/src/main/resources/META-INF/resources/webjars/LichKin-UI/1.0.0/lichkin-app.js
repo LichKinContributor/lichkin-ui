@@ -27,6 +27,10 @@ LK.app = {
 
   log : function(options) {
     window.WebViewJavascriptBridge.callHandler('log', options);
+  },
+
+  toast : function(options) {
+    window.WebViewJavascriptBridge.callHandler('toast', options);
   }
 
 };
