@@ -56,6 +56,23 @@ LK.web = {
     if (typeof callback == 'function') {
       callback();
     }
+  },
+
+  showLoading : function() {
+    var $loading = $('<div class="lichkin-loading"></div>').appendTo('body');
+    var $center = $('<div class="center"></div>').appendTo($loading);
+    var $container = $('<div class="container"></div>').appendTo($center);
+    for (var i = 2; i <= 10; i++) {
+      $container.append('<div class="object" style="-webkit-animation-name:loadingAnimate;-webkit-animation-delay:0.' + (i - 1) + 's;animation-delay:0.' + (i - 1) + 's;"></div>');
+    }
+    $loading.show();
+  },
+
+  closeLoading : function() {
+    $loading = $('.lichkin-loading');
+    if ($loading) {
+      $loading.remove();
+    }
   }
 
 };

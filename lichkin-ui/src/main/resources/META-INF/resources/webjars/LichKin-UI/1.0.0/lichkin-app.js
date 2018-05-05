@@ -41,6 +41,14 @@ LK.app = {
     } else {
       window.WebViewJavascriptBridge.callHandler('alert', options);
     }
+  },
+
+  showLoading : function() {
+    window.WebViewJavascriptBridge.callHandler('showLoading');
+  },
+
+  closeLoading : function() {
+    window.WebViewJavascriptBridge.callHandler('closeLoading');
   }
 
 };

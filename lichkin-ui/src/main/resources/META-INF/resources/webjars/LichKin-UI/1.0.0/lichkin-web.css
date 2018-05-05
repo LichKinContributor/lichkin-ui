@@ -1,63 +1,160 @@
 @charset "UTF-8";
 
 :root {
+  --lichkin-body-background-color: #dddddd;
+  --lichkin-font-color: #333333;
   --lichkin-font-size: 12px;
-  --lichkin-body-background-color: #e0e0e0;
-  --lichkin-inputs-background-color: #ffffff;
+
+  /* inputs */
   --lichkin-inputs-padding: 3px 8px 3px 8px;
+  --lichkin-inputs-background-color: #ffffff;
+  --lichkin-inputs-font-color: #ffffff;
+  --lichkin-inputs-font-size: 12px;
+
+  /* btn */
   --lichkin-btn-padding: 7px 0px 7px 0px;
+  --lichkin-btn-background-color: #669933;
+  --lichkin-btn-font-color: #ffffff;
+  --lichkin-btn-font-size: 12px;
+
+  /* toast */
+  --lichkin-toast-padding: 3px 8px 3px 8px;
+  --lichkin-toast-background-color: #669933;
+  --lichkin-toast-color: #ffffff;
+  --lichkin-toast-font-size: 12px;
+
+  /* loading */
+  --lichkin-loading-background-color: rgba(202, 202, 202, 0.66);
+  --lichkin-loading-foreground-color: #88bb66;
 }
 
 .lichkin-body {
   background-color: var(--lichkin-body-background-color);
 }
 
+/* img */
 .lichkin-img {
   vertical-align: middle;
 }
 
+/* inputs */
 .lichkin-textbox {
+  padding: var(--lichkin-inputs-padding);
+  background-color: var(--lichkin-inputs-background-color);
+  color: var(--lichkin-inputs-font-color);
+  font-size: var(--lichkin-inputs-font-size);
   width: 100%;
   height: 100%;
   border: none;
-  padding: var(--lichkin-inputs-padding);
   margin: 0px;
-  background-color: var(--lichkin-inputs-background-color);
 }
 
 .lichkin-textarea {
-  resize: none;
+  padding: var(--lichkin-inputs-padding);
+  background-color: var(--lichkin-inputs-background-color);
+  color: var(--lichkin-inputs-font-color);
+  font-size: var(--lichkin-inputs-font-size);
   width: 100%;
   height: 100%;
   border: none;
-  padding: var(--lichkin-inputs-padding);
   margin: 0px;
-  background-color: var(--lichkin-inputs-background-color);
+  resize: none;
 }
 
+/* btn */
 .lichkin-btn {
-  width: 100%;
   padding: var(--lichkin-btn-padding);
+  background-color: var(--lichkin-btn-background-color);
+  color: var(--lichkin-btn-font-color);
+  font-size: var(--lichkin-btn-font-size);
+  width: 100%;
+  height: 100%;
+  border: 1px solid #548421;
   margin: 0px;
   text-align: center;
-  font-size: var(--lichkin-font-size);
-  background-color: #67a029;
-  color: #ffffff;
   cursor: pointer;
-  background-color: #67a029;
-  border: 1px solid #548421;
 }
 
+/* toast */
 .lichkin-toast {
-  display: none;
   width: 100%;
+  height: auto;
+  border: none;
+  margin: 0px;
   text-align: center;
   position: fixed;
   bottom: 18px;
+  display: none;
 }
 
 .lichkin-toast span {
-  padding: 3px 8px 3px 8px;
-  background-color: #656464;
-  color: #ffffff;
+  padding: var(--lichkin-toast-padding);
+  background-color: var(--lichkin-toast-background-color);
+  color: var(--lichkin-toast-color);
+  font-size: var(--lichkin-toast-font-size);
+}
+
+/* loading */
+.lichkin-loading {
+  padding: 0px;
+  background-color: var(--lichkin-loading-background-color);
+  width: 100%;
+  height: 100%;
+  border: none;
+  margin: 0px;
+  position: fixed;
+  z-index: 3333;
+  top: 0px;
+  display: none;
+}
+
+.lichkin-loading .center {
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+  border: none;
+  margin: 0px;
+  position: relative;
+}
+
+.lichkin-loading .center .container {
+  padding: 0px;
+  width: 112px;
+  height: 50px;
+  border: none;
+  margin: -25px 0px 0px -56px;
+  left: 50%;
+  top: 50%;
+  position: absolute;
+}
+
+.lichkin-loading .center .container .object {
+  background-color: var(--lichkin-loading-foreground-color);
+  width: 8px;
+  height: 50px;
+  border: none;
+  margin: 0px 5px 0px 0px;
+  -webkit-animation: animate 1s infinite;
+  animation: animate 1s infinite;
+  float: left;
+}
+
+.lichkin-loading .center .container .object:last-child {
+  margin-right: 0px;
+}
+
+@-webkit-keyframes loadingAnimate {
+  50% {
+    -ms-transform: scaleY(0);
+    -webkit-transform: scaleY(0);
+    transform: scaleY(0);
+  }
+}
+
+@keyframes loadingAnimate {
+  50% {
+    -ms-transform: scaleY(0);
+    -webkit-transform: scaleY(0);
+    transform: scaleY(0);
+  }
 }

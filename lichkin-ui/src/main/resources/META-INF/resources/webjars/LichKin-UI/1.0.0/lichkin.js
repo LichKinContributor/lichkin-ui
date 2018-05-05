@@ -322,6 +322,22 @@ let LK = {
   },
 
   /**
+   * 显示加载效果
+   */
+  showLoading : function() {
+    // 调用具体实现方法
+    LK[this.type].showLoading();
+  },
+
+  /**
+   * 关闭加载效果
+   */
+  closeLoading : function() {
+    // 调用具体实现方法
+    LK[this.type].closeLoading();
+  },
+
+  /**
    * 基于JQuery.ajax实现动态加载内嵌式页面
    * @param options 自定义的参数
    * @param options[$obj] 页面内容要写入的DOM元素对应的JQuery对象
