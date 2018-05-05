@@ -340,10 +340,11 @@ let LK = {
   /**
    * 基于JQuery.ajax实现动态加载内嵌式页面
    * @param options 自定义的参数
-   * @param options[$obj] 页面内容要写入的DOM元素对应的JQuery对象
-   * @param options[method] GET/POST
-   * @param options[url] 拼接前缀与后缀
-   * @param options[data] 当method='POST'时，自动转换为RequestBody内容。
+   * @param options[$obj] [$Object] 页面内容要写入的DOM元素对应的JQuery对象
+   * @param options[method] [string] GET/POST
+   * @param options[url] [string] 拼接前缀与后缀
+   * @param options[data] [JSON] 当method='POST'时，自动转换为RequestBody内容。
+   * @param options[showLoading] [boolean] 是否显示加载效果
    */
   loadPage : function(options) {
     options = $.extend({
@@ -352,13 +353,17 @@ let LK = {
       contentType : 'text/html;charset=UTF-8',
       headers : {
         'Accept-Language' : _LANG
-      }
+      },
+      showLoading : true
     }, options, {
       data : $.extend({}, options.data)
     }, {
       url : _CTX + options.url + _MAPPING_PAGES,
       data : (options.method == 'GET') ? options.data : JSON.stringify(options.data),
       success : function(text) {
+        if (options.showLoading) {
+          LK.closeLoading();
+        }
         var $obj = options.$obj;
         $obj[0].innerHTML = text;
         var head = document.getElementsByTagName("head")[0];
@@ -374,17 +379,33 @@ let LK = {
           }
           head.appendChild(script);
         });
+      },
+      error : function() {
+        if (options.showLoading) {
+          LK.closeLoading();
+        }
       }
     });
 
+    if (options.showLoading) {
+      LK.showLoading();
+    }
+
     $.ajax(options);
+
+    setTimeout(function() {
+      LK.closeLoading();
+      LK.toast(LK.i18n.timeout);
+    }, 15000);
   },
 
   /**
    * AJAX请求
    * @param options 自定义的参数
-   * @param options[url] 拼接前缀与后缀
-   * @param options[data] 转换为RequestBody内容
+   * @param options[url] [string] 拼接前缀与后缀
+   * @param options[data] [JSON] 转换为RequestBody内容
+   * @param options[showLoading] [boolean] 是否显示加载效果
+   * 
    * @param $options JQuery定义的参数
    */
   ajax : function(options, $options) {
@@ -394,13 +415,54 @@ let LK = {
       contentType : 'application/json;charset=UTF-8',
       headers : {
         'Accept-Language' : _LANG
-      }
+      },
+      showLoading : true
     }, options, {
       url : _CTX + options.url + _MAPPING_DATAS,
       data : JSON.stringify($.extend({}, options.data))
     }, $options);
 
+    var success = options.success;
+    if (typeof success == 'function') {
+      options.success = function() {
+        if (options.showLoading) {
+          LK.closeLoading();
+        }
+        success(arguments);
+      }
+    } else {
+      options.success = function() {
+        if (options.showLoading) {
+          LK.closeLoading();
+        }
+      }
+    }
+
+    var error = options.error;
+    if (typeof error == 'function') {
+      options.error = function() {
+        if (options.showLoading) {
+          LK.closeLoading();
+        }
+        error(arguments);
+      }
+    } else {
+      options.error = function() {
+        if (options.showLoading) {
+          LK.closeLoading();
+        }
+      }
+    }
+
+    if (options.showLoading) {
+      LK.showLoading();
+    }
+
     $.ajax(options);
+
+    setTimeout(function() {
+      LK.closeLoading();
+    }, 15000);
   },
 
   /**
