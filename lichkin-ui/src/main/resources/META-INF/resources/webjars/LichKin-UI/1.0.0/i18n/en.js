@@ -1,6 +1,6 @@
 ;
 /**
- * 国际化具体实现内容
+ * The specific implementation content of the locale.
  * @author SuZhou LichKin Information Technology Co., Ltd.
  */
 
