@@ -35,8 +35,8 @@ let LK = {
    * 输出日志
    * @param options [string|number|JSON] 自定义的参数
    * @param options.type [string] 日志类型。debug;info;warn;error.
-   * @param options.msg [string|number|JSON] 日志内容。字符串类型或JSON字符串。
-   * @param options.jsonMsg [boolean] 参数msg为JSON格式时true，参数msg为字符串时false。
+   * @param options.msg [string|number|JSON] 日志内容。
+   * @param options.jsonMsg [boolean] 参数msg为JSON格式时true，否则false。（框架内部设置，无需传入）
    */
   log : function(options) {
     // 根据各种支持的类型将options转换为标准JSON格式
@@ -139,8 +139,8 @@ let LK = {
    * 显示提示窗
    * @param options [string|number|JSON] 自定义的参数
    * @param options.timeout [number] 弹出时长，单位：毫秒。
-   * @param options.msg [string|number|JSON] 日志内容。字符串类型或JSON字符串。
-   * @param options.jsonMsg [boolean] 参数msg为JSON格式时true，参数msg为字符串时false。
+   * @param options.msg [string|number|JSON] 提示内容。
+   * @param options.jsonMsg [boolean] 参数msg为JSON格式时true，否则false。（框架内部设置，无需传入）
    */
   toast : function(options) {
     // 根据各种支持的类型将options转换为标准JSON格式
@@ -234,8 +234,8 @@ let LK = {
   /**
    * 显示警示窗
    * @param options [string|number|JSON] 自定义的参数
-   * @param options.msg [string|number|JSON] 日志内容。字符串类型或JSON字符串。
-   * @param options.jsonMsg [boolean] 参数msg为JSON格式时true，参数msg为字符串时false。
+   * @param options.msg [string|number|JSON] 提示内容。
+   * @param options.jsonMsg [boolean] 参数msg为JSON格式时true，否则false。（框架内部设置，无需传入）
    */
   alert : function(options, callback) {
     // 根据各种支持的类型将options转换为标准JSON格式
