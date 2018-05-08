@@ -5,5 +5,6 @@
  */
 
 LK.i18n = {
-  timeout : 'timeout, please try again later.'
+  timeout : 'Timeout, please try again later.',
+  ajaxError : 'An error occurred when invoke server.'
 };

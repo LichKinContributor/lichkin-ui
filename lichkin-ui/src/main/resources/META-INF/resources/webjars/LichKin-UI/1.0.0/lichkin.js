@@ -362,6 +362,7 @@ let LK = {
    * @param options[param] [JSON] 参数将转为URL地址。
    * @param options[data] [JSON] 自动转换为RequestBody内容。
    * @param options[showLoading] [boolean] 是否显示加载效果
+   * @param options[timeout] [function|string] 超时回调时，方法或方法名。
    */
   loadPage : function(options) {
     var loadingTimeout = true;
@@ -407,6 +408,15 @@ let LK = {
       }
     });
 
+    var timeout = options.timeout;
+    if (typeof timeout == 'number') {
+      timeout = 'LK_loadPage_timeout';
+    }
+    if (typeof timeout == 'string') {
+      timeout = window[timeout];
+    }
+    delete options.timeout;
+
     if (options.showLoading) {
       LK.showLoading();
     }
@@ -418,9 +428,9 @@ let LK = {
         if (options.showLoading) {
           LK.closeLoading();
         }
-        LK.toast(LK.i18n.timeout);
+        timeout(options);
       }
-    }, 30000);
+    }, LK.ajax.timeoutValue);
   },
 
   /**
@@ -431,11 +441,15 @@ let LK = {
    * @param options[showLoading] [boolean] 是否显示加载效果
    * @param options[showSuccess] [boolean] 调用默认业务成功回调方法时是否显示提示信息
    * @param options[showError] [boolean] 调用默认业务失败回调方法时是否显示提示信息
+   * @param options[timeout] [function|string] 超时回调时，方法或方法名。
+   * @param options[success] [function|string] 业务成功时，回调方法或方法名。
+   * @param options[error] [function|string] 请求错误或业务失败时，回调方法或方法名。
    */
   ajax : function(options) {
+    var loadingTimeout = true;
     options = $.extend({
       showLoading : true,
-      showSuccess : true,
+      showSuccess : false,
       showError : true,
       timeout : 'LK_ajax_timeout',
       success : 'LK_ajax_success',
@@ -471,6 +485,7 @@ let LK = {
     }
 
     options.success = function(responseDatas) {
+      loadingTimeout = false;
       if (options.showLoading) {
         LK.closeLoading();
       }
@@ -479,7 +494,12 @@ let LK = {
       } else {
         error(responseDatas.errorCode, responseDatas.errorMessage, options);
       }
-    }
+    };
+
+    options.error = function() {
+      loadingTimeout = false;
+      error(-999, LK.i18n.ajaxError, options);
+    };
 
     if (options.showLoading) {
       LK.showLoading();
@@ -488,11 +508,13 @@ let LK = {
     $.ajax(options);
 
     setTimeout(function() {
-      if (options.showLoading) {
-        LK.closeLoading();
+      if (loadingTimeout) {
+        if (options.showLoading) {
+          LK.closeLoading();
+        }
+        timeout(options);
       }
-      timeout(options);
-    }, 30000);
+    }, LK.ajax.timeoutValue);
   },
 
   /**
@@ -580,8 +602,21 @@ LK.UI._ = function(plugin, options, uiOptions) {
   return LK.UI[LK.UI['__'][plugin]][plugin](options, uiOptions);
 };
 
+// loadPage请求超时时长
+LK.loadPage.timeoutValue = 30000;
+
+/**
+ * loadPage超时默认回调方法。
+ * @param options 调用loadPage方法时传入的参数
+ */
+var LK_loadPage_timeout = function(options) {
+  LK.loadPage(options);
+};
+
 // ajax请求超时跳转页面
 LK.ajax.timeoutPageUrl = _CTX + '/index.html';
+// ajax请求超时时长
+LK.ajax.timeoutValue = 30000;
 
 /**
  * AJAX请求超时默认回调方法。
