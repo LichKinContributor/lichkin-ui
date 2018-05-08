@@ -413,6 +413,7 @@ let LK = {
       showLoading : true,
       showSuccess : true,
       showError : true,
+      timeout : 'LK_ajax_timeout',
       success : 'LK_ajax_success',
       error : 'LK_ajax_error'
     }, options, {
@@ -425,6 +426,15 @@ let LK = {
         'Accept-Language' : _LANG
       }
     });
+
+    var timeout = options.timeout;
+    if (typeof timeout == 'number') {
+      timeout = 'LK_ajax_timeout';
+    }
+    if (typeof timeout == 'string') {
+      timeout = window[timeout];
+    }
+    delete options.timeout;
 
     var success = options.success;
     if (typeof success == 'string') {
@@ -454,8 +464,11 @@ let LK = {
     $.ajax(options);
 
     setTimeout(function() {
-      LK.closeLoading();
-    }, 15000);
+      if (options.showLoading) {
+        LK.closeLoading();
+      }
+      timeout(options);
+    }, 30000);
   },
 
   /**
@@ -541,6 +554,20 @@ LK.UI._ = function(plugin, options, uiOptions) {
 
   // 使用该控件类型指定的UI实现。
   return LK.UI[LK.UI['__'][plugin]][plugin](options, uiOptions);
+};
+
+// ajax请求超时跳转页面
+LK.ajax.timeoutPageUrl = _CTX + '/index.html';
+
+/**
+ * AJAX请求超时默认回调方法。
+ * @param options 调用ajax方法时传入的参数
+ */
+var LK_ajax_timeout = function(options) {
+  LK.toast(LK.i18n.timeout);
+  setTimeout(function() {
+    window.location.href = LK.ajax.timeoutPageUrl;
+  }, 2000);
 };
 
 /**
