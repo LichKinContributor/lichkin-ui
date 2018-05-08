@@ -338,29 +338,48 @@ let LK = {
   },
 
   /**
+   * 将参数转为URL地址
+   * @param param [JSON] 参数
+   */
+  paramUrl : function(param) {
+    var url = '?_$=' + new Date().getTime();
+    if (typeof param != 'undefined') {
+      for ( var key in param) {
+        var value = param[key];
+        if (this.isString(value) || this.isNumber(value)) {
+          url += '&' + key + '=' + value;
+        }
+      }
+    }
+    return url;
+  },
+
+  /**
    * 基于JQuery.ajax实现动态加载内嵌式页面
    * @param options 自定义的参数
    * @param options[$obj] [$Object] 页面内容要写入的DOM元素对应的JQuery对象
-   * @param options[method] [string] GET/POST
-   * @param options[url] [string] 拼接前缀与后缀
-   * @param options[data] [JSON] 当method='POST'时，自动转换为RequestBody内容。
+   * @param options[url] [string] 自动拼接前缀与后缀
+   * @param options[param] [JSON] 参数将转为URL地址。
+   * @param options[data] [JSON] 自动转换为RequestBody内容。
    * @param options[showLoading] [boolean] 是否显示加载效果
    */
   loadPage : function(options) {
+    var loadingTimeout = true;
     options = $.extend({
+      showLoading : true
+    }, options, {
+      data : $.extend({}, options.data)
+    }, {
       method : 'POST',
       dataType : 'text',
       contentType : 'text/html;charset=UTF-8',
       headers : {
         'Accept-Language' : _LANG
       },
-      showLoading : true
-    }, options, {
-      data : $.extend({}, options.data)
-    }, {
-      url : _CTX + options.url + _MAPPING_PAGES,
+      url : _CTX + options.url + _MAPPING_PAGES + this.paramUrl(options.param),
       data : (options.method == 'GET') ? options.data : JSON.stringify(options.data),
       success : function(text) {
+        loadingTimeout = false;
         if (options.showLoading) {
           LK.closeLoading();
         }
@@ -381,6 +400,7 @@ let LK = {
         });
       },
       error : function() {
+        loadingTimeout = false;
         if (options.showLoading) {
           LK.closeLoading();
         }
@@ -394,9 +414,13 @@ let LK = {
     $.ajax(options);
 
     setTimeout(function() {
-      LK.closeLoading();
-      LK.toast(LK.i18n.timeout);
-    }, 15000);
+      if (loadingTimeout) {
+        if (options.showLoading) {
+          LK.closeLoading();
+        }
+        LK.toast(LK.i18n.timeout);
+      }
+    }, 30000);
   },
 
   /**
