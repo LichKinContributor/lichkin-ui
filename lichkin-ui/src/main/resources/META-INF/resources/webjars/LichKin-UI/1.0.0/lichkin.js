@@ -402,55 +402,48 @@ let LK = {
   /**
    * AJAX请求
    * @param options 自定义的参数
-   * @param options[url] [string] 拼接前缀与后缀
+   * @param options[url] [string] 自动拼接前缀与后缀
    * @param options[data] [JSON] 转换为RequestBody内容
    * @param options[showLoading] [boolean] 是否显示加载效果
-   * 
-   * @param $options JQuery定义的参数
+   * @param options[showSuccess] [boolean] 调用默认业务成功回调方法时是否显示提示信息
+   * @param options[showError] [boolean] 调用默认业务失败回调方法时是否显示提示信息
    */
-  ajax : function(options, $options) {
+  ajax : function(options) {
     options = $.extend({
+      showLoading : true,
+      showSuccess : true,
+      showError : true,
+      success : 'LK_ajax_success',
+      error : 'LK_ajax_error'
+    }, options, {
+      url : _CTX + options.url + _MAPPING_DATAS,
+      data : JSON.stringify($.extend({}, options.data)),
       method : 'POST',
       dataType : 'json',
       contentType : 'application/json;charset=UTF-8',
       headers : {
         'Accept-Language' : _LANG
-      },
-      showLoading : true
-    }, options, {
-      url : _CTX + options.url + _MAPPING_DATAS,
-      data : JSON.stringify($.extend({}, options.data))
-    }, $options);
+      }
+    });
 
     var success = options.success;
-    if (typeof success == 'function') {
-      options.success = function() {
-        if (options.showLoading) {
-          LK.closeLoading();
-        }
-        success(arguments);
-      }
-    } else {
-      options.success = function() {
-        if (options.showLoading) {
-          LK.closeLoading();
-        }
-      }
+    if (typeof success == 'string') {
+      success = window[success];
     }
 
     var error = options.error;
-    if (typeof error == 'function') {
-      options.error = function() {
-        if (options.showLoading) {
-          LK.closeLoading();
-        }
-        error(arguments);
+    if (typeof error == 'string') {
+      error = window[error];
+    }
+
+    options.success = function(responseDatas) {
+      if (options.showLoading) {
+        LK.closeLoading();
       }
-    } else {
-      options.error = function() {
-        if (options.showLoading) {
-          LK.closeLoading();
-        }
+      if (responseDatas.errorCode == 0) {
+        success(responseDatas.datas, options);
+      } else {
+        error(responseDatas.errorCode, responseDatas.errorMessage, options);
       }
     }
 
@@ -548,4 +541,27 @@ LK.UI._ = function(plugin, options, uiOptions) {
 
   // 使用该控件类型指定的UI实现。
   return LK.UI[LK.UI['__'][plugin]][plugin](options, uiOptions);
+};
+
+/**
+ * AJAX请求业务成功默认回调方法。
+ * @param datas 响应数据
+ * @param options 调用ajax方法时传入的参数
+ */
+var LK_ajax_success = function(datas, options) {
+  if (options.showSuccess) {
+    LK.toast(datas);
+  }
+};
+
+/**
+ * AJAX请求业务失败默认回调方法。
+ * @param errorCode 错误编码
+ * @param errorMessage 错误信息
+ * @param options 调用ajax方法时传入的参数
+ */
+var LK_ajax_error = function(errorCode, errorMessage, options) {
+  if (options.showError) {
+    LK.toast(errorMessage);
+  }
 };
