@@ -59,19 +59,30 @@ LK.web = {
   },
 
   showLoading : function() {
-    var $loading = $('<div class="lichkin-loading"></div>').appendTo('body');
-    var $center = $('<div class="center"></div>').appendTo($loading);
-    var $container = $('<div class="container"></div>').appendTo($center);
-    for (var i = 2; i <= 10; i++) {
-      $container.append('<div class="object" style="-webkit-animation-name:loadingAnimate;-webkit-animation-delay:0.' + (i - 1) + 's;animation-delay:0.' + (i - 1) + 's;"></div>');
+    var loadingId = 'loading_' + randomInRange(10000, 99999);
+    if (!isJSON(this.loadingIds)) {
+      this.loadingIds = {};
     }
-    $loading.show();
+    if (isEmptyJSON(this.loadingIds)) {
+      var $loading = $('<div class="lichkin-loading"></div>').appendTo('body');
+      var $center = $('<div class="center"></div>').appendTo($loading);
+      var $container = $('<div class="container"></div>').appendTo($center);
+      for (var i = 2; i <= 10; i++) {
+        $container.append('<div class="object" style="-webkit-animation-name:loadingAnimate;-webkit-animation-delay:0.' + (i - 1) + 's;animation-delay:0.' + (i - 1) + 's;"></div>');
+      }
+      $loading.show();
+    }
+    this.loadingIds[loadingId] = loadingId;
+    return loadingId;
   },
 
-  closeLoading : function() {
-    $loading = $('.lichkin-loading');
-    if ($loading) {
-      $loading.remove();
+  closeLoading : function(loadingId) {
+    delete this.loadingIds[loadingId];
+    if (isEmptyJSON(this.loadingIds)) {
+      $loading = $('.lichkin-loading');
+      if ($loading) {
+        $loading.remove();
+      }
     }
   }
 

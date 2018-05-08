@@ -4,32 +4,53 @@
  * @author SuZhou LichKin Information Technology Co., Ltd.
  */
 
+/**
+ * 判断是否为JSON对象
+ * @param json JSON对象
+ */
+let isJSON = function(json) {
+  return (typeof json == 'object') && Object.prototype.toString.call(json).toLowerCase() == "[object object]" && !json.length;
+};
+
+/**
+ * 是否为空JSON
+ * @param json JSON对象
+ */
+let isEmptyJSON = function(json) {
+  for ( var name in json) {
+    return false;
+  }
+  return true;
+};
+
+/**
+ * 判断是否为字符串
+ * @param str 字符串
+ */
+let isString = function(str) {
+  return typeof str == 'string';
+};
+
+/**
+ * 判断是否为数字
+ * @param number 数字
+ */
+let isNumber = function(number) {
+  return typeof number == 'number';
+};
+
+/**
+ * 生成随机值
+ * @param min 最小值
+ * @param max 最大值
+ * @return 随机值
+ */
+let randomInRange = function(min, max) {
+  return Math.floor(Math.random() * (max + 1 - min) + min);
+};
+
 /** 全局定义顶层对象 */
 let LK = {
-
-  /**
-   * 判断是否为JSON对象
-   * @param json JSON对象
-   */
-  isJSON : function(json) {
-    return (typeof json == 'object') && Object.prototype.toString.call(json).toLowerCase() == "[object object]" && !json.length;
-  },
-
-  /**
-   * 判断是否为字符串
-   * @param str 字符串
-   */
-  isString : function(str) {
-    return typeof str == 'string';
-  },
-
-  /**
-   * 判断是否为数字
-   * @param number 数字
-   */
-  isNumber : function(number) {
-    return typeof number == 'number';
-  },
 
   /**
    * 输出日志
@@ -47,21 +68,21 @@ let LK = {
         msg : 'undefined',
         jsonMsg : false
       };
-    } else if (this.isNumber(options)) {
+    } else if (isNumber(options)) {
       // 传入的是数字，则转换为标准格式。
       options = {
         type : 'debug',
         msg : String(options),
         jsonMsg : false
       };
-    } else if (this.isString(options)) {
+    } else if (isString(options)) {
       // 传入的是字符串，则转换为标准格式。
       options = {
         type : 'debug',
         msg : options,
         jsonMsg : false
       };
-    } else if (this.isJSON(options)) {
+    } else if (isJSON(options)) {
       // 传入的是JOSN数据格式
       // 处理type参数
       if (typeof options.type == 'undefined') {
@@ -71,16 +92,16 @@ let LK = {
           options.type = 'debug';
           options.msg = 'undefined';
           options.jsonMsg = false;
-        } else if (this.isNumber(options.msg)) {
+        } else if (isNumber(options.msg)) {
           // 传入的msg是数字类型，则将数字转为字符串。
           options.type = 'debug';
           options.msg = String(options.msg);
           options.jsonMsg = false;
-        } else if (this.isString(options.msg)) {
+        } else if (isString(options.msg)) {
           // 传入的msg是字符串类型，不做处理。
           options.type = 'debug';
           options.jsonMsg = false;
-        } else if (this.isJSON(options.msg)) {
+        } else if (isJSON(options.msg)) {
           // 传入的msg是JSON类型，则将msg转为JSON对应的字符串。
           options.type = 'debug';
           options.msg = JSON.stringify(options.msg);
@@ -104,14 +125,14 @@ let LK = {
           // 没有传入msg参数
           options.msg = 'undefined';
           options.jsonMsg = false;
-        } else if (this.isNumber(options.msg)) {
+        } else if (isNumber(options.msg)) {
           // 传入的msg是数字类型，则将数字转为字符串。
           options.msg = String(options.msg);
           options.jsonMsg = false;
-        } else if (this.isString(options.msg)) {
+        } else if (isString(options.msg)) {
           // 传入的msg是字符串类型，不做处理。
           options.jsonMsg = false;
-        } else if (this.isJSON(options.msg)) {
+        } else if (isJSON(options.msg)) {
           // 传入的msg是JSON类型，则将msg转为JSON对应的字符串。
           options.msg = JSON.stringify(options.msg);
           options.jsonMsg = true;
@@ -151,21 +172,21 @@ let LK = {
         msg : 'undefined',
         jsonMsg : false
       };
-    } else if (this.isNumber(options)) {
+    } else if (isNumber(options)) {
       // 传入的是数字，则转换为标准格式。
       options = {
         timeout : 1000,
         msg : String(options),
         jsonMsg : false
       };
-    } else if (this.isString(options)) {
+    } else if (isString(options)) {
       // 传入的是字符串，则转换为标准格式。
       options = {
         timeout : 1000,
         msg : options,
         jsonMsg : false
       };
-    } else if (this.isJSON(options)) {
+    } else if (isJSON(options)) {
       // 传入的是JOSN数据格式
       // 处理msg参数
       if (typeof options.msg == 'undefined') {
@@ -177,14 +198,14 @@ let LK = {
             delete options[key];
           }
         }
-      } else if (this.isNumber(options.msg)) {
+      } else if (isNumber(options.msg)) {
         // 传入的msg是数字类型，则将数字转为字符串。
         options.msg = String(options.msg);
         options.jsonMsg = false;
-      } else if (this.isString(options.msg)) {
+      } else if (isString(options.msg)) {
         // 传入的msg是字符串类型，不做处理。
         options.jsonMsg = false;
-      } else if (this.isJSON(options.msg)) {
+      } else if (isJSON(options.msg)) {
         // 传入的msg是JSON类型，则将msg转为JSON对应的字符串。
         options.msg = JSON.stringify(options.msg);
         options.jsonMsg = true;
@@ -199,8 +220,8 @@ let LK = {
       // 处理timeout参数
       if (typeof options.timeout == 'undefined') {
         options.timeout = 1000;
-      } else if (this.isNumber(options.timeout)) {
-      } else if (this.isString(options.timeout)) {
+      } else if (isNumber(options.timeout)) {
+      } else if (isString(options.timeout)) {
         options.timeout = parseInt(options.timeout);
         if (options.timeout == 'NaN') {
           // 传入的参数不支持，报错！
@@ -245,19 +266,19 @@ let LK = {
         msg : 'undefined',
         jsonMsg : false
       };
-    } else if (this.isNumber(options)) {
+    } else if (isNumber(options)) {
       // 传入的是数字，则转换为标准格式。
       options = {
         msg : String(options),
         jsonMsg : false
       };
-    } else if (this.isString(options)) {
+    } else if (isString(options)) {
       // 传入的是字符串，则转换为标准格式。
       options = {
         msg : options,
         jsonMsg : false
       };
-    } else if (this.isJSON(options)) {
+    } else if (isJSON(options)) {
       // 传入的是JOSN数据格式
       // 处理msg参数
       if (typeof options.msg == 'undefined') {
@@ -269,14 +290,14 @@ let LK = {
             delete options[key];
           }
         }
-      } else if (this.isNumber(options.msg)) {
+      } else if (isNumber(options.msg)) {
         // 传入的msg是数字类型，则将数字转为字符串。
         options.msg = String(options.msg);
         options.jsonMsg = false;
-      } else if (this.isString(options.msg)) {
+      } else if (isString(options.msg)) {
         // 传入的msg是字符串类型，不做处理。
         options.jsonMsg = false;
-      } else if (this.isJSON(options.msg)) {
+      } else if (isJSON(options.msg)) {
         // 传入的msg是JSON类型，则将msg转为JSON对应的字符串。
         options.msg = JSON.stringify(options.msg);
         options.jsonMsg = true;
@@ -298,7 +319,7 @@ let LK = {
     }
 
     if (typeof callback == 'undefined') {
-    } else if (this.isString(callback)) {
+    } else if (isString(callback)) {
       callback = window[callback];
       if (typeof callback != 'function') {
         // 传入的参数不支持，报错！
@@ -323,18 +344,20 @@ let LK = {
 
   /**
    * 显示加载效果
+   * @return loadingId 加载对话框ID
    */
   showLoading : function() {
     // 调用具体实现方法
-    LK[this.type].showLoading();
+    return LK[this.type].showLoading();
   },
 
   /**
    * 关闭加载效果
+   * @param loadingId 加载对话框ID
    */
-  closeLoading : function() {
+  closeLoading : function(loadingId) {
     // 调用具体实现方法
-    LK[this.type].closeLoading();
+    LK[this.type].closeLoading(loadingId);
   },
 
   /**
@@ -346,7 +369,7 @@ let LK = {
     if (typeof param != 'undefined') {
       for ( var key in param) {
         var value = param[key];
-        if (this.isString(value) || this.isNumber(value)) {
+        if (isString(value) || isNumber(value)) {
           url += '&' + key + '=' + value;
         }
       }
@@ -365,6 +388,7 @@ let LK = {
    * @param options[timeout] [function|string] 超时回调时，方法或方法名。
    */
   loadPage : function(options) {
+    var loadingId = '';
     var loadingTimeout = true;
     options = $.extend({
       showLoading : true
@@ -382,7 +406,7 @@ let LK = {
       success : function(text) {
         loadingTimeout = false;
         if (options.showLoading) {
-          LK.closeLoading();
+          LK.closeLoading(loadingId);
         }
         var $obj = options.$obj;
         $obj[0].innerHTML = text;
@@ -403,7 +427,7 @@ let LK = {
       error : function() {
         loadingTimeout = false;
         if (options.showLoading) {
-          LK.closeLoading();
+          LK.closeLoading(loadingId);
         }
       }
     });
@@ -412,13 +436,13 @@ let LK = {
     if (typeof timeout == 'number') {
       timeout = 'LK_loadPage_timeout';
     }
-    if (typeof timeout == 'string') {
+    if (isString(timeout)) {
       timeout = window[timeout];
     }
     delete options.timeout;
 
     if (options.showLoading) {
-      LK.showLoading();
+      loadingId = LK.showLoading();
     }
 
     $.ajax(options);
@@ -426,7 +450,7 @@ let LK = {
     setTimeout(function() {
       if (loadingTimeout) {
         if (options.showLoading) {
-          LK.closeLoading();
+          LK.closeLoading(loadingId);
         }
         timeout(options);
       }
@@ -446,6 +470,7 @@ let LK = {
    * @param options[error] [function|string] 请求错误或业务失败时，回调方法或方法名。
    */
   ajax : function(options) {
+    var loadingId = '';
     var loadingTimeout = true;
     options = $.extend({
       showLoading : true,
@@ -466,28 +491,28 @@ let LK = {
     });
 
     var timeout = options.timeout;
-    if (typeof timeout == 'number') {
+    if (isNumber(timeout)) {
       timeout = 'LK_ajax_timeout';
     }
-    if (typeof timeout == 'string') {
+    if (isString(timeout)) {
       timeout = window[timeout];
     }
     delete options.timeout;
 
     var success = options.success;
-    if (typeof success == 'string') {
+    if (isString(success)) {
       success = window[success];
     }
 
     var error = options.error;
-    if (typeof error == 'string') {
+    if (isString(error)) {
       error = window[error];
     }
 
     options.success = function(responseDatas) {
       loadingTimeout = false;
       if (options.showLoading) {
-        LK.closeLoading();
+        LK.closeLoading(loadingId);
       }
       if (responseDatas.errorCode == 0) {
         success(responseDatas.datas, options);
@@ -502,7 +527,7 @@ let LK = {
     };
 
     if (options.showLoading) {
-      LK.showLoading();
+      loadingId = LK.showLoading();
     }
 
     $.ajax(options);
@@ -510,7 +535,7 @@ let LK = {
     setTimeout(function() {
       if (loadingTimeout) {
         if (options.showLoading) {
-          LK.closeLoading();
+          LK.closeLoading(loadingId);
         }
         timeout(options);
       }
