@@ -631,7 +631,7 @@ LK.UI = function(provider, plugin, func, defaultValues) {
  */
 LK.UI._ = function(plugin, options) {
   // 自动补全默认参数，并且不支持默认参数中未定义的参数。
-  var defaultValues = LK.UI[plugin].defaultValues;
+  var defaultValues = $.extend(true, {}, LK.UI[plugin].defaultValues);
   options = $.extend({}, defaultValues, options);
   for ( var key in options) {
     var containsKey = false;
