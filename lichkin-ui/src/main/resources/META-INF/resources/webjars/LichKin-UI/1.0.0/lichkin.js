@@ -596,8 +596,9 @@ let LK = {
  * @param provider 控件提供者
  * @param plugin 控件类型
  * @param func 具体实现方法
+ * @param defaultValues 控件所有参数默认值（框架内部实现，自定义实现方法不处理该参数。）
  */
-LK.UI = function(provider, plugin, func) {
+LK.UI = function(provider, plugin, func, defaultValues) {
   // 确定控件提供者
   if (typeof LK.UI['__'] == 'undefined') {
     LK.UI['__'] = {};
@@ -616,6 +617,11 @@ LK.UI = function(provider, plugin, func) {
     LK.UI[provider] = {};
   }
   LK.UI[provider][plugin] = func;
+
+  // 添加默认值
+  if (provider == 'plugins') {
+    LK.UI[plugin].defaultValues = defaultValues;
+  }
 };
 
 /**
@@ -624,9 +630,21 @@ LK.UI = function(provider, plugin, func) {
  * @param options 自定义的参数
  */
 LK.UI._ = function(plugin, options) {
-  // 非空验证
-  if (typeof options == 'undefined') {
-    options = {};
+  // 自动补全默认参数，并且不支持默认参数中未定义的参数。
+  var defaultValues = LK.UI[plugin].defaultValues;
+  options = $.extend({}, defaultValues, options);
+  for ( var key in options) {
+    var containsKey = false;
+    for ( var defaultKey in defaultValues) {
+      if (defaultKey === key) {
+        containsKey = true;
+        delete defaultValues[defaultKey];
+        break;
+      }
+    }
+    if (!containsKey) {
+      delete options[key];
+    }
   }
 
   // 调用时显式指定了UI类型，则调用该UI方法。
