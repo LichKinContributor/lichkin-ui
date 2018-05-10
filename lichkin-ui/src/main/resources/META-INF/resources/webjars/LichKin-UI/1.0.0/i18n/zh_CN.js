@@ -5,6 +5,11 @@
  */
 
 LK.i18n = {
+  userInfo : '个人信息',
+  changePwd : '修改密码',
+  changeTheme : '更换主题',
+  help : '使用帮助',
+  exit : '退出登录',
   timeout : '请求超时，请稍后再试！',
   ajaxError : '请求时服务器出现异常'
 };

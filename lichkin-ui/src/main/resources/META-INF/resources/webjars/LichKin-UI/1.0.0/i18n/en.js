@@ -5,6 +5,11 @@
  */
 
 LK.i18n = {
+  userInfo : 'User Info',
+  changePwd : 'Change Password',
+  changeTheme : 'Change Theme',
+  help : 'Help',
+  exit : 'Exit',
   timeout : 'Timeout, please try again later.',
   ajaxError : 'An error occurred when invoke server.'
 };
