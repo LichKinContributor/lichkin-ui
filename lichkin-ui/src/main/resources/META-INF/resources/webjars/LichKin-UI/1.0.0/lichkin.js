@@ -622,9 +622,8 @@ LK.UI = function(provider, plugin, func) {
  * 处理UI实现方法（框架内部调用）
  * @param plugin 控件类型
  * @param options 自定义的参数
- * @param uiOptions 三方库定义的参数
  */
-LK.UI._ = function(plugin, options, uiOptions) {
+LK.UI._ = function(plugin, options) {
   // 非空验证
   if (typeof options == 'undefined') {
     options = {};
@@ -633,11 +632,11 @@ LK.UI._ = function(plugin, options, uiOptions) {
   // 调用时显式指定了UI类型，则调用该UI方法。
   var provider = options.UI;
   if (typeof provider != 'undefined') {
-    return LK.UI[provider][plugin](options, uiOptions);
+    return LK.UI[provider][plugin](options);
   }
 
   // 使用该控件类型指定的UI实现。
-  return LK.UI[LK.UI['__'][plugin]][plugin](options, uiOptions);
+  return LK.UI[LK.UI['__'][plugin]][plugin](options);
 };
 
 // loadPage请求超时时长
