@@ -103,7 +103,7 @@
   border: none;
   margin: 0px;
   position: fixed;
-  z-index: 33333;
+  z-index: 99999;
   top: 0px;
   display: none;
 }
