@@ -257,6 +257,8 @@ let LK = {
    * @param options [string|number|JSON] 自定义的参数
    * @param options.msg [string|number|JSON] 提示内容。
    * @param options.jsonMsg [boolean] 参数msg为JSON格式时true，否则false。（框架内部设置，无需传入）
+   * 
+   * @param callback 按钮点击后回调方法
    */
   alert : function(options, callback) {
     // 根据各种支持的类型将options转换为标准JSON格式
@@ -405,9 +407,11 @@ let LK = {
       data : (options.method == 'GET') ? options.data : JSON.stringify(options.data),
       success : function(text) {
         loadingTimeout = false;
-        if (options.showLoading) {
-          LK.closeLoading(loadingId);
-        }
+        setTimeout(function() {
+          if (options.showLoading) {
+            LK.closeLoading(loadingId);
+          }
+        }, 333);
         var $obj = options.$obj;
         $obj[0].innerHTML = text;
         var head = document.getElementsByTagName("head")[0];
@@ -426,9 +430,11 @@ let LK = {
       },
       error : function() {
         loadingTimeout = false;
-        if (options.showLoading) {
-          LK.closeLoading(loadingId);
-        }
+        setTimeout(function() {
+          if (options.showLoading) {
+            LK.closeLoading(loadingId);
+          }
+        }, 333);
       }
     });
 
@@ -511,9 +517,11 @@ let LK = {
 
     options.success = function(responseDatas) {
       loadingTimeout = false;
-      if (options.showLoading) {
-        LK.closeLoading(loadingId);
-      }
+      setTimeout(function() {
+        if (options.showLoading) {
+          LK.closeLoading(loadingId);
+        }
+      }, 333);
       if (responseDatas.errorCode == 0) {
         success(responseDatas.datas, options);
       } else {
@@ -523,6 +531,11 @@ let LK = {
 
     options.error = function() {
       loadingTimeout = false;
+      setTimeout(function() {
+        if (options.showLoading) {
+          LK.closeLoading(loadingId);
+        }
+      }, 333);
       error(-999, LK.i18n.ajaxError, options);
     };
 
