@@ -5,6 +5,7 @@
  */
 
 LK.i18n = {
+  dialogTitle : '提示',
   userInfo : '个人信息',
   changePwd : '修改密码',
   changeTheme : '更换主题',

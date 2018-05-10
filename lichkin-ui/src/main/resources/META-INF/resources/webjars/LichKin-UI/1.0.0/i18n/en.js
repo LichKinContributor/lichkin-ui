@@ -5,6 +5,7 @@
  */
 
 LK.i18n = {
+  dialogTitle : 'Tip',
   userInfo : 'User Info',
   changePwd : 'Change Password',
   changeTheme : 'Change Theme',
