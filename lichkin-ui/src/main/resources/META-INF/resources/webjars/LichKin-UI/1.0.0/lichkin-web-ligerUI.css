@@ -1991,3 +1991,10 @@ line-height: 20px;}
 .l-tree .l-tree-icon-none img{border: 0;height: 16px;width: 16px; top:2px; margin-top:2px; margin-left:2px;}
 .l-tree .l-tree-icon-folder-open{background-position:-44px -88px;}
 .l-tree .l-tree-icon-leaf{background-position:-22px -110px;}
+
+/** ============================== 重定义 ============================== */
+.l-dialog-content-noimage{padding:0px;}
+
+
+/** ============================== 新增 ============================== */
+.l-dialog-content-noimage .lichkin-body{min-height:100%;}

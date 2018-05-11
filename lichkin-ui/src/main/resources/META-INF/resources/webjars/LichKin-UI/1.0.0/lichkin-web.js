@@ -90,9 +90,6 @@ LK.web = {
 
 /**
  * 文本框
- * @param options 自定义的参数
- * @param options[$obj] 待渲染对象
- * @param options[attr] HTML标签定义的属性
  */
 LK.UI('plugins', 'textbox', function(options) {
   // 创建控件对象
@@ -109,4 +106,38 @@ LK.UI('plugins', 'textbox', function(options) {
 
   // 返回控件对象
   return $plugin;
+}, {
+  // 待渲染对象
+  $obj : $('body'),
+  // HTML标签定义的属性
+  attr : {}
+});
+
+/**
+ * 打开对话框
+ */
+LK.UI('plugins', 'openDialog', function(options) {
+}, {
+  // 对话框ID，自动拼接dlg_前缀。
+  id : '',
+  // 对话框标题
+  title : LK.i18n.dialogTitle,
+  // 对话框加载页面地址
+  url : '',
+  // 页面加载结束后回调方法
+  beforeLoading : function(options) {
+  },
+  // 页面加载结束后回调方法
+  afterLoading : function(options) {
+  },
+  // 是否增加遮罩层
+  mask : true,
+  // 是否自适应屏幕
+  fit : false,
+  // 对话框宽度
+  width : 640,
+  // 对话框高度
+  height : 360,
+  // 对话框按钮数组
+  buttons : []
 });

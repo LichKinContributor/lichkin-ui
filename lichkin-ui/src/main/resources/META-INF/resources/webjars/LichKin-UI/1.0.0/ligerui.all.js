@@ -5519,7 +5519,7 @@
 
             }
             if (p.cls) g.dialog.addClass(p.cls);
-            if (p.id) g.dialog.attr("id", p.id);
+            if (p.id) g.dialog.attr({"id":p.id,"data-id":"dlg_"+p.id});
 
             //设置锁定屏幕、拖动支持 和设置图片
             g.mask();

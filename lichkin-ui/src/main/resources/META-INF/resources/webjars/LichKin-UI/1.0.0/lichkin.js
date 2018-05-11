@@ -395,8 +395,6 @@ let LK = {
     options = $.extend({
       showLoading : true
     }, options, {
-      data : $.extend({}, options.data)
-    }, {
       method : 'POST',
       dataType : 'text',
       contentType : 'text/html;charset=UTF-8',
@@ -404,7 +402,7 @@ let LK = {
         'Accept-Language' : _LANG
       },
       url : _CTX + options.url + _MAPPING_PAGES + this.paramUrl(options.param),
-      data : (options.method == 'GET') ? options.data : JSON.stringify(options.data),
+      data : JSON.stringify($.extend({}, options.data)),
       success : function(text) {
         loadingTimeout = false;
         setTimeout(function() {
