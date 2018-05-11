@@ -137,12 +137,6 @@ LK.UI('plugins', 'openDialog', function(options) {
   title : LK.i18n.dialogTitle,
   // 对话框加载页面地址
   url : '',
-  // 页面加载结束后回调方法
-  beforeLoading : function(options) {
-  },
-  // 页面加载结束后回调方法
-  afterLoading : function(options) {
-  },
   // 是否增加遮罩层
   mask : true,
   // 是否自适应屏幕
@@ -152,7 +146,19 @@ LK.UI('plugins', 'openDialog', function(options) {
   // 对话框高度
   height : 360,
   // 对话框按钮数组
-  buttons : []
+  buttons : [],
+
+  // 事件
+
+  // 页面加载结束后
+  onBeforeLoading : function(options, $dlg) {
+  },
+  // 页面加载结束后
+  onAfterLoading : function(options, $dlg) {
+  },
+  // 对话框被聚焦后
+  onFocus : function(options, $dlg) {
+  }
 });
 
 /**
