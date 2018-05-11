@@ -789,7 +789,7 @@
         },
 
         //前端显示
-        setFront: function (win)
+        setFront: function (win, fromActive)
         {
             var wins = liger.find(liger.core.Win);
             for (var i in wins)
@@ -805,8 +805,11 @@
                     $(w.element).css("z-index", "9100");
                 }
             }
-            if (win.events.focus) {
-              win.trigger('focus', win);
+
+            if (fromActive) {
+              if (win.events.focus) {
+                win.trigger('focus', win);
+              }
             }
         }
     };
@@ -5845,7 +5848,7 @@
             }
             g.actived = true;
             g.minimize = false;
-            l.win.setFront(g);
+            l.win.setFront(g, true);
             g.show();
         },
 
