@@ -806,7 +806,7 @@
                 }
             }
 
-            if (fromActive) {
+            if (!fromActive) {
               if (win.events.focus) {
                 win.trigger('focus', win);
               }
