@@ -805,6 +805,9 @@
                     $(w.element).css("z-index", "9100");
                 }
             }
+            if (win.events.focus) {
+              win.trigger('focus', win);
+            }
         }
     };
 
