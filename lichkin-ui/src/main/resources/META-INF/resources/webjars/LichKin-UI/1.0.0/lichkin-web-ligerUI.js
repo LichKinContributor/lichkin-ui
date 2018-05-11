@@ -25,6 +25,11 @@ LK.UI(providerLigerUI, 'getUIPlugin', function(options) {
  * @param options 自定义的参数，具体参数参见lichkin-web.js。
  */
 LK.UI(providerLigerUI, 'openDialog', function(options) {
+  options.isHidden = false;// 不支持隐藏功能，强制设值。
+
+  options.onClose = options.onBeforeClose;
+  options.onClosed = options.onAfterClose;
+
   options.modal = options.mask;
 
   if (options.buttons.length == 0) {

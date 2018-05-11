@@ -158,6 +158,12 @@ LK.UI('plugins', 'openDialog', function(options) {
   },
   // 对话框被聚焦后
   onFocus : function(options, $dlg) {
+  },
+  // 对话框关闭前
+  onBeforeClose : function(options, $dlg) {
+  },
+  // 对话框关闭后
+  onAfterClose : function(options, $dlg) {
   }
 });
 
