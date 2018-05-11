@@ -28,6 +28,13 @@
   --lichkin-loading-foreground-color: #88bb66;
 }
 
+/* icons */
+.lichkin-icon{background-repeat:no-repeat;}
+.lichkin-icon-16{background-size:16px;}
+.lichkin-icon-32{background-size:32px;}
+.lichkin-icon-64{background-size:64px;}
+.lichkin-icon-128{background-size:128px;}
+
 .lichkin-body {
   background-color: var(--lichkin-body-background-color);
 }
