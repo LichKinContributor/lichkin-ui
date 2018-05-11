@@ -4,11 +4,27 @@
  * @author SuZhou LichKin Information Technology Co., Ltd.
  */
 
+var providerLigerUI = 'ligerUI';
+
+/**
+ * 获取UI控件对象
+ */
+LK.UI(providerLigerUI, 'getUIPlugin', function(options) {
+  var $obj = options.$obj;
+  if (options.id != '') {
+    $obj = $('#' + options.id);
+  }
+  if (options.dataId != '') {
+    $obj = $('[data-id=' + options.dataId + ']');
+  }
+  return $.ligerui.get($obj);
+});
+
 /**
  * 打开对话框
  * @param options 自定义的参数，具体参数参见lichkin-web.js。
  */
-LK.UI('ligerUI', 'openDialog', function(options) {
+LK.UI(providerLigerUI, 'openDialog', function(options) {
   options.modal = options.mask;
 
   if (options.buttons.length == 0) {
@@ -33,4 +49,14 @@ LK.UI('ligerUI', 'openDialog', function(options) {
   } else {
     return $.ligerDialog.open(options);
   }
+});
+
+/**
+ * 将对话框激活
+ */
+LK.UI(providerLigerUI, 'activeDialog', function(options) {
+  if (options.dataId != '') {
+    options.dataId = 'dlg_' + options.dataId;
+  }
+  LK.UI.getUIPlugin(options).active();
 });

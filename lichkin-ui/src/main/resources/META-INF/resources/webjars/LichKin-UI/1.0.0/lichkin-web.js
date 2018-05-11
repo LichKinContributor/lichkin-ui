@@ -89,6 +89,19 @@ LK.web = {
 };
 
 /**
+ * 获取UI控件对象
+ */
+LK.UI('plugins', 'getUIPlugin', function(options) {
+}, {
+  // 渲染过的控件对应的DOM元素ID属性值
+  id : '',
+  // 渲染过的控件对应的DOM元素data-id属性值
+  dataId : '',
+  // 渲染过的控件对应的JQuery对象
+  $obj : null
+});
+
+/**
  * 文本框
  */
 LK.UI('plugins', 'textbox', function(options) {
@@ -118,7 +131,7 @@ LK.UI('plugins', 'textbox', function(options) {
  */
 LK.UI('plugins', 'openDialog', function(options) {
 }, {
-  // 对话框ID，自动拼接dlg_前缀。
+  // 对话框ID，自动拼接dlg_前缀，存入生成后控件的data-id中。
   id : '',
   // 对话框标题
   title : LK.i18n.dialogTitle,
@@ -140,4 +153,17 @@ LK.UI('plugins', 'openDialog', function(options) {
   height : 360,
   // 对话框按钮数组
   buttons : []
+});
+
+/**
+ * 将对话框激活
+ */
+LK.UI('plugins', 'activeDialog', function(options) {
+}, {
+  // 渲染过的控件对应的DOM元素ID属性值
+  id : '',
+  // 渲染过的控件对应的DOM元素data-id属性值
+  dataId : '',
+  // 渲染过的控件对应的JQuery对象
+  $obj : null
 });
