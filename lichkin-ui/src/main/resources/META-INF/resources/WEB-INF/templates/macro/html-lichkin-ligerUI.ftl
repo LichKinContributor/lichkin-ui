@@ -17,6 +17,9 @@
   	<#if section="body-content">
   		<#nested "body-content"/>
   	</#if>
+	<#if section="javascript-contents-before-links">
+		<#nested "javascript-contents-before-links"/>
+	</#if>
   	<#if section="javascript-links">
   		<@lichkin@jsTag url="/webjars/LichKin-UI/ligerui.all${compressSuffix}.js"/>
 		<@lichkin@jsTag url="/webjars/LichKin-UI/lichkin-web-ligerUI${compressSuffix}.js" />
@@ -25,6 +28,9 @@
   	<#if section="javascript-contents">
   		<#nested "javascript-contents"/>
   	</#if>
+	<#if section="javascript-contents-after-links">
+		<#nested "javascript-contents-after-links"/>
+	</#if>
   </@html>
 
 </#macro>

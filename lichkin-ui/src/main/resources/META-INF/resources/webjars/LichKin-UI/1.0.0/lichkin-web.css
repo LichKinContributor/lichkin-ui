@@ -28,15 +28,59 @@
   --lichkin-loading-foreground-color: #88bb66;
 }
 
-/* icons */
-.lichkin-icon{background-repeat:no-repeat;}
-.lichkin-icon-16{background-size:16px;}
-.lichkin-icon-32{background-size:32px;}
-.lichkin-icon-64{background-size:64px;}
-.lichkin-icon-128{background-size:128px;}
+/* icons 用于DIV标签，图标占比0.75。 */
+.lichkin-icon{background-repeat:no-repeat;text-align:center;color:#ffffff;}
+.lichkin-icon-16{background-size:16px;width:16px;height:16px;line-height:16px;}
+.lichkin-icon-32{background-size:32px;width:32px;height:32px;line-height:32px;}
+.lichkin-icon-64{background-size:64px;width:64px;height:64px;line-height:64px;}
+.lichkin-icon-128{background-size:128px;width:128px;height:128px;line-height:128px;}
 
+/* icons for fontAwesome */
+.lichkin-icon .fa, .lichkin-icon .fas{text-align:center;vertical-align:middle;color:#ffffff;}
+.lichkin-icon-16 .fa, .lichkin-icon-16 .fas{width:16px;height:16px;line-height:16px;font-size:12px;}
+.lichkin-icon-32 .fa, .lichkin-icon-32 .fas{width:32px;height:32px;line-height:32px;font-size:24px;}
+.lichkin-icon-64 .fa, .lichkin-icon-64 .fas{width:64px;height:64px;line-height:64px;font-size:48px;}
+.lichkin-icon-128 .fa, .lichkin-icon-128 .fas{width:128px;height:128px;line-height:128px;font-size:96px;}
+
+/* commons */
 .lichkin-body {
   background-color: var(--lichkin-body-background-color);
+}
+
+.lichkin-div-default {
+  color: #ffffff;
+  background-color: #ffffff;
+  border-color: #cccccc;
+}
+
+.lichkin-div-primary {
+  color: #ffffff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+}
+
+.lichkin-div-success {
+  color: #ffffff;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+
+.lichkin-div-info {
+  color: #ffffff;
+  background-color: #5bc0de;
+  border-color: #46b8da;
+}
+
+.lichkin-div-warning {
+  color: #ffffff;
+  background-color: #f0ad4e;
+  border-color: #eea236;
+}
+
+.lichkin-div-danger {
+  color: #ffffff;
+  background-color: #d9534f;
+  border-color: #d43f3a;
 }
 
 /* img */

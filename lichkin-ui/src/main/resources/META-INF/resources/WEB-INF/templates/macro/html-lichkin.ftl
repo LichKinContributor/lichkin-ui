@@ -38,8 +38,10 @@
 		</#if>
 		<#if section="body-attributes"><#nested "body-attributes"/></#if>
 		<#if section="body-content">
-			<#nested "body-content"/>
-			<script type="text/javascript">let _CTX='${ctx}',_LANG='${locale}',_MAPPING_PAGES='${mappingPages}',_MAPPING_DATAS='${mappingDatas}',_MAPPING_API='${mappingApi}';</script>
+			<#nested "body-content"/></#if>
+		<#if section="javascript-contents-before-links">
+			let _CTX='${ctx}',_LANG='${locale}',_MAPPING_PAGES='${mappingPages}',_MAPPING_DATAS='${mappingDatas}',_MAPPING_API='${mappingApi}';
+			<#nested "javascript-contents-before-links"/>
 		</#if>
 		<#if section="javascript-links">
 			<@lichkin@jsTag url="/webjars/jquery/jquery${compressSuffix}.js"/>
@@ -49,13 +51,18 @@
 			<@lichkin@jsTag url="/webjars/LichKin-UI/lichkin-${calculateType}${compressSuffix}.js" />
 			<#nested "javascript-links"/>
 		</#if>
-		<#if section="javascript-contents">
-			LK.UI.icons = ['ALIEN','UNKNOWN','SECRECY','FEMALE','MALE','menu-next'];
-			<#nested "javascript-contents"/>
-			var $iconsStyle = $('#lichkin-icons');
-			for (var i = 0; i < LK.UI.icons.length; i++) {
-				var icon = LK.UI.icons[i];
-				$iconsStyle.append('.lichkin-icon-' + icon + '{background-image:url("../../res/img/icons/' + icon + '.png") !important;}');
+		<#if section="javascript-contents-after-links">
+			let $win = $(window), $doc = $(document), $body = $('body');
+			LK.UI.icons = ['ALIEN','UNKNOWN','SECRECY','FEMALE','MALE','roleMgmt'];
+			LK.UI.icons.fontAwesome = true;
+			<#nested "javascript-contents-after-links"/>
+			if (!LK.UI.icons.fontAwesome) {
+				var $iconsStyle = $('#lichkin-icons');
+				$iconsStyle.append('.lichkin-icon .fa, .lichkin-icon .fas{display:none;}');
+				for (var i = 0; i < LK.UI.icons.length; i++) {
+					var icon = LK.UI.icons[i];
+					$iconsStyle.append('.lichkin-icon-' + icon + '{background-image:url("../../res/img/icons/' + icon + '.png") !important;}');
+				}
 			}
 		</#if>
 	</@html>
