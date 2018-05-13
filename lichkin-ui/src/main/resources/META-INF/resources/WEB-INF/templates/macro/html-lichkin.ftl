@@ -53,7 +53,7 @@
 		</#if>
 		<#if section="javascript-contents-after-links">
 			let $win = $(window), $doc = $(document), $body = $('body');
-			LK.UI.icons = ['ALIEN','UNKNOWN','SECRECY','FEMALE','MALE','roleMgmt'];
+			LK.UI.icons = ['ALIEN','UNKNOWN','SECRECY','FEMALE','MALE','page','folder','sysMgmt','roleMgmt','userMgmt','dictMgmt','loginLog','errorLog','operLog'];
 			LK.UI.icons.fontAwesome = true;
 			<#nested "javascript-contents-after-links"/>
 			if (!LK.UI.icons.fontAwesome) {
