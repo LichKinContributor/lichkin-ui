@@ -53,8 +53,8 @@
 		</#if>
 		<#if section="javascript-contents-after-links">
 			let $win = $(window), $doc = $(document), $body = $('body');
-			LK.UI.icons = ['ALIEN','UNKNOWN','SECRECY','FEMALE','MALE','page','folder','sysMgmt','roleMgmt','userMgmt','dictMgmt','loginLog','errorLog','operLog'];
-			LK.UI.icons.fontAwesome = true;
+			LK.UI.icons = ['ALIEN','UNKNOWN','SECRECY','FEMALE','MALE','page','folder','starter','starter-closed','starter-back','sysMgmt','roleMgmt','userMgmt','dictMgmt','loginLog','errorLog','operLog'];
+			LK.UI.icons.fontAwesome = false;
 			<#nested "javascript-contents-after-links"/>
 			if (!LK.UI.icons.fontAwesome) {
 				var $iconsStyle = $('#lichkin-icons');
