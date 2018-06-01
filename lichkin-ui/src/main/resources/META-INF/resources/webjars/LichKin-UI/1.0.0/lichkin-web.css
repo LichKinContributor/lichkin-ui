@@ -209,3 +209,66 @@
     transform: scaleY(0);
   }
 }
+
+/* dialog */
+.lichkin-dialog {
+  background-color: #ffffff;
+  position: fixed;
+  border-bottom: 1px solid #46b8da;
+  opacity: 0.6;
+}
+
+.lichkin-dialog-focus {
+  opacity: 1.0;
+}
+
+.lichkin-dialog .lichkin-dialog-titleBar {
+  background-color: #5bc0de;
+  padding: 3px 0px;
+  height: 20px;
+  line-height: 20px;
+  cursor: move;
+  border-left: 1px solid #46b8da;
+  border-right: 1px solid #46b8da;
+  border-top: 1px solid #46b8da;
+}
+
+.lichkin-dialog-focus .lichkin-dialog-titleBar {
+  background-color: #337ab7;
+  border-color: #2e6da4;
+}
+
+.lichkin-dialog .lichkin-dialog-titleBar .lichkin-icon {
+  float: left;
+  margin-left: 6px;
+  font-size: 14px;
+  height: 20px;
+  line-height: 20px;
+}
+
+.lichkin-dialog .lichkin-dialog-titleBar .lichkin-title {
+  float: left;
+  color: #ffffff;
+  margin-left: 6px;
+  font-size: 14px;
+  height: 20px;
+  line-height: 20px;
+}
+
+.lichkin-dialog .lichkin-dialog-titleBar .lichkin-buttons {
+  float: right;
+  color: #ffffff;
+  cursor: pointer;
+  margin-right: 6px;
+}
+
+.lichkin-dialog .lichkin-dialog-contentBar {
+  border-left: 1px solid #46b8da;
+  border-right: 1px solid #46b8da;
+}
+
+.lichkin-dialog .lichkin-dialog-buttonsBar {
+  border-left: 1px solid #46b8da;
+  border-right: 1px solid #46b8da;
+  border-bottom: 1px solid #46b8da;
+}

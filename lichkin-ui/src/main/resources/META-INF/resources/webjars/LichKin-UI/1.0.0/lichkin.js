@@ -388,6 +388,7 @@ let LK = {
    * @param options[data] [JSON] 自动转换为RequestBody内容。
    * @param options[showLoading] [boolean] 是否显示加载效果
    * @param options[timeout] [function|string] 超时回调时，方法或方法名。
+   * @param options[onAfterLoading] [function] 页面加载后事件
    */
   loadPage : function(options) {
     var loadingId = '';
@@ -404,6 +405,7 @@ let LK = {
       url : _CTX + options.url + _MAPPING_PAGES + this.paramUrl(options.param),
       data : JSON.stringify($.extend({}, options.data)),
       success : function(text) {
+        options.onAfterLoading(options);
         loadingTimeout = false;
         setTimeout(function() {
           if (options.showLoading) {
@@ -632,6 +634,9 @@ LK.UI._ = function(plugin, options) {
   var defaultValues = $.extend(true, {}, LK.UI[plugin].defaultValues);
   options = $.extend({}, defaultValues, options);
   for ( var key in options) {
+    if (key == 'UI') {
+      continue;
+    }
     var containsKey = false;
     for ( var defaultKey in defaultValues) {
       if (defaultKey === key) {
