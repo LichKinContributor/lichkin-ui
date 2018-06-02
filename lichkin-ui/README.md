@@ -16,15 +16,12 @@ WEB端常用方法以及UI控件
 > ## 1.1 isJSON(json)
 > #### 描述
 >> 判断是否为JSON对象
-
 > #### 参数
 >> json JSON对象
-
 > #### 返回值
 >> json参数是JSON格式时返回true，否则返回false。
-
 > #### 示例
-```javascript
+>```javascript
 isJSON({}) -> true;
 isJSON(1) -> false;
 isJSON('1') -> false;
