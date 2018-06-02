@@ -1,5 +1,35 @@
 ;
 /**
+ * 控件功能性方法，提供JQuery扩展。
+ */
+$.fn.extend({
+
+  /**
+   * 使用LKUI开头+控件名命名扩展
+   * @param funcName 控件具体方法名
+   * @param options 控件具体方法需要的参数。部分方法可扩展实现代码简写方式。
+   */
+  LKUIdialog : function(funcName, options) {
+    // 第一个参数为字符串时，即为调用该类型控件的方法。
+    if (isString(funcName)) {
+      switch (funcName) {
+        case 'active':
+          LK.UI.activeDialog({
+            $obj : this
+          });
+          return;
+        default:
+          // 没有该方法
+          break;
+      }
+    }
+    // 参数非法
+    throw 'illegal arguments';
+  }
+
+});
+
+/**
  * 对话框内部实现相关
  */
 LK.UI._dialog = {
