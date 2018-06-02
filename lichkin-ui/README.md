@@ -21,13 +21,13 @@ WEB端常用方法以及UI控件
 > #### 返回值
 >> json参数是JSON格式时返回true，否则返回false。
 > #### 示例
->```javascript
-isJSON({}) -> true;
-isJSON(1) -> false;
-isJSON('1') -> false;
-isJSON([]) -> false;
-isJSON(document) -> false;
-```
+> ```javascript
+> isJSON({}) -> true;
+> isJSON(1) -> false;
+> isJSON('1') -> false;
+> isJSON([]) -> false;
+> isJSON(document) -> false;
+> ```
 
 > ## 1.2 isEmptyJSON(json)
 > #### 描述
