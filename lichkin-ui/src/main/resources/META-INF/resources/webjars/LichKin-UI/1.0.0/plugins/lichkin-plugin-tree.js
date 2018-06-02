@@ -175,7 +175,7 @@ LK.UI._tree = {
    */
   getCheckedIds : function($plugin, statusArr) {
     var ids = new Array();
-    $tree.find('.lichkin-tree-node-checkbox').each(function() {
+    $plugin.find('.lichkin-tree-node-checkbox').each(function() {
       for (var i = 0; i < statusArr.length; i++) {
         if ($(this).hasClass('lichkin-icon-checkbox-' + statusArr[i])) {
           ids.push($(this).data('id'));
@@ -192,7 +192,7 @@ LK.UI._tree = {
    */
   getCheckedNodes : function($plugin, statusArr) {
     var nodes = new Array();
-    $tree.find('.lichkin-tree-node-checkbox').each(function() {
+    $plugin.find('.lichkin-tree-node-checkbox').each(function() {
       for (var i = 0; i < statusArr.length; i++) {
         if ($(this).hasClass('lichkin-icon-checkbox-' + statusArr[i])) {
           nodes.push($(this));

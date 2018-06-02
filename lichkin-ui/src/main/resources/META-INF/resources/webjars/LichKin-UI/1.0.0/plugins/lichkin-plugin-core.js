@@ -146,7 +146,7 @@ LK.UI('plugins', 'getUIPlugin', function(options) {
     return LK.UI._core.getCached($('[data-id=' + options.dataId + ']').attr('id'));
   }
   if (options.$obj != null) {
-    return LK.UI._core.getCached($obj.attr('id'));
+    return LK.UI._core.getCached(options.$obj.attr('id'));
   }
   return null;
 }, {

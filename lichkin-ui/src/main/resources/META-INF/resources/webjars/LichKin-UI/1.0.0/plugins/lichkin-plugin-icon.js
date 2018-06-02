@@ -265,9 +265,9 @@ LK.UI('plugins', 'changeIcon', function(options) {
   }
   var originalMappings = {
     'loading' : '<i class="fa fa-spinner fa-spin"></i>',
-    'checkbox-checked' : '<span style="position:relative;"><i class="far fa-square" style="position:absolute;left:-7px;top:0px;font-size:16px;"></i><i class="fa fa-check" style="position:absolute;left:-7px;top:0px;"></i></span>',
-    'checkbox-tristate' : '<span style="position:relative;"><i class="far fa-square" style="position:absolute;left:-7px;top:0px;font-size:16px;"></i><i class="fa fa-square" style="position:absolute;left:-7px;top:0px;"></i></span>',
-    'checkbox-unchecked' : '<span style="position:relative;"><i class="far fa-square" style="position:absolute;left:-7px;top:0px;font-size:16px;"></i></span>'
+    'checkbox-checked' : '<span style="position:relative;left:-1px;"><i class="far fa-square" style="position:absolute;left:-7px;top:0px;font-size:16px;"></i><i class="fa fa-check" style="position:absolute;left:-7px;top:0px;font-size:8px;"></i></span>',
+    'checkbox-tristate' : '<span style="position:relative;left:-1px;"><i class="far fa-square" style="position:absolute;left:-7px;top:0px;font-size:16px;"></i><i class="fa fa-square" style="position:absolute;left:-7px;top:0px;font-size:8px;"></i></span>',
+    'checkbox-unchecked' : '<span style="position:relative;left:-1px;"><i class="far fa-square" style="position:absolute;left:-7px;top:0px;font-size:16px;"></i></span>'
   };
   for ( var key in originalMappings) {
     LK.UI.bindIcon({

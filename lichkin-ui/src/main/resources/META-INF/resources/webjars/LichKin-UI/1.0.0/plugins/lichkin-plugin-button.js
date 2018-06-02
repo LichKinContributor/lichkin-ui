@@ -2,10 +2,11 @@
 /**
  * 初始化控件，提供简写代码。
  */
-LKUI.button = function(text, icon) {
+LKUI.button = function(text, icon, click) {
   return LK.UI.button({
     text : text,
-    icon : icon
+    icon : icon,
+    click : click
   });
 };
 
@@ -74,6 +75,11 @@ LK.UI('plugins', 'button', function(options) {
     $span.append(LKUI.text(options.text));
   }
 
+  // 点击事件
+  $plugin.click(function() {
+    options.click(options, $plugin);
+  });
+
   // 返回控件对象
   return $plugin;
 }, {
@@ -88,5 +94,8 @@ LK.UI('plugins', 'button', function(options) {
   // 文字控件约定的内容
   _text : null,
   // 文字
-  text : ''
+  text : '',
+  // 点击事件
+  click : function(options, $button) {
+  }
 });
