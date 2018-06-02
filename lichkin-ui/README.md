@@ -24,8 +24,7 @@ WEB端常用方法以及UI控件
 >> json参数是JSON格式返回true，否则返回false。
 
 > #### 示例
-
->```javascript
+```javascript
 isJSON({}) -> true;
 isJSON(1) -> false;
 isJSON('1') -> false;
