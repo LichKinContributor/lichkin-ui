@@ -25,7 +25,7 @@ WEB端常用方法以及UI控件
 
 > #### 示例
 
->```JavaScript
+>```javascript
 isJSON({}) -> true;
 isJSON(1) -> false;
 isJSON('1') -> false;
