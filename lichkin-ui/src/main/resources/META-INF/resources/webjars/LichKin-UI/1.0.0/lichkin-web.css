@@ -36,13 +36,16 @@
 
 /* text */
 .lichkin-text {
-display: inline-block;
-    vertical-align: top;
-    width: auto;
-    line-height: 22px;
-    padding: 0;color: #ffffff;
-} .lichkin-icon+.lichkin-text {
-    margin-left: 3px;
+  display: inline-block;
+  vertical-align: top;
+  width: auto;
+  line-height: 18px;
+  padding: 0;
+  color: #ffffff;
+}
+
+.lichkin-icon+.lichkin-text {
+  margin-left: 3px;
 }
 
 /* commons */
@@ -156,6 +159,10 @@ display: inline-block;
 .lichkin-button .lichkin-button-container .lichkin-icon-16 {
   display: inline-block;
   margin-top: 3px;
+}
+
+.lichkin-button .lichkin-button-container .lichkin-text {
+  line-height: 22px;
 }
 
 /* toast */
