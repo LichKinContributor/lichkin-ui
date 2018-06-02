@@ -13,14 +13,17 @@ let isJSON = function(json) {
 };
 
 /**
- * 是否为空JSON
+ * 判断是否为空JSON
  * @param json JSON对象
  */
 let isEmptyJSON = function(json) {
-  for ( var name in json) {
-    return false;
+  if (isJSON(json)) {
+    for ( var name in json) {
+      return false;
+    }
+    return true;
   }
-  return true;
+  return false;
 };
 
 /**
@@ -48,6 +51,24 @@ let isNumber = function(number) {
 let randomInRange = function(min, max) {
   return Math.floor(Math.random() * (max + 1 - min) + min);
 };
+
+/**
+ * 扩展JQuery功能
+ */
+$.fn.extend({
+
+  /**
+   * 获取对象的class属性并转换为数组形式返回
+   */
+  getClassArr : function() {
+    var cls = this.attr("class");
+    if (cls) {
+      return cls.match(/[^\x20\t\r\n\f]+/g) || [];
+    }
+    return [];
+  }
+
+});
 
 /** 全局定义顶层对象 */
 let LK = {
@@ -589,75 +610,6 @@ let LK = {
     }
   }
 
-};
-
-/**
- * 添加控件实现代码
- * @param provider 控件提供者
- * @param plugin 控件类型
- * @param func 具体实现方法
- * @param defaultValues 控件所有参数默认值（框架内部实现，自定义实现方法不处理该参数。）
- */
-LK.UI = function(provider, plugin, func, defaultValues) {
-  // 确定控件提供者
-  if (typeof LK.UI['__'] == 'undefined') {
-    LK.UI['__'] = {};
-  }
-  LK.UI['__'][plugin] = provider;
-
-  // 添加解析器
-  if (typeof LK.UI[plugin] == 'undefined') {
-    LK.UI[plugin] = function(x, y) {
-      return LK.UI['_'](plugin, x, y);
-    };
-  }
-
-  // 添加实现方法
-  if (typeof LK.UI[provider] == 'undefined') {
-    LK.UI[provider] = {};
-  }
-  LK.UI[provider][plugin] = func;
-
-  // 添加默认值
-  if (provider == 'plugins') {
-    LK.UI[plugin].defaultValues = defaultValues;
-  }
-};
-
-/**
- * 处理UI实现方法（框架内部调用）
- * @param plugin 控件类型
- * @param options 自定义的参数
- */
-LK.UI._ = function(plugin, options) {
-  // 自动补全默认参数，并且不支持默认参数中未定义的参数。
-  var defaultValues = $.extend(true, {}, LK.UI[plugin].defaultValues);
-  options = $.extend({}, defaultValues, options);
-  for ( var key in options) {
-    if (key == 'UI') {
-      continue;
-    }
-    var containsKey = false;
-    for ( var defaultKey in defaultValues) {
-      if (defaultKey === key) {
-        containsKey = true;
-        delete defaultValues[defaultKey];
-        break;
-      }
-    }
-    if (!containsKey) {
-      delete options[key];
-    }
-  }
-
-  // 调用时显式指定了UI类型，则调用该UI方法。
-  var provider = options.UI;
-  if (typeof provider != 'undefined') {
-    return LK.UI[provider][plugin](options);
-  }
-
-  // 使用该控件类型指定的UI实现。
-  return LK.UI[LK.UI['__'][plugin]][plugin](options);
 };
 
 // loadPage请求超时时长

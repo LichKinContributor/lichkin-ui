@@ -35,6 +35,7 @@
 			<style>
 				<#nested "style"/>
 			</style>
+			<style>.lichkin-hidden-icon{background-image:none !important;}</style>
 		</#if>
 		<#if section="body-attributes"><#nested "body-attributes"/></#if>
 		<#if section="body-content">
@@ -49,21 +50,19 @@
 			<@lichkin@jsTag url="/webjars/LichKin-UI/i18n/${locale}${compressSuffix}.js" />
 			<@lichkin@jsTag url="/res/js/i18n/${locale}.js" />
 			<@lichkin@jsTag url="/webjars/LichKin-UI/lichkin-${calculateType}${compressSuffix}.js" />
+			<#-- TODO web与app分离？ -->
+			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-core${compressSuffix}.js" />
+			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-icon${compressSuffix}.js" />
+			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-text${compressSuffix}.js" />
+			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-button${compressSuffix}.js" />
+			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-textbox${compressSuffix}.js" />
+			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-dialog${compressSuffix}.js" />
+			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-tree${compressSuffix}.js" />
 			<#nested "javascript-links"/>
 		</#if>
 		<#if section="javascript-contents-after-links">
 			let $win = $(window), $doc = $(document), $body = $('body');
-			LK.UI.icons = ['ALIEN','UNKNOWN','SECRECY','FEMALE','MALE','page','folder','starter','starter-closed','starter-back','menu-next','sysMgmt','roleMgmt','userMgmt','dictMgmt','loginLog','operLog','errorLog','appMgmt','appVersionMgmt','appBannerMgmt','appNewsMgmt','appFeedbackMgmt','appScoreMgmt','websiteMgmt','websiteBannerMgmt','websiteNewsMgmt','orgMgmt','compMgmt','deptMgmt','employeeMgmt','workflowMgmt','dictTimeMgmt','employeeAttendance'];
-			LK.UI.icons.fontAwesome = true;
 			<#nested "javascript-contents-after-links"/>
-			if (!LK.UI.icons.fontAwesome) {
-				var $iconsStyle = $('#lichkin-icons');
-				$iconsStyle.append('.lichkin-icon .fa, .lichkin-icon .fas{display:none;}');
-				for (var i = 0; i < LK.UI.icons.length; i++) {
-					var icon = LK.UI.icons[i];
-					$iconsStyle.append('.lichkin-icon-' + icon + '{background-image:url("../../res/img/icons/' + icon + '.png") !important;}');
-				}
-			}
 		</#if>
 	</@html>
 <#else>
