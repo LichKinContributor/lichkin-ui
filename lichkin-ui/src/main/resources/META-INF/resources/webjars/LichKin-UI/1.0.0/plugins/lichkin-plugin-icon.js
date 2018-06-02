@@ -115,7 +115,7 @@ LK.UI._icon = {
  * 绑定图标
  */
 LK.UI('plugins', 'bindIcon', function(options) {
-  $('#lichkin-icons').append('.lichkin-icon-' + options.icon + '{background-image:url("../../res/img/icons/' + options.icon + '.png") !important;}');
+  $('#lichkin-icons').append('.lichkin-icon-' + options.icon + '{background-image:url("../../res/img/icons/' + options.icon + '.' + ((options.icon == 'loading') ? 'gif' : 'png') + '") !important;}');
 
   if (options.fontAwesome != '') {
     LK.UI._icon.mappings[options.icon] = options.fontAwesome;
@@ -183,13 +183,9 @@ LK.UI('plugins', 'changeIcon', function(options) {
   var $icon = options.$icon;
 
   // 文字图标环境下隐藏图片图标
-  if ((((options.type == null) ? LK.UI.iconType : options.type) == false) && !$icon.hasClass('lichkin-hidden-icon')) {
+  var type = (((options.type == null) ? LK.UI.iconType : options.type) == false);
+  if (type && !$icon.hasClass('lichkin-hidden-icon')) {
     $icon.addClass('lichkin-hidden-icon');
-  }
-
-  // 包含该图标则不做处理
-  if (LK.UI.hasIcon(options)) {
-    return $icon;
   }
 
   // 清除图标
@@ -207,8 +203,10 @@ LK.UI('plugins', 'changeIcon', function(options) {
   if (options.icon != '') {
     // 更换图标
     $icon.addClass('lichkin-icon-' + options.icon);
-    // 更换文字图标
-    $icon.append(LK.UI._icon.getFontAwesome(options.icon));
+    if (type) {
+      // 更换文字图标
+      $icon.append(LK.UI._icon.getFontAwesome(options.icon));
+    }
   }
   return $icon;
 }, {
