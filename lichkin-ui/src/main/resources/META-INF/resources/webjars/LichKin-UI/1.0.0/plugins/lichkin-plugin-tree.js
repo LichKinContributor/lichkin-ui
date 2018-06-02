@@ -1,5 +1,51 @@
 ;
 /**
+ * 初始化控件，提供简写代码。
+ */
+LKUI.tree = function(id, url, data) {
+  return LK.UI.tree({
+    id : id,
+    url : url,
+    data : data
+  });
+};
+
+/**
+ * 控件功能性方法，提供JQuery扩展。
+ */
+$.fn.extend({
+
+  /**
+   * 使用LKUI开头+控件名命名扩展
+   * @param funcName 控件具体方法名
+   * @param options 控件具体方法需要的参数。部分方法可扩展实现代码简写方式。
+   */
+  LKUItree : function(funcName, options) {
+    // 第一个参数为字符串时，即为调用该类型控件的方法。
+    if (isString(funcName)) {
+      switch (funcName) {
+        case 'getCheckedNodes':
+          return LK.UI.getTreeCheckedNodes({
+            $obj : this,
+            statusArr : options
+          });
+        case 'getCheckedIds':
+          return LK.UI.getTreeCheckedIds({
+            $obj : this,
+            statusArr : options
+          });
+        default:
+          // 没有该方法
+          break;
+      }
+    }
+    // 参数非法
+    throw 'illegal arguments';
+  }
+
+});
+
+/**
  * 树形控件内部实现相关
  */
 LK.UI._tree = {
