@@ -271,6 +271,34 @@
   border-left: 1px solid #46b8da;
   border-right: 1px solid #46b8da;
   border-bottom: 1px solid #46b8da;
+  padding: 5px 0px;
+  background-color: #c9e6ff;
+  position: relative;
+  height: 22px;
+  line-height: 22px;
+}
+
+.lichkin-dialog .lichkin-dialog-buttonsBar .lichkin-button {
+  border: 1px solid #eea236;
+  position: absolute;
+  cursor: pointer;
+  width: 100px;
+  height: 20px;
+  line-height: 20px;
+  background-color: #f0ad4e;
+  right: 6px;
+}
+
+.lichkin-dialog .lichkin-dialog-buttonsBar .lichkin-button .lichkin-icon {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+}
+
+.lichkin-dialog .lichkin-dialog-buttonsBar .lichkin-button .lichkin-text {
+  left: 20px;
+  position: absolute;
+  color: #ffffff;
 }
 
 /** tree */
