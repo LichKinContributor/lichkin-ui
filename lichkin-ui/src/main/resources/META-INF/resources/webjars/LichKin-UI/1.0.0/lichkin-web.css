@@ -272,3 +272,32 @@
   border-right: 1px solid #46b8da;
   border-bottom: 1px solid #46b8da;
 }
+
+/** tree */
+.lichkin-tree .lichkin-icon {
+  float: left;
+}
+
+.lichkin-tree .lichkin-tree-node-container {
+  height: 16px;
+  padding: 2px 0px;
+}
+
+.lichkin-tree .lichkin-tree-node-container .fa,
+.lichkin-tree .lichkin-tree-node-container .far,
+.lichkin-tree .lichkin-tree-node-container .lichkin-text,
+.lichkin-tree .lichkin-tree-node-container .lichkin-tree-node-checkbox {
+  float: left;
+  color: #337ab7;
+}
+
+.lichkin-tree .lichkin-tree-node-container-hover {
+  cursor: pointer;
+  background-color: #5bc0de;
+}
+
+.lichkin-tree .lichkin-tree-node-container-hover .fa,
+.lichkin-tree .lichkin-tree-node-container-hover .far,
+.lichkin-tree .lichkin-tree-node-container-hover .lichkin-text {
+  color: #ffffff;
+}
