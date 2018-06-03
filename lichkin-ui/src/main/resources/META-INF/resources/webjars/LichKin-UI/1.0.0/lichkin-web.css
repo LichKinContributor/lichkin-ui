@@ -28,6 +28,8 @@
   --lichkin-loading-foreground-color: #88bb66;
 }
 
+*{font-size:12px;}
+
 /* icons 用于DIV标签，图标占比0.75。 */
 .lichkin-icon{background-repeat:no-repeat;text-align:center;color:#ffffff;}
 
@@ -162,7 +164,7 @@
 
 .lichkin-button .lichkin-button-container .lichkin-icon-16 {
   display: inline-block;
-  margin-top: 3px;
+  margin-top: 2px;
 }
 
 .lichkin-button .lichkin-button-container .lichkin-text {
@@ -329,6 +331,11 @@
 }
 
 /** tree */
+.lichkin-tree ul {
+  list-style: none;
+  padding: 0px;
+}
+
 .lichkin-tree .lichkin-icon {
   float: left;
 }
