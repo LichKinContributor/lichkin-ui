@@ -174,19 +174,11 @@ LK.UI('plugins', 'openDialog', function(options) {
     var $buttonsBar = $('<div class="lichkin-dialog-buttonsBar"></div>').appendTo($plugin);
     for (var i = 0; i < options.buttons.length; i++) {
       var button = options.buttons[i];
-
-      // 添加按钮
-      var $button = LKUI.button(button.text).appendTo($buttonsBar);
-
-      // 添加按钮图标
-      if (button.icon) {
-        $button.children().prepend(LKUI.icon(button.icon));
-      }
-
-      // 绑定按钮点击事件
-      $button.click(function() {
-        button.click($plugin, options);
-      });
+      (function(button) {
+        $buttonsBar.append(LKUI.button(button.text, button.icon, function() {
+          button.click($plugin, options);
+        }));
+      })(button);
     }
   }
 
