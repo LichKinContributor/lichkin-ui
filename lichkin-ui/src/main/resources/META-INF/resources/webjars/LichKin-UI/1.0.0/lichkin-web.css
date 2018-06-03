@@ -49,7 +49,7 @@
 }
 
 /* commons */
-.lichkin-body {
+#lichkin-html, .lichkin-body {
   background-color: var(--lichkin-body-background-color);
 }
 
@@ -145,6 +145,10 @@
   height: 22px;
   background-color: #5bc0de;
   border: 1px solid #46b8da;
+}
+
+.lichkin-button:hover {
+  opacity: 0.6;
 }
 
 .lichkin-button .lichkin-button-container {
@@ -306,6 +310,7 @@
 .lichkin-dialog .lichkin-dialog-contentBar {
   border-left: 1px solid #46b8da;
   border-right: 1px solid #46b8da;
+  overflow: auto;
 }
 
 .lichkin-dialog .lichkin-dialog-buttonsBar {

@@ -110,13 +110,13 @@ LK.UI('plugins', 'openDialog', function(options) {
   var $plugin = $('<div id="' + options.id + '" data-id="dlg_' + options.id + '" data-plugin="dialog" class="lichkin-dialog"></div>');
 
   // 控件点击事件
-  $plugin.click(function() {
+  $plugin.mousedown(function() {
     // 切换并触发聚焦事件
     LK.UI._dialog.switchTo($plugin, true);
   });
 
   // 添加标题栏
-  var $titleBar = $('<div class="lichkin-dialog-titleBar" style="width:' + options.contentWidth + 'px;"></div>').appendTo($plugin);
+  var $titleBar = $('<div class="lichkin-dialog-titleBar"></div>').appendTo($plugin);
   // 标题栏拖拽
   $titleBar.mousedown(function(e) {
     var left = parseInt($plugin.css('left'));
@@ -156,7 +156,7 @@ LK.UI('plugins', 'openDialog', function(options) {
   });
 
   // 添加内容栏
-  var $contentBar = $('<div class="lichkin-dialog-contentBar" style="width:' + options.contentWidth + 'px;height:' + options.contentHeight + 'px;"></div>').appendTo($plugin);
+  var $contentBar = $('<div class="lichkin-dialog-contentBar" style="width:' + options.size.width + 'px;height:' + options.size.height + 'px;"></div>').appendTo($plugin);
   // 加载页面
   // 触发页面加载前事件
   options.onBeforeLoading(options, $plugin);
@@ -192,10 +192,8 @@ LK.UI('plugins', 'openDialog', function(options) {
 
   // 定位&大小
   $plugin.css({
-    'left' : ($doc.width() - options.contentWidth) / 2 + 'px',
-    'top' : ($doc.height() - options.contentHeight - 45) / 2 + 'px',
-    'width' : options.contentWidth + 2 + 'px',
-    'height' : 26 + options.contentHeight + 'px'
+    'left' : ($doc.width() - options.size.width) / 2 + 'px',
+    'top' : ($doc.height() - options.size.height - 45) / 2 + 'px'
   });
 
   // 添加到页面
@@ -217,10 +215,13 @@ LK.UI('plugins', 'openDialog', function(options) {
   url : '',
   // 是否增加遮罩层
   mask : true,
-  // 对话框内容宽度
-  contentWidth : 640,
-  // 对话框内容高度
-  contentHeight : 360,
+  // 对话框大小
+  size : {
+    // 对话框内容宽度
+    width : 640,
+    // 对话框内容高度
+    height : 360
+  },
   // 对话框按钮数组
   buttons : [],
 
