@@ -1,39 +1,19 @@
 ;
 /**
  * 初始化控件，提供简写代码。
+ * @param text 按钮文字
+ * @param icon 按钮图标
+ * @param click 按钮点击事件
+ * @param tip 按钮提示信息
  */
-LKUI.button = function(text, icon, click) {
+LKUI.button = function(text, icon, click, tip) {
   return LK.UI.button({
     text : text,
     icon : icon,
-    click : click
+    click : click,
+    tip : tip
   });
 };
-
-/**
- * 控件功能性方法，提供JQuery扩展。
- */
-$.fn.extend({
-
-  /**
-   * 使用LKUI开头+控件名命名扩展
-   * @param funcName 控件具体方法名
-   * @param options 控件具体方法需要的参数。部分方法可扩展实现代码简写方式。
-   */
-  LKUIbutton : function(funcName, options) {
-    // 第一个参数为字符串时，即为调用该类型控件的方法。
-    if (isString(funcName)) {
-      switch (funcName) {
-        default:
-          // 没有该方法
-          break;
-      }
-    }
-    // 参数非法
-    throw 'illegal arguments';
-  }
-
-});
 
 /**
  * 按钮控件
@@ -80,6 +60,15 @@ LK.UI('plugins', 'button', function(options) {
     options.click(options, $plugin);
   });
 
+  // 提示信息
+  if (options.tip != '') {
+    $plugin.attr('title', options.tip);
+  } else if (options.text != '') {
+    $plugin.attr('title', options.text);
+  } else if (options.icon != '') {
+    $plugin.attr('title', options.icon);
+  }
+
   // 返回控件对象
   return $plugin;
 }, {
@@ -97,5 +86,7 @@ LK.UI('plugins', 'button', function(options) {
   text : '',
   // 点击事件
   click : function(options, $button) {
-  }
+  },
+  // 按钮提示信息
+  tip : ''
 });

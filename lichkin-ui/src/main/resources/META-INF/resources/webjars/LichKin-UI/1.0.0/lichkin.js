@@ -73,6 +73,9 @@ $.fn.extend({
 /** 全局定义顶层对象 */
 let LK = {
 
+  // 标准分隔符
+  SPLITOR : '#@#',
+
   /**
    * 输出日志
    * @param options [string|number|JSON] 自定义的参数

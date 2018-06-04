@@ -181,6 +181,7 @@
   position: fixed;
   bottom: 18px;
   display: none;
+  z-index: 99999;
 }
 
 .lichkin-toast span {
@@ -263,10 +264,6 @@
   opacity: 0.9;
 }
 
-.lichkin-dialog-focus {
-  opacity: 1.0;
-}
-
 .lichkin-dialog .lichkin-dialog-titleBar {
   background-color: #5bc0de;
   padding: 3px 0px;
@@ -276,11 +273,6 @@
   border-left: 1px solid #46b8da;
   border-right: 1px solid #46b8da;
   border-top: 1px solid #46b8da;
-}
-
-.lichkin-dialog-focus .lichkin-dialog-titleBar {
-  background-color: #337ab7;
-  border-color: #2e6da4;
 }
 
 .lichkin-dialog .lichkin-dialog-titleBar .lichkin-icon {
@@ -330,6 +322,18 @@
   margin-left: 5px;
 }
 
+.lichkin-dialog-focus {
+  opacity: 1.0;
+}
+
+.lichkin-dialog-focus .lichkin-dialog-titleBar {
+  background-color: #337ab7;
+}
+
+.lichkin-dialog-focus, .lichkin-dialog-focus .lichkin-dialog-titleBar, .lichkin-dialog-focus .lichkin-dialog-contentBar, .lichkin-dialog-focus .lichkin-dialog-buttonsBar {
+  border-color: #2e6da4;
+}
+
 /** tree */
 .lichkin-tree ul {
   list-style: none;
@@ -361,5 +365,97 @@
 .lichkin-tree .lichkin-tree-node-container-hover .fa,
 .lichkin-tree .lichkin-tree-node-container-hover .far,
 .lichkin-tree .lichkin-tree-node-container-hover .lichkin-text {
+  color: #ffffff;
+}
+
+/** table */
+.lichkin-table, .lichkin-table th, .lichkin-table td {
+  border-width: 1px;
+  border-style: solid;
+  border-color: #2e6da4;
+  padding: 0px;
+}
+
+.lichkin-table {
+  text-align: center;
+  border-collapse: collapse;
+}
+
+.lichkin-table .lichkin-table {
+  width: 100%;
+  border: none;
+}
+
+.lichkin-table .lichkin-table .lichkin-table-row .lichkin-table-cell:first-child {
+  border-left: none;
+}
+
+.lichkin-table .lichkin-table .lichkin-table-row .lichkin-table-cell:last-child {
+  border-right: none;
+}
+
+/** datagrid */
+.lichkin-datagrid {
+  overflow: hidden;
+}
+
+.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-text {
+  height: 30px;
+  line-height: 30px;
+}
+
+.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-datagrid-titleBar-toolsBar {
+  float: right;
+  margin-right: 3px;
+  margin-top: 3px;
+}
+
+.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-datagrid-titleBar-toolsBar .lichkin-button {
+  border-radius: 3px;
+  margin-left: 3px;
+}
+
+.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-datagrid-titleBar-toolsBar .lichkin-button .lichkin-text {
+  height: 22px;
+  line-height: 22px;
+}
+
+.lichkin-datagrid .lichkin-datagrid-toolsBar {
+  text-align: left;
+}
+
+.lichkin-datagrid-titleBar, .lichkin-datagrid .lichkin-datagrid-dataBar .lichkin-datagrid-dataHeaderBar {
+  background-color: #46b8da;
+}
+
+.lichkin-datagrid .lichkin-datagrid-dataBar .lichkin-datagrid-dataHeaderBar .lichkin-table .lichkin-table-row .lichkin-table-cell {
+  padding: 6px 0px;
+}
+
+.lichkin-datagrid .lichkin-datagrid-dataBar .lichkin-datagrid-dataBodyBar {
+  overflow-y: auto;
+}
+
+.lichkin-datagrid .lichkin-datagrid-dataBar .lichkin-datagrid-dataBodyBar .lichkin-table .lichkin-table-row {
+  background-color: #ffffff;
+}
+
+.lichkin-datagrid .lichkin-datagrid-dataBar .lichkin-datagrid-dataBodyBar .lichkin-table .lichkin-table-row-selected {
+  background-color: #5bc0de;
+}
+
+.lichkin-datagrid .lichkin-datagrid-dataBar .lichkin-datagrid-dataBodyBar .lichkin-table-cell {
+  padding: 3px 0px;
+  border-style: dotted;
+  border-top: none;
+  border-left: none;
+  cursor: pointer;
+}
+
+.lichkin-datagrid .lichkin-datagrid-dataBar .lichkin-datagrid-dataBodyBar .lichkin-table-cell .lichkin-text {
+  color: #337ab7;
+}
+
+.lichkin-datagrid .lichkin-datagrid-dataBar .lichkin-datagrid-dataBodyBar .lichkin-table .lichkin-table-row-selected .lichkin-table-cell .lichkin-text {
   color: #ffffff;
 }

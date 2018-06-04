@@ -1,6 +1,9 @@
 ;
 /**
  * 初始化控件，提供简写代码。
+ * @param icon 图标
+ * @param size 图标大小
+ * @param type 图标类型
  */
 LKUI.icon = function(icon, size, type) {
   return LK.UI.icon({
@@ -232,6 +235,11 @@ LK.UI('plugins', 'changeIcon', function(options) {
     'ALIEN' : 'bug',
     'FEMALE' : 'female',
     'MALE' : 'male',
+    'save' : 'save',
+    'edit' : 'pencil-alt',
+    'add' : 'plus',
+    'remove' : 'trash-alt',
+    'search' : 'search',
     'close' : 'times',
     'sysMgmt' : 'cog',
     'roleMgmt' : 'user-secret',

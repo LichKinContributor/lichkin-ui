@@ -1,6 +1,7 @@
 ;
 /**
  * 初始化控件，提供简写代码。
+ * @param text 文字
  */
 LKUI.text = function(text) {
   return LK.UI.text({

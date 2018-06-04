@@ -12,5 +12,11 @@ LK.i18n = {
   help : '使用帮助',
   exit : '退出登录',
   timeout : '请求超时，请稍后再试！',
-  ajaxError : '请求时服务器出现异常'
+  ajaxError : '请求时服务器出现异常',
+  singleSelect : '只能选择一项数据',
+  noSelect : '请先选择一项数据',
+  add : '新增',
+  edit : '修改',
+  remove : '删除',
+  search : '查询'
 };

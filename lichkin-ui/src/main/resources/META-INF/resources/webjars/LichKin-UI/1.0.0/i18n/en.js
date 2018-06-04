@@ -12,5 +12,11 @@ LK.i18n = {
   help : 'Help',
   exit : 'Exit',
   timeout : 'Timeout, please try again later.',
-  ajaxError : 'An error occurred when invoke server.'
+  ajaxError : 'An error occurred when invoke server.',
+  singleSelect : 'Single select to do this.',
+  noSelect : 'No select to do this.',
+  add : 'ADD',
+  edit : 'EDIT',
+  remove : 'REMOVE',
+  search : 'SEARCH'
 };

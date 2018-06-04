@@ -46,14 +46,14 @@ LK.UI._dialog = {
    * @param activeFocus 是否触发对话框被聚焦后事件
    */
   switchTo : function($current, activeFocus) {
-    LK.UI._core.callEachCached(this.plugin, function($plugin, $plugins) {
-      $plugin.removeClass('lichkin-dialog-focus');
+    $('.lichkin-dialog').each(function() {
+      $(this).removeClass('lichkin-dialog-focus');
     });
     $current.addClass('lichkin-dialog-focus');
     $current.css('z-index', this.maxZIndex++);
     if (activeFocus) {
       // 触发对话框被聚焦后事件
-      $current.options.onFocus($current.options, $current);
+      $current.data('LKOPTIONS').onFocus($current.data('LKOPTIONS'), $current);
     }
   },
 
@@ -195,7 +195,7 @@ LK.UI('plugins', 'openDialog', function(options) {
   LK.UI._dialog.switchTo($plugin);
 
   // 返回控件对象
-  return LK.UI._core.cache('dialog', $plugin, options);
+  return $plugin.LKUIinit('dialog', options);
 }, {
   // 对话框ID，自动拼接dlg_前缀，存入生成后控件的data-id中。
   id : '',

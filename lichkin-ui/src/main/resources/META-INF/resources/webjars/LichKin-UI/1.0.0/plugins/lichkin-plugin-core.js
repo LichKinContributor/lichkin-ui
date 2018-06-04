@@ -72,81 +72,81 @@ LK.UI._ = function(plugin, options) {
 };
 
 /**
- * 控件核心实现（框架内部使用）
+ * 控件功能性方法，提供JQuery扩展。
  */
-LK.UI._core = {
-  /** 缓存的对象 */
-  cached : {},
+$.fn.extend({
 
   /**
-   * 缓存对象
+   * 初始化控件
    * @param plugin 控件类型
-   * @param $plugin 控件对象
-   * @param options 创建对象时的参数
-   * @param options[id] 控件ID
-   * @return 缓存后的对象
+   * @param options 创建控件时的参数
    */
-  cache : function(plugin, $plugin, options) {
-    if (typeof this.cached[plugin] == 'undefined') {
-      this.cached[plugin] = {};
+  LKUIinit : function(plugin, options) {
+    var that = this;
+    that.data('LKUI', plugin);
+    that.data('LKOPTIONS', options);
+    return that;
+  },
+
+  /**
+   * 使用LKUI实现全控件管理
+   * @param funcName 控件具体方法名
+   * @param options 控件具体方法需要的参数。部分方法可扩展实现代码简写方式。
+   */
+  LKUI : function(funcName, options) {
+    var that = this;
+
+    // 首先验证是否为LKUI控件
+    var plugin = that.data('LKUI');
+    var lkOptions = that.data('LKOPTIONS');
+    if (typeof plugin == 'undefined' || typeof lkOptions == 'undefined') {
+      throw 'this is not a LK plugin.';
     }
-    this.cached[plugin][options.id] = $plugin;
-    this.cached[plugin][options.id].options = options;
-    return $plugin;
-  },
 
-  /**
-   * 获取缓存对象
-   * @param id 控件ID
-   */
-  getCached : function(id) {
-    var $plugin = $('#' + id);
-    return this.cached[$plugin.data('plugin')][id];
-  },
-
-  /**
-   * 获取所有缓存的控件
-   * @param plugin 控件类型
-   */
-  getAllCached : function(plugin) {
-    return this.cached[plugin];
-  },
-
-  /**
-   * 调用所有缓存的控件
-   * @param plugin 控件类型
-   * @param func 调用的方法。参数1：具体控件对象；参数2:所有控件对象。
-   */
-  callEachCached : function(plugin, func) {
-    for ( var key in this.cached[plugin]) {
-      func(this.cached[plugin][key], this.cached[plugin]);
+    // 没有传入参数，视为获取控件对象。
+    if (typeof funcName == 'undefined') {
+      that.options = lkOptions;
+      return that;
     }
-  },
 
-  /**
-   * 清除缓存对象
-   * @param plugin 控件类型
-   * @param id 控件ID
-   */
-  removeCached : function(plugin, id) {
-    var $plugin = this.cached[plugin][id];
-    delete this.cached[plugin][id];
-    $plugin.remove();
+    // 验证参数是否正确
+    if (!isString(funcName)) {
+      throw 'illegal arguments';
+    }
+
+    switch (funcName) {
+      case 'change':
+        if (plugin == 'icon') {
+          return that.LKUIicon(funcName, options);
+        }
+      case 'clear':
+        if (plugin == 'icon') {
+          return that.LKUIicon(funcName, options);
+        }
+      case 'has':
+        if (plugin == 'icon') {
+          return that.LKUIicon(funcName, options);
+        }
+    }
+
+    // 未实现
+    throw 'not implemented at all.';
   }
-};
+
+});
 
 /**
  * 获取UI控件对象
  */
 LK.UI('plugins', 'getUIPlugin', function(options) {
   if (options.id != '') {
-    return LK.UI._core.getCached(options.id);
+    return $('#' + options.id).LKUI();
   }
   if (options.dataId != '') {
-    return LK.UI._core.getCached($('[data-id=' + options.dataId + ']').attr('id'));
+    return $('[data-id=' + options.dataId + ']').LKUI();
   }
   if (options.$obj != null) {
-    return LK.UI._core.getCached(options.$obj.attr('id'));
+    return options.$obj.LKUI();
   }
   return null;
 }, {
