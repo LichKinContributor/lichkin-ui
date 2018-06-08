@@ -14,46 +14,6 @@ LKUI.datagrid = function(columns, url, param) {
 };
 
 /**
- * 控件功能性方法，提供JQuery扩展。
- */
-$.fn.extend({
-
-  /**
-   * 使用LKUI开头+控件名命名扩展
-   * @param funcName 控件具体方法名
-   * @param options 控件具体方法需要的参数。部分方法可扩展实现代码简写方式。
-   */
-  LKUIdatagrid : function(funcName, options) {
-    var that = this;
-
-    // 第一个参数为字符串时，即为调用该类型控件的方法。
-    if (isString(funcName)) {
-      switch (funcName) {
-        case 'reload':
-          LK.UI.reloadDatagrid($.extend({
-            $obj : that
-          }, options));
-          return;
-        case 'getSelected':
-          return LK.UI.getDatagridSelected($.extend({
-            $obj : that
-          }));
-        case 'getSelectedData':
-          return LK.UI.getDatagridSelected($.extend({
-            $obj : that
-          })).data();
-        default:
-          // 没有该方法
-          break;
-      }
-    }
-    // 参数非法
-    throw 'illegal arguments';
-  }
-
-});
-
-/**
  * 数据表格控件内部实现相关
  */
 LK.UI._datagrid = {
@@ -62,12 +22,37 @@ LK.UI._datagrid = {
   plugin : 'datagrid',
 
   /**
+   * 获取数据容器对象
+   * @param $plugin 控件对象
+   */
+  getDataContainer : function($plugin) {
+    return $plugin.find('.lichkin-data-container');
+  },
+
+  /**
+   * 获取选中项
+   * @param $plugin 控件对象
+   */
+  getSelected : function($plugin) {
+    return this.getDataContainer($plugin).find('tr.lichkin-table-row-selected');
+  },
+
+  /**
+   * 添加数据
+   * @param $plugin 控件对象
+   * @param datas 数据集
+   */
+  addDatas : function($plugin, datas) {
+    this.addNodes(this.getDataContainer($plugin), $plugin.options.columns, datas);
+  },
+
+  /**
    * 添加数据
    * @param $table 数据容器对象
    * @param columns 列信息
    * @param datas 数据集
    */
-  addDatas : function($table, columns, datas) {
+  addNodes : function($table, columns, datas) {
     for (var i = 0; i < datas.length; i++) {
       var data = datas[i];
       var $tr = $('<tr class="lichkin-table-row"></tr>').appendTo($table);
@@ -85,52 +70,6 @@ LK.UI._datagrid = {
   },
 
   /**
-   * 加载数据
-   * @param $table 数据容器对象
-   * @param options 参数
-   */
-  loadDatas : function($table, options) {
-    var that = this;
-
-    // 数据方式增加行
-    if (options.data.length != 0) {
-      that.addDatas($table, options.columns, options.data);
-    } else {
-      // 请求方式增加行
-      if (options.url != '') {
-        LK.ajax({
-          url : options.url,
-          data : options.param,
-          success : function(responseDatas) {
-            that.addDatas($table, options.columns, responseDatas);
-          },
-          error : function() {
-            options.onLoadDatasError(arguments, options.url, options.param);
-          }
-        });
-      }
-    }
-  },
-
-  /**
-   * 重新加载数据
-   * @param $table 数据容器对象
-   * @param options 参数
-   */
-  reloadDatas : function($table, options) {
-    $table.children().remove();
-    this.loadDatas($table, options);
-  },
-
-  /**
-   * 获取选中项
-   * @param $plugin 控件对象
-   */
-  getSelected : function($plugin) {
-    return $plugin.find('.lichkin-table-row-selected');
-  },
-
-  /**
    * 添加工具栏
    * @param $plugin 控件对象
    * @param options 参数
@@ -138,37 +77,35 @@ LK.UI._datagrid = {
    * @param tools 工具栏定义参数
    */
   addTools : function($plugin, options, $toolsBar, tools) {
+    var that = this;
+
     for (var i = 0; i < tools.length; i++) {
       var tool = tools[i];
       (function(tool) {
         var click;
         if (tool.singleCheck == true) {
           click = function() {
-            var $selectRow = LK.UI.getDatagridSelected({
-              id : options.id
-            });
-            if ($selectRow.length == 0) {
+            var $selected = that.getSelected($plugin);
+            if ($selected.length == 0) {
               LK.alert(LK.i18n.noSelect);
               return;
-            } else if ($selectRow.length != 1) {
+            } else if ($selected.length != 1) {
               LK.alert(LK.i18n.singleSelect);
               return;
             }
-            tool.click($plugin, options, $selectRow.data(), $selectRow.data().id);
+            tool.click($plugin, options, $selected.data(), $selected.data().id);
           };
         } else if (tool.singleCheck == false) {
           click = function() {
-            var $selectRow = LK.UI.getDatagridSelected({
-              id : options.id
-            });
-            if ($selectRow.length == 0) {
+            var $selected = that.getSelected($plugin);
+            if ($selected.length == 0) {
               LK.alert(LK.i18n.noSelect);
               return;
             }
             var datas = new Array();
             var ids = new Array();
-            for (var i = 0; i < $selectRow.length; i++) {
-              var data = $($selectRow[i]).data();
+            for (var i = 0; i < $selected.length; i++) {
+              var data = $($selected[i]).data();
               datas.push(data);
               ids.push(data.id);
             }
@@ -176,14 +113,12 @@ LK.UI._datagrid = {
           };
         } else {
           click = function() {
-            var $selectRow = LK.UI.getDatagridSelected({
-              id : options.id
-            });
+            var $selected = that.getSelected($plugin);
             var datas = new Array();
             var ids = new Array();
-            if ($selectRow.length != 0) {
-              for (var i = 0; i < $selectRow.length; i++) {
-                var data = $($selectRow[i]).data();
+            if ($selected.length != 0) {
+              for (var i = 0; i < $selected.length; i++) {
+                var data = $($selected[i]).data();
                 datas.push(data);
                 ids.push(data.id);
               }
@@ -202,13 +137,11 @@ LK.UI._datagrid = {
  * 数据表格控件
  */
 LK.UI('plugins', 'datagrid', function(options) {
-  // 设置id
-  if (options.id == '') {
-    options.id = randomInRange(10000, 99999);
-  }
+  // 控件类型
+  var plugin = 'datagrid';
 
   // 创建控件对象
-  var $plugin = $('<div id="' + options.id + '" data-id="datagrid_' + options.id + '" data-plugin="datagrid" class="lichkin-datagrid"></div>');
+  var $plugin = LKUI._createUIPlugin(plugin, options);
 
   // 标题栏
   if (options.title != '' || options.titleTools.length != 0) {
@@ -242,9 +175,9 @@ LK.UI('plugins', 'datagrid', function(options) {
   if (options.dataBodyBarHeight != 0) {
     $dataBodyBar.height(options.dataBodyBarHeight + 'px');
   }
-  var $table = $('<table class="lichkin-table"></table>').appendTo($dataBodyBar);
+  var $container = $('<table class="lichkin-data-container lichkin-table"></table>').appendTo($dataBodyBar);
   // 点击事件
-  $table.click(function(e) {
+  $container.click(function(e) {
     var that = this;
 
     if (e.target != that) {
@@ -262,18 +195,18 @@ LK.UI('plugins', 'datagrid', function(options) {
     }
   });
 
-  // 加载数据
-  if (options.lazy != true) {
-    LK.UI._datagrid.loadDatas($table, options);
-  }
-
   // 分页栏
   if (options.pageable != null) {
     var $pagesBar = $('<div class="lichkin-datagrid-pagesBar"></div>').appendTo($plugin);
   }
 
+  // 加载数据
+  if (options.lazy != true) {
+    LKUI._load(options, plugin, $container);
+  }
+
   // 返回控件对象
-  return $plugin.LKUIinit('datagrid', options);
+  return $plugin;
 }, {
   // 渲染过的控件对应的DOM元素ID属性值
   id : '',
@@ -331,58 +264,4 @@ LK.UI('plugins', 'datagrid', function(options) {
    */
   onLoadDatasError : function(ajaxErrorArguments, url, param) {
   }
-});
-
-/**
- * 重新加载数据表格
- */
-LK.UI('plugins', 'reloadDatagrid', function(options) {
-  var $plugin = LK.UI.getUIPlugin($.extend(true, {}, options, {
-    UI : 'plugins'
-  }));
-
-  var pluginOptions = $plugin.options;
-  if (options.url != '') {
-    pluginOptions.url = options.url;
-  }
-
-  pluginOptions.param = options.param;
-
-  pluginOptions.data = [];
-  if (options.data.length != 0) {
-    pluginOptions.data = options.data;
-  }
-
-  LK.UI._datagrid.reloadDatas($plugin.find('.lichkin-datagrid-dataBodyBar').children('.lichkin-table'), pluginOptions);
-}, {
-  // 渲染过的控件对应的DOM元素ID属性值
-  id : '',
-  // 渲染过的控件对应的DOM元素data-id属性值
-  dataId : '',
-  // 渲染过的控件对应的JQuery对象
-  $obj : null,
-  // 重新加载的地址
-  url : '',
-  // 重新加载的参数
-  param : {},
-  // 重新加载的数据
-  data : []
-});
-
-/**
- * 获取选中项
- */
-LK.UI('plugins', 'getDatagridSelected', function(options) {
-  var $plugin = LK.UI.getUIPlugin($.extend(true, {}, options, {
-    UI : 'plugins'
-  }));
-
-  return LK.UI._datagrid.getSelected($plugin);
-}, {
-  // 渲染过的控件对应的DOM元素ID属性值
-  id : '',
-  // 渲染过的控件对应的DOM元素data-id属性值
-  dataId : '',
-  // 渲染过的控件对应的JQuery对象
-  $obj : null
 });

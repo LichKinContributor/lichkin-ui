@@ -18,5 +18,6 @@ LK.i18n = {
   add : '新增',
   edit : '修改',
   remove : '删除',
-  search : '查询'
+  search : '查询',
+  dropdown : '显示/隐藏选项'
 };

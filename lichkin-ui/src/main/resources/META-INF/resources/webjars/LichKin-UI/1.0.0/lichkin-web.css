@@ -26,28 +26,40 @@
   /* loading */
   --lichkin-loading-background-color: rgba(202, 202, 202, 0.66);
   --lichkin-loading-foreground-color: #88bb66;
+
+  /* plugin */
+  --lichkin-plugin-border-color: #2e6da4;
+  --lichkin-plugin-background-color: #ffffff;
+  --lichkin-plugin-font-color: #337ab7;
+
+  /* plugin-selected */
+  --lichkin-plugin-selected-background-color: #e6e6ff;
+
+  /* plugin-hover */
+  --lichkin-plugin-hover-background-color: #ffffe6;
+
+  /* plugin-invalid */
+  --lichkin-plugin-invalid-border-color: #d43f3a;
+  --lichkin-plugin-invalid-background-color: #ffe6e6;
+  --lichkin-plugin-invalid-font-color: #d43f3a;
 }
 
 *{font-size:12px;}
 
 /* icons 用于DIV标签，图标占比0.75。 */
-.lichkin-icon{background-repeat:no-repeat;text-align:center;color:#ffffff;}
+.lichkin-icon{position:relative;display:inline-block;background-repeat:no-repeat;text-align:center;}
 
 /* icons for fontAwesome */
-.lichkin-icon .fa, .lichkin-icon .fas, .lichkin-icon .far{text-align:center;vertical-align:middle;color:#ffffff;}
+.lichkin-icon i{position:absolute;display:inline-block;left:0px;top:0px;vertical-align:middle;color:#ffffff;}
 
 /* text */
 .lichkin-text {
   display: inline-block;
-  vertical-align: top;
-  width: auto;
-  line-height: 17px;
+  vertical-align: middle;
   padding: 0;
   color: #ffffff;
-}
-
-.lichkin-icon+.lichkin-text {
-  margin-left: 3px;
+  height: 16px;
+  line-height: 16px;
 }
 
 /* commons */
@@ -122,10 +134,10 @@
 
 /* btn */
 .lichkin-btn {
-  padding: var(- -lichkin-btn-padding);
-  background-color: var(- -lichkin-btn-background-color);
-  color: var(- -lichkin-btn-font-color);
-  font-size: var(- -lichkin-btn-font-size);
+  padding: var(--lichkin-btn-padding);
+  background-color: var(--lichkin-btn-background-color);
+  color: var(--lichkin-btn-font-color);
+  font-size: var(--lichkin-btn-font-size);
   width: 100%;
   height: 100%;
   border: 1px solid #548421;
@@ -135,18 +147,15 @@
 }
 
 .lichkin-button {
-  text-decoration: none;
   display: inline-block;
-  overflow: hidden;
   margin: 0;
   padding: 0;
   cursor: pointer;
-  outline: none;
-  text-align: center;
-  vertical-align: middle;
-  height: 22px;
   background-color: #5bc0de;
   border: 1px solid #46b8da;
+  height: 28px;
+  vertical-align: middle;
+  overflow: hidden;
 }
 
 .lichkin-button:hover {
@@ -155,20 +164,23 @@
 
 .lichkin-button .lichkin-button-container {
   display: inline-block;
-  position: relative;
-  overflow: hidden;
-  margin: 0;
-  padding: 0px 3px;
-  vertical-align: top;
+  width: 100%;
+  height: 100%;
 }
 
 .lichkin-button .lichkin-button-container .lichkin-icon-16 {
-  display: inline-block;
-  margin-top: 2px;
+  margin: 6px;
 }
 
 .lichkin-button .lichkin-button-container .lichkin-text {
-  line-height: 22px;
+  height: 16px;
+  line-height: 16px;
+  padding: 6px;
+}
+
+.lichkin-button .lichkin-button-container .lichkin-icon-16+.lichkin-text {
+  margin-top: -22px;
+  padding-left: 0px;
 }
 
 /* toast */
@@ -265,6 +277,7 @@
 }
 
 .lichkin-dialog .lichkin-dialog-titleBar {
+  position: relative;
   background-color: #5bc0de;
   padding: 3px 0px;
   height: 20px;
@@ -275,26 +288,29 @@
   border-top: 1px solid #46b8da;
 }
 
-.lichkin-dialog .lichkin-dialog-titleBar .lichkin-icon {
-  float: left;
-  margin-left: 6px;
-  margin-top: 2px;
+.lichkin-dialog .lichkin-dialog-titleBar>.lichkin-icon {
+  position: absolute;
+  left: 6px;
+  top: 4.5px;
 }
 
 .lichkin-dialog .lichkin-dialog-titleBar .lichkin-title {
-  float: left;
+  position: absolute;
+  left: 6px;
   color: #ffffff;
-  margin-left: 6px;
   font-size: 14px;
-  height: 20px;
-  line-height: 20px;
+}
+
+.lichkin-dialog .lichkin-dialog-titleBar>.lichkin-icon+.lichkin-title {
+  left: 25px;
 }
 
 .lichkin-dialog .lichkin-dialog-titleBar .lichkin-buttons {
-  float: right;
+  position: absolute;
   color: #ffffff;
   cursor: pointer;
-  margin-right: 6px;
+  right: 6px;
+  top: 4.5px;
 }
 
 .lichkin-dialog .lichkin-dialog-titleBar .lichkin-buttons .lichkin-icon-close {
@@ -349,10 +365,8 @@
   padding: 2px 0px;
 }
 
-.lichkin-tree .lichkin-tree-node-container .fa,
-.lichkin-tree .lichkin-tree-node-container .far,
-.lichkin-tree .lichkin-tree-node-container .lichkin-text,
-.lichkin-tree .lichkin-tree-node-container .lichkin-tree-node-checkbox {
+.lichkin-tree .lichkin-tree-node-container .lichkin-icon i,
+.lichkin-tree .lichkin-tree-node-container .lichkin-text {
   float: left;
   color: #337ab7;
 }
@@ -362,8 +376,7 @@
   background-color: #5bc0de;
 }
 
-.lichkin-tree .lichkin-tree-node-container-hover .fa,
-.lichkin-tree .lichkin-tree-node-container-hover .far,
+.lichkin-tree .lichkin-tree-node-container-hover .lichkin-icon i,
 .lichkin-tree .lichkin-tree-node-container-hover .lichkin-text {
   color: #ffffff;
 }
@@ -399,20 +412,25 @@
   overflow: hidden;
 }
 
+.lichkin-datagrid .lichkin-datagrid-titleBar {
+  position: relative;
+}
+
 .lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-text {
   height: 30px;
   line-height: 30px;
 }
 
 .lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-datagrid-titleBar-toolsBar {
-  float: right;
-  margin-right: 3px;
-  margin-top: 3px;
+  position: absolute;
+  display: inline-block;
+  right: 3px;
+  top: 0px;
 }
 
 .lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-datagrid-titleBar-toolsBar .lichkin-button {
-  border-radius: 3px;
-  margin-left: 3px;
+  border: none;
+  background-color: transparent;
 }
 
 .lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-datagrid-titleBar-toolsBar .lichkin-button .lichkin-text {
@@ -458,4 +476,109 @@
 
 .lichkin-datagrid .lichkin-datagrid-dataBar .lichkin-datagrid-dataBodyBar .lichkin-table .lichkin-table-row-selected .lichkin-table-cell .lichkin-text {
   color: #ffffff;
+}
+
+/** droplist */
+.lichkin-droplist {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.lichkin-droplist .lichkin-droplist-controller {
+  width: 148px;
+  padding: 0px 6px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--lichkin-plugin-border-color);
+  background-color: var(--lichkin-plugin-background-color);
+}
+
+.lichkin-droplist-invalid .lichkin-droplist-controller {
+  border-color: var(--lichkin-plugin-invalid-border-color);
+  background-color: var(--lichkin-plugin-invalid-background-color);
+}
+
+.lichkin-droplist .lichkin-droplist-controller .lichkin-text {
+  height: 28px;
+  line-height: 28px;
+  color: var(--lichkin-plugin-font-color);
+}
+
+.lichkin-droplist-invalid .lichkin-droplist-controller .lichkin-text {
+  color: var(--lichkin-plugin-invalid-font-color);
+}
+
+.lichkin-droplist .lichkin-droplist-button {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  background: transparent;
+  border-color: transparent;
+  width: 28px;
+  height: 28px;
+}
+
+.lichkin-droplist .lichkin-droplist-button .lichkin-icon {
+  margin: 2px;
+}
+
+.lichkin-droplist .lichkin-droplist-button .lichkin-icon i {
+  color: var(--lichkin-plugin-font-color);
+}
+
+.lichkin-droplist-invalid .lichkin-droplist-button .lichkin-icon i {
+  color: var(--lichkin-plugin-invalid-font-color);
+}
+
+.lichkin-droplist .lichkin-droplist-content {
+  position: absolute;
+  display: none;
+  width: 160px;
+  height: 200px;
+  z-index: 99999;
+  top: 29px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--lichkin-plugin-border-color);
+  background-color: var(--lichkin-plugin-background-color);
+}
+
+.lichkin-droplist-invalid .lichkin-droplist-content {
+  border-color: var(--lichkin-plugin-invalid-border-color);
+  background-color: var(--lichkin-plugin-invalid-background-color);
+}
+
+.lichkin-droplist .lichkin-droplist-content ul {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+.lichkin-droplist .lichkin-droplist-content ul li {
+  padding: 3px 6px;
+  cursor: pointer;
+  border-bottom-width: 1px;
+  border-bottom-style: dotted;
+  border-bottom-color: var(--lichkin-plugin-border-color);
+}
+
+.lichkin-droplist .lichkin-droplist-content ul li.selected {
+  background-color: var(--lichkin-plugin-selected-background-color);
+}
+
+.lichkin-droplist .lichkin-droplist-content ul li:HOVER {
+  background-color: var(--lichkin-plugin-hover-background-color);
+}
+
+.lichkin-droplist-invalid .lichkin-droplist-content ul li {
+  border-bottom-color: var(--lichkin-plugin-invalid-border-color);
+}
+
+.lichkin-droplist .lichkin-droplist-content ul li .lichkin-text {
+  color: var(--lichkin-plugin-font-color);
+}
+
+.lichkin-droplist-invalid .lichkin-droplist-content ul li .lichkin-text {
+  color: var(--lichkin-plugin-invalid-font-color);
 }

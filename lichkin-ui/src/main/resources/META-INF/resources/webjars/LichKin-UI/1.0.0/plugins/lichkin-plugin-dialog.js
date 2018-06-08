@@ -1,35 +1,5 @@
 ;
 /**
- * 控件功能性方法，提供JQuery扩展。
- */
-$.fn.extend({
-
-  /**
-   * 使用LKUI开头+控件名命名扩展
-   * @param funcName 控件具体方法名
-   * @param options 控件具体方法需要的参数。部分方法可扩展实现代码简写方式。
-   */
-  LKUIdialog : function(funcName, options) {
-    // 第一个参数为字符串时，即为调用该类型控件的方法。
-    if (isString(funcName)) {
-      switch (funcName) {
-        case 'active':
-          LK.UI.activeDialog({
-            $obj : this
-          });
-          return;
-        default:
-          // 没有该方法
-          break;
-      }
-    }
-    // 参数非法
-    throw 'illegal arguments';
-  }
-
-});
-
-/**
  * 对话框内部实现相关
  */
 LK.UI._dialog = {
@@ -42,18 +12,16 @@ LK.UI._dialog = {
 
   /**
    * 切换对话框
-   * @param $current 要切换的对话框对象
+   * @param $plugin 控件对象
    * @param activeFocus 是否触发对话框被聚焦后事件
    */
-  switchTo : function($current, activeFocus) {
-    $('.lichkin-dialog').each(function() {
-      $(this).removeClass('lichkin-dialog-focus');
-    });
-    $current.addClass('lichkin-dialog-focus');
-    $current.css('z-index', this.maxZIndex++);
+  active : function($plugin, activeFocus) {
+    $('.lichkin-dialog').removeClass('lichkin-dialog-focus');
+    $plugin.addClass('lichkin-dialog-focus');
+    $plugin.css('z-index', this.maxZIndex++);
     if (activeFocus) {
       // 触发对话框被聚焦后事件
-      $current.data('LKOPTIONS').onFocus($current.data('LKOPTIONS'), $current);
+      $plugin.options.onFocus($plugin);
     }
   },
 
@@ -62,9 +30,10 @@ LK.UI._dialog = {
    */
   getTop : function() {
     var $topDlg;
-    LK.UI._core.callEachCached(this.plugin, function($plugin, $plugins) {
-      if (!$topDlg || ($topDlg.css('z-index') < $plugin.css('z-index'))) {
-        $topDlg = $plugin;
+    $('.lichkin-dialog').each(function() {
+      var $that = $(this);
+      if (!$topDlg || ($topDlg.css('z-index') < $that.css('z-index'))) {
+        $topDlg = $that;
       }
     });
     return $topDlg;
@@ -74,21 +43,20 @@ LK.UI._dialog = {
    * 关闭对话框
    */
   close : function(id) {
-    var $plugin = LK.UI.getUIPlugin({
-      UI : 'plugins',
+    var $plugin = LKUI._getUIPlugin({
       id : id
-    })
+    });
     // 触发对话框关闭前事件
     $plugin.options.onBeforeClose($plugin.options, $plugin);
 
     // 清除控件
-    LK.UI._core.removeCached(this.plugin, id);
+    $plugin.remove();
 
     // 聚焦最上层对话框
     var $topDlg = this.getTop();
     if ($topDlg) {
       // 切换并触发聚焦事件
-      LK.UI._dialog.switchTo($topDlg, true);
+      $topDlg.LKUI('active', true);
     }
 
     // 触发对话框关闭后事件
@@ -101,18 +69,16 @@ LK.UI._dialog = {
  * 打开对话框
  */
 LK.UI('plugins', 'openDialog', function(options) {
-  // 设置id
-  if (options.id == '') {
-    options.id = randomInRange(10000, 99999);
-  }
+  // 控件类型
+  var plugin = 'dialog';
 
   // 创建控件对象
-  var $plugin = $('<div id="' + options.id + '" data-id="dlg_' + options.id + '" data-plugin="dialog" class="lichkin-dialog"></div>');
+  var $plugin = LKUI._createUIPlugin(plugin, options);
 
   // 控件点击事件
   $plugin.mousedown(function() {
     // 切换并触发聚焦事件
-    LK.UI._dialog.switchTo($plugin, true);
+    $plugin.LKUI('active', true);
   });
 
   // 添加标题栏
@@ -188,17 +154,16 @@ LK.UI('plugins', 'openDialog', function(options) {
     'top' : ($doc.height() - options.size.height - 45) / 2 + 'px'
   });
 
-  // 添加到页面
-  $plugin.appendTo('body');
-
   // 切换
-  LK.UI._dialog.switchTo($plugin);
+  $plugin.LKUI('active', false);
 
   // 返回控件对象
-  return $plugin.LKUIinit('dialog', options);
+  return $plugin;
 }, {
-  // 对话框ID，自动拼接dlg_前缀，存入生成后控件的data-id中。
+  // @see createUIPlugin
   id : '',
+  $appendTo : 'body',// 对话框只能添加到body上
+
   // 对话框标题
   title : LK.i18n.dialogTitle,
   // 图标
@@ -234,21 +199,4 @@ LK.UI('plugins', 'openDialog', function(options) {
   // 对话框关闭后
   onAfterClose : function(options) {
   }
-});
-
-/**
- * 将对话框激活
- */
-LK.UI('plugins', 'activeDialog', function(options) {
-  // 切换并触发聚焦事件
-  LK.UI._dialog.switchTo(LK.UI.getUIPlugin($.extend(true, {}, options, {
-    UI : 'plugins'
-  })), true);
-}, {
-  // 渲染过的控件对应的DOM元素ID属性值
-  id : '',
-  // 渲染过的控件对应的DOM元素data-id属性值
-  dataId : '',
-  // 渲染过的控件对应的JQuery对象
-  $obj : null
 });

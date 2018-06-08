@@ -12,49 +12,34 @@ LKUI.tree = function(url, param) {
 };
 
 /**
- * 控件功能性方法，提供JQuery扩展。
- */
-$.fn.extend({
-
-  /**
-   * 使用LKUI开头+控件名命名扩展
-   * @param funcName 控件具体方法名
-   * @param options 控件具体方法需要的参数。部分方法可扩展实现代码简写方式。
-   */
-  LKUItree : function(funcName, options) {
-    var that = this;
-
-    // 第一个参数为字符串时，即为调用该类型控件的方法。
-    if (isString(funcName)) {
-      switch (funcName) {
-        case 'getCheckedNodes':
-          return LK.UI.getTreeCheckedNodes({
-            $obj : that,
-            statusArr : options
-          });
-        case 'getCheckedIds':
-          return LK.UI.getTreeCheckedIds({
-            $obj : that,
-            statusArr : options
-          });
-        default:
-          // 没有该方法
-          break;
-      }
-    }
-    // 参数非法
-    throw 'illegal arguments';
-  }
-
-});
-
-/**
  * 树形控件内部实现相关
  */
 LK.UI._tree = {
 
-  /** 控件类型 */
-  plugin : 'tree',
+  /**
+   * 获取数据容器对象
+   * @param $plugin 控件对象
+   */
+  getDataContainer : function($plugin) {
+    return $plugin.children('ul.lichkin-tree-nodes-container');
+  },
+
+  /**
+   * 获取选中项
+   * @param $plugin 控件对象
+   */
+  getSelected : function($plugin) {
+    return this.getDataContainer($plugin).find('li.selected');
+  },
+
+  /**
+   * 添加数据
+   * @param $container 数据容器对象
+   * @param datas 数据集
+   */
+  addDatas : function($container, datas) {
+    this.addNodes(datas, $container, 0);
+  },
 
   /**
    * 添加节点
@@ -222,30 +207,11 @@ LK.UI._tree = {
   },
 
   /**
-   * 获取选中节点ID数组
-   * @param $plugin 控件对象
-   * @param statusArr 选中状态数组
-   */
-  getCheckedIds : function($plugin, statusArr) {
-    var ids = new Array();
-    $plugin.find('.lichkin-tree-node-checkbox').each(function() {
-      var $that = $(this);
-
-      for (var i = 0; i < statusArr.length; i++) {
-        if ($that.hasClass('lichkin-icon-checkbox-' + statusArr[i])) {
-          ids.push($that.data('id'));
-        }
-      }
-    });
-    return ids;
-  },
-
-  /**
    * 获取选中节点
    * @param $plugin 控件对象
    * @param statusArr 选中状态数组
    */
-  getCheckedNodes : function($plugin, statusArr) {
+  getChecked : function($plugin, statusArr) {
     var nodes = new Array();
     $plugin.find('.lichkin-tree-node-checkbox').each(function() {
       var $that = $(this);
@@ -257,34 +223,6 @@ LK.UI._tree = {
       }
     });
     return nodes;
-  },
-
-  /**
-   * 加载数据
-   * @param $$container 数据容器对象
-   * @param options 参数
-   */
-  loadDatas : function($container, options) {
-    var that = this;
-
-    // 数据方式增加行
-    if (options.data.length != 0) {
-      that.addNodes(options.data, $container, 0);
-    } else {
-      // 请求方式增加行
-      if (options.url != '') {
-        LK.ajax({
-          url : options.url,
-          data : options.param,
-          success : function(responseDatas) {
-            that.addNodes(responseDatas, $container, 0);
-          },
-          error : function() {
-            options.onLoadDatasError(arguments, options.url, options.param);
-          }
-        });
-      }
-    }
   }
 
 };
@@ -293,86 +231,48 @@ LK.UI._tree = {
  * 树形控件
  */
 LK.UI('plugins', 'tree', function(options) {
-  // 设置id
-  if (options.id == '') {
-    options.id = randomInRange(10000, 99999);
-  }
+  // 控件类型
+  var plugin = 'tree';
 
   // 创建控件对象
-  var $plugin = $('<div id="' + options.id + '" data-id="tree_' + options.id + '" data-plugin="tree" class="lichkin-tree"></div>');
+  var $plugin = LKUI._createUIPlugin(plugin, options);
+
+  // 存值对象
+  var $value = LKUI._createUIPluginValue(options, plugin, $plugin);
 
   // 添加节点容器
   var $container = $('<ul class="lichkin-tree-nodes-container"></ul>').appendTo($plugin);
 
   // 加载数据
   if (options.lazy != true) {
-    LK.UI._tree.loadDatas($container, options);
+    LKUI._load(options, plugin, $container);
   }
 
   // 返回控件对象
-  return $plugin.LKUIinit('tree', options);
+  return $plugin;
 }, {
-  // 渲染过的控件对应的DOM元素ID属性值
+  // @see createUIPlugin
   id : '',
-  // 数据请求地址
-  url : '',
-  // 请求参数
-  param : {},
-  // 数据
-  data : [],
+  $appendTo : null,
+
+  // @see createUIPluginValue
+  name : '',
+  validator : '',
+
   // 创建时不加载数据。需要通过reload方法触发数据的加载。
   lazy : false,
+  // 支持多选
+  multiSelect : false,
 
-  // 事件
-
-  /**
-   * 加载数据失败
-   * @param ajaxErrorArguments AJAX请求失败参数列表
-   * @param url 请求地址
-   * @param param 请求参数
-   */
+  // @see load
+  url : '',
+  param : {},
+  data : [],
+  onBeforeAddDatas : function(responseDatas, url, param) {
+    return responseDatas;
+  },
+  onAfterAddDatas : function(responseDatas, url, param) {
+  },
   onLoadDatasError : function(ajaxErrorArguments, url, param) {
   }
-});
-
-/**
- * 获取选中树形控件节点ID数组
- */
-LK.UI('plugins', 'getTreeCheckedIds', function(options) {
-  // 切换并触发聚焦事件
-  return LK.UI._tree.getCheckedIds(LK.UI.getUIPlugin($.extend(true, {}, options, {
-    UI : 'plugins'
-  })), options.statusArr);
-}, {
-  // 渲染过的控件对应的DOM元素ID属性值
-  id : '',
-  // 渲染过的控件对应的DOM元素data-id属性值
-  dataId : '',
-  // 渲染过的控件对应的JQuery对象
-  $obj : null,
-  // 选中状态数组
-  statusArr : [
-      'checked', 'tristate'
-  ]
-});
-
-/**
- * 获取选中树形控件节点数组
- */
-LK.UI('plugins', 'getTreeCheckedNodes', function(options) {
-  // 切换并触发聚焦事件
-  return LK.UI._tree.getCheckedNodes(LK.UI.getUIPlugin($.extend(true, {}, options, {
-    UI : 'plugins'
-  })), options.statusArr);
-}, {
-  // 渲染过的控件对应的DOM元素ID属性值
-  id : '',
-  // 渲染过的控件对应的DOM元素data-id属性值
-  dataId : '',
-  // 渲染过的控件对应的JQuery对象
-  $obj : null,
-  // 选中状态数组
-  statusArr : [
-      'checked', 'tristate'
-  ]
 });

@@ -22,6 +22,11 @@ LK.UI('plugins', 'button', function(options) {
   // 创建控件对象
   var $plugin = $('<a href="javascript:;" class="lichkin-button"></a>');
 
+  // 增加样式
+  if (options.cls != '') {
+    $plugin.addClass(options.cls);
+  }
+
   // 按钮容器
   var $span = $('<span class="lichkin-button-container"></span>').appendTo($plugin);
 
@@ -88,5 +93,7 @@ LK.UI('plugins', 'button', function(options) {
   click : function(options, $button) {
   },
   // 按钮提示信息
-  tip : ''
+  tip : '',
+  // 样式
+  cls : ''
 });

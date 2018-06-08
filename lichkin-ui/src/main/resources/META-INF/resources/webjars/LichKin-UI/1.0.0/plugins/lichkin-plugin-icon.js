@@ -75,8 +75,8 @@ LK.UI.iconType = false;
   ];
   for (var i = 0; i < sizes.length; i++) {
     var size = sizes[i];
-    $icons.append('.lichkin-icon-' + size + '{background-size:' + size + 'px;width:' + size + 'px;height:' + size + 'px;line-height:' + size + 'px;}');
-    $icons.append('.lichkin-icon-' + size + ' .fa, .lichkin-icon-' + size + ' .fas, .lichkin-icon-' + size + ' .far{width:' + size + 'px;height:' + size + 'px;line-height:' + size + 'px;font-size:' + (size * 0.75) + 'px;}');
+    $icons.append('.lichkin-icon-' + size + '{background-size:' + size + 'px;width:' + size + 'px;height:' + size + 'px;}');
+    $icons.append('.lichkin-icon-' + size + ' i{font-size:' + (size * 0.75) + 'px;width:' + size + 'px;height:' + size + 'px;line-height:' + size + 'px;}');
   }
 })();
 
@@ -241,6 +241,7 @@ LK.UI('plugins', 'changeIcon', function(options) {
     'remove' : 'trash-alt',
     'search' : 'search',
     'close' : 'times',
+    'dropdown' : 'caret-square-down',
     'sysMgmt' : 'cog',
     'roleMgmt' : 'user-secret',
     'userMgmt' : 'user',

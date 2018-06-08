@@ -18,5 +18,6 @@ LK.i18n = {
   add : 'ADD',
   edit : 'EDIT',
   remove : 'REMOVE',
-  search : 'SEARCH'
+  search : 'SEARCH',
+  dropdown : 'Show/Hide options'
 };
