@@ -53,6 +53,20 @@ let randomInRange = function(min, max) {
 };
 
 /**
+ * 判断字符串开头
+ */
+String.prototype.startsWith = function(str) {
+  return new RegExp("^" + str).test(this);
+};
+
+/**
+ * 判断字符串结尾
+ */
+String.prototype.endsWith = function(str) {
+  return new RegExp(str + "$").test(this);
+};
+
+/**
  * 扩展JQuery功能
  */
 $.fn.extend({
@@ -75,6 +89,16 @@ let LK = {
 
   // 标准分隔符
   SPLITOR : '#@#',
+
+  // 页面请求地址
+  WEB_MAPPING_PAGES : '.dhtml',
+
+  // 版本号
+  VERSION : {
+    versionX : 1,
+    versionY : 0,
+    versionZ : 0
+  },
 
   /**
    * 输出日志
@@ -388,11 +412,12 @@ let LK = {
 
   /**
    * 将参数转为URL地址
+   * @param startFromQuestion 是否从问号开始
    * @param param [JSON] 参数
    */
-  paramUrl : function(param) {
-    var url = '?_$=' + new Date().getTime();
-    if (typeof param != 'undefined') {
+  paramUrl : function(startFromQuestion, param) {
+    var url = (startFromQuestion ? '?' : '&') + '_$=' + new Date().getTime();
+    if (isJSON(param)) {
       for ( var key in param) {
         var value = param[key];
         if (isString(value) || isNumber(value)) {
@@ -401,6 +426,54 @@ let LK = {
       }
     }
     return url;
+  },
+
+  /**
+   * 解析URL
+   * @param url 地址
+   * @param isPageUrl 是否为页面地址
+   * @param param [JSON] 参数
+   */
+  resolveUrl : function(url, isPageUrl, param) {
+    if (!isString(url)) {
+      url = '';
+    }
+
+    if (!url.startsWith('http')) {
+      var ctx = _CTX.startsWith('/') ? _CTX : '/' + _CTX;
+      url = (url.startsWith('/') ? '' : '/') + url;
+      if (isPageUrl) {
+        if (!url.startsWith(ctx)) {
+          url = ctx + url;
+        }
+        if (!url.endsWith(LK.WEB_MAPPING_PAGES)) {
+          if (url.indexOf('?') > 0) {
+            url = url.replace('?', LK.WEB_MAPPING_PAGES + '?');
+          } else {
+            url += LK.WEB_MAPPING_PAGES;
+          }
+        }
+      } else {
+        if (url.startsWith(ctx)) {
+          if (!url.startsWith(ctx + '/API/')) {
+            url = url.substring(ctx.length);
+            url = (url.startsWith('/') ? '' : '/') + url;
+            if (url.startsWith('/API/')) {
+              url = ctx + url;
+            } else {
+              url = ctx + '/API' + url;
+            }
+          }
+        } else {
+          if (url.startsWith('/API/')) {
+            url = ctx + url;
+          } else {
+            url = ctx + '/API' + url;
+          }
+        }
+      }
+    }
+    return url + LK.paramUrl((url.indexOf('?') < 0), param);
   },
 
   /**
@@ -426,7 +499,7 @@ let LK = {
       headers : {
         'Accept-Language' : _LANG
       },
-      url : _CTX + options.url + _MAPPING_PAGES + this.paramUrl(options.param),
+      url : LK.resolveUrl(options.url, true, options.param),
       data : JSON.stringify($.extend({}, options.data)),
       success : function(text) {
         options.onAfterLoading(options);
@@ -510,8 +583,10 @@ let LK = {
       success : 'LK_ajax_success',
       error : 'LK_ajax_error'
     }, options, {
-      url : _CTX + options.url + _MAPPING_DATAS,
-      data : JSON.stringify($.extend({}, options.data)),
+      url : LK.resolveUrl(options.url, false),
+      data : JSON.stringify($.extend({}, options.data, {
+        clientType : 'JAVASCRIPT'
+      }, LK.VERSION)),
       method : 'POST',
       dataType : 'json',
       contentType : 'application/json;charset=UTF-8',
@@ -627,7 +702,7 @@ var LK_loadPage_timeout = function(options) {
 };
 
 // ajax请求超时跳转页面
-LK.ajax.timeoutPageUrl = _CTX + '/index.html';
+LK.ajax.timeoutPageUrl = _CTX + '/index' + LK.WEB_MAPPING_PAGES;
 // ajax请求超时时长
 LK.ajax.timeoutValue = 30000;
 
