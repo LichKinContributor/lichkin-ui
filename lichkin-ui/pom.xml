@@ -51,6 +51,11 @@
       <artifactId>lichkin-ueditor</artifactId>
       <version>1.0.0.RELEASE</version>
     </dependency>
+    <dependency>
+      <groupId>org.webjars.npm</groupId>
+      <artifactId>spark-md5</artifactId>
+      <version>3.0.0</version>
+    </dependency>
     <!-- https://mvnrepository.com/artifact/org.webjars/webjars-locator -->
     <dependency>
       <groupId>org.webjars</groupId>
