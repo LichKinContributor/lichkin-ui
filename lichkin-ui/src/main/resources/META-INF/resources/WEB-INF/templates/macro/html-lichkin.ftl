@@ -54,6 +54,7 @@
 			<@lichkin@jsTag url="/webjars/ueditor/ueditor.config.js" />
 			<@lichkin@jsTag url="/webjars/ueditor/ueditor.all.js" />
 			<@lichkin@jsTag url="/webjars/spark-md5/spark-md5${compressSuffix}.js" />
+			<@lichkin@jsTag url="/webjars/cropper/cropper${compressSuffix}.js" />
 			<#-- TODO web与app分离？ -->
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-core${compressSuffix}.js" />
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-icon${compressSuffix}.js" />
