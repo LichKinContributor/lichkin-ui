@@ -53,6 +53,15 @@ let randomInRange = function(min, max) {
 };
 
 /**
+ * 日期格式化
+ * @param time 日期
+ * @return 标准日期格式（yyyy-MM-dd HH:mm:ss）
+ */
+let formatterTime = function(time) {
+  return time.substr(0, 4) + '-' + time.substr(4, 2) + '-' + time.substr(6, 2) + ' ' + time.substr(8, 2) + ':' + time.substr(10, 2) + ':' + time.substr(12, 2);
+};
+
+/**
  * 判断字符串开头
  */
 String.prototype.startsWith = function(str) {
