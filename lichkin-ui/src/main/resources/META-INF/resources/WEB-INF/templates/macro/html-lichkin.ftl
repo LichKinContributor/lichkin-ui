@@ -41,7 +41,7 @@
 		<#if section="body-content">
 			<#nested "body-content"/></#if>
 		<#if section="javascript-contents-before-links">
-			let _CTX='${ctx}',_LANG='${locale}',_MAPPING_PAGES='${mappingPages}',_MAPPING_DATAS='${mappingDatas}',_MAPPING_API='${mappingApi}';
+			let _CTX='${ctx}',_LANG='${locale}',_MAPPING_PAGES='${mappingPages}',_MAPPING_API='${mappingApi}';
 			<#nested "javascript-contents-before-links"/>
 		</#if>
 		<#if section="javascript-links">
