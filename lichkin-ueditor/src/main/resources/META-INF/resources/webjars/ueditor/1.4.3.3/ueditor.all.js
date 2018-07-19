@@ -8047,7 +8047,7 @@ UE.Editor.defaultOptions = function(editor){
         initialContent: '',
         initialStyle:'',
         autoClearinitialContent: false,
-        iframeCssUrl: _url + 'themes/iframe.css',
+//        iframeCssUrl: _url + 'themes/iframe.css',
         textarea: 'editorValue',
         focus: false,
         focusInEnd: true,
@@ -8058,7 +8058,7 @@ UE.Editor.defaultOptions = function(editor){
         imagePopup: true,
         enterTag: 'p',
         customDomain: false,
-        lang: 'zh-cn',
+        lang: _LANG,
         langPath: _url + 'lang/',
         theme: 'default',
         themePath: _url + 'themes/',
@@ -29427,12 +29427,12 @@ UE.ui = baidu.editor.ui = {};
     UE.ui.Editor = function (options) {
         var editor = new UE.Editor(options);
         editor.options.editor = editor;
-        utils.loadFile(document, {
-            href:editor.options.themePath + editor.options.theme + "/css/ueditor.css",
-            tag:"link",
-            type:"text/css",
-            rel:"stylesheet"
-        });
+//        utils.loadFile(document, {
+//            href:editor.options.themePath + editor.options.theme + "/css/ueditor.css",
+//            tag:"link",
+//            type:"text/css",
+//            rel:"stylesheet"
+//        });
 
         var oldRender = editor.render;
         editor.render = function (holder) {

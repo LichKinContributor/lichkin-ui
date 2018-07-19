@@ -27,6 +27,7 @@
 			<link href="${ctx}/res/img/favicon.ico" type="image/x-icon" rel="shortcut icon">
 			<@lichkin@cssTag url="/webjars/font-awesome/web-fonts-with-css/css/fontawesome-all${compressSuffix}.css" />
 			<@lichkin@cssTag url="/webjars/LichKin-UI/lichkin-${calculateType}${compressSuffix}.css" />
+			<@lichkin@cssTag url="/webjars/ueditor/themes/default/css/ueditor.css" />
 			<#nested "link"/>
 		</#if>
 		<#if section="style">
@@ -53,6 +54,7 @@
 			<#-- 三方 -->
 			<@lichkin@jsTag url="/webjars/ueditor/ueditor.config.js" />
 			<@lichkin@jsTag url="/webjars/ueditor/ueditor.all.js" />
+			<@lichkin@jsTag url="/webjars/ueditor/lang/${locale}/${locale}.js" />
 			<@lichkin@jsTag url="/webjars/spark-md5/spark-md5${compressSuffix}.js" />
 			<@lichkin@jsTag url="/webjars/cropper/cropper${compressSuffix}.js" />
 			<@lichkin@jsTag url="/webjars/datepicker/datepicker${compressSuffix}.js" />
