@@ -99,9 +99,6 @@ let LK = {
   // 标准分隔符
   SPLITOR : '#@#',
 
-  // 页面请求地址
-  WEB_MAPPING_PAGES : '.dhtml',
-
   // 版本号
   VERSION : {
     versionX : 1,
@@ -449,35 +446,35 @@ let LK = {
     }
 
     if (!url.startsWith('http')) {
-      var ctx = _CTX.startsWith('/') ? _CTX : '/' + _CTX;
+      var ctx = (_CTX == '') ? '' : (_CTX.startsWith('/') ? _CTX : '/' + _CTX);
       url = (url.startsWith('/') ? '' : '/') + url;
       if (isPageUrl) {
         if (!url.startsWith(ctx)) {
           url = ctx + url;
         }
-        if (!url.endsWith(LK.WEB_MAPPING_PAGES)) {
+        if (!url.endsWith(_MAPPING_PAGES)) {
           if (url.indexOf('?') > 0) {
-            url = url.replace('?', LK.WEB_MAPPING_PAGES + '?');
+            url = url.replace('?', _MAPPING_PAGES + '?');
           } else {
-            url += LK.WEB_MAPPING_PAGES;
+            url += _MAPPING_PAGES;
           }
         }
       } else {
         if (url.startsWith(ctx)) {
-          if (!url.startsWith(ctx + '/API/')) {
+          if (!url.startsWith(ctx + _MAPPING_API)) {
             url = url.substring(ctx.length);
             url = (url.startsWith('/') ? '' : '/') + url;
-            if (url.startsWith('/API/')) {
+            if (url.startsWith(_MAPPING_API)) {
               url = ctx + url;
             } else {
-              url = ctx + '/API' + url;
+              url = ctx + _MAPPING_API + url;
             }
           }
         } else {
-          if (url.startsWith('/API/')) {
+          if (url.startsWith(_MAPPING_API)) {
             url = ctx + url;
           } else {
-            url = ctx + '/API' + url;
+            url = ctx + _MAPPING_API + url;
           }
         }
       }
@@ -711,7 +708,7 @@ var LK_loadPage_timeout = function(options) {
 };
 
 // ajax请求超时跳转页面
-LK.ajax.timeoutPageUrl = _CTX + '/index' + LK.WEB_MAPPING_PAGES;
+LK.ajax.timeoutPageUrl = _CTX + '/index' + _MAPPING_PAGES;
 // ajax请求超时时长
 LK.ajax.timeoutValue = 30000;
 
