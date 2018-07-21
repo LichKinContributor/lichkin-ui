@@ -40,7 +40,8 @@
 		</#if>
 		<#if section="body-attributes"><#nested "body-attributes"/></#if>
 		<#if section="body-content">
-			<#nested "body-content"/></#if>
+			<#nested "body-content"/>
+		</#if>
 		<#if section="javascript-contents-before-links">
 			let _CTX='${ctx}',_LANG='${locale}',_MAPPING_PAGES='${mappingPages}',_MAPPING_API='${mappingApi}';
 			<#nested "javascript-contents-before-links"/>
