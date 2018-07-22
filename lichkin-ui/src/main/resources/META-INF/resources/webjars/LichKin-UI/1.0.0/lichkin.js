@@ -8,7 +8,7 @@
  * 判断是否为JSON对象
  * @param json JSON对象
  */
-let isJSON = function(json) {
+var isJSON = function(json) {
   return (typeof json == 'object') && Object.prototype.toString.call(json).toLowerCase() == "[object object]" && !json.length;
 };
 
@@ -16,7 +16,7 @@ let isJSON = function(json) {
  * 判断是否为空JSON
  * @param json JSON对象
  */
-let isEmptyJSON = function(json) {
+var isEmptyJSON = function(json) {
   if (isJSON(json)) {
     for ( var name in json) {
       return false;
@@ -30,7 +30,7 @@ let isEmptyJSON = function(json) {
  * 判断是否为字符串
  * @param str 字符串
  */
-let isString = function(str) {
+var isString = function(str) {
   return typeof str == 'string';
 };
 
@@ -38,7 +38,7 @@ let isString = function(str) {
  * 判断是否为数字
  * @param number 数字
  */
-let isNumber = function(number) {
+var isNumber = function(number) {
   return typeof number == 'number';
 };
 
@@ -48,7 +48,7 @@ let isNumber = function(number) {
  * @param max 最大值
  * @return 随机值
  */
-let randomInRange = function(min, max) {
+var randomInRange = function(min, max) {
   return Math.floor(Math.random() * (max + 1 - min) + min);
 };
 
@@ -57,7 +57,7 @@ let randomInRange = function(min, max) {
  * @param time 日期
  * @return 标准日期格式（yyyy-MM-dd HH:mm:ss）
  */
-let formatterTime = function(time) {
+var formatterTime = function(time) {
   return time.substr(0, 4) + '-' + time.substr(4, 2) + '-' + time.substr(6, 2) + ' ' + time.substr(8, 2) + ':' + time.substr(10, 2) + ':' + time.substr(12, 2);
 };
 
@@ -94,7 +94,7 @@ $.fn.extend({
 });
 
 /** 全局定义顶层对象 */
-let LK = {
+var LK = {
 
   // 标准分隔符
   SPLITOR : '#@#',

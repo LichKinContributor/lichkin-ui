@@ -59,6 +59,7 @@
 			<@lichkin@jsTag url="/webjars/spark-md5/spark-md5${compressSuffix}.js" />
 			<@lichkin@jsTag url="/webjars/cropper/cropper${compressSuffix}.js" />
 			<@lichkin@jsTag url="/webjars/datepicker/datepicker${compressSuffix}.js" />
+			<#if webDebug==true>
 			<#-- TODO web与app分离？ -->
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-core${compressSuffix}.js" />
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-icon${compressSuffix}.js" />
@@ -69,6 +70,9 @@
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-tree${compressSuffix}.js" />
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-datagrid${compressSuffix}.js" />
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-droplist${compressSuffix}.js" />
+			<#else>
+			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugins${compressSuffix}.js" />
+			</#if>
 			<#nested "javascript-links"/>
 		</#if>
 		<#if section="javascript-contents-after-links">

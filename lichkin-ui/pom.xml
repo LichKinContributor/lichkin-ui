@@ -74,4 +74,52 @@
     </dependency>
   </dependencies>
 
+  <build>
+    <plugins>
+      <!-- https://mvnrepository.com/artifact/net.alchim31.maven/yuicompressor-maven-plugin -->
+      <plugin>
+        <groupId>net.alchim31.maven</groupId>
+        <artifactId>yuicompressor-maven-plugin</artifactId>
+        <version>1.5.1</version>
+        <executions>
+          <execution>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>compress</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <includes>
+            <include>**/*.js</include>
+            <include>**/*.css</include>
+          </includes>
+          <encoding>UTF-8</encoding>
+          <jswarn>false</jswarn>
+          <suffix>.min</suffix>
+          <preProcessAggregates>true</preProcessAggregates>
+          <aggregations>
+            <aggregation>
+              <insertNewLine>true</insertNewLine>
+              <insertFileHeader>true</insertFileHeader>
+              <inputDir>${basedir}/target/classes/META-INF/resources/webjars/LichKin-UI/1.0.0/plugins</inputDir>
+              <output>${basedir}/target/classes/META-INF/resources/webjars/LichKin-UI/1.0.0/plugins/lichkin-plugins.js</output>
+              <includes>
+                <include>lichkin-plugin-core.js</include>
+                <include>lichkin-plugin-icon.js</include>
+                <include>lichkin-plugin-text.js</include>
+                <include>lichkin-plugin-button.js</include>
+                <include>lichkin-plugin-dialog.js</include>
+                <include>lichkin-plugin-textbox.js</include>
+                <include>lichkin-plugin-droplist.js</include>
+                <include>lichkin-plugin-tree.js</include>
+                <include>lichkin-plugin-datagrid.js</include>
+              </includes>
+            </aggregation>
+          </aggregations>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
 </project>
