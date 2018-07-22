@@ -106,6 +106,9 @@ let LK = {
     versionZ : 0
   },
 
+  // 请求子路径
+  SUB_URL : '/Admin',
+
   /**
    * 输出日志
    * @param options [string|number|JSON] 自定义的参数
@@ -435,6 +438,25 @@ let LK = {
   },
 
   /**
+   * 转换为标准路径，即使用/作为分隔符，并以/开头，不以/结尾。
+   * @param path 路径
+   * @return 标准路径
+   */
+  toStandardPath : function(path) {
+    if (typeof path == 'undefined' || '' == path || '/' == path) {
+      return '';
+    }
+    path = path.replace(new RegExp("\\\\"), '/');
+    if (!path.startsWith('/')) {
+      path = '/' + path;
+    }
+    if (path.endsWith('/')) {
+      path = path.substring(0, path.lastIndexOf('/'));
+    }
+    return path;
+  },
+
+  /**
    * 解析URL
    * @param url 地址
    * @param isPageUrl 是否为页面地址
@@ -442,15 +464,14 @@ let LK = {
    */
   resolveUrl : function(url, isPageUrl, param) {
     if (!isString(url)) {
-      url = '';
+      return null;
     }
 
     if (!url.startsWith('http')) {
-      var ctx = (_CTX == '') ? '' : (_CTX.startsWith('/') ? _CTX : '/' + _CTX);
-      url = (url.startsWith('/') ? '' : '/') + url;
+      url = LK.toStandardPath(url);
       if (isPageUrl) {
-        if (!url.startsWith(ctx)) {
-          url = ctx + url;
+        if (!url.startsWith(_CTX)) {
+          url = _CTX + url;
         }
         if (!url.endsWith(_MAPPING_PAGES)) {
           if (url.indexOf('?') > 0) {
@@ -460,25 +481,22 @@ let LK = {
           }
         }
       } else {
-        if (url.startsWith(ctx)) {
-          if (!url.startsWith(ctx + _MAPPING_API)) {
-            url = url.substring(ctx.length);
-            url = (url.startsWith('/') ? '' : '/') + url;
-            if (url.startsWith(_MAPPING_API)) {
-              url = ctx + url;
-            } else {
-              url = ctx + _MAPPING_API + url;
-            }
-          }
-        } else {
-          if (url.startsWith(_MAPPING_API)) {
-            url = ctx + url;
-          } else {
-            url = ctx + _MAPPING_API + url;
-          }
+        if (url.startsWith(_MAPPING_API)) {
+          url = url.substring(_MAPPING_API.length);
         }
+
+        if (url.startsWith('/Web')) {
+          url = url.substring('/Web'.length);
+        }
+
+        if (url.startsWith(LK.SUB_URL)) {
+          url = url.substring(LK.SUB_URL.length);
+        }
+
+        url = _CTX + _MAPPING_API + '/Web' + LK.SUB_URL + url;
       }
     }
+
     return url + LK.paramUrl((url.indexOf('?') < 0), param);
   },
 
@@ -695,6 +713,9 @@ let LK = {
   }
 
 };
+
+// 转为标准路径
+_CTX = LK.toStandardPath(_CTX);
 
 // loadPage请求超时时长
 LK.loadPage.timeoutValue = 30000;
