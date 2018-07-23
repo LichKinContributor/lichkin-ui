@@ -224,7 +224,7 @@ LK.UI('plugins', 'createUIPlugin', function(opts) {
   var options = opts.options;
 
   // 设置id
-  var id = (options.id == '') ? randomInRange(10000, 99999) : options.id;
+  var id = options.id = (options.id == '') ? 'LK_' + randomInRange(10000, 99999) : options.id;
 
   // 创建UI控件对象
   var $plugin = $('<div id="' + id + '" data-id="' + plugin + '_' + id + '" class="lichkin-plugin lichkin-' + plugin + '" data-plugin-type="' + plugin + '"></div>');
@@ -236,7 +236,8 @@ LK.UI('plugins', 'createUIPlugin', function(opts) {
 
   // 渲染对象
   if (options.$renderTo != null) {
-    options.$renderTo.prop('outerHTML', $plugin.prop('outerHTML'));
+    $plugin.insertAfter(options.$renderTo);
+    options.$renderTo.remove();
   }
 
   // 缓存参数
