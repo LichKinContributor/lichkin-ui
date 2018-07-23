@@ -191,6 +191,10 @@ LK.UI('plugins', 'changeIcon', function(options) {
     $icon.addClass('lichkin-hidden-icon');
   }
 
+  if (!type && $icon.hasClass('lichkin-hidden-icon')) {
+    $icon.removeClass('lichkin-hidden-icon');
+  }
+
   // 清除图标
   var classes = $icon.getClassArr();
   for (var i = 0; i < classes.length; i++) {
