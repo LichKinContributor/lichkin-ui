@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+.lichkin-text {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0;
+  color: #ffffff;
+  padding: 3px 6px;
+}
