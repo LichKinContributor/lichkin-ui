@@ -41,6 +41,12 @@
 				<li><a href="javascript:;">textbox</a></li>
 			</ul>
 		</div>
+		<div class="title">ueditor</div>
+		<div class="content">
+			<ul>
+				<li><a href="javascript:;">ueditor</a></li>
+			</ul>
+		</div>
 	</#if>
 	<#if section="javascript-contents-after-links">
 		$('a').each(function(){
