@@ -5,27 +5,55 @@
 LK.UI._droplist = {
 
   /**
-   * 获取数据容器对象
+   * 设置值
    * @param $plugin 控件对象
+   * @param $container 数据容器对象
+   * @param values 值数组
    */
-  getDataContainer : function($plugin) {
-    return $plugin.find('.lichkin-droplist-content').children('ul');
-  },
+  setValues : function($plugin, $container, values) {
+    var valueArr = [];
+    var textArr = [];
 
-  /**
-   * 获取选中项
-   * @param $plugin 控件对象
-   */
-  getSelected : function($plugin) {
-    return this.getDataContainer($plugin).find('li.selected');
+    if (values == null) {
+      $container.find('li.selected').each(function() {
+        var data = $(this).data();
+        valueArr.push(data.value);
+        textArr.push(data.text);
+      });
+    } else {
+      var $nodes = $container.find('li');
+      $nodes.removeClass('selected');
+      if (!Array.isArray(values)) {
+        values = [
+          values
+        ];
+      }
+
+      $nodes.each(function() {
+        var $that = $(this);
+        var data = $that.data();
+        for (var i = 0; i < values.length; i++) {
+          if (data.value == values[i]) {
+            $that.addClass('selected');
+            valueArr.push(data.value);
+            textArr.push(data.text);
+            break;
+          }
+        }
+      });
+    }
+
+    $plugin.LKSetValues(valueArr);
+    $plugin.LKSetTexts(textArr);
   },
 
   /**
    * 添加数据
+   * @param $plugin 控件对象
    * @param $container 数据容器对象
    * @param datas 数据集
    */
-  addDatas : function($container, datas) {
+  addDatas : function($plugin, $container, datas) {
     for (var i = 0; i < datas.length; i++) {
       var data = datas[i];
       var $li = $('<li></li>').appendTo($container);
@@ -44,23 +72,26 @@ LK.UI('plugins', 'droplist', function(options) {
   var plugin = 'droplist';
 
   // 创建控件对象
-  var $plugin = LKUI._createUIPlugin(plugin, options);
-
-  // 存值对象
-  var $value = LKUI._createUIPluginValue(options, plugin, $plugin);
-
-  // 控制器
-  var $controller = $('<div class="lichkin-' + plugin + '-controller"></div>').appendTo($plugin);
-  var $text = LK.UI.text().appendTo($controller);
+  var $plugin = LK.UI.create({
+    plugin : plugin,
+    options : options
+  });
 
   // 下拉内容
-  var $content = $('<div class="lichkin-' + plugin + '-content"></div>').appendTo($plugin);
+  var $content = $('<div class="lichkin-content lichkin-droplist-content"></div>').appendTo($plugin);
 
   // 下拉内容显示/隐藏
   $content.mouseover(function() {
     $content.show();
   }).mouseout(function() {
     $content.hide();
+  });
+
+  // 控制器
+  var $controller = $('<div class="lichkin-controller lichkin-droplist-controller"></div>').appendTo($plugin);
+  var $text = LK.UI.text().appendTo($controller).addClass('lichkin-show-text').addClass('lichkin-droplist-text');
+  $controller.click(function() {
+    $content.toggle();
   });
 
   // 下拉按钮
@@ -70,14 +101,14 @@ LK.UI('plugins', 'droplist', function(options) {
       icon : 'dropdown'
     },
     click : function(btnOptions, $btn) {
-      $btn.siblings('.lichkin-' + plugin + '-content').toggle();
+      $content.toggle();
     },
     tip : LK.i18n.dropdown,
-    cls : 'lichkin-' + plugin + '-button'
+    cls : 'lichkin-controll-button lichkin-droplist-button'
   }).appendTo($plugin);
 
   // 数据容器
-  var $container = $('<ul></ul>').appendTo($content);
+  var $container = $('<ul class="lichkin-dataContainer lichkin-droplist-dataContainer"></ul>').appendTo($content);
   // 点击事件
   $container.click(function(e) {
     if (e.target != this) {
@@ -87,42 +118,22 @@ LK.UI('plugins', 'droplist', function(options) {
       }
       if (options.multiSelect) {
         $row.toggleClass('selected');
-        var $selecteds = $container.children('.selected');
-        if ($selecteds.length == 0) {
-          $value.val('');
-          $text.html('');
-        } else {
-          var textHtml = new Array();
-          var valueHtml = new Array();
-          for (var i = 0; i < $selecteds.length; i++) {
-            var $selected = $($selecteds[i]);
-            textHtml.push($selected.data('text'));
-            valueHtml.push($selected.data('value'));
-          }
-          $text.html(textHtml.join(','));
-          $value.val(valueHtml.join(LK.SPLITOR));
-        }
+        $plugin.LKInvokeSetValues(null);
       } else {
-        var flag = $row.hasClass('selected');
-        $container.children().removeClass('selected');
-        if (flag) {
-          $text.html('');
-          $value.val('');
-        } else {
-          $row.addClass('selected');
-          $text.html($row.data('text'));
-          $value.val($row.data('value'));
-        }
+        $plugin.LKInvokeSetValues(($row.hasClass('selected') ? '' : $row.data('value')));
         $container.parent().hide();
       }
-      $plugin._validate();
+      $plugin.LKlinkage($row.data('value'), false);
+      $plugin.LKValidate();
     }
   });
 
   // 加载数据
-  if (options.lazy != true) {
-    LKUI._load(options, plugin, $container);
-  }
+  LK.UI.load({
+    $plugin : $plugin,
+    isCreateEvent : true,
+    options : options
+  });
 
   // 返回控件对象
   return $plugin;
@@ -130,25 +141,29 @@ LK.UI('plugins', 'droplist', function(options) {
   // @see createUIPlugin
   id : '',
   $appendTo : null,
-
-  // @see createUIPluginValue
+  $renderTo : null,
   name : '',
-  validator : '',
-
-  // 创建时不加载数据。需要通过reload方法触发数据的加载。
-  lazy : false,
-  // 支持多选
-  multiSelect : false,
+  validator : null,
+  value : null,
+  linkages : [],
+  onLinkaged : function($plugin, $linkage, linkageValues, linkageValue, linkageCurrentValue) {
+  },
+  onChange : function($plugin, pluginValues, pluginValue, currentValue) {
+  },
 
   // @see load
+  lazy : false,
   url : '',
   param : {},
-  data : [],
-  onBeforeAddDatas : function(responseDatas, url, param) {
+  data : null,
+  onBeforeAddDatas : function($plugin, responseDatas, url, param) {
     return responseDatas;
   },
-  onAfterAddDatas : function(responseDatas, url, param) {
+  onAfterAddDatas : function($plugin, responseDatas, url, param) {
   },
-  onLoadDatasError : function(ajaxErrorArguments, url, param) {
-  }
+  onLoadDatasError : function($plugin, ajaxErrorArguments, url, param) {
+  },
+
+  // 支持多选
+  multiSelect : false
 });

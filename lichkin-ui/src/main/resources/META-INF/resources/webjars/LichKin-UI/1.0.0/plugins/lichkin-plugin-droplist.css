@@ -1,0 +1,56 @@
+@charset "UTF-8";
+
+.lichkin-droplist {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.lichkin-droplist .lichkin-droplist-controller {
+  width: 134px;
+  padding: 0px 6px;
+  border-width: 1px;
+  border-style: solid;
+  cursor: pointer;
+}
+
+.lichkin-droplist .lichkin-droplist-controller .lichkin-text {
+  height: 22px;
+  line-height: 22px;
+}
+
+.lichkin-droplist .lichkin-droplist-button {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  background: transparent;
+  border-color: transparent;
+}
+
+.lichkin-droplist .lichkin-droplist-button .lichkin-icon {
+  top: 1.5px;
+}
+
+.lichkin-droplist .lichkin-droplist-content {
+  position: absolute;
+  display: none;
+  width: 146px;
+  height: 200px;
+  z-index: 99999;
+  top: 26px;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.lichkin-droplist .lichkin-droplist-content ul {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+.lichkin-droplist .lichkin-droplist-content ul li {
+  padding: 3px 6px;
+  cursor: pointer;
+  border-bottom-width: 1px;
+  border-bottom-style: dotted;
+}
