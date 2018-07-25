@@ -158,6 +158,7 @@ LK.UI('plugins', 'openDialog', function(options) {
       $obj : $contentBar,
       url : options.url,
       param : options.param,
+      data : options.data,
       onAfterLoading : function(opts) {
         // 触发页面加载后事件
         options.onAfterLoading($plugin);
@@ -215,6 +216,8 @@ LK.UI('plugins', 'openDialog', function(options) {
   url : '',
   // 对话框加载页面参数
   param : {},
+  // 对话框加载页面数据
+  data : {},
   // 对话框文本内容
   content : '',
   // 是否增加遮罩层
