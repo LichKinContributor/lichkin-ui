@@ -26,8 +26,15 @@
 		<#if section="link">
 			<link href="${ctx}/res/img/favicon.ico" type="image/x-icon" rel="shortcut icon">
 			<@lichkin@cssTag url="/webjars/font-awesome/web-fonts-with-css/css/fontawesome-all${compressSuffix}.css" />
-			<@lichkin@cssTag url="/webjars/LichKin-UI/lichkin-${calculateType}${compressSuffix}.css" />
-			<@lichkin@cssTag url="/webjars/ueditor/themes/default/css/ueditor.css" />
+			<@lichkin@cssTag url="/webjars/LichKin-UI/themes/default/lichkin-${calculateType}${compressSuffix}.css" />
+			<#if webDebug==true>
+			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-icon${compressSuffix}.css" />
+			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-text${compressSuffix}.css" />
+			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-button${compressSuffix}.css" />
+			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-droplist${compressSuffix}.css" />
+			<#else>
+			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugins${compressSuffix}.css" />
+			</#if>
 			<#nested "link"/>
 		</#if>
 		<#if section="style">
@@ -52,23 +59,11 @@
 			<@lichkin@jsTag url="/webjars/LichKin-UI/i18n/${locale}${compressSuffix}.js" />
 			<@lichkin@jsTag url="/res/js/i18n/${locale}.js" />
 			<@lichkin@jsTag url="/webjars/LichKin-UI/lichkin-${calculateType}${compressSuffix}.js" />
-			<#-- 三方 -->
-			<@lichkin@jsTag url="/webjars/ueditor/ueditor.config.js" />
-			<@lichkin@jsTag url="/webjars/ueditor/ueditor.all.js" />
-			<@lichkin@jsTag url="/webjars/ueditor/lang/${locale}/${locale}.js" />
-			<@lichkin@jsTag url="/webjars/spark-md5/spark-md5${compressSuffix}.js" />
-			<@lichkin@jsTag url="/webjars/cropper/cropper${compressSuffix}.js" />
-			<@lichkin@jsTag url="/webjars/datepicker/datepicker${compressSuffix}.js" />
 			<#if webDebug==true>
-			<#-- TODO web与app分离？ -->
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-core${compressSuffix}.js" />
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-icon${compressSuffix}.js" />
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-text${compressSuffix}.js" />
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-button${compressSuffix}.js" />
-			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-textbox${compressSuffix}.js" />
-			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-dialog${compressSuffix}.js" />
-			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-tree${compressSuffix}.js" />
-			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-datagrid${compressSuffix}.js" />
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-droplist${compressSuffix}.js" />
 			<#else>
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugins${compressSuffix}.js" />
