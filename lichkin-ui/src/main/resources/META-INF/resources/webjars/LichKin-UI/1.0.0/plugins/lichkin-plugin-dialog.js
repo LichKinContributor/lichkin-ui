@@ -147,17 +147,22 @@ LK.UI('plugins', 'openDialog', function(options) {
 
   // 添加内容栏
   var $contentBar = $('<div class="lichkin-dialog-contentBar" style="width:' + options.size.width + 'px;height:' + options.size.height + 'px;"></div>').appendTo($plugin);
-  // 加载页面
-  // 触发页面加载前事件
-  options.onBeforeLoading($plugin);
-  LK.loadPage({
-    $obj : $contentBar,
-    url : options.url,
-    onAfterLoading : function(opts) {
-      // 触发页面加载后事件
-      options.onAfterLoading($plugin);
-    }
-  });
+
+  if (options.url != '') {// 加载页面
+    // 触发页面加载前事件
+    options.onBeforeLoading($plugin);
+    LK.loadPage({
+      $obj : $contentBar,
+      url : options.url,
+      param : options.param,
+      onAfterLoading : function(opts) {
+        // 触发页面加载后事件
+        options.onAfterLoading($plugin);
+      }
+    });
+  } else {// 填充页面
+    $contentBar.append(options.content);
+  }
 
   // 添加按钮栏
   if (options.buttons.length != 0) {
@@ -195,6 +200,10 @@ LK.UI('plugins', 'openDialog', function(options) {
   icon : 'page',
   // 对话框加载页面地址
   url : '',
+  // 对话框加载页面参数
+  param : {},
+  // 对话框文本内容
+  content : '',
   // 是否增加遮罩层
   mask : true,
   // 对话框大小
