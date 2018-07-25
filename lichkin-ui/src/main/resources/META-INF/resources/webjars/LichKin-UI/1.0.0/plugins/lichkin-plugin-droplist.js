@@ -137,7 +137,7 @@ LK.UI('plugins', 'droplist', function(options) {
   // 返回控件对象
   return $plugin;
 }, {
-  // @see createUIPlugin
+  // @see LK.UI.create
   id : '',
   $appendTo : null,
   $renderTo : null,
@@ -150,7 +150,7 @@ LK.UI('plugins', 'droplist', function(options) {
   onChange : function($plugin, pluginValues, pluginValue, currentValue) {
   },
 
-  // @see load
+  // @see LK.UI.load
   lazy : false,
   url : '',
   param : {},

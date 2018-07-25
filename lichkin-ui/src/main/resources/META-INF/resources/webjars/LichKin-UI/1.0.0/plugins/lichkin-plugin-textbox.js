@@ -29,7 +29,7 @@ LK.UI('plugins', 'textbox', function(options) {
   // 返回控件对象
   return $plugin;
 }, {
-  // @see createUIPlugin
+  // @see LK.UI.create
   id : '',
   $appendTo : null,
   $renderTo : null,
