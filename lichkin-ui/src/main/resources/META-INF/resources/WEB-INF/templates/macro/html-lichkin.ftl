@@ -60,6 +60,8 @@
 			<@lichkin@jsTag url="/webjars/LichKin-UI/i18n/${locale}${compressSuffix}.js" />
 			<@lichkin@jsTag url="/res/js/i18n/${locale}.js" />
 			<@lichkin@jsTag url="/webjars/LichKin-UI/lichkin-${calculateType}${compressSuffix}.js" />
+			<#-- 三方 -->
+			<@lichkin@jsTag url="/webjars/spark-md5/spark-md5${compressSuffix}.js" />
 			<#if webDebug==true>
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-core${compressSuffix}.js" />
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-icon${compressSuffix}.js" />
