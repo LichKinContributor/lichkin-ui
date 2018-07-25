@@ -78,20 +78,20 @@ LK.UI('plugins', 'droplist', function(options) {
   });
 
   // 下拉内容
-  var $content = $('<div class="lichkin-content lichkin-droplist-content"></div>').appendTo($plugin);
+  var $popup = $('<div></div>').appendTo($plugin).LKAddPluginClass(plugin, 'popup');
 
   // 下拉内容显示/隐藏
-  $content.mouseover(function() {
-    $content.show();
+  $popup.mouseover(function() {
+    $popup.show();
   }).mouseout(function() {
-    $content.hide();
+    $popup.hide();
   });
 
-  // 控制器
-  var $controller = $('<div class="lichkin-controller lichkin-droplist-controller"></div>').appendTo($plugin);
-  var $text = LK.UI.text().appendTo($controller).addClass('lichkin-show-text').addClass('lichkin-droplist-text');
-  $controller.click(function() {
-    $content.toggle();
+  // 包装层
+  var $wrapper = $('<div></div>').appendTo($plugin).LKAddPluginClass(plugin, 'wrapper');
+  var $text = LK.UI.text().appendTo($wrapper).LKAddPluginClass(plugin, 'text');
+  $wrapper.click(function() {
+    $popup.toggle();
   });
 
   // 下拉按钮
@@ -101,14 +101,13 @@ LK.UI('plugins', 'droplist', function(options) {
       icon : 'dropdown'
     },
     click : function(btnOptions, $btn) {
-      $content.toggle();
+      $popup.toggle();
     },
-    tip : LK.i18n.dropdown,
-    cls : 'lichkin-controll-button lichkin-droplist-button'
-  }).appendTo($plugin);
+    tip : LK.i18n.dropdown
+  }).appendTo($plugin).LKAddPluginClass(plugin, 'button');
 
   // 数据容器
-  var $container = $('<ul class="lichkin-dataContainer lichkin-droplist-dataContainer"></ul>').appendTo($content);
+  var $container = $('<ul></ul>').appendTo($popup).LKAddPluginClass(plugin, 'dataContainer');
   // 点击事件
   $container.click(function(e) {
     if (e.target != this) {

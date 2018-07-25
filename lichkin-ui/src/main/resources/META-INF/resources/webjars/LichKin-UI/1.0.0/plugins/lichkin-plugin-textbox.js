@@ -1,25 +1,47 @@
 ;
+
 /**
- * 文本框
+ * 文本框控件
  */
 LK.UI('plugins', 'textbox', function(options) {
   // 创建控件对象
-  var $plugin = $('<input type="text" class="lichkin-textbox" />');
-  if (typeof options.attr != 'undefined') {
-    $plugin.attr(options.attr);
-  }
+  var $plugin = LK.UI.create({
+    plugin : options.line == 1 ? 'textbox' : 'textarea',
+    options : options
+  });
 
-  // 渲染控件
-  var $obj = $(options.$obj);
-  if ($obj) {
-    $obj.append($plugin);
-  }
+  var $value = $plugin.LKGetValueObj();
+  $value.css('height', options.line * 30 - 2 + 'px');
+
+  $value.bind({
+    'change' : function() {
+      $plugin.LKValidate();
+      $plugin.data('LKOPTIONS').onChange($plugin, $plugin.LKGetValues(), $plugin.LKGetValue(), $value.val());
+    },
+    'keyup' : function() {
+      $plugin.LKValidate();
+      $plugin.data('LKOPTIONS').onChange($plugin, $plugin.LKGetValues(), $plugin.LKGetValue(), $value.val());
+    }
+  });
+
+  $plugin.LKValidate();
 
   // 返回控件对象
   return $plugin;
 }, {
-  // 待渲染对象
-  $obj : $('body'),
-  // HTML标签定义的属性
-  attr : {}
+  // @see createUIPlugin
+  id : '',
+  $appendTo : null,
+  $renderTo : null,
+  name : '',
+  validator : null,
+  value : null,
+  linkages : [],
+  onLinkaged : function($plugin, $linkage, linkageValues, linkageValue, linkageCurrentValue) {
+  },
+  onChange : function($plugin, pluginValues, pluginValue, currentValue) {
+  },
+
+  // 行数
+  line : 1
 });

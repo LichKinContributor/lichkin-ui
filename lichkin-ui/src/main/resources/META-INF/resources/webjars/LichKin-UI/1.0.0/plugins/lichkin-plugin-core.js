@@ -95,22 +95,20 @@ $.fn.extend({
     }
 
     var plugin = $plugin.LKGetPluginType();
-    if (!isString(plugin)) {// 不是控件
-      throw 'current jquery object is not a lichkin plugin.';
-    }
-
     var $value = this.LKGetValueObj();// 取控件值对象
-    var value = $value.val();// 取控件值
     var validator = $value.data('validator');// 取验证器
     if (validator != '') {
+      var value = $value.val();// 取控件值
       var validatores = validator.split(',');
       for (var i = 0; i < validatores.length; i++) {
         if (!LK.UI.validator[validatores[i]](value)) {
-          $plugin.addClass('lichkin-' + plugin + '-invalid');// 验证未通过增加样式
+          $plugin.LKAddPluginClass(plugin, 'invalid');// 验证未通过增加样式
           return false;// 验证未通过返回失败
         }
       }
-      $plugin.removeClass('lichkin-' + plugin + '-invalid');// 验证通过清除样式
+      $plugin.removeClass([
+          'lichkin-plugin-invalid', 'lichkin-' + plugin + '-invalid'
+      ]);// 验证通过清除样式
     }
 
     return true;// 验证通过或无验证器返回成功
@@ -163,11 +161,12 @@ $.fn.extend({
    * @param values 值
    */
   LKSetValues : function(values) {
+    var currentValue = values;
     if (Array.isArray(values)) {
-      this.LKGetValueObj().val(values.join(LK.SPLITOR));
-    } else if (isString(values)) {
-      this.LKGetValueObj().val(values);
+      currentValue = values.join(LK.SPLITOR);
     }
+    this.LKGetValueObj().val(currentValue);
+    this.data('LKOPTIONS').onChange(this, this.LKGetValues(), this.LKGetValue(), currentValue);
   },
 
   /**
@@ -331,6 +330,18 @@ $.fn.extend({
    */
   LKGetDatas : function() {
     return this.data('LKDatas');
+  },
+
+  /**
+   * 添加控件样式
+   * @param plugin 控件类型
+   * @param cls 样式名称
+   */
+  LKAddPluginClass : function(plugin, cls) {
+    this.addClass([
+        'lichkin-plugin-' + cls, 'lichkin-' + plugin + '-' + cls
+    ]);
+    return this;
   }
 
 });
@@ -357,7 +368,16 @@ LK.UI('plugins', 'create', function(opts) {
   $plugin.data('initValue', options.value);
 
   // 创建UI控件存值对象
-  var $value = $('<input class="lichkin-value lichkin-' + plugin + '-value" type="hidden" name="' + options.name + '" data-validator="' + validator + '" data-plugin-type="' + plugin + '" />').appendTo($plugin);
+  var $value = $(plugin == 'textbox' ? '<input type="text" />' : (plugin == 'textarea' ? '<textarea></textarea>' : '<input type="hidden" />')).appendTo($plugin);
+  $value.attr('name', options.name);
+  if (plugin == 'textbox' || plugin == 'textarea') {
+    $value.LKAddPluginClass(plugin, 'text');
+  }
+  $value.LKAddPluginClass(plugin, 'value');
+  $value.data({
+    'validator' : validator,
+    'plugin-type' : plugin
+  });
 
   // 设置值
   if (options.value != null) {
