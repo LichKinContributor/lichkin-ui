@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+.lichkin-textbox .lichkin-textbox-text {
+  width: 134px;
+  border: none;
+  padding: 0px 6px;
+  display: block;
+}
+
+.lichkin-textbox .lichkin-textbox-text:focus {
+  outline: none;
+}
+
+.lichkin-textarea .lichkin-textarea-text {
+  width: 134px;
+  resize: none;
+  border: none;
+  padding: 0px 6px;
+  display: block;
+}
+
+.lichkin-textarea .lichkin-textarea-text:focus {
+  outline: none;
+}
