@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+.lichkin-datepicker .lichkin-datepicker-text {
+  width: 134px;
+  height: 28px;
+  border: none;
+  padding: 0px 6px;
+  display: block;
+  cursor: pointer;
+}
+
+.lichkin-datepicker .lichkin-datepicker-text:focus {
+  outline: none;
+}
+
+.datepicker-top-left, .datepicker-top-right {
+  border-top-color: var(--lichkin-plugin-border-color);
+}
+
+.datepicker-top-left::before, .datepicker-top-right::before {
+  border-bottom-color: var(--lichkin-plugin-border-color);
+}
+
+.datepicker-bottom-left, .datepicker-bottom-right {
+  border-bottom-color: var(--lichkin-plugin-border-color);
+}
+
+.datepicker-bottom-left::before, .datepicker-bottom-right::before {
+  border-top-color: var(--lichkin-plugin-border-color);
+}
+
+.datepicker-panel>ul>li.picked, .datepicker-panel>ul>li.picked:hover {
+  color: var(--lichkin-plugin-border-color);
+}

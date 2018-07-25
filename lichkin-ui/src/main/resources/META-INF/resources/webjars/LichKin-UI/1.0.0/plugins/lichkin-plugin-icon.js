@@ -256,6 +256,7 @@ LK.UI('plugins', 'changeIcon', function(options) {
     'reset' : 'redo-alt',
     'close' : 'times',
     'dropdown' : 'caret-square-down',
+    'datepicker' : 'calendar-alt',
     'sysMgmt' : 'cog',
     'roleMgmt' : 'user-secret',
     'userMgmt' : 'user',

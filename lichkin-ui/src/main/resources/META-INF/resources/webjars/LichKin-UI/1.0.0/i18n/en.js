@@ -19,5 +19,6 @@ LK.i18n = {
   edit : 'EDIT',
   remove : 'REMOVE',
   search : 'SEARCH',
-  dropdown : 'Show/Hide options'
+  dropdown : 'Show/Hide options',
+  datepicker : 'Show/Hide datepicker'
 };

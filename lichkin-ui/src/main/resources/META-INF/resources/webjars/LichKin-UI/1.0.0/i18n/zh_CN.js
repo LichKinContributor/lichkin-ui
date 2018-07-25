@@ -19,5 +19,6 @@ LK.i18n = {
   edit : '修改',
   remove : '删除',
   search : '查询',
-  dropdown : '显示/隐藏选项'
+  dropdown : '显示/隐藏选项',
+  datepicker : '显示/隐藏日期控件'
 };

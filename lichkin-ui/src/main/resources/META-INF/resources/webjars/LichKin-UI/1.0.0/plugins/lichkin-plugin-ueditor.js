@@ -1,7 +1,7 @@
 ;
 
 /**
- * 下拉列表控件
+ * 富文本编辑控件
  */
 LK.UI('plugins', 'ueditor', function(options) {
   // 控件类型

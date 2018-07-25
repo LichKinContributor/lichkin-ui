@@ -100,9 +100,6 @@ LK.UI('plugins', 'droplist', function(options) {
       size : 24,
       icon : 'dropdown'
     },
-    click : function(btnOptions, $btn) {
-      $popup.toggle();
-    },
     tip : LK.i18n.dropdown
   }).appendTo($plugin).LKAddPluginClass(plugin, 'button');
 
