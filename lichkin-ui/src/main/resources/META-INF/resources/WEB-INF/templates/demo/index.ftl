@@ -53,6 +53,12 @@
 				<li><a href="javascript:;">datepicker</a></li>
 			</ul>
 		</div>
+		<div class="title">dialog</div>
+		<div class="content">
+			<ul>
+				<li><a href="javascript:;">dialog</a></li>
+			</ul>
+		</div>
 	</#if>
 	<#if section="javascript-contents-after-links">
 		$('a').each(function(){

@@ -72,6 +72,29 @@ LK.UI._ = function(plugin, options) {
 };
 
 /**
+ * JQuery扩展
+ */
+$.extend($, {
+
+  /**
+   * 打开对话框
+   * @param options 参数
+   * @see LK.UI.openDialog
+   */
+  LKOpenDialog : function(options) {
+    return LK.UI.openDialog(options);
+  },
+
+  /**
+   * 获取最上层对话框
+   */
+  LKGetTopDialog : function() {
+    return LK.UI._dialog.getTop();
+  }
+
+});
+
+/**
  * 控件功能性方法，提供JQuery扩展。
  */
 $.fn.extend({
@@ -342,6 +365,28 @@ $.fn.extend({
         'lichkin-plugin-' + cls, 'lichkin-' + plugin + '-' + cls
     ]);
     return this;
+  },
+
+  /**
+   * 激活对话框
+   * @param activeFocus 是否触发对话框被聚焦后事件
+   */
+  LKActiveDialog : function(activeFocus) {
+    if (this.LKGetPluginType() != 'dialog') {
+      throw 'current jquery object is not a dialog plugin.';
+    }
+    LK.UI._dialog.active(this, activeFocus);
+  },
+
+  /**
+   * 激活对话框
+   * @param id 对话框控件主键
+   */
+  LKCloseDialog : function(id) {
+    if (this.LKGetPluginType() != 'dialog') {
+      throw 'current jquery object is not a dialog plugin.';
+    }
+    LK.UI._dialog.close(id, this);
   }
 
 });

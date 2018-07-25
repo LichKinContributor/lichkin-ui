@@ -21,7 +21,7 @@ LK.UI._dialog = {
     $plugin.css('z-index', this.maxZIndex++);
     if (activeFocus) {
       // 触发对话框被聚焦后事件
-      $plugin.options.onFocus($plugin);
+      $plugin.data('LKOPTIONS').onFocus($plugin);
     }
   },
 
@@ -41,13 +41,16 @@ LK.UI._dialog = {
 
   /**
    * 关闭对话框
+   * @param id 对话框控件主键
+   * @param $plugin 控件对象
    */
-  close : function(id) {
-    var $plugin = LKUI._getUIPlugin({
-      id : id
-    });
+  close : function(id, $plugin) {
+    var $plugin = (typeof $plugin == 'undefined' ? $('#' + id) : $plugin);
+
+    var options = $plugin.data('LKOPTIONS');
+
     // 触发对话框关闭前事件
-    $plugin.options.onBeforeClose($plugin.options, $plugin);
+    options.onBeforeClose($plugin);
 
     // 清除控件
     $plugin.remove();
@@ -56,11 +59,11 @@ LK.UI._dialog = {
     var $topDlg = this.getTop();
     if ($topDlg) {
       // 切换并触发聚焦事件
-      $topDlg.LKUI('active', true);
+      this.active($topDlg, true);
     }
 
     // 触发对话框关闭后事件
-    $plugin.options.onAfterClose($plugin.options);
+    options.onAfterClose();
   }
 
 };
@@ -72,13 +75,20 @@ LK.UI('plugins', 'openDialog', function(options) {
   // 控件类型
   var plugin = 'dialog';
 
+  // 实现类
+  var implementor = LK.UI['_' + plugin];
+
   // 创建控件对象
-  var $plugin = LKUI._createUIPlugin(plugin, options);
+  // 设置id
+  var id = options.id = (options.id != '') ? options.id : 'LK_' + randomInRange(100000, 999999);
+
+  // 创建UI控件对象
+  var $plugin = $('<div id="' + id + '" data-id="' + plugin + '_' + id + '" class="lichkin-' + plugin + '" data-plugin-type="' + plugin + '"></div>').appendTo('body');
 
   // 控件点击事件
   $plugin.mousedown(function() {
     // 切换并触发聚焦事件
-    $plugin.LKUI('active', true);
+    implementor.active($plugin, true);
   });
 
   // 添加标题栏
@@ -118,20 +128,20 @@ LK.UI('plugins', 'openDialog', function(options) {
   // 标题栏关闭按钮
   var $titleButtonClose = LKUI.icon('close').appendTo($titleButtons).click(function() {
     // 关闭对话框
-    LK.UI._dialog.close(options.id);
+    implementor.close(null, $plugin);
   });
 
   // 添加内容栏
   var $contentBar = $('<div class="lichkin-dialog-contentBar" style="width:' + options.size.width + 'px;height:' + options.size.height + 'px;"></div>').appendTo($plugin);
   // 加载页面
   // 触发页面加载前事件
-  options.onBeforeLoading(options, $plugin);
+  options.onBeforeLoading($plugin);
   LK.loadPage({
     $obj : $contentBar,
     url : options.url,
     onAfterLoading : function(opts) {
       // 触发页面加载后事件
-      options.onAfterLoading(options, $plugin);
+      options.onAfterLoading($plugin);
     }
   });
 
@@ -155,15 +165,16 @@ LK.UI('plugins', 'openDialog', function(options) {
   });
 
   // 切换
-  $plugin.LKUI('active', false);
+  implementor.active($plugin, false);
+
+  // 缓存参数
+  $plugin.data('LKOPTIONS', options);
 
   // 返回控件对象
   return $plugin;
 }, {
-  // @see createUIPlugin
+  // 控件ID
   id : '',
-  $appendTo : 'body',// 对话框只能添加到body上
-
   // 对话框标题
   title : LK.i18n.dialogTitle,
   // 图标
@@ -183,20 +194,33 @@ LK.UI('plugins', 'openDialog', function(options) {
   buttons : [],
 
   // 事件
-
-  // 页面加载前
-  onBeforeLoading : function(options, $dlg) {
+  /**
+   * 页面加载前
+   * @param $plugin 当前对话框对象
+   */
+  onBeforeLoading : function($plugin) {
   },
-  // 页面加载后
-  onAfterLoading : function(options, $dlg) {
+  /**
+   * 页面加载后
+   * @param $plugin 当前对话框对象
+   */
+  onAfterLoading : function($plugin) {
   },
-  // 对话框被聚焦后
-  onFocus : function(options, $dlg) {
+  /**
+   * 对话框被聚焦后
+   * @param $plugin 当前对话框对象
+   */
+  onFocus : function($plugin) {
   },
-  // 对话框关闭前
-  onBeforeClose : function(options, $dlg) {
+  /**
+   * 对话框关闭前
+   * @param $plugin 当前对话框对象
+   */
+  onBeforeClose : function($plugin) {
   },
-  // 对话框关闭后
-  onAfterClose : function(options) {
+  /**
+   * 对话框关闭后
+   */
+  onAfterClose : function() {
   }
 });
