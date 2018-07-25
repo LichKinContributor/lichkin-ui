@@ -77,139 +77,260 @@ LK.UI._ = function(plugin, options) {
 $.fn.extend({
 
   /**
-   * 使用LKUI实现全控件管理
-   * @param funcName 控件具体方法名
-   * @param options 控件具体方法需要的参数。部分方法可扩展实现代码简写方式。
-   */
-  LKUI : function(funcName, options) {
-    var $plugin = this;
-
-    // 首先验证是否为LKUI控件
-    var plugin = $plugin.data('plugin-type');
-    if (plugin == '') {
-      throw 'is not a LK UI object.';
-    }
-    var lkOptions = $plugin.data('LKOPTIONS');
-    if (lkOptions == '') {
-      throw 'is not a LK UI object.';
-    }
-    // 赋值方便后续调用
-    $plugin.options = lkOptions;
-
-    // 没有传入参数，视为获取控件对象。
-    if (typeof funcName == 'undefined') {
-      return $plugin;
-    }
-
-    // 验证参数是否正确
-    if (!isString(funcName)) {
-      throw 'illegal arguments';
-    }
-
-    switch (funcName) {
-      case 'active':
-        if (plugin == 'dialog') {
-          LK.UI._dialog.active($plugin, options);
-          return;
-        }
-        break;
-      case 'reload':
-        if (plugin == 'droplist' || plugin == 'tree' || plugin == 'datagrid') {
-          LKUI._reload(options, $plugin);
-          return;
-        }
-        break;
-      case 'getSelected':
-        if (plugin == 'droplist' || plugin == 'datagrid') {
-          return LKUI._getSelected(options, $plugin);
-        }
-        break;
-      case 'getSelectedData':
-        if (plugin == 'droplist' || plugin == 'datagrid') {
-          return LKUI._getSelected(options, $plugin).data();
-        }
-        break;
-      case 'getSelectedIds':
-        if (plugin == 'droplist' || plugin == 'datagrid') {
-          var ids = new Array();
-          var datas = LKUI._getSelected(options, $plugin).data();
-          for (var i = 0; i < datas.length; i++) {
-            var data = datas[i];
-            ids.push(data.id);
-          }
-          return ids.join(LK.SPLITOR);
-        }
-        break;
-      case 'getChecked':
-        if (plugin == 'tree') {
-          return LKUI._getChecked(options, $plugin);
-        }
-        break;
-      case 'getCheckedData':
-        if (plugin == 'tree') {
-          var data = new Array();
-          var checkedes = LKUI._getChecked(options, $plugin);
-          for (var i = 0; i < checkedes.length; i++) {
-            data.push($(checkedes[i]).data());
-          }
-          return data;
-        }
-        break;
-      case 'getCheckedId':
-        if (plugin == 'tree') {
-          var id = new Array();
-          var checkedes = LKUI._getChecked(options, $plugin);
-          for (var i = 0; i < checkedes.length; i++) {
-            id.push($(checkedes[i]).data('id'));
-          }
-          return id.join(LK.SPLITOR);
-        }
-        break;
-      default:
-        // 没有该方法
-        break;
-    }
-
-    // 未实现
-    throw 'not implemented at all.';
-  },
-
-  /**
    * 验证表单
    */
-  _validate : function() {
-    var $plugin = this;// 当前对象为控件对象
-    var plugin = $plugin.data('plugin-type');// 取控件类型
-    var $value = $plugin.find('.lichkin-' + plugin + '-value');// 取控件值对象
+  LKValidate : function() {
+    var $plugin = this;
+
+    if ($plugin[0].tagName == 'FORM') {
+      var flag = true;
+
+      $plugin.find('.lichkin-plugin').each(function() {
+        if (!$(this).LKValidate()) {
+          flag = false;
+        }
+      });
+
+      return flag;
+    }
+
+    var plugin = $plugin.LKGetPluginType();
+    if (!isString(plugin)) {// 不是控件
+      throw 'current jquery object is not a lichkin plugin.';
+    }
+
+    var $value = this.LKGetValueObj();// 取控件值对象
     var value = $value.val();// 取控件值
     var validator = $value.data('validator');// 取验证器
     if (validator != '') {
-      if (LK.UI.validator[validator](value)) {
-        $plugin.removeClass('lichkin-' + plugin + '-invalid');// 验证通过清除样式
-      } else {
-        $plugin.addClass('lichkin-' + plugin + '-invalid');// 验证未通过增加样式
-        return false;// 验证未通过返回失败
+      var validatores = validator.split(',');
+      for (var i = 0; i < validatores.length; i++) {
+        if (!LK.UI.validator[validatores[i]](value)) {
+          $plugin.addClass('lichkin-' + plugin + '-invalid');// 验证未通过增加样式
+          return false;// 验证未通过返回失败
+        }
       }
+      $plugin.removeClass('lichkin-' + plugin + '-invalid');// 验证通过清除样式
     }
+
     return true;// 验证通过或无验证器返回成功
   },
 
   /**
-   * 验证表单
+   * 获取控件类型
    */
-  validate : function() {
-    var $frm = this;// 当前对象为表单对象
-    if ($frm[0].tagName != 'FORM') {// 非表单对象不处理
-      return;
+  LKGetPluginType : function() {
+    var plugin = this.data('plugin-type');// 取控件类型
+    if (!isString(plugin)) {// 不是控件
+      throw 'current jquery object is not a lichkin plugin.';
     }
-    var flag = true;// 整体验证状态
-    var serializeArray = $frm.serializeArray();// 取所有表单值
-    for (var i = 0; i < serializeArray.length; i++) {// 遍历表单值
-      if (!$frm.find('[name=' + serializeArray[i].name + ']').parent('.lichkin-plugin')._validate()) {
-        flag = false;
+    return plugin;
+  },
+
+  /**
+   * 获取控件数据容器对象
+   */
+  LKGetDataContainer : function() {
+    return this.find('.lichkin-' + this.LKGetPluginType() + '-dataContainer');
+  },
+
+  /**
+   * 清空数据
+   * @param $plugin 控件对象
+   */
+  LKClearDatas : function() {
+    this.LKGetDataContainer().children().remove();
+    this.LKSetValues([]);
+    this.LKSetTexts([]);
+  },
+
+  /**
+   * 获取控件值对象
+   */
+  LKGetValueObj : function() {
+    return this.find('.lichkin-' + this.LKGetPluginType() + '-value');
+  },
+
+  /**
+   * 获取控件值
+   */
+  LKGetValue : function() {
+    return this.LKGetValueObj().val();
+  },
+
+  /**
+   * 设置控件值
+   * @param values 值
+   */
+  LKSetValues : function(values) {
+    if (Array.isArray(values)) {
+      this.LKGetValueObj().val(values.join(LK.SPLITOR));
+    } else if (isString(values)) {
+      this.LKGetValueObj().val(values);
+    }
+  },
+
+  /**
+   * 获取控件值
+   */
+  LKGetValues : function() {
+    return this.LKGetValue().split(LK.SPLITOR);
+  },
+
+  /**
+   * 获取控件显示对象
+   */
+  LKGetTextObj : function() {
+    return this.find('.lichkin-' + this.LKGetPluginType() + '-text');
+  },
+
+  /**
+   * 获取控件显示值
+   */
+  LKGetText : function() {
+    return this.LKGetTextObj().html();
+  },
+
+  /**
+   * 设置控件显示值
+   * @param texts 显示值数组
+   */
+  LKSetTexts : function(texts) {
+    if (Array.isArray(texts)) {
+      this.LKGetTextObj().html(texts.join(','));
+    } else if (isString(texts)) {
+      this.LKGetTextObj().html(texts);
+    }
+  },
+
+  /**
+   * 获取控件显示值
+   */
+  LKGetTexts : function() {
+    return this.LKGetText().split(',');
+  },
+
+  /**
+   * 加载数据
+   * @param params[url] 数据请求地址
+   * @param params[param] 数据请求参数
+   * @param params[data] 数据（优先处理数据，没有数据才会尝请求服务器。）
+   * @param linkage 联动信息
+   */
+  LKLoad : function(params, linkage) {
+    var options = this.data('LKOPTIONS');
+
+    if (isJSON(params)) {
+      if (isString(params.url)) {
+        options.url = params.url;
+      }
+
+      if (isJSON(params.param)) {
+        options.param = params.param;
+      }
+
+      if (params.data) {
+        options.data = params.data;
       }
     }
-    return flag;
+
+    LK.UI.load({
+      $plugin : this,
+      isCreateEvent : false,
+      options : options,
+      linkage : linkage
+    });
+  },
+
+  /**
+   * 获取FORM对象
+   */
+  LKGetForm : function() {
+    return this.parents('form').first();
+  },
+
+  /**
+   * 获取同表单中的控件对象
+   * @param name 同一表单下控件值名
+   */
+  LKGetSiblingPlugin : function(name) {
+    return this.LKGetForm().find('[name=' + name + ']').parents('.lichkin-plugin').first();
+  },
+
+  /**
+   * 获取控件值名
+   */
+  LKGetName : function() {
+    return this.LKGetValueObj().attr('name');
+  },
+
+  /**
+   * 判断是否是这个控件
+   * @param name 同一表单下控件值名
+   */
+  LKis : function(name) {
+    return this.LKGetName() == name;
+  },
+
+  /**
+   * 触发联动
+   * @param linkageCurrentValue 触发联动的控件当前值
+   * @param isCreateEvent 是否为初始化事件
+   */
+  LKlinkage : function(linkageCurrentValue, isCreateEvent) {
+    var linkages = this.data('LKOPTIONS').linkages;
+    var linkagesLength = linkages.length;
+    if (linkagesLength != 0) {
+      var $linkage = this;
+      var linkageName = this.LKGetName();
+      var linkageValues = this.LKGetValues();
+      var linkageValue = this.LKGetValue();
+      var linkage = {
+        $linkage : $linkage,
+        linkageName : linkageName,
+        linkageValues : linkageValues,
+        linkageValue : linkageValue,
+        linkageCurrentValue : linkageCurrentValue,
+        isCreateEvent : isCreateEvent
+      };
+      for (var i = 0; i < linkagesLength; i++) {
+        var $plugin = $linkage.LKGetSiblingPlugin(linkages[i]);
+        $plugin.data('LKOPTIONS').onLinkaged($plugin, linkage);
+      }
+    }
+  },
+
+  /**
+   * 获取实现类对象
+   */
+  LKGetImplementor : function() {
+    return LK.UI['_' + this.LKGetPluginType()];
+  },
+
+  /**
+   * 调用添加数据方法
+   * @param datas 数据集
+   */
+  LKInvokeAddDatas : function(datas) {
+    this.LKGetImplementor().addDatas(this, this.LKGetDataContainer(), datas);
+  },
+
+  /**
+   * 调用设置值方法
+   * @param values 值
+   */
+  LKInvokeSetValues : function(values) {
+    if (isString(values)) {
+      values = values.split(LK.SPLITOR);
+    }
+    this.LKGetImplementor().setValues(this, this.LKGetDataContainer(), values);
+  },
+
+  /**
+   * 获取数据集
+   */
+  LKGetDatas : function() {
+    return this.data('LKDatas');
   }
 
 });
@@ -217,27 +338,69 @@ $.fn.extend({
 /**
  * 创建UI控件对象
  */
-LK.UI('plugins', 'createUIPlugin', function(opts) {
-  // 控件类型
-  var plugin = opts.plugin;
+LK.UI('plugins', 'create', function(opts) {
   // 创建控件对象的参数
   var options = opts.options;
+  // 控件类型
+  var plugin = opts.plugin;
 
   // 设置id
-  var id = options.id = (options.id == '') ? 'LK_' + randomInRange(10000, 99999) : options.id;
+  var id = options.id = (options.id != '') ? options.id : 'LK_' + randomInRange(100000, 999999);
 
   // 创建UI控件对象
   var $plugin = $('<div id="' + id + '" data-id="' + plugin + '_' + id + '" class="lichkin-plugin lichkin-' + plugin + '" data-plugin-type="' + plugin + '"></div>');
 
-  // 填充对象
-  if (options.$appendTo != null) {
-    $plugin.appendTo(options.$appendTo);
+  // 验证器转换
+  var validator = options.validator = options.validator == null ? '' : (options.validator == true ? 'required' : options.validator);
+
+  // 记录初始化值
+  $plugin.data('initValue', options.value);
+
+  // 创建UI控件存值对象
+  var $value = $('<input class="lichkin-value lichkin-' + plugin + '-value" type="hidden" name="' + options.name + '" data-validator="' + validator + '" data-plugin-type="' + plugin + '" />').appendTo($plugin);
+
+  // 设置值
+  if (options.value != null) {
+    $value.val(options.value);
   }
 
-  // 渲染对象
-  if (options.$renderTo != null) {
+  if (options.$appendTo != null) {// 填充对象
+    $plugin.appendTo(options.$appendTo);
+  } else if (options.$renderTo != null) { // 渲染对象
     $plugin.insertAfter(options.$renderTo);
     options.$renderTo.remove();
+  }
+
+  // 联动控件只能是lazy处理
+  var $form = $plugin.LKGetForm();// 取FORM对象
+  if ($form.length == 1) {// 是表单内控件才处理
+    var linkagesData = $form.data('linkages');
+    if (options.linkages.length != 0) {// 有联动控件先处理FORM中的数据
+      if (typeof linkagesData == 'undefined') {
+        linkagesData = options.linkages;
+      } else {
+        out: for (var i = 0; i < options.linkages.length; i++) {
+          var linkageI = options.linkages[i];
+          var contains = false;
+          for (var i = 0; i < linkagesData.length; i++) {
+            if (linkagesData[i] == linkageI) {
+              continue out;
+            }
+          }
+          if (!contains) {
+            linkagesData.push(linkageI);
+          }
+        }
+      }
+      $form.data('linkages', linkagesData);
+    }
+    // 处理lazy
+    for (var i = 0; i < linkagesData.length; i++) {
+      if ($plugin.LKis(linkagesData[i])) {
+        options.lazy = true;
+        break;
+      }
+    }
   }
 
   // 缓存参数
@@ -248,179 +411,83 @@ LK.UI('plugins', 'createUIPlugin', function(opts) {
 }, {
   // 控件类型
   plugin : '',
-  // 创建控件对象的参数
+
+  // 创建控件的参数
   options : {
     // 控件ID
     id : '',
     // 控件填充到对象
     $appendTo : null,
     // 控件渲染到对象
-    $renderTo : null
+    $renderTo : null,
+
+    // 值对象名称
+    name : '',
+    // 验证器方法名
+    validator : null,
+    // 值对象值
+    value : null,
+
+    // 联动控件名称（需在同一表单中）
+    linkages : [],
+    /**
+     * 控件被联动事件
+     * @param $plugin 当前控件
+     * @param linkage[$linkage] 触发联动的控件
+     * @param linkage[linkageName] 触发联动的控件表单值名
+     * @param linkage[linkageValues] 触发联动的控件值
+     * @param linkage[linkageValue] 触发联动的控件值
+     * @param linkage[linkageCurrentValue] 触发联动的控件当前值
+     */
+    onLinkaged : function($plugin, linkage) {
+    },
+    /**
+     * 值改变事件
+     * @param $plugin 当前控件
+     * @param pluginValues 控件值
+     * @param pluginValue 控件值
+     * @param currentValue 当前值
+     */
+    onChange : function($plugin, pluginValues, pluginValue, currentValue) {
+    }
   }
+
 });
-
-/**
- * 创建UI控件对象（简写代码，框架内部使用。）
- * @param plugin 控件类型
- * @param optinos 创建控件对象的参数
- * @return 控件对象
- */
-LKUI._createUIPlugin = function(plugin, options) {
-  return LK.UI.createUIPlugin({
-    UI : 'plugins',
-    plugin : plugin,
-    options : options
-  });
-};
-
-/**
- * 创建UI控件存值对象
- */
-LK.UI('plugins', 'createUIPluginValue', function(options) {
-  // 验证器转换
-  options.validator = options.validator == null ? 'required' : options.validator;
-
-  // 创建UI控件存值对象
-  var $value = $('<input class="lichkin-' + options.plugin + '-value" type="hidden" name="' + options.name + '" data-validator="' + options.validator + '" data-plugin-type="' + options.plugin + '" />').appendTo(options.$plugin);
-
-  return $value;
-}, {
-  // 控件类型
-  plugin : '',
-  // 控件对象
-  $plugin : null,
-
-  // 表单对象
-  name : '',
-  // 验证器方法名
-  validator : ''
-});
-
-/**
- * 创建UI控件存值对象（简写代码，框架内部使用。）
- * @param optinos 原方法支持的参数
- * @param plugin 控件类型
- * @param $plugin 控件对象
- * @return 控件对象
- */
-LKUI._createUIPluginValue = function(options, plugin, $plugin) {
-  return LK.UI.createUIPluginValue($.extend(true, {}, options, {
-    UI : 'plugins',
-    plugin : plugin,
-    $plugin : $plugin
-  }));
-};
-
-/**
- * 获取UI控件对象
- */
-LK.UI('plugins', 'getUIPlugin', function(options) {
-  if (options.id != '') {
-    return $('#' + options.id).LKUI();
-  }
-  if (options.dataId != '') {
-    return $('[data-id=' + options.dataId + ']').LKUI();
-  }
-  if (options.$obj != null) {
-    return options.$obj.LKUI();
-  }
-  return null;
-}, {
-  // 渲染过的控件对应的DOM元素ID属性值
-  id : '',
-  // 渲染过的控件对应的DOM元素data-id属性值
-  dataId : '',
-  // 渲染过的控件对应的JQuery对象
-  $obj : null
-});
-
-/**
- * 获取UI控件对象（简写代码，框架内部使用。）
- * @param optinos 原方法支持的参数
- * @return 控件对象
- */
-LKUI._getUIPlugin = function(options) {
-  return LK.UI.getUIPlugin($.extend(true, {}, options, {
-    UI : 'plugins'
-  }));
-};
-
-/**
- * 获取选中项
- */
-LK.UI('plugins', 'getSelected', function(options) {
-  return LK.UI['_' + options.plugin].getSelected(LKUI._getUIPlugin(options));
-}, {
-  // 控件类型
-  plugin : '',
-
-  // 渲染过的控件对应的DOM元素ID属性值
-  id : '',
-  // 渲染过的控件对应的DOM元素data-id属性值
-  dataId : '',
-  // 渲染过的控件对应的JQuery对象
-  $obj : null
-});
-
-/**
- * 获取选中项简写代码，框架内部使用。）
- * @param optinos 原方法支持的参数
- * @param $plugin 控件对象
- * @return 控件对象
- */
-LKUI._getSelected = function(options, $plugin) {
-  return LK.UI.getSelected($.extend(true, {}, options, {
-    UI : 'plugins',
-    plugin : $plugin.data('plugin-type'),
-    $obj : $plugin
-  }));
-};
-
-/**
- * 获取选中项
- */
-LK.UI('plugins', 'getChecked', function(options) {
-  return LK.UI['_' + options.plugin].getChecked(LKUI._getUIPlugin(options), options.statusArr);
-}, {
-  // 控件类型
-  plugin : '',
-
-  // 渲染过的控件对应的DOM元素ID属性值
-  id : '',
-  // 渲染过的控件对应的DOM元素data-id属性值
-  dataId : '',
-  // 渲染过的控件对应的JQuery对象
-  $obj : null,
-
-  // 选中状态数组
-  statusArr : [
-      'checked', 'tristate'
-  ]
-});
-
-/**
- * 获取选中项简写代码，框架内部使用。）
- * @param optinos 原方法支持的参数
- * @param $plugin 控件对象
- * @return 选中项
- */
-LKUI._getChecked = function(options, $plugin) {
-  return LK.UI.getChecked($.extend(true, {}, options, {
-    UI : 'plugins',
-    plugin : $plugin.data('plugin-type'),
-    $obj : $plugin
-  }));
-};
 
 /**
  * 加载数据
  */
-LK.UI('plugins', 'load', function(options) {
-  var implementor = LK.UI['_' + options.plugin];
+LK.UI('plugins', 'load', function(opts) {
+  // 调用本方法具体参数
+  var options = opts.options;
+
+  // 延迟加载不处理
+  if (opts.isCreateEvent && options.lazy == true) {
+    return;
+  }
+
+  // 控件对象
+  var $plugin = opts.$plugin;
 
   // 数据方式增加行
-  if (options.data.length != 0) {
-    implementor.addDatas(options.$plugin, options.data);
+  if (options.data != null) {
+    $plugin.LKClearDatas();
+    $plugin.LKInvokeAddDatas(options.data);
+    $plugin.data('LKDatas', options.data);
+    if (opts.isCreateEvent) {
+      var initValue = $plugin.data('initValue');
+      if (initValue != null) {
+        $plugin.LKInvokeSetValues(initValue);
+      }
+      $plugin.LKlinkage(initValue, true);
+    } else {
+      if (opts.linkage != null && opts.linkage.isCreateEvent == true) {
+        var initValue = $plugin.data('initValue');
+        $plugin.LKInvokeSetValues(initValue);
+        $plugin.LKlinkage(initValue, true);
+      }
+    }
+    $plugin.LKValidate();
     return;
   }
 
@@ -430,120 +497,90 @@ LK.UI('plugins', 'load', function(options) {
       url : options.url,
       data : options.param,
       success : function(responseDatas) {
+        $plugin.LKClearDatas();
         if (responseDatas) {
-          responseDatas = options.onBeforeAddDatas(responseDatas, options.url, options.param);
-          implementor.addDatas(options.$plugin, responseDatas);
-          options.onAfterAddDatas(responseDatas, options.url, options.param);
+          responseDatas = options.onBeforeAddDatas($plugin, responseDatas, options.url, options.param);
+          $plugin.LKInvokeAddDatas(responseDatas);
+          options.onAfterAddDatas($plugin, responseDatas, options.url, options.param);
+          $plugin.data('LKDatas', responseDatas);
+          if (opts.isCreateEvent) {
+            var initValue = $plugin.data('initValue');
+            if (initValue != null) {
+              $plugin.LKInvokeSetValues(initValue);
+            }
+            $plugin.LKlinkage(initValue, true);
+          } else {
+            if (opts.linkage != null && opts.linkage.isCreateEvent == true) {
+              var initValue = $plugin.data('initValue');
+              $plugin.LKInvokeSetValues(initValue);
+              $plugin.LKlinkage(initValue, true);
+            }
+          }
+        } else {
+          $plugin.LKlinkage(null, true);
         }
+        $plugin.LKValidate();
       },
       error : function() {
-        options.onLoadDatasError(arguments, options.url, options.param);
+        $plugin.LKClearDatas();
+        options.onLoadDatasError($plugin, arguments, options.url, options.param);
+        $plugin.data('LKDatas', null);
+        $plugin.LKlinkage(null, true);
+        $plugin.LKValidate();
       }
     });
+    return;
   }
+
+  throw 'load must be init with data or url.';
 }, {
-  // 控件类型
-  plugin : '',
   // 控件对象
   $plugin : null,
+  // 是否为创建是调用
+  isCreateEvent : false,
+  // 联动信息（被联动时加载数据需要传入，实现类不提供此参数。）
+  linkage : null,
 
-  // 重新加载的地址
-  url : '',
-  // 重新加载的参数
-  param : {},
-  // 重新加载的数据
-  data : [],
+  // 创建控件的参数
+  options : {
+    // 延迟加载
+    lazy : false,
+    // 数据请求地址
+    url : '',
+    // 数据请求参数
+    param : {},
+    // 数据（优先处理数据，没有数据才会尝请求服务器。）
+    data : null,
 
-  // 事件
-
-  /**
-   * 加载数据失败
-   * @param responseDatas 响应数据
-   * @param url 请求地址
-   * @param param 请求参数
-   * @return 待添加的数据
-   */
-  onBeforeAddDatas : function(responseDatas, url, param) {
-    return responseDatas;
-  },
-  /**
-   * 加载数据失败
-   * @param responseDatas 响应数据
-   * @param url 请求地址
-   * @param param 请求参数
-   */
-  onAfterAddDatas : function(responseDatas, url, param) {
-  },
-  /**
-   * 加载数据失败
-   * @param ajaxErrorArguments AJAX请求失败参数列表
-   * @param url 请求地址
-   * @param param 请求参数
-   */
-  onLoadDatasError : function(ajaxErrorArguments, url, param) {
+    // 事件
+    /**
+     * 添加数据前
+     * @param responseDatas 响应数据
+     * @param url 请求地址
+     * @param param 请求参数
+     * @return 待添加的数据
+     */
+    onBeforeAddDatas : function($plugin, responseDatas, url, param) {
+      return responseDatas;
+    },
+    /**
+     * 添加数据后
+     * @param responseDatas 响应数据
+     * @param url 请求地址
+     * @param param 请求参数
+     */
+    onAfterAddDatas : function($plugin, responseDatas, url, param) {
+    },
+    /**
+     * 加载数据失败
+     * @param ajaxErrorArguments AJAX请求失败参数列表
+     * @param url 请求地址
+     * @param param 请求参数
+     */
+    onLoadDatasError : function($plugin, ajaxErrorArguments, url, param) {
+    }
   }
 });
-
-/**
- * 加载数据简写代码，框架内部使用。）
- * @param optinos 原方法支持的参数
- * @param plugin 控件类型
- * @return 控件对象
- */
-LKUI._load = function(options, plugin, $plugin) {
-  LK.UI.load($.extend(true, {}, options, {
-    UI : 'plugins',
-    plugin : plugin,
-    $plugin : $plugin
-  }));
-};
-
-/**
- * 重新加载数据
- */
-LK.UI('plugins', 'reload', function(options) {
-  var $plugin = options.$plugin;
-
-  var pluginOptions = $plugin.options;
-  if (options.url != '') {
-    pluginOptions.url = options.url;
-  }
-
-  pluginOptions.param = options.param;
-
-  pluginOptions.data = [];
-  if (options.data.length != 0) {
-    pluginOptions.data = options.data;
-  }
-
-  var $container = LK.UI['_' + options.plugin].getDataContainer($plugin);
-  $container.children().remove();
-  LKUI._load(pluginOptions, options.plugin, $plugin);
-}, {
-  // 控件类型
-  plugin : '',
-  // 控件对象
-  $plugin : null,
-
-  // @see load
-  url : '',
-  param : {},
-  data : []
-});
-
-/**
- * 重新加载数据简写代码，框架内部使用。）
- * @param optinos 原方法支持的参数
- * @param $plugin 控件对象
- * @return 控件对象
- */
-LKUI._reload = function(options, $plugin) {
-  return LK.UI.reload($.extend(true, {}, options, {
-    UI : 'plugins',
-    plugin : $plugin.data('plugin-type'),
-    $plugin : $plugin
-  }));
-};
 
 // 验证器集合
 LK.UI.validator = {
