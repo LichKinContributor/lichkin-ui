@@ -368,7 +368,7 @@ LK.UI('plugins', 'create', function(opts) {
   $plugin.data('initValue', options.value);
 
   // 创建UI控件存值对象
-  var $value = $((plugin == 'textbox' || plugin == 'datepicker') ? '<input type="text"'+(plugin == 'datepicker'?' readonly="true"':'')+' />' : (plugin == 'textarea' ? '<textarea></textarea>' : '<input type="hidden" />')).appendTo($plugin);
+  var $value = $((plugin == 'textbox' || plugin == 'datepicker') ? '<input type="text"' + (plugin == 'datepicker' ? ' readonly="true"' : '') + ' />' : (plugin == 'textarea' ? '<textarea></textarea>' : '<input type="hidden" />')).appendTo($plugin);
   $value.attr('name', options.name);
   if (plugin == 'textbox' || plugin == 'datepicker' || plugin == 'textarea') {
     $value.LKAddPluginClass(plugin, 'text');
@@ -575,6 +575,7 @@ LK.UI('plugins', 'load', function(opts) {
     // 事件
     /**
      * 添加数据前
+     * @param $plugin 当前控件
      * @param responseDatas 响应数据
      * @param url 请求地址
      * @param param 请求参数
@@ -585,6 +586,7 @@ LK.UI('plugins', 'load', function(opts) {
     },
     /**
      * 添加数据后
+     * @param $plugin 当前控件
      * @param responseDatas 响应数据
      * @param url 请求地址
      * @param param 请求参数
@@ -593,6 +595,7 @@ LK.UI('plugins', 'load', function(opts) {
     },
     /**
      * 加载数据失败
+     * @param $plugin 当前控件
      * @param ajaxErrorArguments AJAX请求失败参数列表
      * @param url 请求地址
      * @param param 请求参数
