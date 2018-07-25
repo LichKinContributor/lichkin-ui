@@ -6,6 +6,7 @@
   --lichkin-dialog-titleBar-background-color: #a0ecef;
   --lichkin-dialog-font-color: #2e6da4;
   --lichkin-dialog-buttons-color: #ffffff;
+  --lichkin-dialog-mask-background-color: rgba(88, 92, 117, 0.66);
 }
 
 .lichkin-dialog {
@@ -96,3 +97,5 @@
 .lichkin-dialog-focus .lichkin-dialog-titleBar .lichkin-buttons {
   color: var(--lichkin-plugin-background-color);
 }
+
+.lichkin-dialog-mask {padding:0px;background-color:var(--lichkin-dialog-mask-background-color);width:100%;height:100%;border:none;margin:0px;position:fixed;top:0px;display:none;}

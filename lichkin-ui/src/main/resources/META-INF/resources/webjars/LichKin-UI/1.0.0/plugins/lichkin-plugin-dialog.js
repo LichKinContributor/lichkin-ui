@@ -18,7 +18,7 @@ LK.UI._dialog = {
   active : function($plugin, activeFocus) {
     $('.lichkin-dialog').removeClass('lichkin-dialog-focus');
     $plugin.addClass('lichkin-dialog-focus');
-    $plugin.css('z-index', this.maxZIndex++);
+    $plugin.css('z-index', ++this.maxZIndex);
     if (activeFocus) {
       // 触发对话框被聚焦后事件
       $plugin.data('LKOPTIONS').onFocus($plugin);
@@ -60,6 +60,9 @@ LK.UI._dialog = {
     if ($topDlg) {
       // 切换并触发聚焦事件
       this.active($topDlg, true);
+      $('.lichkin-dialog-mask').css('z-index', $topDlg.css('z-index') - 1);
+    } else {
+      $('.lichkin-dialog-mask').remove();
     }
 
     // 触发对话框关闭后事件
@@ -188,6 +191,16 @@ LK.UI('plugins', 'openDialog', function(options) {
 
   // 缓存参数
   $plugin.data('LKOPTIONS', options);
+
+  if (options.mask) {
+    var maskZIndex = LK.UI._dialog.maxZIndex - 1;
+    var $mask = $('.lichkin-dialog-mask');
+    if ($mask.length != 0) {
+      $mask.css('z-index', maskZIndex);
+    } else {
+      $('<div class="lichkin-dialog-mask" style="z-index:' + maskZIndex + ';"></div>').appendTo('body').show();
+    }
+  }
 
   // 返回控件对象
   return $plugin;
