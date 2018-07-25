@@ -7,12 +7,9 @@
 		.content {height:150px;padding-left:10px;}
 	</#if>
 	<#if section="body-attributes">style="background-color:#CCCCCC;"</#if>
-	<#if section="body-content">
-		<div class="title">初始化</div>
-		<div class="content" id="demo"></div>
-	</#if>
 	<#if section="javascript-contents-after-links">
-		LK.UI.openDialog({url:'/demo/icon', $appendTo:$('#demo')});
-		LK.UI.openDialog({url:'/demo/icon-change', $appendTo:$('#demo')});
+		LK.UI.openDialog({url:'/demo/icon'});
+		LK.UI.openDialog({url:'/demo/icon-change',title:'通过width/height设置大小',size:{width:300,height:100}});
+		LK.UI.openDialog({url:'/demo/icon-change',title:'通过cols/rows设置大小',size:{cols:1,rows:1}});
 	</#if>
 </@html>

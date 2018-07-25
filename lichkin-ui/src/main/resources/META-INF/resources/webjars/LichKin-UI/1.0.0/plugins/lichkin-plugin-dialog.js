@@ -131,6 +131,20 @@ LK.UI('plugins', 'openDialog', function(options) {
     implementor.close(null, $plugin);
   });
 
+  if (typeof options.size.width == 'undefined') {
+    if (typeof options.size.cols == 'undefined') {
+      options.size.cols = 2;
+    }
+    options.size.width = options.size.cols * 254;
+  }
+
+  if (typeof options.size.height == 'undefined') {
+    if (typeof options.size.rows == 'undefined') {
+      options.size.rows = 10;
+    }
+    options.size.height = options.size.rows * 30;
+  }
+
   // 添加内容栏
   var $contentBar = $('<div class="lichkin-dialog-contentBar" style="width:' + options.size.width + 'px;height:' + options.size.height + 'px;"></div>').appendTo($plugin);
   // 加载页面
@@ -186,9 +200,13 @@ LK.UI('plugins', 'openDialog', function(options) {
   // 对话框大小
   size : {
     // 对话框内容宽度
-    width : 640,
+    width : 508,
     // 对话框内容高度
-    height : 360
+    height : 300,
+    // 表格列数
+    cols : 2,
+    // 表格行数
+    rows : 10
   },
   // 对话框按钮数组
   buttons : [],
