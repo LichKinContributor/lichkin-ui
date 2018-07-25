@@ -1,4 +1,4 @@
 @charset "UTF-8";
 
 .lichkin-icon{position:relative;display:inline-block;background-repeat:no-repeat;text-align:center;}
-.lichkin-icon i{position:absolute;display:inline-block;left:0px;top:0px;vertical-align:middle;color:#ffffff;}
+.lichkin-icon i{position:absolute;display:inline-block;left:0px;top:0px;vertical-align:middle;color:var(--lichkin-plugin-font-color);}

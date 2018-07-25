@@ -1,15 +1,29 @@
 @charset "UTF-8";
 
+:root {
+  --lichkin-button-border-color: #46b8da;
+  --lichkin-button-background-color: #5bc0de;
+  --lichkin-button-font-color: #ffffff;
+}
+
 .lichkin-button {
   display: inline-block;
   margin: 0;
   padding: 0;
   cursor: pointer;
-  background-color: #5bc0de;
-  border: 1px solid #46b8da;
+  background-color: var(--lichkin-button-background-color);
+  border: 1px solid var(--lichkin-button-border-color);
   height: 28px;
   vertical-align: middle;
   overflow: hidden;
+}
+
+.lichkin-button .lichkin-text {
+  color: var(--lichkin-button-font-color);
+}
+
+.lichkin-button .lichkin-icon i {
+  color: var(--lichkin-button-font-color);
 }
 
 .lichkin-button:hover {
