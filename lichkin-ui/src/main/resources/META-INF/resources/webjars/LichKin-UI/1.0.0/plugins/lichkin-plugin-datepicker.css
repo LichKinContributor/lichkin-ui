@@ -1,10 +1,6 @@
 @charset "UTF-8";
 
 .lichkin-datepicker .lichkin-datepicker-text {
-  width: 134px;
-  height: 28px;
-  border: none;
-  padding: 0px 6px;
   display: block;
   cursor: pointer;
 }

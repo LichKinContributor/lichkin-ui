@@ -156,6 +156,8 @@ LK.UI('plugins', 'icon', function(options) {
     }
   }
 
+  $plugin.data('LKOPTIONS', options);
+
   // 返回控件对象
   return $plugin;
 }, {

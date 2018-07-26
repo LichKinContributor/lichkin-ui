@@ -6,12 +6,11 @@
 LK.UI('plugins', 'textbox', function(options) {
   // 创建控件对象
   var $plugin = LK.UI.create({
-    plugin : options.line == 1 ? 'textbox' : 'textarea',
+    plugin : options.rows == 1 ? 'textbox' : 'textarea',
     options : options
   });
 
   var $value = $plugin.LKGetValueObj();
-  $value.css('height', options.line * 30 - 2 + 'px');
 
   $value.bind({
     'change' : function() {
@@ -36,12 +35,12 @@ LK.UI('plugins', 'textbox', function(options) {
   name : '',
   validator : null,
   value : null,
+  inForm : false,
+  cols : 1,
+  rows : 1,
   linkages : [],
-  onLinkaged : function($plugin, $linkage, linkageValues, linkageValue, linkageCurrentValue) {
+  onLinkaged : function($plugin, linkage) {
   },
   onChange : function($plugin, pluginValues, pluginValue, currentValue) {
-  },
-
-  // 行数
-  line : 1
+  }
 });

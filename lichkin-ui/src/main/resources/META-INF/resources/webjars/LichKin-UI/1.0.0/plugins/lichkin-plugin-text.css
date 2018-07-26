@@ -3,7 +3,6 @@
 .lichkin-text {
   display: inline-block;
   vertical-align: middle;
-  padding: 0;
   color: var(--lichkin-plugin-font-color);
   padding: 3px 6px;
 }

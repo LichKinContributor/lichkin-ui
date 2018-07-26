@@ -58,7 +58,10 @@ LK.UI._droplist = {
       var data = datas[i];
       var $li = $('<li></li>').appendTo($container);
       $li.data(data);
-      $li.append(LKUI.text(data.text));
+      $li.append(LKUI.text(data.text).css({
+        'height' : LK.rowHeight - 7 + 'px',
+        'line-height' : LK.rowHeight - 7 + 'px'
+      }));
     }
   }
 
@@ -78,7 +81,14 @@ LK.UI('plugins', 'droplist', function(options) {
   });
 
   // 下拉内容
+  var width = $plugin.data('LKOPTIONS').width;
+  var height = $plugin.data('LKOPTIONS').height;
   var $popup = $('<div></div>').appendTo($plugin).LKAddPluginClass(plugin, 'popup');
+  $popup.css({
+    'width' : width + 'px',
+    'height' : LK.rowHeight * 6 - 1 + 'px',
+    'top' : height + 1 + 'px'
+  });
 
   // 下拉内容显示/隐藏
   $popup.mouseover(function() {
@@ -89,7 +99,10 @@ LK.UI('plugins', 'droplist', function(options) {
 
   // 包装层
   var $wrapper = $('<div></div>').appendTo($plugin).LKAddPluginClass(plugin, 'wrapper');
-  var $text = LK.UI.text().appendTo($wrapper).LKAddPluginClass(plugin, 'text');
+  var $text = LK.UI.text().appendTo($wrapper).LKAddPluginClass(plugin, 'text').css({
+    'height' : height + 'px',
+    'line-height' : LK.rowHeight - 2 + 'px'
+  });
   $wrapper.click(function() {
     $popup.toggle();
   });
@@ -141,8 +154,11 @@ LK.UI('plugins', 'droplist', function(options) {
   name : '',
   validator : null,
   value : null,
+  inForm : false,
+  cols : 1,
+  rows : 1,
   linkages : [],
-  onLinkaged : function($plugin, $linkage, linkageValues, linkageValue, linkageCurrentValue) {
+  onLinkaged : function($plugin, linkage) {
   },
   onChange : function($plugin, pluginValues, pluginValue, currentValue) {
   },

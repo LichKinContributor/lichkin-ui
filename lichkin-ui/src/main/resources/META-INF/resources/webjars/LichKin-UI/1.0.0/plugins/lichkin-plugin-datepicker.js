@@ -7,6 +7,8 @@ LK.UI('plugins', 'datepicker', function(options) {
   // 控件类型
   var plugin = 'datepicker';
 
+  options.rows = 1;
+
   // 创建控件对象
   var $plugin = LK.UI.create({
     plugin : plugin,
@@ -48,8 +50,11 @@ LK.UI('plugins', 'datepicker', function(options) {
   name : '',
   validator : null,
   value : null,
+  inForm : false,
+  cols : 1,
+  // rows : 1,
   linkages : [],
-  onLinkaged : function($plugin, $linkage, linkageValues, linkageValue, linkageCurrentValue) {
+  onLinkaged : function($plugin, linkage) {
   },
   onChange : function($plugin, pluginValues, pluginValue, currentValue) {
   },

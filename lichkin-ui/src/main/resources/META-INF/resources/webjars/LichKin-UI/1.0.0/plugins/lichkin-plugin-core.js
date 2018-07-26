@@ -361,6 +361,13 @@ LK.UI('plugins', 'create', function(opts) {
   // 创建UI控件对象
   var $plugin = $('<div id="' + id + '" data-id="' + plugin + '_' + id + '" class="lichkin-plugin lichkin-' + plugin + '" data-plugin-type="' + plugin + '"></div>');
 
+  var width = options.width = (LK.colWidth * options.cols - 2) + (options.inForm ? (options.cols - 1) * (LK.fieldKeyWidth + LK.leftGap) : 0);
+  var height = options.height = (LK.rowHeight * options.rows - 2) + (options.inForm ? (options.rows - 1) * LK.topGap : 0);
+  $plugin.css({
+    width : width + 'px',
+    height : height + 'px'
+  });
+
   // 验证器转换
   var validator = options.validator = options.validator == null ? '' : (options.validator == true ? 'required' : options.validator);
 
@@ -377,6 +384,11 @@ LK.UI('plugins', 'create', function(opts) {
   $value.data({
     'validator' : validator,
     'plugin-type' : plugin
+  });
+  $value.css({
+    'width' : width - 12 + 'px',
+    'height' : height + 'px',
+    'line-height' : LK.rowHeight - 2 + 'px'
   });
 
   // 设置值
@@ -449,6 +461,12 @@ LK.UI('plugins', 'create', function(opts) {
     validator : null,
     // 值对象值
     value : null,
+    // 是否在表单中
+    inForm : false,
+    // 列数
+    cols : 1,
+    // 行数
+    rows : 1,
 
     // 联动控件名称（需在同一表单中）
     linkages : [],

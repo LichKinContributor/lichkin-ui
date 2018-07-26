@@ -1,10 +1,5 @@
 @charset "UTF-8";
 
-.lichkin-ueditor {
-  width: 886px;
-  height: 420px;
-}
-
 .lichkin-ueditor .edui-editor {
   border: none;
 }

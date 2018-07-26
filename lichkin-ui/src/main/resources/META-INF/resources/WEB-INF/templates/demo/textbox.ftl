@@ -23,17 +23,17 @@
 
 		LK.UI.textbox({$appendTo:$('#demo2'),validator:true});
 
-		LK.UI.textbox({$appendTo:$('#demo3'),line:2});
-		LK.UI.textbox({$appendTo:$('#demo3'),line:2,validator:true});
-		LK.UI.textbox({$appendTo:$('#demo3'),line:3});
-		LK.UI.textbox({$appendTo:$('#demo3'),line:3,validator:true});
-		LK.UI.textbox({$appendTo:$('#demo3'),line:4});
-		LK.UI.textbox({$appendTo:$('#demo3'),line:4,validator:true});
-		LK.UI.textbox({$appendTo:$('#demo3'),line:5});
-		LK.UI.textbox({$appendTo:$('#demo3'),line:5,validator:true});
-		LK.UI.textbox({$appendTo:$('#demo3'),line:6});
-		LK.UI.textbox({$appendTo:$('#demo3'),line:6,validator:true});
-		LK.UI.textbox({$appendTo:$('#demo3'),line:7});
-		LK.UI.textbox({$appendTo:$('#demo3'),line:7,validator:true});
+		LK.UI.textbox({$appendTo:$('#demo3'),rows:2});
+		LK.UI.textbox({$appendTo:$('#demo3'),rows:2,validator:true});
+		LK.UI.textbox({$appendTo:$('#demo3'),rows:3});
+		LK.UI.textbox({$appendTo:$('#demo3'),rows:3,validator:true});
+		LK.UI.textbox({$appendTo:$('#demo3'),rows:4});
+		LK.UI.textbox({$appendTo:$('#demo3'),rows:4,validator:true});
+		LK.UI.textbox({$appendTo:$('#demo3'),rows:5});
+		LK.UI.textbox({$appendTo:$('#demo3'),rows:5,validator:true});
+		LK.UI.textbox({$appendTo:$('#demo3'),rows:6});
+		LK.UI.textbox({$appendTo:$('#demo3'),rows:6,validator:true});
+		LK.UI.textbox({$appendTo:$('#demo3'),rows:7});
+		LK.UI.textbox({$appendTo:$('#demo3'),rows:7,validator:true});
 	</#if>
 </@html>
