@@ -1,20 +1,22 @@
+
+LK.i18n.busAppKey='客户端唯一标识';
 LK.UI.form({
   plugins : [
       {
+        plugin : 'textbox',
+        options : {
+          name : 'rows14',
+          rows : 14
+        }
+      }, {
+        plugin : 'ueditor',
+        options : {
+          name : 'content'
+        }
+      }, {
         plugin : 'datepicker',
         options : {
           name : 'startTime'
-        }
-      }, {
-        plugin : 'textbox',
-        options : {
-          name : 'name'
-        }
-      }, {
-        plugin : 'textbox',
-        options : {
-          name : 'name',
-          line : 2
         }
       }, {
         plugin : 'droplist',
@@ -84,9 +86,549 @@ LK.UI.form({
           }
         }
       }, {
-        plugin : 'ueditor',
+        plugin : 'textbox',
         options : {
-          name : 'content'
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'name2'
         }
       }
   ]
