@@ -18,7 +18,7 @@ LK.UI._dialog = {
   active : function($plugin, activeFocus) {
     $('.lichkin-dialog').removeClass('lichkin-dialog-focus');
     $plugin.addClass('lichkin-dialog-focus');
-    $plugin.css('z-index', ++this.maxZIndex);
+    $plugin.css('z-index', (this.maxZIndex += 2));
     if (activeFocus) {
       // 触发对话框被聚焦后事件
       $plugin.data('LKOPTIONS').onFocus($plugin);
