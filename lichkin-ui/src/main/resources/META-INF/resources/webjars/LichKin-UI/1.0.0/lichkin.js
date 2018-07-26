@@ -96,6 +96,18 @@ $.fn.extend({
 /** 全局定义顶层对象 */
 var LK = {
 
+  fontSize : 12,
+  // 表单内控件距离顶部间距
+  topGap : 3,
+  // 表单内控件距离左部间距
+  leftGap : 6,
+  // 表单内控件键宽
+  fieldKeyWidth : 113,// 七个汉字
+  // 列宽
+  colWidth : 176,// 最小值
+  // 行高
+  rowHeight : 30,
+
   // 标准分隔符
   SPLITOR : '#@#',
 
