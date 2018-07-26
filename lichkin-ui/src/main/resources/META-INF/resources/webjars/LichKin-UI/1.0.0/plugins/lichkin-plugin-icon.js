@@ -240,6 +240,7 @@ LK.UI('plugins', 'changeIcon', function(options) {
     'FEMALE' : 'female',
     'MALE' : 'male',
     'save' : 'save',
+    'ok' : 'check',
     'cancel' : 'times',
     'edit' : 'pencil-alt',
     'add' : 'plus',
