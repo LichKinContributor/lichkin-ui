@@ -414,11 +414,13 @@ LK.UI('plugins', 'create', function(opts) {
       }
       $form.data('linkages', linkagesData);
     }
-    // 处理lazy
-    for (var i = 0; i < linkagesData.length; i++) {
-      if ($plugin.LKis(linkagesData[i])) {
-        options.lazy = true;
-        break;
+    if (typeof linkagesData != 'undefined') {
+      // 处理lazy
+      for (var i = 0; i < linkagesData.length; i++) {
+        if ($plugin.LKis(linkagesData[i])) {
+          options.lazy = true;
+          break;
+        }
       }
     }
   }

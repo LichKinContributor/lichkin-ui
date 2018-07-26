@@ -53,6 +53,12 @@
 				<li><a href="javascript:;">datepicker</a></li>
 			</ul>
 		</div>
+		<div class="title">form</div>
+		<div class="content">
+			<ul>
+				<li><a href="javascript:;">form</a></li>
+			</ul>
+		</div>
 		<div class="title">dialog</div>
 		<div class="content">
 			<ul>

@@ -26,8 +26,8 @@
 		<#if section="link">
 			<link href="${ctx}/res/img/favicon.ico" type="image/x-icon" rel="shortcut icon">
 			<@lichkin@cssTag url="/webjars/font-awesome/web-fonts-with-css/css/fontawesome-all${compressSuffix}.css" />
-			<@lichkin@cssTag url="/webjars/ueditor/themes/default/css/ueditor${compressSuffix}.css" />
-			<@lichkin@cssTag url="/webjars/datepicker/datepicker${compressSuffix}.css" />
+			<@lichkin@cssTag url="/webjars/ueditor/themes/default/css/ueditor.css" />
+			<@lichkin@cssTag url="/webjars/datepicker/datepicker.css" />
 			<@lichkin@cssTag url="/webjars/LichKin-UI/themes/default/lichkin-${calculateType}${compressSuffix}.css" />
 			<#if webDebug==true>
 			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-icon${compressSuffix}.css" />
@@ -37,6 +37,7 @@
 			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-textbox${compressSuffix}.css" />
 			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-ueditor${compressSuffix}.css" />
 			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-datepicker${compressSuffix}.css" />
+			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-form${compressSuffix}.css" />
 			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-dialog${compressSuffix}.css" />
 			<#else>
 			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugins${compressSuffix}.css" />
@@ -69,9 +70,9 @@
 			<#-- 三方 -->
 			<@lichkin@jsTag url="/webjars/spark-md5/spark-md5${compressSuffix}.js" />
 			<@lichkin@jsTag url="/webjars/ueditor/ueditor.config.js" />
-			<@lichkin@jsTag url="/webjars/ueditor/ueditor.all${compressSuffix}.js" />
+			<@lichkin@jsTag url="/webjars/ueditor/ueditor.all.js" />
 			<@lichkin@jsTag url="/webjars/ueditor/lang/${locale}/${locale}.js" />
-			<@lichkin@jsTag url="/webjars/datepicker/datepicker${compressSuffix}.js" />
+			<@lichkin@jsTag url="/webjars/datepicker/datepicker.js" />
 			<@lichkin@jsTag url="/webjars/datepicker/i18n/datepicker.${locale}.js" />
 			<#if webDebug==true>
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-core${compressSuffix}.js" />
@@ -82,6 +83,7 @@
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-textbox${compressSuffix}.js" />
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-ueditor${compressSuffix}.js" />
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-datepicker${compressSuffix}.js" />
+			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-form${compressSuffix}.js" />
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-dialog${compressSuffix}.js" />
 			<#else>
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugins${compressSuffix}.js" />
