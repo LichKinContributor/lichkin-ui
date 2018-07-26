@@ -376,23 +376,23 @@ LK.UI('plugins', 'create', function(opts) {
 
   // 创建UI控件存值对象
   var $value = $((plugin == 'textbox' || plugin == 'datepicker') ? '<input type="text"' + (plugin == 'datepicker' ? ' readonly="true"' : '') + ' />' : (plugin == 'textarea' ? '<textarea></textarea>' : '<input type="hidden" />')).appendTo($plugin);
-  $value.attr('name', options.name);
-  if (plugin == 'textbox' || plugin == 'datepicker' || plugin == 'textarea') {
-    $value.LKAddPluginClass(plugin, 'text');
-  }
   $value.LKAddPluginClass(plugin, 'value');
+  $value.attr('name', options.name);
   $value.data({
     'validator' : validator,
     'plugin-type' : plugin
   });
-  $value.css({
-    'width' : width - 12 + 'px',
-    'height' : height + 'px',
-    'line-height' : LK.rowHeight - 2 + 'px'
-  });
+  if (plugin == 'textbox' || plugin == 'datepicker' || plugin == 'textarea') {
+    $value.LKAddPluginClass(plugin, 'text');
+    $value.css({
+      'width' : width - 12 + 'px',
+      'height' : height + 'px',
+      'line-height' : LK.rowHeight - 2 + 'px'
+    });
+  }
 
   // 设置值
-  if (options.value != null) {
+  if (plugin != 'ueditor' && options.value != null) {
     $value.val(options.value);
   }
 
