@@ -67,7 +67,7 @@ TABLE.lichkin-table .lichkin-table .lichkin-table-row .lichkin-table-cell:last-c
 .lichkin-plugin .lichkin-plugin-button .lichkin-icon i {color:var(--lichkin-plugin-font-color);}
 .lichkin-plugin .lichkin-plugin-popup {display:none;position:absolute;overflow:auto;left:-1px;z-index:99999;border:1px solid var(--lichkin-plugin-border-color);border-top:none;background-color:var(--lichkin-plugin-background-color);}
 .lichkin-plugin .lichkin-plugin-popup ul {list-style:none;padding:0px;margin:0px;}
-.lichkin-plugin .lichkin-plugin-popup ul li {cursor:pointer;border-bottom-width:1px;border-bottom-style:dotted;background-color:var(--lichkin-plugin-background-color);border-color:var(--lichkin-plugin-border-color);}
+.lichkin-plugin .lichkin-plugin-popup ul li {overflow:hidden;cursor:pointer;border-bottom-width:1px;border-bottom-style:dotted;background-color:var(--lichkin-plugin-background-color);border-color:var(--lichkin-plugin-border-color);}
 .lichkin-plugin .lichkin-plugin-popup ul li .lichkin-text {color:var(--lichkin-plugin-font-color);}
 
 .lichkin-plugin .lichkin-plugin-popup ul li.selected {background-color:var(--lichkin-plugin-background-color-selected);border-color:var(--lichkin-plugin-border-color-selected);}
