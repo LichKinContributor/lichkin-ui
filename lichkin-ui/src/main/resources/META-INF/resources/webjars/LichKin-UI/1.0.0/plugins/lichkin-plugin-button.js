@@ -24,7 +24,7 @@ LK.UI('plugins', 'button', function(options) {
 
   // 增加样式
   if (options.cls != '') {
-    $plugin.addClass(options.cls);
+    $plugin.addClass('lichkin-button-' + options.cls);
   }
 
   // 按钮容器
@@ -62,7 +62,7 @@ LK.UI('plugins', 'button', function(options) {
 
   // 点击事件
   $plugin.click(function() {
-    options.click(options, $plugin);
+    options.click($plugin);
   });
 
   // 提示信息
@@ -89,8 +89,11 @@ LK.UI('plugins', 'button', function(options) {
   _text : null,
   // 文字
   text : '',
-  // 点击事件
-  click : function(options, $button) {
+  /**
+   * 点击事件
+   * @param $plugin 当前按钮控件
+   */
+  click : function(plugin) {
   },
   // 按钮提示信息
   tip : '',
