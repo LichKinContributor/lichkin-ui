@@ -8,13 +8,13 @@
 	</#if>
 	<#if section="body-attributes">style="background-color:#CCCCCC;"</#if>
 	<#if section="javascript-contents-after-links">
-		LK.UI.openDialog({url:'/demo/icon'});
-		LK.UI.openDialog({url:'/demo/icon-change',title:'通过width/height设置大小',size:{width:300,height:100}});
-		LK.UI.openDialog({url:'/demo/icon-change',title:'通过cols/rows设置大小',size:{cols:1,rows:1}});
+		LK.UI.openDialog({mask:false,url:'/demo/dialog-embedded'});
+		LK.UI.openDialog({mask:false,url:'/demo/dialog-embedded',title:'通过width/height设置大小',size:{width:300,height:100}});
+		LK.UI.openDialog({mask:false,url:'/demo/dialog-embedded',title:'通过cols/rows设置大小',size:{cols:1,rows:1}});
 
-		LK.UI.openDialog({title:'使用内容直接渲染对话框',size:{cols:2,rows:2},content:'内容'});
-		LK.UI.openDialog({title:'内容随意填写，当然也可以使用HTML。',size:{cols:2,rows:2},content:'<div style="background-color:black;color:white;">HTML内容</div>'});
+		LK.UI.openDialog({mask:false,title:'使用内容直接渲染对话框',size:{cols:2,rows:2},content:'内容'});
+		LK.UI.openDialog({mask:false,title:'内容随意填写，当然也可以使用HTML。',size:{cols:2,rows:2},content:'<div style="background-color:black;color:white;">HTML内容</div>'});
 
-		LK.UI.openDialog({title:'带按钮的对话框',content:'内容',buttons:[{icon:'ok',text:'确定',cls:'success'},{icon:'save',text:'保存',cls:'warning'},{icon:'cancel',text:'取消',cls:'danger'}]});
+		LK.UI.openDialog({mask:false,title:'带按钮的对话框',content:'内容',buttons:[{icon:'ok',text:'确定',cls:'success'},{icon:'save',text:'保存',cls:'warning'},{icon:'cancel',text:'取消',cls:'danger'}]});
 	</#if>
 </@html>
