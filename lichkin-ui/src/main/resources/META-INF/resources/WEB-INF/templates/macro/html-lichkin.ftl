@@ -96,13 +96,7 @@
 <#else>
 	<div id="${mappingUri}" class="lichkin-body" <#nested "body-attributes"/>>
 		<#nested "body-content"/>
-		<script id="lichkin-javascript-contents-before-links" type="text/javascript">
-			<#nested "javascript-contents-before-links"/>
-		</script>
 		<#nested "javascript-links"/>
-		<script id="lichkin-javascript-contents-after-links" type="text/javascript">
-			<#nested "javascript-contents-after-links"/>
-		</script>
 	</div>
 </#if>
 
