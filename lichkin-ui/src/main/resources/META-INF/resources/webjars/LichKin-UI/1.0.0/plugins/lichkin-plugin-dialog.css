@@ -67,17 +67,15 @@
 }
 
 .lichkin-dialog .lichkin-dialog-buttonsBar {
-  border-left: 1px solid var(--lichkin-dialog-border-color);
-  border-right: 1px solid var(--lichkin-dialog-border-color);
-  border-bottom: 1px solid var(--lichkin-dialog-border-color);
-  padding: 5px;
   background-color: var(--lichkin-dialog-background-color);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-right: 1px solid var(--lichkin-dialog-border-color);
+  border-left: 1px solid var(--lichkin-dialog-border-color);
+  padding: 5px;
   text-align: right;
 }
 
 .lichkin-dialog .lichkin-dialog-buttonsBar .lichkin-button {
-  background-color: var(--lichkin-dialog-background-color);
-  border-color: var(--lichkin-dialog-border-color);
   margin-left: 5px;
 }
 
@@ -87,9 +85,14 @@
 
 .lichkin-dialog-focus,
 .lichkin-dialog-focus .lichkin-dialog-titleBar,
-.lichkin-dialog-focus .lichkin-dialog-contentBar,
-.lichkin-dialog-focus .lichkin-dialog-buttonsBar {
+.lichkin-dialog-focus .lichkin-dialog-contentBar {
   border-color: var(--lichkin-plugin-border-color);
+}
+
+.lichkin-dialog-focus .lichkin-dialog-buttonsBar {
+  border-right-color: var(--lichkin-plugin-border-color);
+  border-bottom-color: var(--lichkin-plugin-border-color);
+  border-left-color: var(--lichkin-plugin-border-color);
 }
 
 .lichkin-dialog-focus .lichkin-dialog-titleBar .lichkin-icon i,

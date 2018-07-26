@@ -174,9 +174,12 @@ LK.UI('plugins', 'openDialog', function(options) {
     for (var i = 0; i < options.buttons.length; i++) {
       var button = options.buttons[i];
       (function(button) {
-        $buttonsBar.append(LKUI.button(button.text, button.icon, function() {
-          button.click($plugin, options);
-        }));
+        var click = button.click;
+        $buttonsBar.append(LK.UI.button($.extend(button, {
+          click : function($button) {
+            click($button, $plugin);
+          }
+        })));
       })(button);
     }
   }
@@ -233,7 +236,10 @@ LK.UI('plugins', 'openDialog', function(options) {
     // 表格行数
     rows : 10
   },
-  // 对话框按钮数组
+  /**
+   * 对话框按钮数组
+   * @see LK.UI.button（click方法被重写，第一个参数保持按钮控件不变，增加第二个参数当前对话框控件。）
+   */
   buttons : [],
 
   // 事件

@@ -14,5 +14,7 @@
 
 		LK.UI.openDialog({title:'使用内容直接渲染对话框',size:{cols:2,rows:2},content:'内容'});
 		LK.UI.openDialog({title:'内容随意填写，当然也可以使用HTML。',size:{cols:2,rows:2},content:'<div style="background-color:black;color:white;">HTML内容</div>'});
+
+		LK.UI.openDialog({title:'带按钮的对话框',content:'内容',buttons:[{icon:'ok',text:'确定',cls:'success'},{icon:'save',text:'保存',cls:'warning'},{icon:'cancel',text:'取消',cls:'danger'}]});
 	</#if>
 </@html>
