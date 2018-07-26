@@ -34,6 +34,12 @@ LK.UI('plugins', 'ueditor', function(options) {
     initialFrameHeight : height - 7 - 25 - 24 * lines
   });
 
+  if (options.value != null) {
+    ue.ready(function() {
+      ue.setContent(options.value);
+    });
+  }
+
   ue.addListener('focus blur', function() {
     $plugin.LKValidate();
   });

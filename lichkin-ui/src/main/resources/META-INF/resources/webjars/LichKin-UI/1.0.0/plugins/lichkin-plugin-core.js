@@ -165,7 +165,17 @@ $.fn.extend({
     if (Array.isArray(values)) {
       currentValue = values.join(LK.SPLITOR);
     }
-    this.LKGetValueObj().val(currentValue);
+    if (this.LKGetPluginType() == 'ueditor') {
+      if (typeof values == 'undefined') {
+        currentValue = '';
+      }
+      var ue = this.data('ue');
+      ue.ready(function() {
+        ue.setContent(currentValue);
+      });
+    } else {
+      this.LKGetValueObj().val(currentValue);
+    }
     this.data('LKOPTIONS').onChange(this, this.LKGetValues(), this.LKGetValue(), currentValue);
   },
 
@@ -322,7 +332,11 @@ $.fn.extend({
     if (isString(values)) {
       values = values.split(LK.SPLITOR);
     }
-    this.LKGetImplementor().setValues(this, this.LKGetDataContainer(), values);
+    if (this.LKGetPluginType() == 'droplist') {
+      this.LKGetImplementor().setValues(this, this.LKGetDataContainer(), values);
+    } else {
+      this.LKSetValues(values);
+    }
   },
 
   /**

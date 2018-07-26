@@ -14,7 +14,7 @@ LK.UI._droplist = {
     var valueArr = [];
     var textArr = [];
 
-    if (values == null) {
+    if (values === null) {
       $container.find('li.selected').each(function() {
         var data = $(this).data();
         valueArr.push(data.value);
