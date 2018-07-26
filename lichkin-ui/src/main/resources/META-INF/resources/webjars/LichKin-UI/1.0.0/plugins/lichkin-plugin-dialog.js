@@ -123,7 +123,7 @@ LK.UI('plugins', 'openDialog', function(options) {
     });
   });
   // 标题栏图标
-  var $titleIcon = LKUI.icon(options.icon).appendTo($titleBar);
+  var $titleIcon = LKUI.icon(options.icon, 24).appendTo($titleBar);
   // 标题栏标题
   var $titleTitle = $('<div class="lichkin-title">' + options.title + '</div>').appendTo($titleBar);
   // 标题栏按钮

@@ -19,8 +19,8 @@
   position: relative;
   background-color:var(--lichkin-dialog-titleBar-background-color);
   padding: 3px 0px;
-  height: 20px;
-  line-height: 20px;
+  height: 29px;
+  line-height: 29px;
   cursor: move;
   border-left: 1px solid var(--lichkin-dialog-border-color);
   border-right: 1px solid var(--lichkin-dialog-border-color);
@@ -37,11 +37,11 @@
   position: absolute;
   left: 6px;
   color: var(--lichkin-dialog-font-color);
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .lichkin-dialog .lichkin-dialog-titleBar>.lichkin-icon+.lichkin-title {
-  left: 25px;
+  left: 30px;
 }
 
 .lichkin-dialog .lichkin-dialog-titleBar .lichkin-buttons {
