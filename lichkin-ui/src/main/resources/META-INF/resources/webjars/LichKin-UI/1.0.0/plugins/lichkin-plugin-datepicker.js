@@ -16,6 +16,7 @@ LK.UI('plugins', 'datepicker', function(options) {
   });
 
   var $value = $plugin.LKGetValueObj();
+  $value.attr('title', $.LKGetI18N('datepicker'));
 
   // 加载日期控件
   $value.datepicker({
@@ -36,8 +37,7 @@ LK.UI('plugins', 'datepicker', function(options) {
     _icon : {
       size : 24,
       icon : 'datepicker'
-    },
-    tip : LK.i18n.datepicker
+    }
   }).appendTo($plugin).LKAddPluginClass(plugin, 'button');
 
   // 返回控件对象
