@@ -38,6 +38,8 @@
   left: 6px;
   color: var(--lichkin-dialog-font-color);
   font-size: 16px;
+  height: 28px;
+  line-height: 28px;
 }
 
 .lichkin-dialog .lichkin-dialog-titleBar>.lichkin-icon+.lichkin-title {
