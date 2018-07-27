@@ -65,8 +65,7 @@
 		LK.UI.icon({size:32,icon:'lock',type:false}).appendTo('#demo2');
 		LK.UI.icon({size:32,icon:'unlock',type:false}).appendTo('#demo2');
 		LK.UI.icon({size:32,icon:'resetPwd',type:false}).appendTo('#demo2');
-		LK.UI.icon({size:32,icon:'set',type:false}).appendTo('#demo2');
-		LK.UI.icon({size:32,icon:'eye',type:false}).appendTo('#demo2');
+		LK.UI.icon({size:32,icon:'view',type:false}).appendTo('#demo2');
 		LK.UI.icon({size:32,icon:'cut',type:false}).appendTo('#demo2');
 		LK.UI.icon({size:32,icon:'search',type:false}).appendTo('#demo2');
 		LK.UI.icon({size:32,icon:'reset',type:false}).appendTo('#demo2');
@@ -121,8 +120,7 @@
 		LK.UI.icon({size:32,icon:'lock',type:true}).appendTo('#demo3');
 		LK.UI.icon({size:32,icon:'unlock',type:true}).appendTo('#demo3');
 		LK.UI.icon({size:32,icon:'resetPwd',type:true}).appendTo('#demo3');
-		LK.UI.icon({size:32,icon:'set',type:true}).appendTo('#demo3');
-		LK.UI.icon({size:32,icon:'eye',type:true}).appendTo('#demo3');
+		LK.UI.icon({size:32,icon:'view',type:true}).appendTo('#demo3');
 		LK.UI.icon({size:32,icon:'cut',type:true}).appendTo('#demo3');
 		LK.UI.icon({size:32,icon:'search',type:true}).appendTo('#demo3');
 		LK.UI.icon({size:32,icon:'reset',type:true}).appendTo('#demo3');
