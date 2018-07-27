@@ -129,15 +129,30 @@ $.fn.extend({
       for (var i = 0; i < validatores.length; i++) {
         if (!LK.UI.validator[validatores[i]](value)) {
           $plugin.LKAddPluginClass(plugin, 'invalid');// 验证未通过增加样式
+          if (plugin == 'droplist') {
+            $plugin.LKGetPopup().LKAddPluginClass(plugin, 'popup-invalid');
+          }
           return false;// 验证未通过返回失败
         }
       }
       $plugin.removeClass([
           'lichkin-plugin-invalid', 'lichkin-' + plugin + '-invalid'
       ]);// 验证通过清除样式
+      if (plugin == 'droplist') {
+        $plugin.LKGetPopup().removeClass([
+            'lichkin-plugin-popup-invalid', 'lichkin-' + plugin + '-popup-invalid'
+        ]);
+      }
     }
 
     return true;// 验证通过或无验证器返回成功
+  },
+
+  /**
+   * 获取弹层对象
+   */
+  LKGetPopup : function() {
+    return $('#' + this.attr('id') + '_popup');
   },
 
   /**
@@ -155,7 +170,12 @@ $.fn.extend({
    * 获取控件数据容器对象
    */
   LKGetDataContainer : function() {
-    return this.find('.lichkin-' + this.LKGetPluginType() + '-dataContainer');
+    var plugin = this.LKGetPluginType();
+    if (plugin == 'droplist') {
+      return this.LKGetPopup().find('.lichkin-' + plugin + '-dataContainer');
+    } else {
+      return this.find('.lichkin-' + plugin + '-dataContainer');
+    }
   },
 
   /**

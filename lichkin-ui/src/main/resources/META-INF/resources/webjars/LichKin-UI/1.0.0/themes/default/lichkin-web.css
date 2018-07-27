@@ -63,23 +63,23 @@ TABLE.lichkin-table .lichkin-table .lichkin-table-row .lichkin-table-cell:last-c
 .lichkin-plugin .lichkin-plugin-button {pointer-events:none;border:none;position:absolute;right:0px;top:0px;background-color:var(--lichkin-plugin-background-color);}
 .lichkin-plugin .lichkin-plugin-button .lichkin-icon {top:2px;}
 .lichkin-plugin .lichkin-plugin-button .lichkin-icon i {color:var(--lichkin-plugin-font-color);}
-.lichkin-plugin .lichkin-plugin-popup {display:none;position:absolute;overflow:auto;left:-1px;z-index:99999;border:1px solid var(--lichkin-plugin-border-color);border-top:none;background-color:var(--lichkin-plugin-background-color);}
-.lichkin-plugin .lichkin-plugin-popup ul {list-style:none;padding:0px;margin:0px;}
-.lichkin-plugin .lichkin-plugin-popup ul li {overflow:hidden;cursor:pointer;border-bottom-width:1px;border-bottom-style:dotted;background-color:var(--lichkin-plugin-background-color);border-color:var(--lichkin-plugin-border-color);}
+.lichkin-plugin-popup {display:none;position:absolute;overflow:auto;left:-1px;z-index:99999;border:1px solid var(--lichkin-plugin-border-color);border-top:none;background-color:var(--lichkin-plugin-background-color);}
+.lichkin-plugin-popup ul {list-style:none;padding:0px;margin:0px;}
+.lichkin-plugin-popup ul li {overflow:hidden;cursor:pointer;border-bottom-width:1px;border-bottom-style:dotted;background-color:var(--lichkin-plugin-background-color);border-color:var(--lichkin-plugin-border-color);}
 
-.lichkin-plugin .lichkin-plugin-popup ul li.selected {background-color:var(--lichkin-plugin-background-color-selected);border-color:var(--lichkin-plugin-border-color-selected);}
-.lichkin-plugin .lichkin-plugin-popup ul li.selected .lichkin-text {color:var(--lichkin-plugin-font-color-selected);}
+.lichkin-plugin-popup ul li.selected {background-color:var(--lichkin-plugin-background-color-selected);border-color:var(--lichkin-plugin-border-color-selected);}
+.lichkin-plugin-popup ul li.selected .lichkin-text {color:var(--lichkin-plugin-font-color-selected);}
 
-.lichkin-plugin .lichkin-plugin-popup ul li:hover {background-color:var(--lichkin-plugin-background-color-hover);border-color:var(--lichkin-plugin-border-color-hover);}
-.lichkin-plugin .lichkin-plugin-popup ul li:hover .lichkin-text {color:var(--lichkin-plugin-font-color-hover);}
+.lichkin-plugin-popup ul li:hover {background-color:var(--lichkin-plugin-background-color-hover);border-color:var(--lichkin-plugin-border-color-hover);}
+.lichkin-plugin-popup ul li:hover .lichkin-text {color:var(--lichkin-plugin-font-color-hover);}
 
-.lichkin-plugin .lichkin-plugin-popup ul li.selected:hover {background-color:var(--lichkin-plugin-background-color-selected-hover);border-color:var(--lichkin-plugin-border-color-selected-hover);}
-.lichkin-plugin .lichkin-plugin-popup ul li.selected:hover .lichkin-text {color:var(--lichkin-plugin-font-color-selected-hover);}
+.lichkin-plugin-popup ul li.selected:hover {background-color:var(--lichkin-plugin-background-color-selected-hover);border-color:var(--lichkin-plugin-border-color-selected-hover);}
+.lichkin-plugin-popup ul li.selected:hover .lichkin-text {color:var(--lichkin-plugin-font-color-selected-hover);}
 
 .lichkin-plugin-invalid {border:1px solid var(--lichkin-plugin-border-color-invalid);background-color:var(--lichkin-plugin-background-color-invalid);}
 .lichkin-plugin-invalid .lichkin-plugin-text {color:var(--lichkin-plugin-font-color-invalid);}
 .lichkin-plugin-invalid .lichkin-plugin-button {background-color:var(--lichkin-plugin-background-color-invalid);}
 .lichkin-plugin-invalid .lichkin-plugin-button .lichkin-icon i {color:var(--lichkin-plugin-font-color-invalid);}
-.lichkin-plugin-invalid .lichkin-plugin-popup {border-color:var(--lichkin-plugin-border-color-invalid);background-color:var(--lichkin-plugin-background-color-invalid);}
-.lichkin-plugin-invalid .lichkin-plugin-popup ul li {background-color:var(--lichkin-plugin-background-color-invalid);border-color:var(--lichkin-plugin-border-color-invalid);}
-.lichkin-plugin-invalid .lichkin-plugin-popup ul li .lichkin-text {color:var(--lichkin-plugin-font-color-invalid);}
+.lichkin-plugin-popup-invalid {border-color:var(--lichkin-plugin-border-color-invalid);background-color:var(--lichkin-plugin-background-color-invalid);}
+.lichkin-plugin-popup-invalid ul li {background-color:var(--lichkin-plugin-background-color-invalid);border-color:var(--lichkin-plugin-border-color-invalid);}
+.lichkin-plugin-popup-invalid ul li .lichkin-text {color:var(--lichkin-plugin-font-color-invalid);}

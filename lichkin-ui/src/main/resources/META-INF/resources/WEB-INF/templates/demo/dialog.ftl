@@ -39,7 +39,7 @@
 			LK.UI.openDialog({size:{width:300,height:100}});
 		}}).appendTo('#buttons');
 		LK.UI.button({text:'btn8',click:function(){
-			LK.UI.openDialog({size:{cols:1,rows:1},onAfterCreate:function($plugin, $contentBar){LK.UI.form({$appendTo:$contentBar,plugins:[{plugin:'droplist',options:{name:'tip',data:[{text:'男',value:'MALE'}]}}]});}});
+			LK.UI.openDialog({size:{cols:2,rows:1},onAfterCreate:function($plugin, $contentBar){LK.UI.form({$appendTo:$contentBar,plugins:[{plugin:'datepicker',options:{name:'tip'}},{plugin:'droplist',options:{name:'tip',data:[{text:'男',value:'MALE'}]}}]});}});
 		}}).appendTo('#buttons');
 		LK.UI.button({text:'btn9',click:function(){
 			LK.UI.openDialog({size:{cols:1,rows:1},buttons:[{icon:'ok',text:'ok',cls:'success'},{icon:'save',text:'save',cls:'warning'},{icon:'cancel',text:'cancel',cls:'danger'}]});

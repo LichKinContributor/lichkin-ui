@@ -84,10 +84,13 @@ LK.UI('plugins', 'droplist', function(options) {
     options : options
   });
 
+  var id = $plugin.attr('id');
+
   // 下拉内容
   var width = $plugin.data('LKOPTIONS').width;
   var height = $plugin.data('LKOPTIONS').height;
-  var $popup = $('<div></div>').appendTo($plugin).LKAddPluginClass(plugin, 'popup');
+  var $popup = $('<div id="' + id + '_popup"></div>').appendTo('body').LKAddPluginClass(plugin, 'popup');
+  $popup.data('plugin-id', id);
   $popup.css({
     'width' : width + 'px',
     'height' : LK.rowHeight * 6 - 1 + 'px',
@@ -107,9 +110,6 @@ LK.UI('plugins', 'droplist', function(options) {
     'height' : height + 'px',
     'line-height' : LK.rowHeight - 2 + 'px'
   });
-  $wrapper.click(function() {
-    $popup.toggle();
-  });
 
   // 下拉按钮
   var $button = LK.UI.button({
@@ -121,24 +121,6 @@ LK.UI('plugins', 'droplist', function(options) {
 
   // 数据容器
   var $container = $('<ul></ul>').appendTo($popup).LKAddPluginClass(plugin, 'dataContainer');
-  // 点击事件
-  $container.click(function(e) {
-    if (e.target != this) {
-      var $row = $target = $(e.target);
-      if (e.target.tagName != 'LI') {
-        $row = $target.parents('li').first();
-      }
-      if (options.multiSelect) {
-        $row.toggleClass('selected');
-        $plugin.LKInvokeSetValues(null);
-      } else {
-        $plugin.LKInvokeSetValues(($row.hasClass('selected') ? '' : $row.data('value')));
-        $container.parent().hide();
-      }
-      $plugin.LKlinkage($row.data('value'), false);
-      $plugin.LKValidate();
-    }
-  });
 
   // 加载数据
   LK.UI.load({
@@ -181,4 +163,41 @@ LK.UI('plugins', 'droplist', function(options) {
 
   // 支持多选
   multiSelect : false
+});
+
+$('body').mousedown(function(e) {
+  var $that = $(e.target);
+  if ($that.is('.lichkin-droplist-wrapper') || $that.is('.lichkin-droplist-wrapper .lichkin-droplist-text')) {
+    var $plugin = $that.parents('.lichkin-droplist:first');
+    var $popup = $plugin.LKGetPopup();
+    if ($popup.is(':hidden')) {
+      $('.lichkin-droplist-popup').hide();
+      var offset = $plugin.offset();
+      $popup.css({
+        'top' : offset.top + LK.rowHeight,
+        'left' : offset.left
+      });
+      $popup.show();
+    } else {
+      $popup.hide();
+    }
+  } else {
+    if ($that.is('.lichkin-droplist-popup') || $that.is('.lichkin-droplist-popup .lichkin-droplist-dataContainer')) {
+    } else if ($that.is('.lichkin-droplist-popup .lichkin-droplist-dataContainer li')) {
+      var $popup = $that.parents('.lichkin-droplist-popup:first');
+      var $plugin = $('#' + $popup.data('plugin-id'));
+      var options = $plugin.data('LKOPTIONS');
+      if (options.multiSelect) {
+        $that.toggleClass('selected');
+        $plugin.LKInvokeSetValues(null);
+      } else {
+        $plugin.LKInvokeSetValues(($that.hasClass('selected') ? '' : $that.data('value')));
+        $popup.hide();
+      }
+      $plugin.LKlinkage($that.data('value'), false);
+      $plugin.LKValidate();
+    } else {
+      $('.lichkin-droplist-popup').hide();
+    }
+  }
 });
