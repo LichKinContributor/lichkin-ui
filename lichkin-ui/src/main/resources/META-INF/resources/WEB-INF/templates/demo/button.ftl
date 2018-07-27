@@ -17,12 +17,12 @@
 		<div class="content" id="demo4"></div>
 	</#if>
 	<#if section="javascript-contents-after-links">
-		LK.UI.button({icon:'sysMgmt',text:'按钮',tip:'提示信息',click:function(){alert();}}).appendTo('#demo');
-		LK.UI.button({text:'按钮',tip:'提示信息',click:function(){alert();}}).appendTo('#demo2');
-		LK.UI.button({icon:'sysMgmt',tip:'提示信息',click:function(){alert();}}).appendTo('#demo3');
+		LK.UI.button({icon:'tip',text:'tip',click:function(){alert();}}).appendTo('#demo');
+		LK.UI.button({text:'tip',click:function(){alert();}}).appendTo('#demo2');
+		LK.UI.button({icon:'tip',click:function(){alert();}}).appendTo('#demo3');
 
-		LKUI.button('按钮','sysMgmt',function(){alert();}).appendTo('#demo4');
-		LKUI.button('按钮','',function(){alert();}).appendTo('#demo4');
-		LKUI.button('','sysMgmt',function(){alert();},'系统管理').appendTo('#demo4');
+		LKUI.button('tip','tip',function(){alert();}).appendTo('#demo4');
+		LKUI.button('tip',null,function(){alert();}).appendTo('#demo4');
+		LKUI.button('tip','tip',function(){alert();}).appendTo('#demo4');
 	</#if>
 </@html>

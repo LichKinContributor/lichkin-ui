@@ -23,7 +23,7 @@ LK.UI('plugins', 'button', function(options) {
   var $plugin = $('<a href="javascript:;" class="lichkin-button"></a>');
 
   // 增加样式
-  if (options.cls != '') {
+  if (options.cls != null) {
     $plugin.addClass('lichkin-button-' + options.cls);
   }
 
@@ -41,7 +41,7 @@ LK.UI('plugins', 'button', function(options) {
   }
 
   // 图标
-  if (options.icon != '') {
+  if (options.icon != null) {
     $span.append(LKUI.icon(options.icon));
   }
 
@@ -56,7 +56,7 @@ LK.UI('plugins', 'button', function(options) {
   }
 
   // 文字
-  if (options.text != '') {
+  if (options.text != null) {
     $span.append(LKUI.text(options.text));
   }
 
@@ -66,12 +66,12 @@ LK.UI('plugins', 'button', function(options) {
   });
 
   // 提示信息
-  if (options.tip != '') {
-    $plugin.attr('title', options.tip);
-  } else if (options.text != '') {
-    $plugin.attr('title', options.text);
-  } else if (options.icon != '') {
-    $plugin.attr('title', options.icon);
+  if (options.tip != null) {
+    $plugin.attr('title', $.LKGetI18N(options.tip));
+  } else if (options.text != null) {
+    $plugin.attr('title', $.LKGetI18N(options.text));
+  } else if (options.icon != null) {
+    $plugin.attr('title', $.LKGetI18N(options.icon));
   }
 
   // 返回控件对象
@@ -82,13 +82,13 @@ LK.UI('plugins', 'button', function(options) {
   // 图标控件约定的内容
   _icon : null,
   // 图标
-  icon : '',
+  icon : null,
   // 文字控件
   $text : null,
   // 文字控件约定的内容
   _text : null,
   // 文字
-  text : '',
+  text : null,
   /**
    * 点击事件
    * @param $plugin 当前按钮控件
@@ -96,7 +96,7 @@ LK.UI('plugins', 'button', function(options) {
   click : function(plugin) {
   },
   // 按钮提示信息
-  tip : '',
+  tip : null,
   // 样式
-  cls : ''
+  cls : null
 });
