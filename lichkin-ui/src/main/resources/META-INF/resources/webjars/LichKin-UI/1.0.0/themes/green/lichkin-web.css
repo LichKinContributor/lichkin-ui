@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+:root {
+  --lichkin-body-background-color: #ffffff;
+
+  --lichkin-plugin-border-color: #4cae4c;
+  --lichkin-plugin-background-color: #ffffff;
+  --lichkin-plugin-font-color: #4cae4c;
+  --lichkin-plugin-font-size: 12px;
+
+  --lichkin-plugin-border-color-selected: #ffffff;
+  --lichkin-plugin-background-color-selected: #4cae4c;
+  --lichkin-plugin-font-color-selected: #ffffff;
+
+  --lichkin-plugin-border-color-hover: #4cae4c;
+  --lichkin-plugin-background-color-hover: #2e6da4;
+  --lichkin-plugin-font-color-hover: #ffffff;
+
+  --lichkin-plugin-border-color-selected-hover: #4cae4c;
+  --lichkin-plugin-background-color-selected-hover: #eea236;
+  --lichkin-plugin-font-color-selected-hover: #ffffff;
+
+  --lichkin-plugin-border-color-invalid: #d43f3a;
+  --lichkin-plugin-background-color-invalid: #ffe6e6;
+  --lichkin-plugin-font-color-invalid: #d43f3a;
+}
+
+:root {
+  --lichkin-button-border-color: #47da91;
+  --lichkin-button-background-color: #5bdd86;
+  --lichkin-button-font-color: #ffffff;
+}
+
+:root {
+  --lichkin-dialog-border-color: #a0efb8;
+  --lichkin-dialog-background-color: #ffffff;
+  --lichkin-dialog-titleBar-background-color: #a0efb8;
+  --lichkin-dialog-font-color: #4cae4c;
+  --lichkin-dialog-buttons-color: #ffffff;
+  --lichkin-dialog-mask-background-color: rgba(88, 117, 105, 0.66);
+}
