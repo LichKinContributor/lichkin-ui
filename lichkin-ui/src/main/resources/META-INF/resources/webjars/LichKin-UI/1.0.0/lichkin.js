@@ -96,7 +96,10 @@ $.fn.extend({
 /** 全局定义顶层对象 */
 var LK = {
 
-  fontSize : 12,
+  // 控件文字大小
+  pluginFontSize : 12,
+  // 控件文字颜色
+  pluginFontColor : '#2e6da4',
   // 表单内控件距离顶部间距
   topGap : 3,
   // 表单内控件距离左部间距
