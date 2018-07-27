@@ -193,14 +193,14 @@ LK.UI('plugins', 'openDialog', function(options) {
     if (typeof options.size.cols == 'undefined') {
       options.size.cols = 2;
     }
-    options.size.width = options.size.cols * 254;
+    options.size.width = options.size.cols * (LK.colWidth + LK.fieldKeyWidth + 6) + 6;
   }
 
   if (typeof options.size.height == 'undefined') {
     if (typeof options.size.rows == 'undefined') {
       options.size.rows = 10;
     }
-    options.size.height = options.size.rows * 30;
+    options.size.height = options.size.rows * (LK.rowHeight + 3) + 3;
   }
 
   // 添加内容栏
@@ -242,7 +242,7 @@ LK.UI('plugins', 'openDialog', function(options) {
   // 定位&大小
   $plugin.css({
     'left' : ($doc.width() - options.size.width) / 2 + 'px',
-    'top' : ($doc.height() - options.size.height - 45) / 2 + 'px'
+    'top' : ($doc.height() - options.size.height - 36 - (options.buttons.length != 0 ? 41 : 0)) / 2 + 'px'
   });
 
   // 切换
@@ -260,6 +260,8 @@ LK.UI('plugins', 'openDialog', function(options) {
       $('<div class="lichkin-dialog-mask" style="z-index:' + maskZIndex + ';"></div>').appendTo('body').show();
     }
   }
+
+  options.onAfterCreate($plugin, $contentBar);
 
   // 返回控件对象
   return $plugin;
@@ -298,6 +300,13 @@ LK.UI('plugins', 'openDialog', function(options) {
   buttons : [],
 
   // 事件
+  /**
+   * 控件创建结束
+   * @param $plugin 当前对话框对象
+   * @param $contentBar 内容栏
+   */
+  onAfterCreate : function($plugin, $contentBar) {
+  },
   /**
    * 页面加载前
    * @param $plugin 当前对话框对象
