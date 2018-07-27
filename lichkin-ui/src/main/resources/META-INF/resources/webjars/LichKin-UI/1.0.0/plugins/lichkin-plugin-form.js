@@ -1,5 +1,95 @@
 ;
 /**
+ * 表单内部实现相关
+ */
+LK.UI._form = {
+
+  /**
+   * 创建子控件
+   * @param $plugin 控件对象
+   * @param options 创建表单时的参数
+   */
+  createSubPlugin : function($plugin, options) { // 添加具体控件
+    for (var i = 0; i < options.plugins.length; i++) {
+      var plugin = options.plugins[i];
+      var name = plugin.options.name;
+      if (!isString(name)) {
+        throw 'plugin name must be setted as a form plugin.';
+      }
+      if (plugin.plugin == 'hidden') {
+        var $hiddenInput = $('<input type="hidden" name="' + name + '" />').LKAddPluginClass('hidden', 'value').appendTo($plugin);
+        if (typeof plugin.options.value != 'undefined') {
+          $hiddenInput.val(plugin.options.value);
+        }
+        continue;
+      }
+      var $field = $('<div class="lichkin-form-field"></div>').appendTo($plugin);
+
+      var $fieldKey = $('<div class="lichkin-form-field-key"></div>').appendTo($field).append(LK.UI.text({
+        original : true,
+        text : $.LKGetI18N(name) + ' :'
+      })).css('width', LK.fieldKeyWidth - 10 + 'px');
+
+      var $fieldValue = $('<div class="lichkin-form-field-value"></div>').appendTo($field);
+      plugin.options.$appendTo = $fieldValue;
+      plugin.options.inForm = true;
+      if (typeof options.values[name] != 'undefined' && typeof plugin.options.value == 'undefined') {
+        plugin.options.value = options.values[name];
+      }
+      LK.UI[plugin.plugin](plugin.options);
+    }
+
+    // 清除浮动
+    $('<div style="clear:both;"></div>').appendTo($plugin);
+
+    // 触发事件
+    options.onAfterCreate($plugin);
+  }
+
+};
+
+/**
+ * 控件功能性方法，提供JQuery扩展。
+ */
+$.fn.extend({
+
+  /**
+   * 获取表单控件
+   */
+  LKGetFormPlugin : function() {
+    if (this[0].tagName != 'FORM' || !this.hasClass('lichkin-form') || this.data('plugin-type') != 'form') {
+      throw 'this method for lichkin from plugin only.';
+    }
+    return this;
+  },
+
+  /**
+   * 绑定表单数据
+   * @param data 数据集
+   */
+  LKFormBindData : function(data) {
+    var $frm = this.LKGetFormPlugin();
+
+    $frm.find('.lichkin-plugin-value').each(function() {
+      var $plugin = $(this).parent('.lichkin-plugin:first');
+      $plugin.LKInvokeSetValues();
+      $plugin.LKlinkage(null, false);
+    });
+
+    if (isJSON(data) && !$.isEmptyObject(data)) {
+      $.each(data, function(key, value) {
+        var $plugin = $frm.find('[name=' + key + '].lichkin-plugin-value').parent('.lichkin-plugin:first');
+        if ($plugin.length != 0) {
+          $plugin.LKInvokeSetValues(value);
+          $plugin.LKlinkage(value, true);
+        }
+      });
+    }
+  }
+
+});
+
+/**
  * 表单控件
  */
 LK.UI('plugins', 'form', function(options) {
@@ -19,42 +109,19 @@ LK.UI('plugins', 'form', function(options) {
     $plugin.appendTo('body');
   }
 
-  // 添加具体控件
-  for (var i = 0; i < options.plugins.length; i++) {
-    var plugin = options.plugins[i];
-    var name = plugin.options.name;
-    if (!isString(name)) {
-      throw 'plugin name must be setted as a form plugin.';
-    }
-    if (plugin.plugin == 'hidden') {
-      var $hiddenInput = $('<input type="hidden" name="' + name + '" />').appendTo($form);
-      if (typeof plugin.options.value != 'undefined') {
-        $hiddenInput.val(plugin.options.value);
+  if (isString(options.url) && options.url != '') {
+    LK.ajax({
+      url : options.url,
+      data : options.param,
+      success : function(responseDatas) {
+        if (responseDatas) {
+          LK.UI._form.createSubPlugin($plugin, options);
+        }
       }
-      continue;
-    }
-    var $field = $('<div class="lichkin-form-field"></div>').appendTo($plugin);
-
-    var textKey = name;
-    if (typeof plugin.textKey != 'undefined') {
-      textKey = plugin.textKey;
-    }
-    if (typeof LK.i18n[textKey] != 'undefined') {
-      textKey = LK.i18n[textKey];
-    }
-    var $fieldKey = $('<div class="lichkin-form-field-key"></div>').appendTo($field).append(LKUI.text(textKey + ' :')).css('width', LK.fieldKeyWidth - 10 + 'px');
-
-    var $fieldValue = $('<div class="lichkin-form-field-value"></div>').appendTo($field);
-    plugin.options.$appendTo = $fieldValue;
-    plugin.options.inForm = true;
-    LK.UI[plugin.plugin](plugin.options);
+    });
+  } else {
+    LK.UI._form.createSubPlugin($plugin, options);
   }
-
-  // 清除浮动
-  $('<div style="clear:both;"></div>').appendTo($plugin);
-
-  // 触发事件
-  options.onAfterCreate($plugin);
 
   // 返回控件对象
   return $plugin;
@@ -73,6 +140,12 @@ LK.UI('plugins', 'form', function(options) {
    * @param options 具体控件参数
    */
   plugins : [],
+  // 表单中对应控件值
+  values : {},
+  // 数据请求地址
+  url : '',
+  // 数据请求参数
+  param : {},
   /**
    * 表单创建结束事件
    * @param $plugin 控件对象
