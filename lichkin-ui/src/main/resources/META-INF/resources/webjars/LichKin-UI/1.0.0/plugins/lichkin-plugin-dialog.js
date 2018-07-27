@@ -176,9 +176,11 @@ LK.UI('plugins', 'openDialog', function(options) {
     });
   });
   // 标题栏图标
-  var $titleIcon = LKUI.icon(options.icon, 24).appendTo($titleBar);
+  if (options.icon != null) {
+    LKUI.icon(options.icon, 24).appendTo($titleBar);
+  }
   // 标题栏标题
-  var $titleTitle = $('<div class="lichkin-title">' + options.title + '</div>').appendTo($titleBar);
+  var $titleTitle = $('<div class="lichkin-title">' + $.LKGetI18N(options.title) + '</div>').appendTo($titleBar);
   // 标题栏按钮
   var $titleButtons = $('<div class="lichkin-buttons"></div>').appendTo($titleBar);
   // 标题栏关闭按钮
@@ -265,9 +267,9 @@ LK.UI('plugins', 'openDialog', function(options) {
   // 控件ID
   id : '',
   // 对话框标题
-  title : LK.i18n.dialogTitle,
+  title : null,
   // 图标
-  icon : 'page',
+  icon : null,
   // 对话框加载页面地址
   url : '',
   // 对话框加载页面参数

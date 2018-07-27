@@ -1,20 +1,36 @@
 <#include "/macro/html-lichkin.ftl"/>
 
 <@html "";section>
-	<#if section="style">
-		.title {font-size:32px;background-color:black;color:white;padding:5px 0px 5px 20px;}
-		.title span {font-size:24px;cursor:pointer;border:1px solid white;margin-left:5px;padding:3px;}
-		.content {height:150px;padding-left:10px;}
+	<#if section="body-content">
+		<div id="buttons"></div>
 	</#if>
-	<#if section="body-attributes">style="background-color:#CCCCCC;"</#if>
 	<#if section="javascript-contents-after-links">
-		LK.UI.openDialog({mask:false,url:'/demo/dialog-embedded'});
-		LK.UI.openDialog({mask:false,url:'/demo/dialog-embedded',title:'通过width/height设置大小',size:{width:300,height:100}});
-		LK.UI.openDialog({mask:false,url:'/demo/dialog-embedded',title:'通过cols/rows设置大小',size:{cols:1,rows:1}});
-
-		LK.UI.openDialog({mask:false,title:'使用内容直接渲染对话框',size:{cols:2,rows:2},content:'内容'});
-		LK.UI.openDialog({mask:false,title:'内容随意填写，当然也可以使用HTML。',size:{cols:2,rows:2},content:'<div style="background-color:black;color:white;">HTML内容</div>'});
-
-		LK.UI.openDialog({mask:false,title:'带按钮的对话框',content:'内容',buttons:[{icon:'ok',text:'确定',cls:'success'},{icon:'save',text:'保存',cls:'warning'},{icon:'cancel',text:'取消',cls:'danger'}]});
+		LK.UI.button({text:'设置标题',click:function(){
+			LK.UI.openDialog({title:'tip'});
+		}}).appendTo('#buttons');
+		LK.UI.button({text:'设置图标',click:function(){
+			LK.UI.openDialog({icon:'tip'});
+		}}).appendTo('#buttons');
+		LK.UI.button({text:'设置图标标题',click:function(){
+			LK.UI.openDialog({title:'tip',icon:'tip'});
+		}}).appendTo('#buttons');
+		LK.UI.button({text:'使用地址加载内嵌页面',click:function(){
+			LK.UI.openDialog({url:'/demo/dialog-embedded'});
+		}}).appendTo('#buttons');
+		LK.UI.button({text:'使用内容直接渲染对话框',click:function(){
+			LK.UI.openDialog({content:'内容'});
+		}}).appendTo('#buttons');
+		LK.UI.button({text:'使用HTML内容直接渲染对话框',click:function(){
+			LK.UI.openDialog({content:'<div style="background-color:black;color:white;">HTML内容</div>'});
+		}}).appendTo('#buttons');
+		LK.UI.button({text:'使用地址加载内嵌页面-通过width/height设置大小',click:function(){
+			LK.UI.openDialog({size:{width:300,height:100}});
+		}}).appendTo('#buttons');
+		LK.UI.button({text:'使用地址加载内嵌页面-通过cols/rows设置大小',click:function(){
+			LK.UI.openDialog({size:{cols:1,rows:1}});
+		}}).appendTo('#buttons');
+		LK.UI.button({text:'设置按钮',click:function(){
+			LK.UI.openDialog({buttons:[{icon:'ok',text:'确定',cls:'success'},{icon:'save',text:'保存',cls:'warning'},{icon:'cancel',text:'取消',cls:'danger'}]});
+		}}).appendTo('#buttons');
 	</#if>
 </@html>
