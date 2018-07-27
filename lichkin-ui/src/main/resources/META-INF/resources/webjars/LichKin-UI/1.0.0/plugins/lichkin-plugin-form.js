@@ -27,7 +27,11 @@ LK.UI._form = {
 
       var $fieldKey = $('<div class="lichkin-form-field-key"></div>').appendTo($field).append(LK.UI.text({
         original : true,
-        text : $.LKGetI18N(name) + ' :'
+        text : $.LKGetI18N(name) + ' :',
+        style : {
+          'height' : LK.rowHeight - 6 + 'px',
+          'line-height' : LK.rowHeight - 6 + 'px'
+        }
       })).css('width', LK.fieldKeyWidth - 10 + 'px');
 
       var $fieldValue = $('<div class="lichkin-form-field-value"></div>').appendTo($field);
