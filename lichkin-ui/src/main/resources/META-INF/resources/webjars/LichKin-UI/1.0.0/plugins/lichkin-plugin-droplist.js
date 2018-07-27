@@ -58,9 +58,13 @@ LK.UI._droplist = {
       var data = datas[i];
       var $li = $('<li></li>').appendTo($container);
       $li.data(data);
-      $li.append(LKUI.text(data.text).css({
-        'height' : LK.rowHeight - 7 + 'px',
-        'line-height' : LK.rowHeight - 7 + 'px'
+      $li.append(LK.UI.text({
+        original : true,
+        text : data.text,
+        style : {
+          'height' : LK.rowHeight - 7 + 'px',
+          'line-height' : LK.rowHeight - 7 + 'px'
+        }
       }));
     }
   }
@@ -98,7 +102,7 @@ LK.UI('plugins', 'droplist', function(options) {
   });
 
   // 包装层
-  var $wrapper = $('<div></div>').appendTo($plugin).LKAddPluginClass(plugin, 'wrapper');
+  var $wrapper = $('<div title=' + $.LKGetI18N('dropdown') + '></div>').appendTo($plugin).LKAddPluginClass(plugin, 'wrapper');
   var $text = LK.UI.text().appendTo($wrapper).LKAddPluginClass(plugin, 'text').css({
     'height' : height + 'px',
     'line-height' : LK.rowHeight - 2 + 'px'
@@ -112,8 +116,7 @@ LK.UI('plugins', 'droplist', function(options) {
     _icon : {
       size : 24,
       icon : 'dropdown'
-    },
-    tip : LK.i18n.dropdown
+    }
   }).appendTo($plugin).LKAddPluginClass(plugin, 'button');
 
   // 数据容器
