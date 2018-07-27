@@ -725,6 +725,19 @@ var LK = {
         }
       });
     }
+  },
+
+  /**
+   * 切换全屏显示状态
+   */
+  toggleFullScreen : function() {
+    var isFullscreen = document.fullScreen || document.mozFullScreen || document.webkitIsFullScreen;
+    if (!isFullscreen) {
+      var el = document.documentElement;
+      (el.requestFullscreen && el.requestFullscreen()) || (el.mozRequestFullScreen && el.mozRequestFullScreen()) || (el.webkitRequestFullscreen && el.webkitRequestFullscreen()) || (el.msRequestFullscreen && el.msRequestFullscreen());
+    } else {
+      document.exitFullscreen ? document.exitFullscreen() : document.mozCancelFullScreen ? document.mozCancelFullScreen() : document.webkitExitFullscreen ? document.webkitExitFullscreen() : '';
+    }
   }
 
 };
