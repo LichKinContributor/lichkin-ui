@@ -26,7 +26,6 @@
   --lichkin-plugin-font-color-invalid: #d43f3a;
 }
 
-*{font-size:var(--lichkin-font-size);}
 #lichkin-html,.lichkin-body {background-color:var(--lichkin-body-background-color);}
 
 /** DIV */
