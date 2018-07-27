@@ -41,13 +41,13 @@
 }
 
 .lichkin-button .lichkin-button-container .lichkin-text {
-  height: 16px;
-  line-height: 16px;
-  padding: 6px;
+  height: 28px;
+  line-height: 28px;
+  padding: 0px 6px;
 }
 
 .lichkin-button .lichkin-button-container .lichkin-icon-16+.lichkin-text {
-  margin-top: -22px;
+  margin-top: -21px;
   padding-left: 0px;
 }
 
