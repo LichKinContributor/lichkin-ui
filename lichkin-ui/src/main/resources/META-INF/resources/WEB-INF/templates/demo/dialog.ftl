@@ -5,34 +5,46 @@
 		<div id="buttons"></div>
 	</#if>
 	<#if section="javascript-contents-after-links">
-		LK.UI.button({text:'设置标题',click:function(){
+		$.extend(LK.i18n,{
+			btn1:'设置标题',
+			btn2:'设置图标',
+			btn3:'设置图标标题',
+			btn4:'使用地址加载内嵌页面',
+			btn5:'使用内容直接渲染对话框',
+			btn6:'使用HTML内容直接渲染对话框',
+			btn7:'使用地址加载内嵌页面-通过width/height设置大小',
+			btn8:'使用地址加载内嵌页面-通过cols/rows设置大小',
+			btn9:'设置按钮',
+			btn10:'不带遮罩',
+		});
+		LK.UI.button({text:'btn1',click:function(){
 			LK.UI.openDialog({title:'tip'});
 		}}).appendTo('#buttons');
-		LK.UI.button({text:'设置图标',click:function(){
+		LK.UI.button({text:'btn2',click:function(){
 			LK.UI.openDialog({icon:'tip'});
 		}}).appendTo('#buttons');
-		LK.UI.button({text:'设置图标标题',click:function(){
+		LK.UI.button({text:'btn3',click:function(){
 			LK.UI.openDialog({title:'tip',icon:'tip'});
 		}}).appendTo('#buttons');
-		LK.UI.button({text:'使用地址加载内嵌页面',click:function(){
+		LK.UI.button({text:'btn4',click:function(){
 			LK.UI.openDialog({url:'/demo/dialog-embedded'});
 		}}).appendTo('#buttons');
-		LK.UI.button({text:'使用内容直接渲染对话框',click:function(){
+		LK.UI.button({text:'btn5',click:function(){
 			LK.UI.openDialog({content:'内容'});
 		}}).appendTo('#buttons');
-		LK.UI.button({text:'使用HTML内容直接渲染对话框',click:function(){
+		LK.UI.button({text:'btn6',click:function(){
 			LK.UI.openDialog({content:'<div style="background-color:black;color:white;">HTML内容</div>'});
 		}}).appendTo('#buttons');
-		LK.UI.button({text:'使用地址加载内嵌页面-通过width/height设置大小',click:function(){
+		LK.UI.button({text:'btn7',click:function(){
 			LK.UI.openDialog({size:{width:300,height:100}});
 		}}).appendTo('#buttons');
-		LK.UI.button({text:'使用地址加载内嵌页面-通过cols/rows设置大小',click:function(){
+		LK.UI.button({text:'btn8',click:function(){
 			LK.UI.openDialog({size:{cols:1,rows:1}});
 		}}).appendTo('#buttons');
-		LK.UI.button({text:'设置按钮',click:function(){
-			LK.UI.openDialog({buttons:[{icon:'ok',text:'确定',cls:'success'},{icon:'save',text:'保存',cls:'warning'},{icon:'cancel',text:'取消',cls:'danger'}]});
+		LK.UI.button({text:'btn9',click:function(){
+			LK.UI.openDialog({size:{cols:1,rows:1},buttons:[{icon:'ok',text:'ok',cls:'success'},{icon:'save',text:'save',cls:'warning'},{icon:'cancel',text:'cancel',cls:'danger'}]});
 		}}).appendTo('#buttons');
-		LK.UI.button({text:'不带遮罩',click:function(){
+		LK.UI.button({text:'btn10',click:function(){
 			LK.UI.openDialog({mask:false});
 		}}).appendTo('#buttons');
 	</#if>
