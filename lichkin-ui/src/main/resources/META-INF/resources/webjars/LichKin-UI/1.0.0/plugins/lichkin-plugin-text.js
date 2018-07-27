@@ -14,7 +14,7 @@ LKUI.text = function(text) {
  */
 LK.UI('plugins', 'text', function(options) {
   // 创建控件对象
-  var $plugin = $('<span class="lichkin-text">' + options.text + '</span>');
+  var $plugin = $('<span class="lichkin-text">' + $.LKGetI18N(options.text) + '</span>');
 
   // 设置样式
   $plugin.css(options.style);

@@ -15,10 +15,10 @@
 		<div class="content" id="demo3"></div>
 	</#if>
 	<#if section="javascript-contents-after-links">
-		LK.UI.text({text:'文字'}).appendTo('#demo');
+		LK.UI.text({text:'tip'}).appendTo('#demo');
 
-		LKUI.text('文字').appendTo('#demo2');
+		LKUI.text('tip').appendTo('#demo2');
 
-		LK.UI.text({text:'文字',style:{'font-size':'32px','color':'red'}}).appendTo('#demo3');
+		LK.UI.text({text:'tip',style:{'font-size':'32px','color':'red'}}).appendTo('#demo3');
 	</#if>
 </@html>
