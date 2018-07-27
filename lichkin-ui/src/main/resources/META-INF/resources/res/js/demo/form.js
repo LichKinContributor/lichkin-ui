@@ -38,12 +38,22 @@ LK.UI.form({
       }, {
         plugin : 'droplist',
         options : {
+          name : 'tip',
+          data : [
+            {
+              text : '男',
+              value : 'MALE'
+            }
+          ]
+        }
+      }, {
+        plugin : 'droplist',
+        options : {
           name : 'busAppKey',
           url : '/L/SysDictionary/Droplist',
           param : {
             categoryCode : 'appKey'
           },
-          $appendTo : $('#demo'),
           linkages : [
               'busClientType', 'versions'
           ]
@@ -53,7 +63,6 @@ LK.UI.form({
         options : {
           name : 'busClientType',
           url : '/L/SysAppVersion/ClientType/Droplist',
-          $appendTo : $('#demo'),
           linkages : [
             'versions'
           ],
@@ -78,7 +87,6 @@ LK.UI.form({
         options : {
           name : 'versions',
           url : '/L/SysAppVersion/Droplist',
-          $appendTo : $('#demo'),
           onLinkaged : function($plugin, linkage) {
             switch (linkage.linkageName) {
               case 'busAppKey':
