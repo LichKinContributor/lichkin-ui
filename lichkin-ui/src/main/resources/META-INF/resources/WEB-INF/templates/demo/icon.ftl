@@ -52,7 +52,10 @@
 		LK.UI.icon({size:32,icon:'ALIEN',type:false}).appendTo('#demo2');
 		LK.UI.icon({size:32,icon:'FEMALE',type:false}).appendTo('#demo2');
 		LK.UI.icon({size:32,icon:'MALE',type:false}).appendTo('#demo2');
+		LK.UI.icon({size:32,icon:'tip',type:false}).appendTo('#demo2');
+		LK.UI.icon({size:32,icon:'warning',type:false}).appendTo('#demo2');
 		LK.UI.icon({size:32,icon:'save',type:false}).appendTo('#demo2');
+		LK.UI.icon({size:32,icon:'ok',type:false}).appendTo('#demo2');
 		LK.UI.icon({size:32,icon:'cancel',type:false}).appendTo('#demo2');
 		LK.UI.icon({size:32,icon:'edit',type:false}).appendTo('#demo2');
 		LK.UI.icon({size:32,icon:'add',type:false}).appendTo('#demo2');
@@ -69,6 +72,7 @@
 		LK.UI.icon({size:32,icon:'reset',type:false}).appendTo('#demo2');
 		LK.UI.icon({size:32,icon:'close',type:false}).appendTo('#demo2');
 		LK.UI.icon({size:32,icon:'dropdown',type:false}).appendTo('#demo2');
+		LK.UI.icon({size:32,icon:'datepicker',type:false}).appendTo('#demo2');
 		LK.UI.icon({size:32,icon:'sysMgmt',type:false}).appendTo('#demo2');
 		LK.UI.icon({size:32,icon:'roleMgmt',type:false}).appendTo('#demo2');
 		LK.UI.icon({size:32,icon:'userMgmt',type:false}).appendTo('#demo2');
@@ -104,7 +108,10 @@
 		LK.UI.icon({size:32,icon:'ALIEN',type:true}).appendTo('#demo3');
 		LK.UI.icon({size:32,icon:'FEMALE',type:true}).appendTo('#demo3');
 		LK.UI.icon({size:32,icon:'MALE',type:true}).appendTo('#demo3');
+		LK.UI.icon({size:32,icon:'tip',type:true}).appendTo('#demo3');
+		LK.UI.icon({size:32,icon:'warning',type:true}).appendTo('#demo3');
 		LK.UI.icon({size:32,icon:'save',type:true}).appendTo('#demo3');
+		LK.UI.icon({size:32,icon:'ok',type:true}).appendTo('#demo3');
 		LK.UI.icon({size:32,icon:'cancel',type:true}).appendTo('#demo3');
 		LK.UI.icon({size:32,icon:'edit',type:true}).appendTo('#demo3');
 		LK.UI.icon({size:32,icon:'add',type:true}).appendTo('#demo3');
@@ -121,6 +128,7 @@
 		LK.UI.icon({size:32,icon:'reset',type:true}).appendTo('#demo3');
 		LK.UI.icon({size:32,icon:'close',type:true}).appendTo('#demo3');
 		LK.UI.icon({size:32,icon:'dropdown',type:true}).appendTo('#demo3');
+		LK.UI.icon({size:32,icon:'datepicker',type:true}).appendTo('#demo3');
 		LK.UI.icon({size:32,icon:'sysMgmt',type:true}).appendTo('#demo3');
 		LK.UI.icon({size:32,icon:'roleMgmt',type:true}).appendTo('#demo3');
 		LK.UI.icon({size:32,icon:'userMgmt',type:true}).appendTo('#demo3');

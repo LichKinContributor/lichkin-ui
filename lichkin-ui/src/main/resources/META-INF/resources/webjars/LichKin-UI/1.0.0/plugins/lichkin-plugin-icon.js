@@ -146,7 +146,8 @@ LK.UI('plugins', 'icon', function(options) {
   var $plugin = $('<span class="lichkin-icon lichkin-icon-' + options.size + '"></span>');
 
   // 不传图标时即只创建空白控件
-  if (options.icon != '') {
+  if (options.icon != null) {
+    $plugin.attr('title', $.LKGetI18N(options.icon));
     // 设置具体图标
     $plugin.addClass('lichkin-icon-' + options.icon);
     // 设置文字图标
@@ -164,7 +165,7 @@ LK.UI('plugins', 'icon', function(options) {
   // 图标大小
   size : 16,
   // 图标
-  icon : '',
+  icon : null,
   // 图标类型
   type : null
 });
@@ -241,6 +242,8 @@ LK.UI('plugins', 'changeIcon', function(options) {
     'ALIEN' : 'bug',
     'FEMALE' : 'female',
     'MALE' : 'male',
+    'tip' : 'exclamation-circle',
+    'warning' : 'exclamation-triangle',
     'save' : 'save',
     'ok' : 'check',
     'cancel' : 'times',
