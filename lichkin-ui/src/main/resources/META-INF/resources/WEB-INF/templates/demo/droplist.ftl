@@ -15,6 +15,7 @@
 		<div class="title">
 			Reload
 			<span onclick="$droplist.LKLoad({url:'/L/SysDictionary/Droplist', param:{categoryCode:'GENDER'}});">reload</span>
+			<span onclick="$('#gender').LKLoad({url:'/L/SysDictionary/Droplist', param:{categoryCode:'GENDER'}});">reload</span>
 		</div>
 		<div class="content" id="demo3"></div>
 	</#if>
@@ -28,5 +29,6 @@
 
 		LK.UI.droplist({url:'/L/SysDictionary/Droplist', param:{categoryCode:'GENDER'}, $appendTo:$('#demo3'), value:'MALE#@#FEMALE', multiSelect:true}).LKLoad();
 		var $droplist = LK.UI.droplist({lazy:true, $appendTo:$('#demo3')});
+		LK.UI.droplist({lazy:true, $appendTo:$('#demo3'), id:'gender'});
 	</#if>
 </@html>
