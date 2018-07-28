@@ -77,29 +77,35 @@
 		            'versions' : '1.0.0',
 		            'startTime' : '2018-07-26',
 		            'content' : 'fffffffffffffffff',
-		            'textbox' : 'fffff'
+		            'textbox' : 'fffff',
+		            'droplist' : 'MALE',
+		            'textarea' : 'ffff'
 		          },
 		          plugins : [
 		              {
 		                plugin : 'ueditor',
 		                options : {
-		                  name : 'content'
+		                  name : 'content',
+		                  validator : true
 		                }
 		              }, {
 		                plugin : 'textbox',
 		                options : {
 		                  name : 'textarea',
-		                  rows : 8
+		                  rows : 8,
+		                  validator : true
 		                }
 		              }, {
 		                plugin : 'datepicker',
 		                options : {
-		                  name : 'startTime'
+		                  name : 'startTime',
+		                  validator : true
 		                }
 		              }, {
 		                plugin : 'droplist',
 		                options : {
 		                  name : 'droplist',
+		                  validator : true,
 		                  data : [
 		                    {
 		                      text : '男',
@@ -111,6 +117,7 @@
 		                plugin : 'droplist',
 		                options : {
 		                  name : 'busAppKey',
+		                  validator : true,
 		                  url : '/L/SysDictionary/Droplist',
 		                  param : {
 		                    categoryCode : 'appKey'
@@ -123,6 +130,7 @@
 		                plugin : 'droplist',
 		                options : {
 		                  name : 'busClientType',
+		                  validator : true,
 		                  url : '/L/SysAppVersion/ClientType/Droplist',
 		                  linkages : [
 		                    'versions'
@@ -147,6 +155,7 @@
 		                plugin : 'droplist',
 		                options : {
 		                  name : 'versions',
+		                  validator : true,
 		                  url : '/L/SysAppVersion/Droplist',
 		                  onLinkaged : function($plugin, linkage) {
 		                    switch (linkage.linkageName) {
@@ -171,7 +180,8 @@
 		              }, {
 		                plugin : 'textbox',
 		                options : {
-		                  name : 'textbox'
+		                  name : 'textbox',
+		                  validator : true
 		                }
 		              }
 		          ]

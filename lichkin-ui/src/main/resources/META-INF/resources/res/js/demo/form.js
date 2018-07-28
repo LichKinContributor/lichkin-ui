@@ -5,7 +5,8 @@ $.extend(LK.i18n, {
   'versions' : '客户端版本号',
   'startTime' : '开始时间',
   'content' : '内容',
-  'textbox' : '文本框'
+  'textbox' : '文本框',
+  'droplist' : '下拉框'
 });
 
 LK.UI.form({
@@ -16,29 +17,34 @@ LK.UI.form({
     'versions' : '1.0.0',
     'startTime' : '2018-07-26',
     'content' : 'fffffffffffffffff',
-    'textbox' : 'fffff'
+    'textbox' : 'fffff',
+    'droplist' : 'MALE'
   },
   plugins : [
       {
         plugin : 'textbox',
         options : {
           name : 'rows14',
+          validator : true,
           rows : 14
         }
       }, {
         plugin : 'ueditor',
         options : {
-          name : 'content'
+          name : 'content',
+          validator : true
         }
       }, {
         plugin : 'datepicker',
         options : {
-          name : 'startTime'
+          name : 'startTime',
+          validator : true
         }
       }, {
         plugin : 'droplist',
         options : {
-          name : 'tip',
+          name : 'droplist',
+          validator : true,
           data : [
             {
               text : '男',
@@ -50,6 +56,7 @@ LK.UI.form({
         plugin : 'droplist',
         options : {
           name : 'busAppKey',
+          validator : true,
           url : '/L/SysDictionary/Droplist',
           param : {
             categoryCode : 'appKey'
@@ -62,6 +69,7 @@ LK.UI.form({
         plugin : 'droplist',
         options : {
           name : 'busClientType',
+          validator : true,
           url : '/L/SysAppVersion/ClientType/Droplist',
           linkages : [
             'versions'
@@ -86,6 +94,7 @@ LK.UI.form({
         plugin : 'droplist',
         options : {
           name : 'versions',
+          validator : true,
           url : '/L/SysAppVersion/Droplist',
           onLinkaged : function($plugin, linkage) {
             switch (linkage.linkageName) {
@@ -110,7 +119,8 @@ LK.UI.form({
       }, {
         plugin : 'textbox',
         options : {
-          name : 'textbox'
+          name : 'textbox',
+          validator : true
         }
       }
   ]
