@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+.lichkin-numberspinner .lichkin-numberspinner-text:focus {
+  outline: none;
+}
+
+.lichkin-numberspinner .lichkin-numberspinner-button .lichkin-numberspinner-button-container .lichkin-icon {
+  margin: 0px;
+  position: relative;
+  display: block;
+  top: 0px;
+}
+
+.lichkin-numberspinner .lichkin-numberspinner-button .lichkin-numberspinner-button-container .lichkin-icon:hover {
+  opacity: 0.6;
+}

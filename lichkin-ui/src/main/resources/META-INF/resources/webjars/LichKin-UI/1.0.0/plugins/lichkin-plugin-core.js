@@ -450,14 +450,14 @@ LK.UI('plugins', 'create', function(opts) {
   $plugin.data('initValue', options.value);
 
   // 创建UI控件存值对象
-  var $value = $((plugin == 'textbox' || plugin == 'datepicker') ? '<input type="text"' + (plugin == 'datepicker' ? ' readonly="true"' : '') + ' />' : (plugin == 'textarea' ? '<textarea></textarea>' : '<input type="hidden" />')).appendTo($plugin);
+  var $value = $((plugin == 'textbox' || plugin == 'datepicker' || plugin == 'numberspinner') ? '<input type="text"' + (plugin == 'datepicker' ? ' readonly="true"' : '') + ' />' : (plugin == 'textarea' ? '<textarea></textarea>' : '<input type="hidden" />')).appendTo($plugin);
   $value.LKAddPluginClass(plugin, 'value');
   $value.attr('name', options.name);
   $value.data({
     'validator' : validator,
     'plugin-type' : plugin
   });
-  if (plugin == 'textbox' || plugin == 'datepicker' || plugin == 'textarea') {
+  if (plugin == 'textbox' || plugin == 'datepicker' || plugin == 'textarea' || plugin == 'numberspinner') {
     $value.LKAddPluginClass(plugin, 'text');
     $value.css({
       'width' : width - 12 + 'px',
