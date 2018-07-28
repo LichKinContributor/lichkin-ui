@@ -23,19 +23,7 @@ LK.UI._form = {
         }
         continue;
       }
-      var $field = $('<div class="lichkin-form-field"></div>').appendTo($plugin);
-
-      var $fieldKey = $('<div class="lichkin-form-field-key"></div>').appendTo($field).append(LK.UI.text({
-        original : true,
-        text : $.LKGetI18N(name) + ' :',
-        style : {
-          'height' : LK.rowHeight - 6 + 'px',
-          'line-height' : LK.rowHeight - 6 + 'px'
-        }
-      })).css('width', LK.fieldKeyWidth - 10 + 'px');
-
-      var $fieldValue = $('<div class="lichkin-form-field-value"></div>').appendTo($field);
-      plugin.options.$appendTo = $fieldValue;
+      plugin.options.$appendTo = $plugin;
       plugin.options.inForm = true;
       if (typeof options.values[name] != 'undefined' && typeof plugin.options.value == 'undefined') {
         plugin.options.value = options.values[name];

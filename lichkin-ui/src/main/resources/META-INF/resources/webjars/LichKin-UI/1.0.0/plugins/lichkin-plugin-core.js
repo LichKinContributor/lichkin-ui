@@ -471,11 +471,27 @@ LK.UI('plugins', 'create', function(opts) {
     $value.val(options.value);
   }
 
-  if (options.$appendTo != null) {// 填充对象
-    $plugin.appendTo(options.$appendTo);
-  } else if (options.$renderTo != null) { // 渲染对象
-    $plugin.insertAfter(options.$renderTo);
-    options.$renderTo.remove();
+  if (options.inForm) {
+    var $field = $('<div class="lichkin-form-field"></div>').appendTo(options.$appendTo);
+
+    var $fieldKey = $('<div class="lichkin-form-field-key"></div>').appendTo($field).append(LK.UI.text({
+      original : true,
+      text : $.LKGetI18N(options.name) + ' :',
+      style : {
+        'height' : LK.rowHeight - 6 + 'px',
+        'line-height' : LK.rowHeight - 6 + 'px'
+      }
+    })).css('width', LK.fieldKeyWidth - 10 + 'px');
+
+    var $fieldValue = $('<div class="lichkin-form-field-value"></div>').appendTo($field);
+    $plugin.appendTo($fieldValue);
+  } else {
+    if (options.$appendTo != null) {// 填充对象
+      $plugin.appendTo(options.$appendTo);
+    } else if (options.$renderTo != null) { // 渲染对象
+      $plugin.insertAfter(options.$renderTo);
+      options.$renderTo.remove();
+    }
   }
 
   // 联动控件只能是lazy处理
