@@ -63,7 +63,9 @@ LK.UI('plugins', 'ueditor', function(options) {
   // 缓存参数
   $plugin.data('ue', ue);
 
-  $plugin.LKValidate();
+  if (options.value == null) {
+    $plugin.LKValidate();
+  }
 
   // 返回控件对象
   return $plugin;
