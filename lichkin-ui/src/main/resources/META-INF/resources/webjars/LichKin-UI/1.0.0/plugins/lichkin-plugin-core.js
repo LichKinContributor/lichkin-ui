@@ -365,6 +365,7 @@ $.fn.extend({
       for (var i = 0; i < linkagesLength; i++) {
         var $plugin = $linkage.LKGetSiblingPlugin(linkages[i]);
         $plugin.data('LKOPTIONS').onLinkaged($plugin, linkage);
+        $plugin.LKValidate();
       }
     }
   },
