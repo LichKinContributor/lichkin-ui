@@ -185,7 +185,10 @@ $('body').mousedown(function(e) {
     }
   } else {
     if ($that.is('.lichkin-droplist-popup') || $that.is('.lichkin-droplist-popup .lichkin-droplist-dataContainer')) {
-    } else if ($that.is('.lichkin-droplist-popup .lichkin-droplist-dataContainer li')) {
+    } else if ($that.is('.lichkin-droplist-popup .lichkin-droplist-dataContainer li') || $that.is('.lichkin-droplist-popup .lichkin-droplist-dataContainer li .lichkin-text')) {
+      if (!$that.is('li')) {
+        $that = $that.parent('li');
+      }
       var $popup = $that.parents('.lichkin-droplist-popup:first');
       var $plugin = $('#' + $popup.data('plugin-id'));
       var options = $plugin.data('LKOPTIONS');
