@@ -6,7 +6,8 @@ $.extend(LK.i18n, {
   'startTime' : '开始时间',
   'content' : '内容',
   'textbox' : '文本框',
-  'droplist' : '下拉框'
+  'droplist' : '下拉框',
+  'numberspinner' : '数字微调器'
 });
 
 LK.UI.form({
@@ -18,7 +19,8 @@ LK.UI.form({
     'startTime' : '2018-07-26',
     'content' : 'fffffffffffffffff',
     'textbox' : 'fffff',
-    'droplist' : 'MALE'
+    'droplist' : 'MALE',
+    'numberspinner' : '123'
   },
   plugins : [
       {
@@ -120,6 +122,12 @@ LK.UI.form({
         plugin : 'textbox',
         options : {
           name : 'textbox',
+          validator : true
+        }
+      }, {
+        plugin : 'numberspinner',
+        options : {
+          name : 'numberspinner',
           validator : true
         }
       }

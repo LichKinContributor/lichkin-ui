@@ -13,7 +13,8 @@
 		  'startTime' : '开始时间',
 		  'content' : '内容',
 		  'textbox' : '文本框',
-		  'droplist' : '下拉框'
+		  'droplist' : '下拉框',
+  	      'numberspinner' : '数字微调器'
 		});
 		$.extend(LK.i18n,{
 			btn1:'设置标题',
@@ -79,7 +80,8 @@
 		            'content' : 'fffffffffffffffff',
 		            'textbox' : 'fffff',
 		            'droplist' : 'MALE',
-		            'textarea' : 'ffff'
+		            'textarea' : 'ffff',
+    				'numberspinner' : '123'
 		          },
 		          plugins : [
 		              {
@@ -92,7 +94,7 @@
 		                plugin : 'textbox',
 		                options : {
 		                  name : 'textarea',
-		                  rows : 8,
+		                  rows : 7,
 		                  validator : true
 		                }
 		              }, {
@@ -183,7 +185,13 @@
 		                  name : 'textbox',
 		                  validator : true
 		                }
-		              }
+		              }, {
+				        plugin : 'numberspinner',
+				        options : {
+				          name : 'numberspinner',
+				          validator : true
+				        }
+				      }
 		          ]
 		        });
 		      }
