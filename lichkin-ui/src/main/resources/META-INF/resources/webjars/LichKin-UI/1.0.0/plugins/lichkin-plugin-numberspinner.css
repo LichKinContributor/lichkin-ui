@@ -4,13 +4,44 @@
   outline: none;
 }
 
+.lichkin-numberspinner .lichkin-numberspinner-button-container {
+  display: inline-block;
+  margin: 3.5px 0px;
+  background-color: var(--lichkin-plugin-background-color);
+}
+
 .lichkin-numberspinner .lichkin-numberspinner-button .lichkin-numberspinner-button-container .lichkin-icon {
   margin: 0px;
+  top: 0px;
   position: relative;
   display: block;
-  top: 0px;
+  background-color: var(--lichkin-plugin-font-color);
+}
+
+.lichkin-numberspinner .lichkin-numberspinner-button .lichkin-numberspinner-button-container .lichkin-icon-spinner-minus {
+  margin-top: 1px;
+}
+
+.lichkin-numberspinner .lichkin-numberspinner-button .lichkin-numberspinner-button-container .lichkin-icon i {
+  color: var(--lichkin-plugin-background-color);
+}
+
+.lichkin-numberspinner .lichkin-numberspinner-button {
+  padding: 0px 3px;
 }
 
 .lichkin-numberspinner .lichkin-numberspinner-button .lichkin-numberspinner-button-container .lichkin-icon:hover {
   opacity: 0.6;
+}
+
+.lichkin-numberspinner-invalid .lichkin-numberspinner-button-container {
+  background-color: var(--lichkin-plugin-background-color-invalid);
+}
+
+.lichkin-numberspinner-invalid .lichkin-numberspinner-button .lichkin-numberspinner-button-container .lichkin-icon {
+  background-color: var(--lichkin-plugin-font-color-invalid);
+}
+
+.lichkin-numberspinner-invalid .lichkin-numberspinner-button .lichkin-numberspinner-button-container .lichkin-icon i {
+  color: var(--lichkin-plugin-background-color-invalid);
 }

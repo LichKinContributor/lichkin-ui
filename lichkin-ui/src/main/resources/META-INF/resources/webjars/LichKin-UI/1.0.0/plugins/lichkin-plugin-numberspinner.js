@@ -24,8 +24,8 @@ LK.UI('plugins', 'numberspinner', function(options) {
   });
 
   // 按钮
-  var height = (LK.rowHeight - 2) / 2 + 'px';
-  var $button = $('<a href="javascript:;" class="lichkin-numberspinner-button"></a>').appendTo($plugin).LKAddPluginClass(plugin, 'button');
+  var height = (LK.rowHeight - 2) / 2 - 4 + 'px';
+  var $button = $('<a href="javascript:;" class="lichkin-numberspinner-button" style="height:' + (LK.rowHeight - 2) + 'px"></a>').appendTo($plugin).LKAddPluginClass(plugin, 'button');
   var $span = $('<span class="lichkin-numberspinner-button-container"></span>').appendTo($button);
   LK.UI.icon({
     size : 16,
