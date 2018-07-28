@@ -12,7 +12,7 @@
 		<div class="content" id="demo"></div>
 	</#if>
 	<#if section="javascript-contents-after-links">
-		LK.UI.datepicker({$appendTo:$('#demo')});
+		LK.UI.datepicker({$appendTo:$('#demo'),validator:true});
 		LK.UI.datepicker({$appendTo:$('#demo')});
 	</#if>
 </@html>

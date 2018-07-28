@@ -77,7 +77,7 @@ TABLE.lichkin-table .lichkin-table .lichkin-table-row .lichkin-table-cell:last-c
 .lichkin-plugin-popup ul li.selected:hover .lichkin-text {color:var(--lichkin-plugin-font-color-selected-hover);}
 
 .lichkin-plugin-invalid {border:1px solid var(--lichkin-plugin-border-color-invalid);background-color:var(--lichkin-plugin-background-color-invalid);}
-.lichkin-plugin-invalid .lichkin-plugin-text {color:var(--lichkin-plugin-font-color-invalid);}
+.lichkin-plugin-invalid .lichkin-plugin-text {color:var(--lichkin-plugin-font-color-invalid);background-color:var(--lichkin-plugin-background-color-invalid);}
 .lichkin-plugin-invalid .lichkin-plugin-button {background-color:var(--lichkin-plugin-background-color-invalid);}
 .lichkin-plugin-invalid .lichkin-plugin-button .lichkin-icon i {color:var(--lichkin-plugin-font-color-invalid);}
 .lichkin-plugin-popup-invalid {border-color:var(--lichkin-plugin-border-color-invalid);background-color:var(--lichkin-plugin-background-color-invalid);}

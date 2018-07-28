@@ -40,6 +40,8 @@ LK.UI('plugins', 'datepicker', function(options) {
     }
   }).appendTo($plugin).LKAddPluginClass(plugin, 'button');
 
+  $plugin.LKValidate();
+
   // 返回控件对象
   return $plugin;
 }, {
