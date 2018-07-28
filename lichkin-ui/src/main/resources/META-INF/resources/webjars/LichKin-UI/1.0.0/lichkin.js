@@ -76,6 +76,28 @@ String.prototype.endsWith = function(str) {
 };
 
 /**
+ * 提取整数
+ */
+String.prototype.extarctInteger = function() {
+  var arr = this.match(/[\-0-9]/g);
+  if (Array.isArray(arr)) {
+    if (arr[0] == '0') {
+      return '0';
+    } else if (arr[0] == '-') {
+      if (arr[1] && arr[1] == '0') {
+        return '-';
+      } else {
+        arr[0] = '';
+        return '-' + arr.join('').replace(/\-/g, '');
+      }
+    } else {
+      return arr.join('').replace(/\-/g, '');
+    }
+  }
+  return '';
+}
+
+/**
  * 扩展JQuery功能
  */
 $.fn.extend({
