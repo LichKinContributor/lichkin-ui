@@ -3,3 +3,7 @@
 .lichkin-droplist .lichkin-droplist-wrapper {
   cursor: pointer;
 }
+
+.lichkin-droplist .lichkin-droplist-button {
+  pointer-events:none;
+}

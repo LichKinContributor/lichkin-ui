@@ -5,6 +5,10 @@
   cursor: pointer;
 }
 
+.lichkin-datepicker .lichkin-datepicker-button {
+  pointer-events:none;
+}
+
 .lichkin-datepicker .lichkin-datepicker-text:focus {
   outline: none;
 }

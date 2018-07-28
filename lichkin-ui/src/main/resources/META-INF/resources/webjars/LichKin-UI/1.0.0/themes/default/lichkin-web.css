@@ -60,7 +60,7 @@ TABLE.lichkin-table .lichkin-table .lichkin-table-row .lichkin-table-cell:last-c
 /** plugin */
 .lichkin-plugin {position:relative;vertical-align:top;display:inline-block;border:1px solid var(--lichkin-plugin-border-color);background-color:var(--lichkin-plugin-background-color);}
 .lichkin-plugin .lichkin-plugin-text {overflow:auto;border:none;padding:0px 6px;color:var(--lichkin-plugin-font-color);font-size:var(--lichkin-plugin-font-size);}
-.lichkin-plugin .lichkin-plugin-button {pointer-events:none;border:none;position:absolute;right:0px;top:0px;background-color:var(--lichkin-plugin-background-color);}
+.lichkin-plugin .lichkin-plugin-button {border:none;position:absolute;right:0px;top:0px;background-color:var(--lichkin-plugin-background-color);}
 .lichkin-plugin .lichkin-plugin-button .lichkin-icon {top:2px;}
 .lichkin-plugin .lichkin-plugin-button .lichkin-icon i {color:var(--lichkin-plugin-font-color);}
 .lichkin-plugin-popup {display:none;position:absolute;overflow:auto;left:-1px;z-index:99999;border:1px solid var(--lichkin-plugin-border-color);border-top:none;background-color:var(--lichkin-plugin-background-color);}
