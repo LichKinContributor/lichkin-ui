@@ -113,13 +113,40 @@ LK.UI._dialog = {
     if ($topDlg) {
       // 切换并触发聚焦事件
       this.active($topDlg, true);
-      $('.lichkin-dialog-mask').css('z-index', $topDlg.css('z-index') - 1);
+      this.resetMaskZIndex();
     } else {
       $('.lichkin-dialog-mask').remove();
     }
 
     // 触发对话框关闭后事件
     options.onAfterClose();
+  },
+
+  /**
+   * 重设遮罩层
+   */
+  resetMaskZIndex : function() {
+    var $mask = $('.lichkin-dialog-mask');
+    if ($mask.length == 0) {
+      return;
+    }
+    var zIndex = 0;
+    var noMask = true;
+    $('.lichkin-dialog').each(function() {
+      var $that = $(this);
+      if ($that.data('LKOPTIONS').mask == true) {
+        noMask = false;
+        var currentZIndex = parseInt($that.css('z-index'));
+        if (currentZIndex > zIndex) {
+          zIndex = currentZIndex;
+        }
+      }
+    });
+    if (noMask) {
+      $mask.remove();
+    } else {
+      $mask.css('z-index', (zIndex - 1));
+    }
   }
 
 };
@@ -230,6 +257,10 @@ LK.UI('plugins', 'openDialog', function(options) {
       var button = options.buttons[i];
       (function(button) {
         var click = button.click;
+        if (typeof click != 'function') {
+          click = function() {
+          };
+        }
         $buttonsBar.append(LK.UI.button($.extend(button, {
           click : function($button) {
             click($button, $plugin);

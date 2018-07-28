@@ -27,6 +27,7 @@
 			btn9:'设置按钮',
 			btn10:'不带遮罩',
 			btn11:'混合form',
+			btn12:'遮罩测试',
 		});
 		LK.UI.button({text:'btn1',click:function(){
 			LK.UI.openDialog({title:'tip'});
@@ -179,5 +180,17 @@
 		    });
 		  }
 		}).appendTo('#buttons');
+
+		LK.UI.button({text:'btn12',click:function(){
+			LK.UI.openDialog({size:{cols:5,rows:5},buttons:[{icon:'ok',text:'ok',cls:'success',click:function(){
+				LK.UI.openDialog({size:{cols:4,rows:4},buttons:[{icon:'ok',text:'ok',cls:'success',click:function(){
+					LK.UI.openDialog({size:{cols:1,rows:1},mask:false});
+					LK.UI.openDialog({size:{cols:4,rows:3}});
+					LK.UI.openDialog({size:{cols:4,rows:2}});
+					LK.UI.openDialog({size:{cols:1,rows:1},mask:false});
+					LK.UI.openDialog({size:{cols:4,rows:1}});
+				}}]});
+			}}]});
+		}}).appendTo('#buttons');
 	</#if>
 </@html>
