@@ -48,6 +48,8 @@ LK.i18n = {
   'close' : 'close',
   'dropdown' : 'show/hide options',
   'datepicker' : 'show/hide date picker',
+  'spinner-plus' : 'plus',
+  'spinner-minus' : 'minus',
   // 菜单图标
   'sysMgmt' : 'system management',
   'roleMgmt' : 'role management',

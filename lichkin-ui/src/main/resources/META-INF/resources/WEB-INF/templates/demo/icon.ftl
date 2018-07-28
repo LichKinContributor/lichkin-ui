@@ -72,6 +72,8 @@
 		LK.UI.icon({size:32,icon:'close',type:false}).appendTo('#demo2');
 		LK.UI.icon({size:32,icon:'dropdown',type:false}).appendTo('#demo2');
 		LK.UI.icon({size:32,icon:'datepicker',type:false}).appendTo('#demo2');
+		LK.UI.icon({size:32,icon:'spinner-plus',type:false}).appendTo('#demo2');
+		LK.UI.icon({size:32,icon:'spinner-minus',type:false}).appendTo('#demo2');
 		LK.UI.icon({size:32,icon:'sysMgmt',type:false}).appendTo('#demo2');
 		LK.UI.icon({size:32,icon:'roleMgmt',type:false}).appendTo('#demo2');
 		LK.UI.icon({size:32,icon:'userMgmt',type:false}).appendTo('#demo2');
@@ -127,6 +129,8 @@
 		LK.UI.icon({size:32,icon:'close',type:true}).appendTo('#demo3');
 		LK.UI.icon({size:32,icon:'dropdown',type:true}).appendTo('#demo3');
 		LK.UI.icon({size:32,icon:'datepicker',type:true}).appendTo('#demo3');
+		LK.UI.icon({size:32,icon:'spinner-plus',type:true}).appendTo('#demo3');
+		LK.UI.icon({size:32,icon:'spinner-minus',type:true}).appendTo('#demo3');
 		LK.UI.icon({size:32,icon:'sysMgmt',type:true}).appendTo('#demo3');
 		LK.UI.icon({size:32,icon:'roleMgmt',type:true}).appendTo('#demo3');
 		LK.UI.icon({size:32,icon:'userMgmt',type:true}).appendTo('#demo3');

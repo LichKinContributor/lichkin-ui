@@ -262,6 +262,8 @@ LK.UI('plugins', 'changeIcon', function(options) {
     'close' : 'times',
     'dropdown' : 'caret-square-down',
     'datepicker' : 'calendar-alt',
+    'spinner-plus' : 'chevron-up',
+    'spinner-minus' : 'chevron-down',
     'sysMgmt' : 'cog',
     'roleMgmt' : 'user-secret',
     'userMgmt' : 'user',
