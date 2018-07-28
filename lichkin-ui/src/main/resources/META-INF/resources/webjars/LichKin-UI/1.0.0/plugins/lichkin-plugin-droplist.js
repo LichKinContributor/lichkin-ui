@@ -129,6 +129,8 @@ LK.UI('plugins', 'droplist', function(options) {
     options : options
   });
 
+  $plugin.LKValidate();
+
   // 返回控件对象
   return $plugin;
 }, {
