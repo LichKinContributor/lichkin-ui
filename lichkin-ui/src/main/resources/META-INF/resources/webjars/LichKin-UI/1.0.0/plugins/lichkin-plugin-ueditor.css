@@ -8,6 +8,22 @@
   border-color:var(--lichkin-plugin-border-color);
 }
 
+.lichkin-ueditor .edui-default .edui-editor-bottomContainer td .edui-editor-breadcrumb {
+  color:var(--lichkin-plugin-font-color);
+}
+
 .lichkin-ueditor .edui-default .edui-editor-toolbarboxouter {
   border-radius: 0px;
+}
+
+.lichkin-ueditor-invalid .edui-default .edui-editor-bottomContainer td {
+  border-color:var(--lichkin-plugin-border-color-invalid);
+}
+
+.lichkin-ueditor-invalid .edui-default .edui-editor-bottomContainer td .edui-editor-breadcrumb {
+  color:var(--lichkin-plugin-font-color-invalid);
+}
+
+.lichkin-ueditor-invalid .edui-default .edui-editor-iframeholder {
+  background-color:var(--lichkin-plugin-background-color-invalid);
 }

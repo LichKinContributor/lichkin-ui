@@ -13,6 +13,8 @@ LK.UI('plugins', 'ueditor', function(options) {
     options : options
   });
 
+  var $value = $plugin.LKGetValueObj();
+
   // 宽度不同时，工具栏行数不同，将影响高度的设置
   var width = $plugin.data('LKOPTIONS').width;
   var height = $plugin.data('LKOPTIONS').height;
@@ -41,15 +43,27 @@ LK.UI('plugins', 'ueditor', function(options) {
   }
 
   ue.addListener('focus blur', function() {
+    if (ue.getContent()) {
+      $value.val('true');
+    } else {
+      $value.val('');
+    }
     $plugin.LKValidate();
   });
 
   ue.addListener('keyup', function() {
+    if (ue.getContent()) {
+      $value.val('true');
+    } else {
+      $value.val('');
+    }
     $plugin.LKValidate();
   });
 
   // 缓存参数
   $plugin.data('ue', ue);
+
+  $plugin.LKValidate();
 
   // 返回控件对象
   return $plugin;

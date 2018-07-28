@@ -129,8 +129,15 @@ $.fn.extend({
       for (var i = 0; i < validatores.length; i++) {
         if (!LK.UI.validator[validatores[i]](value)) {
           $plugin.LKAddPluginClass(plugin, 'invalid');// 验证未通过增加样式
-          if (plugin == 'droplist') {
-            $plugin.LKGetPopup().LKAddPluginClass(plugin, 'popup-invalid');
+          switch (plugin) {
+            case 'droplist':
+              $plugin.LKGetPopup().LKAddPluginClass(plugin, 'popup-invalid');
+              break;
+            case 'ueditor':
+              $plugin.data('ue').ready(function() {
+                $plugin.find('.edui-default .edui-editor-iframeholder iframe').contents().find('body').css('color', LK.pluginInvalidFontColor);
+              });
+              break;
           }
           return false;// 验证未通过返回失败
         }
@@ -138,10 +145,17 @@ $.fn.extend({
       $plugin.removeClass([
           'lichkin-plugin-invalid', 'lichkin-' + plugin + '-invalid'
       ]);// 验证通过清除样式
-      if (plugin == 'droplist') {
-        $plugin.LKGetPopup().removeClass([
-            'lichkin-plugin-popup-invalid', 'lichkin-' + plugin + '-popup-invalid'
-        ]);
+      switch (plugin) {
+        case 'droplist':
+          $plugin.LKGetPopup().removeClass([
+              'lichkin-plugin-popup-invalid', 'lichkin-' + plugin + '-popup-invalid'
+          ]);
+          break;
+        case 'ueditor':
+          $plugin.data('ue').ready(function() {
+            $plugin.find('.edui-default .edui-editor-iframeholder iframe').contents().find('body').css('color', LK.pluginFontColor);
+          });
+          break;
       }
     }
 

@@ -100,6 +100,8 @@ var LK = {
   pluginFontSize : 12,
   // 控件文字颜色
   pluginFontColor : '#2e6da4',
+  // 控件文字颜色
+  pluginInvalidFontColor : '#d43f3a',
   // 表单内控件距离顶部间距
   topGap : 3,
   // 表单内控件距离左部间距

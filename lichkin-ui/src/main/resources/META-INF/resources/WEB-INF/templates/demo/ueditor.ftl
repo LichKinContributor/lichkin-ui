@@ -12,6 +12,7 @@
 		<div class="content" id="demo"></div>
 	</#if>
 	<#if section="javascript-contents-after-links">
+		LK.UI.ueditor({$appendTo:$('#demo'),validator:true});
 		LK.UI.ueditor({$appendTo:$('#demo')});
 	</#if>
 </@html>
