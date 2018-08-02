@@ -165,7 +165,9 @@ LK.UI('plugins', 'droplist', function(options) {
   },
 
   // 支持多选
-  multiSelect : false
+  multiSelect : false,
+  // 是否可以取消选中（仅在单选情况下起作用）
+  cancelabel : true
 });
 
 $('body').mousedown(function(e) {
@@ -197,7 +199,14 @@ $('body').mousedown(function(e) {
         $that.toggleClass('selected');
         $plugin.LKInvokeSetValues(null);
       } else {
-        $plugin.LKInvokeSetValues(($that.hasClass('selected') ? '' : $that.data('value')));
+        if (options.cancelable == true) {
+          $plugin.LKInvokeSetValues(($that.hasClass('selected') ? '' : $that.data('value')));
+        } else {
+          var value = $that.data('value');
+          if (value != $plugin.LKGetValue()) {
+            $plugin.LKInvokeSetValues(value);
+          }
+        }
         $popup.hide();
       }
       $plugin.LKlinkage($that.data('value'), false);
