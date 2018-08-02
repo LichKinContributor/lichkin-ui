@@ -56,7 +56,7 @@ LK.UI._droplist = {
   addDatas : function($plugin, $container, datas) {
     for (var i = 0; i < datas.length; i++) {
       var data = datas[i];
-      var $li = $('<li></li>').appendTo($container);
+      var $li = $('<li></li>').appendTo($container).LKAddPluginClass('droplist', 'node');
       $li.data(data);
       $li.append(LK.UI.text({
         original : true,
