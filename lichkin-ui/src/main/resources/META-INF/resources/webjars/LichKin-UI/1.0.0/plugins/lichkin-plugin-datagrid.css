@@ -14,8 +14,6 @@
 .lichkin-datagrid {
   border: none;
   background-color: transparent;
-  overflow-x: auto;
-  overflow-y: hidden;
 }
 
 .lichkin-datagrid .lichkin-datagrid-titleBar {
@@ -92,8 +90,9 @@
 }
 
 .lichkin-datagrid .lichkin-datagrid-dataBar {
-  background-color: transparent;
+  background-color: var(--lichkin-plugin-background-color);
   border: 1px solid var(--lichkin-plugin-border-color);
+  overflow: hidden;
 }
 
 .lichkin-datagrid .lichkin-datagrid-dataHeaderBar {
@@ -109,6 +108,7 @@
   border-bottom: none;
   border-right-color: var(--lichkin-datagrid-header-border-color);
   border-left: none;
+  background-color: var(--lichkin-datagrid-header-background-color);
 }
 
 .lichkin-datagrid .lichkin-datagrid-dataHeaderBar .lichkin-table .lichkin-table-row .lichkin-table-cell .lichkin-text {
@@ -118,7 +118,7 @@
 }
 
 .lichkin-datagrid .lichkin-datagrid-dataBodyBar {
-  background-color: transparent;
+  background-color: var(--lichkin-plugin-background-color);
   overflow: auto;
 }
 
