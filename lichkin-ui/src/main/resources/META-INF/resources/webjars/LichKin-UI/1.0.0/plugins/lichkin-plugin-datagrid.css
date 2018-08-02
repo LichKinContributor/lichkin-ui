@@ -89,6 +89,31 @@
   border-left: 1px solid var(--lichkin-plugin-border-color);
 }
 
+.lichkin-datagrid .lichkin-datagrid-toolsBar {
+  background-color: var(--lichkin-plugin-border-color);
+  border-top: none;
+  border-right: 1px solid var(--lichkin-plugin-border-color);
+  border-bottom: 1px solid var(--lichkin-datagrid-header-border-color);
+  border-left: 1px solid var(--lichkin-plugin-border-color);
+}
+
+.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-buttons .lichkin-button {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-buttons .lichkin-button .lichkin-icon-add i {
+  color: #60ff60;
+}
+
+.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-buttons .lichkin-button .lichkin-icon-edit i {
+  color: #ffff00;
+}
+
+.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-buttons .lichkin-button .lichkin-icon-remove i {
+  color: #ff9c9c;
+}
+
 .lichkin-datagrid .lichkin-datagrid-dataBar {
   background-color: var(--lichkin-plugin-background-color);
   border: 1px solid var(--lichkin-plugin-border-color);

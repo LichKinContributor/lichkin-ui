@@ -37,6 +37,24 @@ LK.UI.datagrid({
         }
       }
   ],
+  tools : [
+      {
+        icon : 'add',
+        click : function() {
+          alert();
+        }
+      }, {
+        icon : 'edit',
+        click : function() {
+          alert();
+        }
+      }, {
+        icon : 'remove',
+        click : function() {
+          alert();
+        }
+      }
+  ],
   cols : 6,
   searchForm : [
       {

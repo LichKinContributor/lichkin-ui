@@ -188,6 +188,29 @@ LK.UI('plugins', 'datagrid', function(options) {
     }
   }
 
+  // 工具栏
+  var $toolsBar = $('<div class="lichkin-datagrid-toolsBar"></div>');
+  if (options.tools.length != 0) {
+    $toolsBar.appendTo($plugin);
+    $toolsBar.css('width', dataWidth);
+    var $buttonsBar = $('<div class="lichkin-buttons"></div>').appendTo($toolsBar);
+    for (var i = 0; i < options.tools.length; i++) {
+      var button = options.tools[i];
+      (function(button) {
+        var click = button.click;
+        if (typeof click != 'function') {
+          click = function() {
+          };
+        }
+        $buttonsBar.append(LK.UI.button($.extend(button, {
+          click : function($button) {
+            click($button, $plugin);
+          }
+        })));
+      })(button);
+    }
+  }
+
   // 分页栏
   var $pageBar = $('<div class="lichkin-datagrid-pageBar"></div>');
   if (options.pageable == true) {
@@ -364,6 +387,11 @@ LK.UI('plugins', 'datagrid', function(options) {
    * @tip 如果输入了title或icon，则框架内部会补充刷新按钮。如果有查询表单时，则框架内部会补充重置按钮和查询按钮。
    */
   titleTools : [],
+  /**
+   * 工具栏
+   * @see LK.UI.button（click方法被重写，第一个参数保持按钮控件不变，增加第二个参数当前对话框控件。）
+   */
+  tools : [],
   // 是否带分页信息
   pageable : true,
   // 分页大小
