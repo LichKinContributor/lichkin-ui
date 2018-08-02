@@ -399,7 +399,15 @@ LK.UI('plugins', 'datagrid', function(options) {
   // 页面大小选择项数据
   pageList : [
       25, 50, 100, 200
-  ]
+  ],
+  /**
+   * 行点击事件
+   * @param $plugin 当前控件对象
+   * @param $row 行对象
+   * @param rowData 行数据
+   */
+  onRowClick : function($plugin, $row, rowData) {
+  }
 });
 
 $('body').mousedown(function(e) {
@@ -411,7 +419,8 @@ $('body').mousedown(function(e) {
     var $plugin = $that.parents('.lichkin-datagrid:first');
     var options = $plugin.data('LKOPTIONS');
     var $node = $that.parents('tr:first');
-    var dataValue = $node.data(options.valueFieldName);
+    var data = $node.data();
+    var dataValue = data[options.valueFieldName];
     if (typeof dataValue == 'undefined') {
       throw 'can not get value by key -> ' + options.valueFieldName;
     }
@@ -423,5 +432,6 @@ $('body').mousedown(function(e) {
     }
     $plugin.LKlinkage(dataValue, false);
     $plugin.LKValidate();
+    options.onRowClick($plugin, $node, data);
   }
 });
