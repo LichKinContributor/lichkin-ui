@@ -1,6 +1,6 @@
 <#include "/macro/html-lichkin.ftl"/>
 
-<@html "";section>
+<@html ;section>
 	<#if section="style">
 		.title {font-size:32px;background-color:black;color:white;padding:5px 0px 5px 20px;}
 		.content {height:150px;}
