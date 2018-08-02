@@ -188,6 +188,80 @@ LK.UI('plugins', 'datagrid', function(options) {
     }
   }
 
+  // 编辑按钮
+  if (options.toolsEdit != null) {
+    options.tools.unshift({
+      icon : 'edit',
+      click : function() {
+        var value = $plugin.LKGetValue();
+        if (value == '') {
+          LK.alert($.LKGetI18N('noSelect'));
+          return;
+        }
+        if (value.indexOf(LK.SPLITOR) > 0) {
+          LK.alert($.LKGetI18N('singleSelect'));
+          return;
+        }
+        LK.UI.openDialog($.extend({}, options.toolsEdit.dialog, {
+          title : 'edit',
+          icon : 'edit',
+          url : '',
+          param : {},
+          data : {},
+          content : '',
+          mask : true,
+          buttons : [
+              {
+                text : 'save',
+                icon : 'save',
+                cls : 'warning',
+                click : function($button, $dialog) {
+                  var $form = $dialog.find('form');
+                  if ($form.LKValidate()) {
+                    LK.ajax({
+                      url : options.toolsEdit.saveUrl,
+                      data : $form.LKFormGetData(),
+                      showSuccess : true,
+                      success : function() {
+                        $plugin.LKLoad();
+                        $dialog.LKCloseDialog();
+                      }
+                    });
+                  }
+                }
+              }, {
+                text : 'cancel',
+                icon : 'cancel',
+                cls : 'danger',
+                click : function($button, $dialog) {
+                  $dialog.LKCloseDialog();
+                }
+              }
+          ],
+          onAfterCreate : function($dialog, $contentBar) {
+            var formOptions = $.extend({}, options.toolsEdit.form, {
+              $appendTo : $contentBar,
+              $renderTo : null,
+              values : {},
+              param : {
+                id : value
+              }
+            });
+            formOptions.plugins.push({
+              plugin : 'hidden',
+              options : {
+                name : 'id',
+                value : value
+              }
+            });
+            LK.UI.form(formOptions);
+          }
+        }));
+      }
+    });
+  }
+
+  // 新增按钮
   if (options.toolsAdd != null) {
     options.tools.unshift({
       icon : 'add',
@@ -449,10 +523,17 @@ LK.UI('plugins', 'datagrid', function(options) {
   /**
    * 工具栏-新增按钮
    * @param form see LK.UI.form，其中$appendTo/$renderTo/values/url/param参数无效。
-   * @param dialog see LK.UI.dialog，其中title/icon/url/param/data/content/mask/buttons/onAfterCreate无效。
+   * @param dialog see LK.UI.dialog，其中title/icon/url/param/data/content/mask/buttons/onAfterCreate/onBeforeLoading/onAfterLoading无效。
    * @param saveUrl 表单提交地址
    */
   toolsAdd : null,
+  /**
+   * 工具栏-编辑按钮
+   * @param form see LK.UI.form，其中$appendTo/$renderTo/values/param参数无效。
+   * @param dialog see LK.UI.dialog，其中title/icon/url/param/data/content/mask/buttons/onAfterCreate/onBeforeLoading/onAfterLoading无效。
+   * @param saveUrl 表单提交地址
+   */
+  toolsEdit : null,
   // 是否带分页信息
   pageable : true,
   // 分页大小

@@ -13,8 +13,10 @@ $.extend(LK.i18n, {
 });
 
 LK.UI.datagrid({
-  url : '/L/SysCategory',
-  valueFieldName : 'categoryCode',
+  url : '/L/SysDictionary',
+  param : {
+    categoryCode : 'nation'
+  },
   $appendTo : $('#demo'),
   multiSelect : true,
   title : 'category',
@@ -85,6 +87,43 @@ LK.UI.datagrid({
             options : {
               name : 'orderId',
               value : 0
+            }
+          }, {
+            plugin : 'hidden',
+            textKey : 'tip',
+            options : {
+              name : 'categoryCode',
+              value : 'nation',
+              validator : true
+            }
+          }
+
+      ]
+    }
+  },
+  toolsEdit : {
+    saveUrl : '/U/SysDictionary',
+    dialog : {
+      size : {
+        cols : 1,
+        rows : 2
+      }
+    },
+    form : {
+      url : '/O/SysDictionary',
+      plugins : [
+          {
+            plugin : 'textbox',
+            textKey : 'tip',
+            options : {
+              name : 'dictName',
+              validator : true
+            }
+          }, {
+            plugin : 'numberspinner',
+            textKey : 'tip',
+            options : {
+              name : 'orderId'
             }
           }, {
             plugin : 'hidden',
@@ -182,48 +221,16 @@ LK.UI.datagrid({
   value : 'USING_STATUS#@#GENDER',
   columns : [
       {
-        'name' : 'categoryCode',
-        'text' : 'categoryCode',
+        'name' : 'dictCode',
+        'text' : 'dictCode',
         'width' : '200'
       }, {
-        'name' : 'categoryCode',
-        'text' : 'categoryCode',
+        'name' : 'dictName',
+        'text' : 'dictName',
         'width' : '200'
       }, {
-        'name' : 'categoryCode',
-        'text' : 'categoryCode',
-        'width' : '200'
-      }, {
-        'name' : 'categoryCode',
-        'text' : 'categoryCode',
-        'width' : '200'
-      }, {
-        'name' : 'categoryCode',
-        'text' : 'categoryCode',
-        'width' : '200'
-      }, {
-        'name' : 'categoryCode',
-        'text' : 'categoryCode',
-        'width' : '200'
-      }, {
-        'name' : 'categoryCode',
-        'text' : 'categoryCode',
-        'width' : '200'
-      }, {
-        'name' : 'categoryCode',
-        'text' : 'categoryCode',
-        'width' : '200'
-      }, {
-        'name' : 'categoryCode',
-        'text' : 'categoryCode',
-        'width' : '200'
-      }, {
-        'name' : 'categoryCode',
-        'text' : 'categoryCode',
-        'width' : '200'
-      }, {
-        'name' : 'categoryCode',
-        'text' : 'categoryCode',
+        'name' : 'orderId',
+        'text' : 'orderId',
         'width' : '200'
       }
   ]
