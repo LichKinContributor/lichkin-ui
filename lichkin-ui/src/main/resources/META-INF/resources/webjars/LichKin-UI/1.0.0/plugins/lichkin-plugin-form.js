@@ -47,6 +47,7 @@ $.fn.extend({
 
   /**
    * 获取表单控件
+   * @return 表单控件
    */
   LKGetFormPlugin : function() {
     if (this[0].tagName != 'FORM' || !this.hasClass('lichkin-form') || this.data('plugin-type') != 'form') {
@@ -77,6 +78,21 @@ $.fn.extend({
         }
       });
     }
+  },
+
+  /**
+   * 获取表单数据
+   * @return JSON数据
+   */
+  LKFormGetData : function() {
+    var $frm = this.LKGetFormPlugin();
+
+    var json = {};
+    $frm.find('.lichkin-plugin-value').each(function() {
+      json[$(this).attr('name')] = $(this).val();
+    });
+
+    return json;
   }
 
 });
