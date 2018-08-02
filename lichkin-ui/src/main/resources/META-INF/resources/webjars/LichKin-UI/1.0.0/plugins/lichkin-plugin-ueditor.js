@@ -80,6 +80,7 @@ LK.UI('plugins', 'ueditor', function(options) {
   inForm : false,
   cols : 4,
   rows : 14,
+  cls : '',
   linkages : [],
   onLinkaged : function($plugin, linkage) {
   },

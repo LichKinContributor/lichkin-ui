@@ -55,6 +55,7 @@ LK.UI('plugins', 'datepicker', function(options) {
   inForm : false,
   cols : 1,
   // rows : 1,
+  cls : '',
   linkages : [],
   onLinkaged : function($plugin, linkage) {
   },

@@ -145,6 +145,7 @@ LK.UI('plugins', 'droplist', function(options) {
   inForm : false,
   cols : 1,
   rows : 1,
+  cls : '',
   linkages : [],
   onLinkaged : function($plugin, linkage) {
   },

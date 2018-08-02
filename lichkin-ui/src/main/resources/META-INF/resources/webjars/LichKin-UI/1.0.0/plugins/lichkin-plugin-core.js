@@ -533,6 +533,10 @@ LK.UI('plugins', 'create', function(opts) {
     }
   }
 
+  if (options.cls != '') {
+    $plugin.addClass(options.cls);
+  }
+
   // 缓存参数
   $plugin.data('LKOPTIONS', options);
 
@@ -563,6 +567,8 @@ LK.UI('plugins', 'create', function(opts) {
     cols : 1,
     // 行数
     rows : 1,
+    // 样式
+    cls : '',
 
     // 联动控件名称（需在同一表单中）
     linkages : [],
