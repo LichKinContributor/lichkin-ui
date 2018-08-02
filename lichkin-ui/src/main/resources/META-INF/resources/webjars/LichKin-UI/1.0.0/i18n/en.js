@@ -14,6 +14,7 @@ LK.i18n = {
   ajaxError : 'An error occurred when invoke server.',
   singleSelect : 'Single select to do this.',
   noSelect : 'No select to do this.',
+  confirmRemove : 'The data cannot be recovered after deletion, make sure you know that.',
   'datagrid-statistics' : 'Displaying {from} to {to} of {total} records',
   'go-first' : 'first',
   'go-previous' : 'previous',

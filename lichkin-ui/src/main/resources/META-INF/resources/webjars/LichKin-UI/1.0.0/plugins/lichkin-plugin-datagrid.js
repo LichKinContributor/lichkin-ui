@@ -188,6 +188,33 @@ LK.UI('plugins', 'datagrid', function(options) {
     }
   }
 
+  // 删除按钮
+  if (options.toolsRemove != null) {
+    options.tools.unshift({
+      icon : 'remove',
+      click : function() {
+        var value = $plugin.LKGetValue();
+        if (value == '') {
+          LK.alert($.LKGetI18N('noSelect'));
+          return;
+        }
+        LK.web.confirm($.LKGetI18N('confirmRemove'), function() {
+          LK.ajax({
+            url : options.toolsRemove.saveUrl,
+            data : {
+              id : value,
+              usingStatus : 'DEPRECATED'
+            },
+            showSuccess : true,
+            success : function() {
+              $plugin.LKLoad();
+            }
+          });
+        });
+      }
+    });
+  }
+
   // 编辑按钮
   if (options.toolsEdit != null) {
     options.tools.unshift({
@@ -534,6 +561,11 @@ LK.UI('plugins', 'datagrid', function(options) {
    * @param saveUrl 表单提交地址
    */
   toolsEdit : null,
+  /**
+   * 工具栏-删除按钮
+   * @param saveUrl 表单提交地址
+   */
+  toolsRemove : null,
   // 是否带分页信息
   pageable : true,
   // 分页大小

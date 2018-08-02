@@ -14,6 +14,7 @@ LK.i18n = {
   ajaxError : '请求时服务器出现异常',
   singleSelect : '只能选择一项数据',
   noSelect : '请先选择一项数据',
+  confirmRemove : '数据删除后将不能恢复，确认删除么？',
   'datagrid-statistics' : '当前显示为第{from}条到{to}条数据,共有{total}条数据。',
   'go-first' : '第一页',
   'go-previous' : '上一页',

@@ -138,6 +138,9 @@ LK.UI.datagrid({
       ]
     }
   },
+  toolsRemove : {
+    saveUrl : '/U/SysDictionary/UsingStatus'
+  },
   cols : 6,
   searchForm : [
       {
