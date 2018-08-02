@@ -1,4 +1,5 @@
 $.extend(LK.i18n, {
+  'category' : '类目',
   'categoryCode' : '类目编码',
   'categoryName' : '类目名称'
 });
@@ -9,6 +10,8 @@ LK.UI.datagrid({
   $appendTo : $('#demo'),
   validator : true,
   multiSelect : true,
+  title : 'category',
+  icon : 'page',
   value : 'USING_STATUS#@#GENDER',
   columns : [
       {

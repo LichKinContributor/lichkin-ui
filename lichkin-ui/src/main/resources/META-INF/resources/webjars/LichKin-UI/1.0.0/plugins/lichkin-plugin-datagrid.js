@@ -121,6 +121,23 @@ LK.UI('plugins', 'datagrid', function(options) {
     });
   }
 
+  // 标题栏
+  var $titleBar = $('<div class="lichkin-datagrid-titleBar"></div>');
+  if (options.title != null || options.icon != null) {
+    $titleBar.appendTo($plugin);
+    if (options.icon != null) {
+      $titleBar.append(LK.UI.icon({
+        'icon' : options.icon,
+        'size' : 24
+      }));
+    }
+    if (options.title != null) {
+      $titleBar.append(LK.UI.text({
+        'text' : options.title
+      }));
+    }
+  }
+
   // 数据栏
   var $dataBar = $('<div class="lichkin-datagrid-dataBar"></div>').appendTo($plugin);
   // 数据标题栏
@@ -136,8 +153,12 @@ LK.UI('plugins', 'datagrid', function(options) {
       'text' : column.text
     }).css('width', parseInt(column.width) - 12));
   }
+
+  if (options.title != null) {
+    $titleBar.css('width', dataWidth);
+  }
   $dataBar.css('width', dataWidth);
-  $dataBar.css('height', height - 2);
+  $dataBar.css('height', height - 2 - ((options.title != null || options.icon != null) ? 38 : 0));
   $dataHeaderBar.css('width', dataWidth);
   // 数据内容栏
   var $dataBodyBar = $('<div class="lichkin-datagrid-dataBodyBar"></div>').appendTo($dataBar);
@@ -200,7 +221,11 @@ LK.UI('plugins', 'datagrid', function(options) {
    * @param formatter[rowData] 行数据
    * @param textAlign 文本对齐方式
    */
-  columns : []
+  columns : [],
+  // 标题
+  title : null,
+  // 图标
+  icon : null
 });
 
 $('body').mousedown(function(e) {
