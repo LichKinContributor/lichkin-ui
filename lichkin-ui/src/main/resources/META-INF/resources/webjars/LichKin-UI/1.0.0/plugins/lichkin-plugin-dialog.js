@@ -377,3 +377,64 @@ $('body').keydown(function(e) {
     }
   }
 });
+
+// 重新实现
+LK.web.alert = function(options, callback) {
+  $.LKOpenDialog({
+    title : 'tip',
+    icon : 'tip',
+    content : '<div style="padding:30px 10px;height:40px;line-height:40px;text-align:center;font-size:16px;color:' + LK.pluginFontColor + ';">' + options.msg + '</div>',
+    size : {
+      width : 300,
+      height : 100,
+    },
+    onAfterClose : function() {
+      callback();
+    }
+  });
+};
+
+/**
+ * 确认提示窗
+ * @param msg 提示信息
+ * @param callbackOk 确定按钮回调方法
+ * @param callbackCancel 取消按钮回调方法
+ */
+LK.web.confirm = function(msg, callbackOk, callbackCancel) {
+  if (typeof callbackOk == 'undefined') {
+    callbackOk = function() {
+    };
+  }
+  if (typeof callbackCancel == 'undefined') {
+    callbackCancel = function() {
+    };
+  }
+  $.LKOpenDialog({
+    title : 'warning',
+    icon : 'warning',
+    content : '<div style="padding:30px 10px;height:40px;line-height:40px;text-align:center;font-size:16px;color:' + LK.pluginFontColor + ';">' + msg + '</div>',
+    size : {
+      width : 300,
+      height : 100,
+    },
+    buttons : [
+        {
+          icon : 'ok',
+          text : 'ok',
+          cls : 'success',
+          click : function($button, $dialog) {
+            callbackOk();
+            $dialog.LKCloseDialog();
+          }
+        }, {
+          icon : 'cancel',
+          text : 'cancel',
+          cls : 'danger',
+          click : function($button, $dialog) {
+            callbackCancel();
+            $dialog.LKCloseDialog();
+          }
+        }
+    ]
+  });
+};
