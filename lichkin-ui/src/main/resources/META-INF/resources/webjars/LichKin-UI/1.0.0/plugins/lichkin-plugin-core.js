@@ -194,11 +194,11 @@ $.fn.extend({
 
   /**
    * 清空数据
-   * @param $plugin 控件对象
+   * @param isCreateEvent 是否为创建是调用
    */
-  LKClearDatas : function() {
+  LKClearDatas : function(isCreateEvent) {
     this.LKGetDataContainer().children().remove();
-    this.LKSetValues([]);
+    this.LKSetValues([], isCreateEvent);
     this.LKSetTexts([]);
   },
 
@@ -607,7 +607,7 @@ LK.UI('plugins', 'load', function(opts) {
 
   // 数据方式增加行
   if (options.data != null) {
-    $plugin.LKClearDatas();
+    $plugin.LKClearDatas(opts.isCreateEvent || (opts.linkage != null && opts.linkage.isCreateEvent == true));
     $plugin.LKInvokeAddDatas(options.data);
     $plugin.data('LKDatas', options.data);
     if (opts.isCreateEvent) {
@@ -633,7 +633,7 @@ LK.UI('plugins', 'load', function(opts) {
       url : options.url,
       data : options.param,
       success : function(responseDatas) {
-        $plugin.LKClearDatas();
+        $plugin.LKClearDatas(opts.isCreateEvent || (opts.linkage != null && opts.linkage.isCreateEvent == true));
         if (responseDatas) {
           responseDatas = options.onBeforeAddDatas($plugin, responseDatas, options.url, options.param);
           $plugin.LKInvokeAddDatas(responseDatas);
@@ -658,7 +658,7 @@ LK.UI('plugins', 'load', function(opts) {
         $plugin.LKValidate();
       },
       error : function() {
-        $plugin.LKClearDatas();
+        $plugin.LKClearDatas(opts.isCreateEvent || (opts.linkage != null && opts.linkage.isCreateEvent == true));
         options.onLoadDatasError($plugin, arguments, options.url, options.param);
         $plugin.data('LKDatas', null);
         $plugin.LKlinkage(null, true);
