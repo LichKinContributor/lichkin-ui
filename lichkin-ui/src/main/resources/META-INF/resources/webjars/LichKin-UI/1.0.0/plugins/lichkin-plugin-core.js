@@ -393,7 +393,8 @@ $.fn.extend({
     if (isString(values)) {
       values = values.split(LK.SPLITOR);
     }
-    if (this.LKGetPluginType() == 'droplist') {
+    var plugin = this.LKGetPluginType();
+    if (plugin == 'droplist' || plugin == 'datagrid') {
       this.LKGetImplementor().setValues(this, this.LKGetDataContainer(), values);
     } else {
       this.LKSetValues(values);

@@ -7,7 +7,10 @@ $.extend(LK.i18n, {
   'content' : '内容',
   'textbox' : '文本框',
   'droplist' : '下拉框',
-  'numberspinner' : '数字微调器'
+  'numberspinner' : '数字微调器',
+  'datagrid' : '数据表格',
+  'categoryCode' : '类目编码',
+  'categoryName' : '类目名称'
 });
 
 LK.UI.form({
@@ -18,12 +21,33 @@ LK.UI.form({
     'versions' : '1.0.0',
     'startTime' : '2018-07-26',
     'content' : 'fffffffffffffffff',
+    'datagrid' : 'USING_STATUS',
     'textbox' : 'fffff',
     'droplist' : 'MALE',
     'numberspinner' : '123'
   },
   plugins : [
       {
+        plugin : 'datagrid',
+        options : {
+          name : 'datagrid',
+          validator : true,
+          valueFieldName : 'categoryCode',
+          url : '/L/SysCategory',
+          $appendTo : $('#demo'),
+          columns : [
+              {
+                'name' : 'categoryCode',
+                'text' : 'categoryCode',
+                'width' : '200'
+              }, {
+                'name' : 'categoryName',
+                'text' : 'categoryName',
+                'width' : '200'
+              }
+          ]
+        }
+      }, {
         plugin : 'textbox',
         options : {
           name : 'rows14',
@@ -35,6 +59,13 @@ LK.UI.form({
         options : {
           name : 'content',
           validator : true
+        }
+      }, {
+        plugin : 'textbox',
+        options : {
+          name : 'rows14',
+          validator : true,
+          rows : 14
         }
       }, {
         plugin : 'datepicker',
