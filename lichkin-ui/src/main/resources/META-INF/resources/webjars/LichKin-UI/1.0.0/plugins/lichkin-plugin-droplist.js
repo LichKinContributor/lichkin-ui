@@ -97,6 +97,9 @@ LK.UI('plugins', 'droplist', function(options) {
     'height' : LK.rowHeight * 6 - 1 + 'px',
     'top' : height + 1 + 'px'
   });
+  if (options.cls != '') {
+    $popup.addClass(options.cls);
+  }
 
   // 下拉内容显示/隐藏
   $popup.mouseover(function() {
