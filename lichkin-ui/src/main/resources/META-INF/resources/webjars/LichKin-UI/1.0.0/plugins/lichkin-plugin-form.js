@@ -123,6 +123,16 @@ LK.UI('plugins', 'form', function(options) {
       data : options.param,
       success : function(responseDatas) {
         if (responseDatas) {
+          out: for ( var key in responseDatas) {
+            for (var i = 0; i < options.plugins.length; i++) {
+              var plugin = options.plugins[i];
+              var name = plugin.options.name;
+              if (name == key) {
+                plugin.options.value = responseDatas[key];
+                continue out;
+              }
+            }
+          }
           LK.UI._form.createSubPlugin($plugin, options);
         }
       }
