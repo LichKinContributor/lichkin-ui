@@ -37,6 +37,7 @@ LK.UI.datagrid({
         }
       }
   ],
+  cols : 6,
   searchForm : [
       {
         plugin : 'textbox',
@@ -118,10 +119,50 @@ LK.UI.datagrid({
   ],
   value : 'USING_STATUS#@#GENDER',
   columns : [
-    {
-      'name' : 'categoryCode',
-      'text' : 'categoryCode',
-      'width' : '200'
-    }
+      {
+        'name' : 'categoryCode',
+        'text' : 'categoryCode',
+        'width' : '200'
+      }, {
+        'name' : 'categoryCode',
+        'text' : 'categoryCode',
+        'width' : '200'
+      }, {
+        'name' : 'categoryCode',
+        'text' : 'categoryCode',
+        'width' : '200'
+      }, {
+        'name' : 'categoryCode',
+        'text' : 'categoryCode',
+        'width' : '200'
+      }, {
+        'name' : 'categoryCode',
+        'text' : 'categoryCode',
+        'width' : '200'
+      }, {
+        'name' : 'categoryCode',
+        'text' : 'categoryCode',
+        'width' : '200'
+      }, {
+        'name' : 'categoryCode',
+        'text' : 'categoryCode',
+        'width' : '200'
+      }, {
+        'name' : 'categoryCode',
+        'text' : 'categoryCode',
+        'width' : '200'
+      }, {
+        'name' : 'categoryCode',
+        'text' : 'categoryCode',
+        'width' : '200'
+      }, {
+        'name' : 'categoryCode',
+        'text' : 'categoryCode',
+        'width' : '200'
+      }, {
+        'name' : 'categoryCode',
+        'text' : 'categoryCode',
+        'width' : '200'
+      }
   ]
 });

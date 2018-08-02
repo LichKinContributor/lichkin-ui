@@ -231,6 +231,10 @@ LK.UI('plugins', 'changeIcon', function(options) {
 // 绑定图标样式
 (function() {
   var mappings = {
+    'go-first' : 'step-backward',
+    'go-previous' : 'backward',
+    'go-next' : 'forward',
+    'go-last' : 'step-forward',
     'page' : 'file',
     'folder' : 'folder',
     'starter' : 'chevron-circle-down',

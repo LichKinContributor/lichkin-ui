@@ -188,10 +188,88 @@ LK.UI('plugins', 'datagrid', function(options) {
     }
   }
 
+  // 分页栏
+  var $pageBar = $('<div class="lichkin-datagrid-pageBar"></div>');
+  if (options.pageable == true) {
+    $pageBar.appendTo($plugin);
+    $pageBar.css('width', dataWidth);
+
+    // 页面大小选择项
+    var pageListData = new Array();
+    for (var i = 0; i < options.pageList.length; i++) {
+      pageListData.push({
+        'text' : options.pageList[i],
+        'value' : options.pageList[i]
+      });
+    }
+    var $pageList = LK.UI.droplist({
+      $appendTo : $pageBar,
+      data : pageListData,
+      value : options.pageSize,
+      onChange : function($pageList, pluginValues, pluginValue, currentValue) {
+        $plugin.LKLoad();
+      },
+      cancelabel : false,
+      cls : 'pageList'
+    });
+
+    // 统计栏
+    var $statistics = $('<div class="statistics"></div>').appendTo($pageBar);
+    $statistics.append(LK.UI.text({
+      'original' : true,
+      'text' : $.LKGetI18N('datagrid-statistics').replace('{from}', 0).replace('{to}', 0).replace('{total}', 0)
+    }));
+
+    // 跳页按钮栏
+    var $jumpButtons = $('<div class="buttons"></div>').appendTo($pageBar);
+    LK.UI.button({
+      icon : 'go-first',
+      click : function() {
+        $plugin.LKLoad();
+      }
+    }).appendTo($jumpButtons);
+    LK.UI.button({
+      icon : 'go-previous',
+      click : function() {
+        $plugin.LKLoad();
+      }
+    }).appendTo($jumpButtons);
+    LK.UI.text({
+      'original' : true,
+      text : $.LKGetI18N('page-prefix').replace('{totalPages}', 0)
+    }).appendTo($jumpButtons);
+    LK.UI.numberspinner({
+      $appendTo : $jumpButtons,
+      cls : 'pageNumber',
+      value : 0
+    });
+    LK.UI.text({
+      'original' : true,
+      text : $.LKGetI18N('page-suffix').replace('{totalPages}', 0)
+    }).appendTo($jumpButtons);
+    LK.UI.button({
+      icon : 'go-next',
+      click : function() {
+        $plugin.LKLoad();
+      }
+    }).appendTo($jumpButtons);
+    LK.UI.button({
+      icon : 'go-last',
+      click : function() {
+        $plugin.LKLoad();
+      }
+    }).appendTo($jumpButtons);
+  }
+
   // 数据栏
-  var $dataBar = $('<div class="lichkin-datagrid-dataBar"></div>').appendTo($plugin);
+  var $dataBar = $('<div class="lichkin-datagrid-dataBar"></div>');
+  if (options.pageable == true) {
+    $dataBar.insertBefore($pageBar);
+  } else {
+    $dataBar.appendTo($plugin);
+  }
   $dataBar.css('width', dataWidth);
-  $dataBar.css('height', height - 2 - ((options.title != null || options.icon != null) ? $titleBar.outerHeight() : 0) - (options.searchForm.length != 0 ? $searchFormBar.outerHeight() : 0));
+  $dataBar.css('height', height - 2 - ((options.title != null || options.icon != null) ? $titleBar.outerHeight() : 0) - (options.searchForm.length != 0 ? $searchFormBar.outerHeight() : 0) - (options.pageable == true ? $pageBar.outerHeight() : 0));
   // 数据标题栏
   var $dataHeaderBar = $('<div class="lichkin-datagrid-dataHeaderBar"></div>').appendTo($dataBar);
   $dataHeaderBar.css('width', dataWidth);
@@ -285,7 +363,15 @@ LK.UI('plugins', 'datagrid', function(options) {
    * @see LK.UI.button（click方法被重写，第一个参数保持按钮控件不变，增加第二个参数当前对话框控件。仅支持图标按钮。）
    * @tip 如果输入了title或icon，则框架内部会补充刷新按钮。如果有查询表单时，则框架内部会补充重置按钮和查询按钮。
    */
-  titleTools : []
+  titleTools : [],
+  // 是否带分页信息
+  pageable : true,
+  // 分页大小
+  pageSize : 25,
+  // 页面大小选择项数据
+  pageList : [
+      25, 50, 100, 200
+  ]
 });
 
 $('body').mousedown(function(e) {

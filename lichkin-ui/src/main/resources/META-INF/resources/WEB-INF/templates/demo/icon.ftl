@@ -41,6 +41,10 @@
 		LK.UI.icon({size:120,icon:'sysMgmt',type:false}).appendTo('#demo');
 		LK.UI.icon({size:128,icon:'sysMgmt',type:false}).appendTo('#demo');
 
+		LK.UI.icon({size:32,icon:'go-first',type:false}).appendTo('#demo2');
+		LK.UI.icon({size:32,icon:'go-previous',type:false}).appendTo('#demo2');
+		LK.UI.icon({size:32,icon:'go-next',type:false}).appendTo('#demo2');
+		LK.UI.icon({size:32,icon:'go-last',type:false}).appendTo('#demo2');
 		LK.UI.icon({size:32,icon:'page',type:false}).appendTo('#demo2');
 		LK.UI.icon({size:32,icon:'folder',type:false}).appendTo('#demo2');
 		LK.UI.icon({size:32,icon:'starter',type:false}).appendTo('#demo2');
@@ -98,6 +102,10 @@
 		LK.UI.icon({size:32,icon:'dictTimeMgmt',type:false}).appendTo('#demo2');
 		LK.UI.icon({size:32,icon:'employeeAttendance',type:false}).appendTo('#demo2');
 
+		LK.UI.icon({size:32,icon:'go-first',type:true}).appendTo('#demo3');
+		LK.UI.icon({size:32,icon:'go-previous',type:true}).appendTo('#demo3');
+		LK.UI.icon({size:32,icon:'go-next',type:true}).appendTo('#demo3');
+		LK.UI.icon({size:32,icon:'go-last',type:true}).appendTo('#demo3');
 		LK.UI.icon({size:32,icon:'page',type:true}).appendTo('#demo3');
 		LK.UI.icon({size:32,icon:'folder',type:true}).appendTo('#demo3');
 		LK.UI.icon({size:32,icon:'starter',type:true}).appendTo('#demo3');

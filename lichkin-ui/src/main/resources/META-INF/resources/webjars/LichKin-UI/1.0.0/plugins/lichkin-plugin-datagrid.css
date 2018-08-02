@@ -139,6 +139,57 @@
   padding: 6px;
 }
 
+.lichkin-datagrid .lichkin-datagrid-pageBar {
+  border-top: none;
+  border-right: 1px solid var(--lichkin-plugin-border-color);
+  border-bottom: 1px solid var(--lichkin-plugin-border-color);
+  border-left: 1px solid var(--lichkin-plugin-border-color);
+  background-color: var(--lichkin-plugin-background-color);
+  padding: 3px 0px;
+  height: 30px;
+}
+
+.lichkin-datagrid .lichkin-datagrid-pageBar .lichkin-droplist.pageList {
+  float: left;
+  margin-left: 10px;
+  width: 58px !important;
+}
+
+.lichkin-droplist-popup.pageList {
+  width: 58px !important;
+}
+
+.lichkin-datagrid .lichkin-datagrid-pageBar .lichkin-numberspinner.pageNumber {
+  width: 58px !important;
+}
+
+.lichkin-datagrid .lichkin-datagrid-pageBar .lichkin-numberspinner.pageNumber .lichkin-plugin-text {
+  width: 46px !important;
+}
+
+.lichkin-datagrid .lichkin-datagrid-pageBar .statistics {
+  float: right;
+  padding: 4px;
+}
+
+.lichkin-datagrid .lichkin-datagrid-pageBar .statistics .lichkin-text {
+  display: block;
+}
+
+.lichkin-datagrid .lichkin-datagrid-pageBar .buttons {
+  float: left;
+  margin-left: 10px;
+}
+
+.lichkin-datagrid .lichkin-datagrid-pageBar .buttons .lichkin-button {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.lichkin-datagrid .lichkin-datagrid-pageBar .buttons .lichkin-button i {
+  color: var(--lichkin-plugin-border-color);
+}
+
 .lichkin-form-field .lichkin-form-field-value .lichkin-datagrid {
   border: 1px solid var(--lichkin-plugin-border-color);
 }

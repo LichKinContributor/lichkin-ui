@@ -14,6 +14,13 @@ LK.i18n = {
   ajaxError : '请求时服务器出现异常',
   singleSelect : '只能选择一项数据',
   noSelect : '请先选择一项数据',
+  'datagrid-statistics' : '当前显示为第{from}条到{to}条数据,共有{total}条数据。',
+  'go-first' : '第一页',
+  'go-previous' : '上一页',
+  'go-next' : '下一页',
+  'go-last' : '最后一页',
+  'page-prefix' : '第',
+  'page-suffix' : '页，共{totalPages}页',
 
   /** 图标 */
   // 通用图标

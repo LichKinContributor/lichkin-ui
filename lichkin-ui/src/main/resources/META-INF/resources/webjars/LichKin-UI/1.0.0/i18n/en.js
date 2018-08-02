@@ -14,6 +14,13 @@ LK.i18n = {
   ajaxError : 'An error occurred when invoke server.',
   singleSelect : 'Single select to do this.',
   noSelect : 'No select to do this.',
+  'datagrid-statistics' : 'Displaying {from} to {to} of {total} records',
+  'go-first' : 'first',
+  'go-previous' : 'previous',
+  'go-next' : 'next',
+  'go-last' : 'last',
+  'page-prefix' : 'Page',
+  'page-suffix' : 'of {totalPages}',
 
   /** 图标 */
   // 通用图标
