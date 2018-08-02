@@ -121,10 +121,31 @@ LK.UI('plugins', 'datagrid', function(options) {
     });
   }
 
+  // 查询表单栏
+  var $searchFormBar = $('<div class="lichkin-datagrid-searchFormBar"></div>');
+  var $searchForm;
+  if (options.searchForm.length != 0) {
+    $searchFormBar.appendTo($plugin);
+    $searchForm = LK.UI.form({
+      $appendTo : $searchFormBar,
+      plugins : options.searchForm
+    });
+    var searchFormWidth = 0;
+    $searchForm.find('.lichkin-form-field').each(function() {
+      searchFormWidth += $(this).outerWidth();
+    });
+    $searchFormBar.css('width', searchFormWidth + LK.leftGap + 17);
+    $searchFormBar.css('padding-bottom', LK.topGap);
+  }
+
   // 标题栏
   var $titleBar = $('<div class="lichkin-datagrid-titleBar"></div>');
   if (options.title != null || options.icon != null) {
-    $titleBar.appendTo($plugin);
+    if (options.searchForm.length != 0) {
+      $titleBar.insertBefore($searchFormBar);
+    } else {
+      $titleBar.appendTo($plugin);
+    }
     if (options.icon != null) {
       $titleBar.append(LK.UI.icon({
         'icon' : options.icon,
@@ -135,6 +156,50 @@ LK.UI('plugins', 'datagrid', function(options) {
       $titleBar.append(LK.UI.text({
         'text' : options.title
       }));
+    }
+    if (options.searchForm.length != 0) {
+      options.titleTools.push({
+        icon : 'reset',
+        click : function() {
+          $searchForm.LKFormBindData();
+        }
+      });
+      options.titleTools.push({
+        icon : 'search',
+        click : function() {
+          $plugin.LKLoad({
+            param : $searchForm.LKFormGetData()
+          });
+        }
+      });
+    } else {
+      options.titleTools.push({
+        icon : 'search',
+        click : function() {
+          $plugin.LKLoad();
+        }
+      });
+    }
+    var $buttonsBar = $('<div class="lichkin-buttons"></div>').appendTo($titleBar);
+    for (var i = 0; i < options.titleTools.length; i++) {
+      var button = options.titleTools[i];
+      (function(button) {
+        var click = button.click;
+        if (typeof click != 'function') {
+          click = function() {
+          };
+        }
+        $buttonsBar.append(LK.UI.button({
+          _icon : {
+            icon : button.icon,
+            size : 24
+          },
+          click : function($button) {
+            click($button, $plugin);
+          },
+          tip : button.tip
+        }));
+      })(button);
     }
   }
 
@@ -154,7 +219,11 @@ LK.UI('plugins', 'datagrid', function(options) {
     }).css('width', parseInt(column.width) - 12));
   }
 
-  if (options.title != null) {
+  if (options.searchForm.length != 0 && dataWidth < $searchFormBar.outerWidth()) {
+    dataWidth = $searchFormBar.width();
+  }
+
+  if (options.title != null || options.icon != null) {
     $titleBar.css('width', dataWidth);
   }
   $dataBar.css('width', dataWidth);
@@ -225,7 +294,18 @@ LK.UI('plugins', 'datagrid', function(options) {
   // 标题
   title : null,
   // 图标
-  icon : null
+  icon : null,
+  /**
+   * 查询表单
+   * @see LK.UI.form中的plugins参数
+   */
+  searchForm : [],
+  /**
+   * 标题栏工具栏
+   * @see LK.UI.button（click方法被重写，第一个参数保持按钮控件不变，增加第二个参数当前对话框控件。仅支持图标按钮。）
+   * @tip 如果输入了title或icon，则框架内部会补充刷新按钮。如果有查询表单时，则框架内部会补充重置按钮和查询按钮。
+   */
+  titleTools : []
 });
 
 $('body').mousedown(function(e) {
