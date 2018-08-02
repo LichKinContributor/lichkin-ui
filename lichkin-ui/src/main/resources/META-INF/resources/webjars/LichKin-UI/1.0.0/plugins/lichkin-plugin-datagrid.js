@@ -9,8 +9,9 @@ LK.UI._datagrid = {
    * @param $plugin 控件对象
    * @param $container 数据容器对象
    * @param values 值数组
+   * @param isCreateEvent 是否为创建是调用
    */
-  setValues : function($plugin, $container, values) {
+  setValues : function($plugin, $container, values, isCreateEvent) {
     var valueFieldName = $plugin.data('LKOPTIONS').valueFieldName;
 
     var valueArr = [];
@@ -41,7 +42,7 @@ LK.UI._datagrid = {
       });
     }
 
-    $plugin.LKSetValues(valueArr);
+    $plugin.LKSetValues(valueArr, isCreateEvent);
   },
 
   /**

@@ -219,8 +219,9 @@ $.fn.extend({
   /**
    * 设置控件值
    * @param values 值
+   * @param isCreateEvent 是否为创建是调用
    */
-  LKSetValues : function(values) {
+  LKSetValues : function(values, isCreateEvent) {
     var currentValue = values;
     if (Array.isArray(values)) {
       currentValue = values.join(LK.SPLITOR);
@@ -236,7 +237,9 @@ $.fn.extend({
     } else {
       this.LKGetValueObj().val(currentValue);
     }
-    this.data('LKOPTIONS').onChange(this, this.LKGetValues(), this.LKGetValue(), currentValue);
+    if (typeof isCreateEvent == 'undefined' || isCreateEvent != true) {
+      this.data('LKOPTIONS').onChange(this, this.LKGetValues(), this.LKGetValue(), currentValue);
+    }
   },
 
   /**
@@ -388,16 +391,17 @@ $.fn.extend({
   /**
    * 调用设置值方法
    * @param values 值
+   * @param isCreateEvent 是否为创建是调用
    */
-  LKInvokeSetValues : function(values) {
+  LKInvokeSetValues : function(values, isCreateEvent) {
     if (isString(values)) {
       values = values.split(LK.SPLITOR);
     }
     var plugin = this.LKGetPluginType();
     if (plugin == 'droplist' || plugin == 'datagrid') {
-      this.LKGetImplementor().setValues(this, this.LKGetDataContainer(), values);
+      this.LKGetImplementor().setValues(this, this.LKGetDataContainer(), values, isCreateEvent);
     } else {
-      this.LKSetValues(values);
+      this.LKSetValues(values, isCreateEvent);
     }
   },
 
@@ -609,13 +613,13 @@ LK.UI('plugins', 'load', function(opts) {
     if (opts.isCreateEvent) {
       var initValue = $plugin.data('initValue');
       if (initValue != null) {
-        $plugin.LKInvokeSetValues(initValue);
+        $plugin.LKInvokeSetValues(initValue, true);
       }
       $plugin.LKlinkage(initValue, true);
     } else {
       if (opts.linkage != null && opts.linkage.isCreateEvent == true) {
         var initValue = $plugin.data('initValue');
-        $plugin.LKInvokeSetValues(initValue);
+        $plugin.LKInvokeSetValues(initValue, true);
         $plugin.LKlinkage(initValue, true);
       }
     }
@@ -638,13 +642,13 @@ LK.UI('plugins', 'load', function(opts) {
           if (opts.isCreateEvent) {
             var initValue = $plugin.data('initValue');
             if (initValue != null) {
-              $plugin.LKInvokeSetValues(initValue);
+              $plugin.LKInvokeSetValues(initValue, true);
             }
             $plugin.LKlinkage(initValue, true);
           } else {
             if (opts.linkage != null && opts.linkage.isCreateEvent == true) {
               var initValue = $plugin.data('initValue');
-              $plugin.LKInvokeSetValues(initValue);
+              $plugin.LKInvokeSetValues(initValue, true);
               $plugin.LKlinkage(initValue, true);
             }
           }
