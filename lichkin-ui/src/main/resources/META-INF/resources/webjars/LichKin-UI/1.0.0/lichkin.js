@@ -417,6 +417,8 @@ var LK = {
     }
 
     if (typeof callback == 'undefined') {
+      callback = function() {
+      };
     } else if (isString(callback)) {
       callback = window[callback];
       if (typeof callback != 'function') {
