@@ -188,6 +188,60 @@ LK.UI('plugins', 'datagrid', function(options) {
     }
   }
 
+  if (options.toolsAdd != null) {
+    options.tools.unshift({
+      icon : 'add',
+      click : function() {
+        LK.UI.openDialog($.extend({}, options.toolsAdd.dialog, {
+          title : 'add',
+          icon : 'add',
+          url : '',
+          param : {},
+          data : {},
+          content : '',
+          mask : true,
+          buttons : [
+              {
+                text : 'save',
+                icon : 'save',
+                cls : 'warning',
+                click : function($button, $dialog) {
+                  var $form = $dialog.find('form');
+                  if ($form.LKValidate()) {
+                    LK.ajax({
+                      url : options.toolsAdd.saveUrl,
+                      data : $form.LKFormGetData(),
+                      showSuccess : true,
+                      success : function() {
+                        $plugin.LKLoad();
+                        $dialog.LKCloseDialog();
+                      }
+                    });
+                  }
+                }
+              }, {
+                text : 'cancel',
+                icon : 'cancel',
+                cls : 'danger',
+                click : function($button, $dialog) {
+                  $dialog.LKCloseDialog();
+                }
+              }
+          ],
+          onAfterCreate : function($dialog, $contentBar) {
+            LK.UI.form($.extend({}, options.toolsAdd.form, {
+              $appendTo : $contentBar,
+              $renderTo : null,
+              values : {},
+              url : '',
+              param : {}
+            }));
+          }
+        }));
+      }
+    });
+  }
+
   // 工具栏
   var $toolsBar = $('<div class="lichkin-datagrid-toolsBar"></div>');
   if (options.tools.length != 0) {
@@ -392,6 +446,13 @@ LK.UI('plugins', 'datagrid', function(options) {
    * @see LK.UI.button（click方法被重写，第一个参数保持按钮控件不变，增加第二个参数当前对话框控件。）
    */
   tools : [],
+  /**
+   * 工具栏-新增按钮
+   * @param form see LK.UI.form，其中$appendTo/$renderTo/values/url/param参数无效。
+   * @param dialog see LK.UI.dialog，其中title/icon/url/param/data/content/mask/buttons/onAfterCreate无效。
+   * @param saveUrl 表单提交地址
+   */
+  toolsAdd : null,
   // 是否带分页信息
   pageable : true,
   // 分页大小

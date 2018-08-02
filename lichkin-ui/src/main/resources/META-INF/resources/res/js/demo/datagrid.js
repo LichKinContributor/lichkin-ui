@@ -55,6 +55,50 @@ LK.UI.datagrid({
         }
       }
   ],
+  toolsAdd : {
+    saveUrl : '/I/SysDictionary',
+    dialog : {
+      size : {
+        cols : 1,
+        rows : 3
+      }
+    },
+    form : {
+      plugins : [
+          {
+            plugin : 'textbox',
+            textKey : 'tip',
+            options : {
+              name : 'dictName',
+              validator : true
+            }
+          }, {
+            plugin : 'textbox',
+            textKey : 'tip',
+            options : {
+              name : 'dictCode',
+              validator : true
+            }
+          }, {
+            plugin : 'numberspinner',
+            textKey : 'tip',
+            options : {
+              name : 'orderId',
+              value : 0
+            }
+          }, {
+            plugin : 'hidden',
+            textKey : 'tip',
+            options : {
+              name : 'categoryCode',
+              value : 'nation',
+              validator : true
+            }
+          }
+
+      ]
+    }
+  },
   cols : 6,
   searchForm : [
       {
