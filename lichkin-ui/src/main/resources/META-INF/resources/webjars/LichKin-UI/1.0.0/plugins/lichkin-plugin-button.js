@@ -21,6 +21,7 @@ LKUI.button = function(text, icon, click, tip) {
 LK.UI('plugins', 'button', function(options) {
   // 创建控件对象
   var $plugin = $('<a href="javascript:;" class="lichkin-button"></a>');
+  $plugin.css('height', LK.rowHeight - 2 + 'px');
 
   // 增加样式
   if (options.cls != null) {

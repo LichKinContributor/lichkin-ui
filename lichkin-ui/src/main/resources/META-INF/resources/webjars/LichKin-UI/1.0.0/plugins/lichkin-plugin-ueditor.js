@@ -16,15 +16,16 @@ LK.UI('plugins', 'ueditor', function(options) {
   var $value = $plugin.LKGetValueObj();
 
   // 宽度不同时，工具栏行数不同，将影响高度的设置
-  var width = $plugin.data('LKOPTIONS').width;
-  var height = $plugin.data('LKOPTIONS').height;
-  var lines = 1;
-  if (width >= 2059) {
-    lines = 1;
-  } else if (width >= 1039) {
-    lines = 2;
-  } else if (width >= 702) {
-    lines = 3;
+  var width = $plugin.width() + 2;
+  var height = $plugin.height();
+  var toolbarboxHeight = 0;
+  var bottomContainerHeight = 25;
+  if (width >= 2026 + 2) {
+    toolbarboxHeight = 32;
+  } else if (width >= 1017 + 2) {
+    toolbarboxHeight = 57;
+  } else if (width >= 693 + 2) {
+    toolbarboxHeight = 82;
   } else {
     throw 'ueditor width is too small.';
   }
@@ -32,8 +33,8 @@ LK.UI('plugins', 'ueditor', function(options) {
   // 创建UEditor对象
   var ue = UE.getEditor($plugin.data('LKOPTIONS').id, {
     autoHeightEnabled : false,
-    initialFrameWidth : width,
-    initialFrameHeight : height - 7 - 25 - 24 * lines
+    initialFrameWidth : width - 2,
+    initialFrameHeight : height - toolbarboxHeight - bottomContainerHeight
   });
 
   if (options.value != null) {
@@ -78,6 +79,8 @@ LK.UI('plugins', 'ueditor', function(options) {
   validator : null,
   value : null,
   inForm : false,
+  width : null,
+  height : null,
   cols : 4,
   rows : 14,
   cls : '',

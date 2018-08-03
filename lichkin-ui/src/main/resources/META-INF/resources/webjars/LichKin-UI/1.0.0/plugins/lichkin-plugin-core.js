@@ -441,11 +441,30 @@ LK.UI('plugins', 'create', function(opts) {
   // 创建UI控件对象
   var $plugin = $('<div id="' + id + '" data-id="' + plugin + '_' + id + '" class="lichkin-plugin lichkin-' + plugin + '" data-plugin-type="' + plugin + '"></div>');
 
-  var width = options.width = (LK.colWidth * options.cols - 2) + (options.inForm ? (options.cols - 1) * (LK.fieldKeyWidth + LK.leftGap) : 0);
-  var height = options.height = (LK.rowHeight * options.rows - 2) + (options.inForm ? (options.rows - 1) * LK.topGap : 0);
+  var width = options.width;
+  if (options.width == null) {
+    if (plugin == 'datagrid') {
+      width = options.width = options.inForm ? (LK.colWidth * options.cols) + (options.inForm ? (options.cols - 1) * (LK.fieldKeyWidth + LK.leftGap) : 0) - 2 : (LK.leftGap + LK.fieldKeyWidth + LK.colWidth) * options.cols;
+    } else {
+      width = options.width = (LK.colWidth * options.cols) + (options.inForm ? (options.cols - 1) * (LK.fieldKeyWidth + LK.leftGap) : 0) - 2;
+    }
+  } else {
+    width = options.width = options.width + 2;
+  }
+  var height = options.height;
+  if (options.height == null) {
+    if (plugin == 'datagrid') {
+      height = options.height = (LK.rowHeight + LK.topGap) * options.rows;
+    } else {
+      height = options.height = (LK.rowHeight * options.rows) + (options.inForm ? (options.rows - 1) * LK.topGap : 0) - 2;
+    }
+  } else {
+    height = options.height = options.height + 2;
+  }
+
   $plugin.css({
-    width : width + 'px',
-    height : height + 'px'
+    width : width,
+    height : height
   });
 
   // 验证器转换
@@ -463,11 +482,17 @@ LK.UI('plugins', 'create', function(opts) {
     'plugin-type' : plugin
   });
   if (plugin == 'textbox' || plugin == 'datepicker' || plugin == 'textarea' || plugin == 'numberspinner') {
-    $value.LKAddPluginClass(plugin, 'text');
-    $value.css({
-      'width' : width - 12 + 'px',
-      'height' : height + 'px',
-      'line-height' : LK.rowHeight - 2 + 'px'
+    var textHeight = height - 2 * LK.textPaddingTB;
+    var textLineHeight = LK.rowHeight - 2 * LK.textPaddingTB - 2;
+    if (textHeight < textLineHeight) {
+      textLineHeight = textHeight;
+    }
+    $value.LKAddPluginClass(plugin, 'text').css({
+      'padding' : LK.textPaddingTB + 'px ' + LK.textPaddingLR + 'px',
+      'width' : width - 2 * LK.textPaddingLR + 'px',
+      'height' : textHeight + 'px',
+      'line-height' : textLineHeight + 'px',
+      'display' : 'block'
     });
   }
 
@@ -478,15 +503,18 @@ LK.UI('plugins', 'create', function(opts) {
 
   if (options.inForm) {
     var $field = $('<div class="lichkin-form-field"></div>').appendTo(options.$appendTo);
+    $field.css({
+      'padding' : LK.topGap + 'px 0px 0px ' + LK.leftGap + 'px'
+    });
 
     var $fieldKey = $('<div class="lichkin-form-field-key"></div>').appendTo($field).append(LK.UI.text({
       original : true,
       text : $.LKGetI18N(options.name) + ' :',
       style : {
-        'height' : LK.rowHeight - 6 + 'px',
-        'line-height' : LK.rowHeight - 6 + 'px'
+        'height' : LK.rowHeight - 2 * LK.textPaddingTB,
+        'line-height' : LK.rowHeight - 2 * LK.textPaddingTB + 'px'
       }
-    })).css('width', LK.fieldKeyWidth - 10 + 'px');
+    })).css('width', LK.fieldKeyWidth);
 
     var $fieldValue = $('<div class="lichkin-form-field-value"></div>').appendTo($field);
     $plugin.appendTo($fieldValue);
@@ -563,6 +591,10 @@ LK.UI('plugins', 'create', function(opts) {
     value : null,
     // 是否在表单中
     inForm : false,
+    // 宽度（特殊情况下使用）
+    width : null,
+    // 高度（特殊情况下使用）
+    height : null,
     // 列数
     cols : 1,
     // 行数

@@ -36,6 +36,8 @@ LK.UI('plugins', 'textbox', function(options) {
   validator : null,
   value : null,
   inForm : false,
+  width : null,
+  height : null,
   cols : 1,
   rows : 1,
   cls : '',

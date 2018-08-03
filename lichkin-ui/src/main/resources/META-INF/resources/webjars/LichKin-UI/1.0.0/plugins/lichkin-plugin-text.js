@@ -16,6 +16,12 @@ LK.UI('plugins', 'text', function(options) {
   // 创建控件对象
   var $plugin = $('<span class="lichkin-text">' + (options.original ? options.text : $.LKGetI18N(options.text)) + '</span>');
 
+  $plugin.css({
+    'padding' : LK.textPaddingTB + 'px ' + LK.textPaddingLR + 'px',
+    'height' : LK.rowHeight - 2 * LK.textPaddingTB + 'px',
+    'line-height' : LK.rowHeight - 2 * LK.textPaddingTB - 2 + 'px'
+  });
+
   // 设置样式
   if (!$.isEmptyObject(options.style)) {
     $plugin.css(options.style);

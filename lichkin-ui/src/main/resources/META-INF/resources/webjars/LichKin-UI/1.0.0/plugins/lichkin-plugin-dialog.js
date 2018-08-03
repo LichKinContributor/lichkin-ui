@@ -220,18 +220,21 @@ LK.UI('plugins', 'openDialog', function(options) {
     if (typeof options.size.cols == 'undefined') {
       options.size.cols = 2;
     }
-    options.size.width = options.size.cols * (LK.colWidth + LK.fieldKeyWidth + 6) + 6;
+    options.size.width = options.formContent == true ? (options.size.cols * (LK.colWidth + LK.fieldKeyWidth + LK.leftGap)) : (options.size.cols * LK.colWidth);
   }
 
   if (typeof options.size.height == 'undefined') {
     if (typeof options.size.rows == 'undefined') {
       options.size.rows = 10;
     }
-    options.size.height = options.size.rows * (LK.rowHeight + 3) + 3;
+    options.size.height = options.formContent == true ? (options.size.rows * (LK.rowHeight + LK.topGap)) : (options.size.rows * LK.rowHeight);
   }
 
   // 添加内容栏
-  var $contentBar = $('<div class="lichkin-dialog-contentBar" style="width:' + options.size.width + 'px;height:' + options.size.height + 'px;"></div>').appendTo($plugin);
+  var $contentBar = $('<div class="lichkin-dialog-contentBar"></div>').appendTo($plugin).css({
+    'width' : options.size.width,
+    'height' : options.size.height
+  });
 
   if (options.url != '') {// 加载页面
     // 触发页面加载前事件
@@ -244,6 +247,11 @@ LK.UI('plugins', 'openDialog', function(options) {
       onAfterLoading : function(opts) {
         // 触发页面加载后事件
         options.onAfterLoading($plugin);
+      },
+      onAfterRender : function(opts) {
+        if ($contentBar.find('.lichkin-body').height() > $contentBar.height()) {
+          $contentBar.css('width', $contentBar.outerWidth() + 17);
+        }
       }
     });
   } else {// 填充页面
@@ -251,8 +259,9 @@ LK.UI('plugins', 'openDialog', function(options) {
   }
 
   // 添加按钮栏
+  var $buttonsBar = $('<div class="lichkin-dialog-buttonsBar"></div>');
   if (options.buttons.length != 0) {
-    var $buttonsBar = $('<div class="lichkin-dialog-buttonsBar"></div>').appendTo($plugin);
+    $buttonsBar.appendTo($plugin);
     for (var i = 0; i < options.buttons.length; i++) {
       var button = options.buttons[i];
       (function(button) {
@@ -273,7 +282,7 @@ LK.UI('plugins', 'openDialog', function(options) {
   // 定位&大小
   $plugin.css({
     'left' : ($doc.width() - options.size.width) / 2 + 'px',
-    'top' : ($doc.height() - options.size.height - 36 - (options.buttons.length != 0 ? 41 : 0)) / 2 + 'px'
+    'top' : ($doc.height() - options.size.height - $titleBar.height() - (options.buttons.length != 0 ? $buttonsBar.height() : 0)) / 2 + 'px'
   });
 
   // 切换
@@ -316,14 +325,16 @@ LK.UI('plugins', 'openDialog', function(options) {
   // 对话框大小
   size : {
     // 对话框内容宽度
-    width : 508,
+    width : 2 * LK.colWidth,
     // 对话框内容高度
-    height : 300,
+    height : 10 * LK.rowHeight,
     // 表格列数
     cols : 2,
     // 表格行数
     rows : 10
   },
+  // 表单内容，决定大小的设置。
+  formContent : true,
   /**
    * 对话框按钮数组
    * @see LK.UI.button（click方法被重写，第一个参数保持按钮控件不变，增加第二个参数当前对话框控件。）

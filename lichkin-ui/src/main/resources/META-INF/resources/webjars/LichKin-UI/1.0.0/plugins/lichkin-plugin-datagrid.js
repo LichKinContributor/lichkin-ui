@@ -104,7 +104,7 @@ LK.UI('plugins', 'datagrid', function(options) {
     options : options
   });
 
-  var width = $plugin.width();
+  var width = $plugin.width() + (options.inForm ? 2 : 0);
   var height = $plugin.height();
 
   // 查询表单栏
@@ -112,12 +112,14 @@ LK.UI('plugins', 'datagrid', function(options) {
   var $searchForm;
   if (options.searchForm.length != 0) {
     $searchFormBar.appendTo($plugin);
-    $searchFormBar.css('width', width);
-    $searchFormBar.css('padding-bottom', LK.topGap);
+    $searchFormBar.css({
+      'width' : width - 2,
+      'padding-bottom' : LK.topGap + 'px'
+    });
     $searchForm = LK.UI.form({
       $appendTo : $searchFormBar,
       plugins : options.searchForm
-    });
+    }).css('margin-left', -2 - LK.leftGap + 'px');
   }
 
   // 删除按钮
@@ -301,7 +303,7 @@ LK.UI('plugins', 'datagrid', function(options) {
     } else {
       $titleBar.appendTo($plugin);
     }
-    $titleBar.css('width', width);
+    $titleBar.css('width', width - 2);
     if (options.icon != null) {
       $titleBar.append(LK.UI.icon({
         'icon' : options.icon,
@@ -363,7 +365,7 @@ LK.UI('plugins', 'datagrid', function(options) {
   var $toolsBar = $('<div class="lichkin-datagrid-toolsBar"></div>');
   if (options.tools.length != 0) {
     $toolsBar.appendTo($plugin);
-    $toolsBar.css('width', width);
+    $toolsBar.css('width', width - 2);
     var $buttonsBar = $('<div class="lichkin-buttons"></div>').appendTo($toolsBar);
     for (var i = 0; i < options.tools.length; i++) {
       var button = options.tools[i];
@@ -386,7 +388,7 @@ LK.UI('plugins', 'datagrid', function(options) {
   var $pageBar = $('<div class="lichkin-datagrid-pageBar"></div>');
   if (options.pageable == true) {
     $pageBar.appendTo($plugin);
-    $pageBar.css('width', width);
+    $pageBar.css('width', width - 2);
 
     // 页面大小选择项
     var pageListData = new Array();
@@ -404,7 +406,9 @@ LK.UI('plugins', 'datagrid', function(options) {
         $plugin.LKLoad();
       },
       cancelabel : false,
-      cls : 'pageList'
+      cls : 'pageList',
+      width : 58,
+      height : 20
     });
 
     // 统计栏
@@ -435,6 +439,8 @@ LK.UI('plugins', 'datagrid', function(options) {
     LK.UI.numberspinner({
       $appendTo : $jumpButtons,
       cls : 'pageNumber',
+      width : 58,
+      height : 20,
       value : 0
     });
     LK.UI.text({
@@ -453,6 +459,8 @@ LK.UI('plugins', 'datagrid', function(options) {
         $plugin.LKLoad();
       }
     }).appendTo($jumpButtons);
+
+    $pageBar.append('<div style="clear:both;"></div>');
   }
 
   // 数据栏
@@ -462,11 +470,11 @@ LK.UI('plugins', 'datagrid', function(options) {
   } else {
     $dataBar.appendTo($plugin);
   }
-  $dataBar.css('width', width);
-  $dataBar.css('height', height - 2 - ((options.title != null || options.icon != null) ? $titleBar.outerHeight() : 0) - (options.searchForm.length != 0 ? $searchFormBar.outerHeight() : 0) - (options.pageable == true ? $pageBar.outerHeight() : 0));
+  $dataBar.css('width', width - 2);
+  $dataBar.css('height', height - 2 - $titleBar.outerHeight() - $searchFormBar.outerHeight() - $toolsBar.outerHeight() - $pageBar.outerHeight());
   // 数据标题栏
   var $dataHeaderBar = $('<div class="lichkin-datagrid-dataHeaderBar"></div>').appendTo($dataBar);
-  $dataHeaderBar.css('width', width);
+  $dataHeaderBar.css('width', width - 2);
   var $tableHeader = $('<table class="lichkin-table"></table>').appendTo($dataHeaderBar);
   var $tr = $('<tr class="lichkin-table-row"></tr>').appendTo($tableHeader);
   for (var i = 0; i < options.columns.length; i++) {
@@ -479,10 +487,10 @@ LK.UI('plugins', 'datagrid', function(options) {
 
   // 数据内容栏
   var $dataBodyBar = $('<div class="lichkin-datagrid-dataBodyBar"></div>').appendTo($dataBar);
-  $dataBodyBar.css('width', width);
+  $dataBodyBar.css('width', width - 2);
   $dataBodyBar.css('height', $dataBar.height() - $dataHeaderBar.outerHeight());
   $dataBodyBar.scroll(function(e) {
-    $dataHeaderBar.css('margin-left', -$(this).scrollLeft());
+    $dataHeaderBar.css('margin-left', -$(this).scrollLeft() + 'px');
   });
   // 数据容器
   var $container = $('<table class="lichkin-table"></table>').appendTo($dataBodyBar).LKAddPluginClass(plugin, 'dataContainer');
@@ -507,6 +515,8 @@ LK.UI('plugins', 'datagrid', function(options) {
   validator : null,
   value : null,
   inForm : false,
+  width : null,
+  height : null,
   cols : 4,
   rows : 14,
   cls : '',

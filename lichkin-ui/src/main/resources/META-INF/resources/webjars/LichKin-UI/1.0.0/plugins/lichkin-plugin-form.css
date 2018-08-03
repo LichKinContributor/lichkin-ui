@@ -2,13 +2,11 @@
 
 .lichkin-form-field {
   display: inline-block;
-  padding: 3px 0px 0px 6px;
   float: left;
 }
 
 .lichkin-form-field .lichkin-form-field-key {
   float: left;
-  padding: 0px 5px;
   text-align: right;
 }
 

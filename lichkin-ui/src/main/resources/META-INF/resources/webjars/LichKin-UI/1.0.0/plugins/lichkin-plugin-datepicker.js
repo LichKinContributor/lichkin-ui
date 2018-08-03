@@ -53,6 +53,8 @@ LK.UI('plugins', 'datepicker', function(options) {
   validator : null,
   value : null,
   inForm : false,
+  width : null,
+  height : null,
   cols : 1,
   // rows : 1,
   cls : '',

@@ -42,8 +42,8 @@
   position: absolute;
   left: 6px;
   top: 0px;
-  height: 29px;
-  line-height: 29px;
+  height: 29px !important;
+  line-height: 29px !important;
   color: var(--lichkin-plugin-background-color);
   font-size: var(--lichkin-datagrid-title-font-size);
 }
@@ -186,31 +186,20 @@
   border-bottom: 1px solid var(--lichkin-plugin-border-color);
   border-left: 1px solid var(--lichkin-plugin-border-color);
   background-color: var(--lichkin-plugin-background-color);
-  padding: 3px 0px;
-  height: 30px;
 }
 
 .lichkin-datagrid .lichkin-datagrid-pageBar .lichkin-droplist.pageList {
   float: left;
   margin-left: 10px;
-  width: 58px !important;
-}
-
-.lichkin-droplist-popup.pageList {
-  width: 58px !important;
+  margin-top: 3px;
 }
 
 .lichkin-datagrid .lichkin-datagrid-pageBar .lichkin-numberspinner.pageNumber {
-  width: 58px !important;
-}
-
-.lichkin-datagrid .lichkin-datagrid-pageBar .lichkin-numberspinner.pageNumber .lichkin-plugin-text {
-  width: 46px !important;
+  margin-top: 3px;
 }
 
 .lichkin-datagrid .lichkin-datagrid-pageBar .statistics {
   float: right;
-  padding: 4px;
 }
 
 .lichkin-datagrid .lichkin-datagrid-pageBar .statistics .lichkin-text {

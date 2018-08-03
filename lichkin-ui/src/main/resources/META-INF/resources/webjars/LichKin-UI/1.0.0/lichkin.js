@@ -125,15 +125,19 @@ var LK = {
   // 控件文字颜色
   pluginInvalidFontColor : '#d43f3a',
   // 表单内控件距离顶部间距
-  topGap : 3,
+  topGap : 10,
   // 表单内控件距离左部间距
-  leftGap : 6,
+  leftGap : 10,
   // 表单内控件键宽
-  fieldKeyWidth : 113,// 七个汉字
+  fieldKeyWidth : 200,// 七个汉字
   // 列宽
-  colWidth : 176,// 最小值
+  colWidth : 200,// UEditor最小宽度为695
   // 行高
   rowHeight : 30,
+  // 文本上下内边距
+  textPaddingTB : 3,
+  // 文本左右内边距
+  textPaddingLR : 6,
 
   // 标准分隔符
   SPLITOR : '#@#',
@@ -551,6 +555,7 @@ var LK = {
    * @param options[showLoading] [boolean] 是否显示加载效果
    * @param options[timeout] [function|string] 超时回调时，方法或方法名。
    * @param options[onAfterLoading] [function] 页面加载后事件
+   * @param options[onAfterRender] [function] 页面渲染后事件
    */
   loadPage : function(options) {
     var loadingId = '';
@@ -567,7 +572,9 @@ var LK = {
       url : LK.resolveUrl(options.url, true, options.param),
       data : JSON.stringify($.extend({}, options.data)),
       success : function(text) {
-        options.onAfterLoading(options);
+        setTimeout(function() {
+          options.onAfterLoading(options);
+        }, 333);
         loadingTimeout = false;
         setTimeout(function() {
           if (options.showLoading) {
@@ -589,6 +596,9 @@ var LK = {
           }
           head.appendChild(script);
         });
+        setTimeout(function() {
+          options.onAfterRender(options);
+        }, 333);
       },
       error : function() {
         loadingTimeout = false;

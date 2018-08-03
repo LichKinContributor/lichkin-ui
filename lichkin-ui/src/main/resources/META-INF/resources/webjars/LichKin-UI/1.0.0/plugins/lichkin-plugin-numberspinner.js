@@ -15,6 +15,8 @@ LK.UI('plugins', 'numberspinner', function(options) {
     options : options
   });
 
+  var height = $plugin.data('LKOPTIONS').height;
+
   var $value = $plugin.LKGetValueObj();
 
   $value.bind({
@@ -24,15 +26,16 @@ LK.UI('plugins', 'numberspinner', function(options) {
   });
 
   // 按钮
-  var height = (LK.rowHeight - 2) / 2 - 4 + 'px';
-  var $button = $('<a href="javascript:;" class="lichkin-numberspinner-button" style="height:' + (LK.rowHeight - 2) + 'px"></a>').appendTo($plugin).LKAddPluginClass(plugin, 'button');
+  var buttonHeight = (height - (3.5 + 1 + 3.5)) / 2;
+  var $button = $('<a href="javascript:;" class="lichkin-numberspinner-button"></a>').appendTo($plugin).LKAddPluginClass(plugin, 'button');
+  $button.css('height', height);
   var $span = $('<span class="lichkin-numberspinner-button-container"></span>').appendTo($button);
   LK.UI.icon({
     size : 16,
     icon : 'spinner-plus'
   }).appendTo($span).css({
-    'height' : height,
-    'background-size' : height
+    'height' : buttonHeight,
+    'background-size' : buttonHeight + 'px'
   }).click(function() {
     var value = $plugin.LKGetValue().extarctInteger();
     if (value == '' || value == '-') {
@@ -42,15 +45,16 @@ LK.UI('plugins', 'numberspinner', function(options) {
     }
     $plugin.LKValidate();
   }).find('i').css({
-    'height' : height,
-    'line-height' : height
+    'height' : buttonHeight,
+    'line-height' : buttonHeight + 'px',
+    'font-size' : buttonHeight + 'px'
   });
   LK.UI.icon({
     size : 16,
     icon : 'spinner-minus'
   }).appendTo($span).css({
-    'height' : height,
-    'background-size' : height
+    'height' : buttonHeight,
+    'background-size' : buttonHeight + 'px'
   }).click(function() {
     var value = $plugin.LKGetValue().extarctInteger();
     if (value == '' || value == '-') {
@@ -60,8 +64,9 @@ LK.UI('plugins', 'numberspinner', function(options) {
     }
     $plugin.LKValidate();
   }).find('i').css({
-    'height' : height,
-    'line-height' : height
+    'height' : buttonHeight,
+    'line-height' : buttonHeight + 'px',
+    'font-size' : buttonHeight + 'px'
   });
 
   $plugin.LKValidate();
@@ -77,6 +82,8 @@ LK.UI('plugins', 'numberspinner', function(options) {
   validator : null,
   value : null,
   inForm : false,
+  width : null,
+  height : null,
   cols : 1,
   // rows : 1,
   cls : '',

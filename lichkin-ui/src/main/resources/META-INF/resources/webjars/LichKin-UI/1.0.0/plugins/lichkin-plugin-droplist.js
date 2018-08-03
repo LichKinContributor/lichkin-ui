@@ -110,9 +110,17 @@ LK.UI('plugins', 'droplist', function(options) {
 
   // 包装层
   var $wrapper = $('<div title=' + $.LKGetI18N('dropdown') + '></div>').appendTo($plugin).LKAddPluginClass(plugin, 'wrapper');
+  $wrapper.css('height', height);
+  var textHeight = height - 2 * LK.textPaddingTB;
+  var textLineHeight = LK.rowHeight - 2 * LK.textPaddingTB - 2;
+  if (textHeight < textLineHeight) {
+    textLineHeight = textHeight;
+  }
   var $text = LK.UI.text().appendTo($wrapper).LKAddPluginClass(plugin, 'text').css({
-    'height' : height + 'px',
-    'line-height' : LK.rowHeight - 2 + 'px'
+    'width' : width - 2 * LK.textPaddingLR + 'px',
+    'height' : textHeight + 'px',
+    'line-height' : textLineHeight + 'px',
+    'margin-top' : (height + 2 - LK.rowHeight) / 2 + 'px'
   });
 
   // 下拉按钮
@@ -122,6 +130,8 @@ LK.UI('plugins', 'droplist', function(options) {
       icon : 'dropdown'
     }
   }).appendTo($plugin).LKAddPluginClass(plugin, 'button');
+  $button.css('height', height);
+  $button.find('.lichkin-icon').css('top', (height - 24) / 2 + 'px');
 
   // 数据容器
   var $container = $('<ul></ul>').appendTo($popup).LKAddPluginClass(plugin, 'dataContainer');
@@ -146,6 +156,8 @@ LK.UI('plugins', 'droplist', function(options) {
   validator : null,
   value : null,
   inForm : false,
+  width : null,
+  height : null,
   cols : 1,
   rows : 1,
   cls : '',
