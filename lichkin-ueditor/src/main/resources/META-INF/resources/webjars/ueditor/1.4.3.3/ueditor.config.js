@@ -48,7 +48,7 @@
             //'webapp',
             'pagebreak',
             //'template',
-            'background', '|',
+            //'background', '|',
             'horizontal', 'date', 'time', //'spechars', 'snapscreen', 'wordimage',
             '|',
             'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|',
