@@ -544,6 +544,8 @@ LK.UI('plugins', 'datagrid', function(options) {
 
   // 支持多选
   multiSelect : false,
+  // 是否可以取消选中（仅在单选情况下起作用）
+  cancelable : true,
   // 值字段名
   valueFieldName : 'id',
   /**
@@ -636,7 +638,13 @@ $('body').mousedown(function(e) {
       $node.toggleClass('selected');
       $plugin.LKInvokeSetValues(null);
     } else {
-      $plugin.LKInvokeSetValues(($node.hasClass('selected') ? '' : dataValue));
+      if (options.cancelable == true) {
+        $plugin.LKInvokeSetValues(($node.hasClass('selected') ? '' : dataValue));
+      } else {
+        if (dataValue != $plugin.LKGetValue()) {
+          $plugin.LKInvokeSetValues(dataValue);
+        }
+      }
     }
     $plugin.LKlinkage(dataValue, false);
     $plugin.LKValidate();
