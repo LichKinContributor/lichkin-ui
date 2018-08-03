@@ -97,6 +97,10 @@
   border-left: 1px solid var(--lichkin-plugin-border-color);
 }
 
+.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-buttons {
+  text-align: left;
+}
+
 .lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-buttons .lichkin-button {
   background-color: transparent;
   border-color: transparent;
