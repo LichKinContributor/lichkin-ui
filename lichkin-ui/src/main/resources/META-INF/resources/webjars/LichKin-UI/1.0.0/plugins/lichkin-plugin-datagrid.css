@@ -73,6 +73,18 @@
   color: var(--lichkin-plugin-background-color);
 }
 
+.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-buttons .lichkin-button .lichkin-icon-add i {
+  color: #60ff60;
+}
+
+.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-buttons .lichkin-button .lichkin-icon-edit i {
+  color: #ffff00;
+}
+
+.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-buttons .lichkin-button .lichkin-icon-remove i {
+  color: #ff9c9c;
+}
+
 .lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-buttons .lichkin-icon-reset i {
   color: #ff7979;
 }

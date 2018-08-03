@@ -120,75 +120,9 @@ LK.UI('plugins', 'datagrid', function(options) {
     });
   }
 
-  // 标题栏
-  var $titleBar = $('<div class="lichkin-datagrid-titleBar"></div>');
-  if (options.title != null || options.icon != null) {
-    if (options.searchForm.length != 0) {
-      $titleBar.insertBefore($searchFormBar);
-    } else {
-      $titleBar.appendTo($plugin);
-    }
-    $titleBar.css('width', width);
-    if (options.icon != null) {
-      $titleBar.append(LK.UI.icon({
-        'icon' : options.icon,
-        'size' : 24
-      }));
-    }
-    if (options.title != null) {
-      $titleBar.append(LK.UI.text({
-        'text' : options.title
-      }));
-    }
-    if (options.searchForm.length != 0) {
-      options.titleTools.push({
-        icon : 'reset',
-        click : function() {
-          $searchForm.LKFormBindData();
-        }
-      });
-      options.titleTools.push({
-        icon : 'search',
-        click : function() {
-          $plugin.LKLoad({
-            param : $searchForm.LKFormGetData()
-          });
-        }
-      });
-    } else {
-      options.titleTools.push({
-        icon : 'search',
-        click : function() {
-          $plugin.LKLoad();
-        }
-      });
-    }
-    var $buttonsBar = $('<div class="lichkin-buttons"></div>').appendTo($titleBar);
-    for (var i = 0; i < options.titleTools.length; i++) {
-      var button = options.titleTools[i];
-      (function(button) {
-        var click = button.click;
-        if (typeof click != 'function') {
-          click = function() {
-          };
-        }
-        $buttonsBar.append(LK.UI.button({
-          _icon : {
-            icon : button.icon,
-            size : 24
-          },
-          click : function($button) {
-            click($button, $plugin);
-          },
-          tip : button.tip
-        }));
-      })(button);
-    }
-  }
-
   // 删除按钮
   if (options.toolsRemove != null) {
-    options.tools.unshift({
+    var json = {
       icon : 'remove',
       click : function() {
         var value = $plugin.LKGetValue();
@@ -210,12 +144,17 @@ LK.UI('plugins', 'datagrid', function(options) {
           });
         });
       }
-    });
+    };
+    if (typeof options.toolsRemove.titleTools != 'undefined' && options.toolsRemove.titleTools == true) {
+      options.titleTools.unshift(json);
+    } else {
+      options.tools.unshift(json);
+    }
   }
 
   // 编辑按钮
   if (options.toolsEdit != null) {
-    options.tools.unshift({
+    var json = {
       icon : 'edit',
       click : function() {
         var value = $plugin.LKGetValue();
@@ -283,12 +222,17 @@ LK.UI('plugins', 'datagrid', function(options) {
           }
         }));
       }
-    });
+    };
+    if (typeof options.toolsEdit.titleTools != 'undefined' && options.toolsEdit.titleTools == true) {
+      options.titleTools.unshift(json);
+    } else {
+      options.tools.unshift(json);
+    }
   }
 
   // 新增按钮
   if (options.toolsAdd != null) {
-    options.tools.unshift({
+    var json = {
       icon : 'add',
       click : function() {
         if (typeof options.toolsAdd.beforeClick == 'function' && !options.toolsAdd.beforeClick($plugin)) {
@@ -341,7 +285,78 @@ LK.UI('plugins', 'datagrid', function(options) {
           }
         }));
       }
-    });
+    };
+    if (typeof options.toolsAdd.titleTools != 'undefined' && options.toolsAdd.titleTools == true) {
+      options.titleTools.unshift(json);
+    } else {
+      options.tools.unshift(json);
+    }
+  }
+
+  // 标题栏
+  var $titleBar = $('<div class="lichkin-datagrid-titleBar"></div>');
+  if (options.title != null || options.icon != null) {
+    if (options.searchForm.length != 0) {
+      $titleBar.insertBefore($searchFormBar);
+    } else {
+      $titleBar.appendTo($plugin);
+    }
+    $titleBar.css('width', width);
+    if (options.icon != null) {
+      $titleBar.append(LK.UI.icon({
+        'icon' : options.icon,
+        'size' : 24
+      }));
+    }
+    if (options.title != null) {
+      $titleBar.append(LK.UI.text({
+        'text' : options.title
+      }));
+    }
+    if (options.searchForm.length != 0) {
+      options.titleTools.push({
+        icon : 'reset',
+        click : function() {
+          $searchForm.LKFormBindData();
+        }
+      });
+      options.titleTools.push({
+        icon : 'search',
+        click : function() {
+          $plugin.LKLoad({
+            param : $searchForm.LKFormGetData()
+          });
+        }
+      });
+    } else {
+      options.titleTools.push({
+        icon : 'search',
+        click : function() {
+          $plugin.LKLoad();
+        }
+      });
+    }
+    var $buttonsBar = $('<div class="lichkin-buttons"></div>').appendTo($titleBar);
+    for (var i = 0; i < options.titleTools.length; i++) {
+      var button = options.titleTools[i];
+      (function(button) {
+        var click = button.click;
+        if (typeof click != 'function') {
+          click = function() {
+          };
+        }
+        $buttonsBar.append(LK.UI.button({
+          _icon : {
+            icon : button.icon,
+            size : 24
+          },
+          click : function($button) {
+            click($button, $plugin);
+          },
+          tip : button.tip
+        }));
+      })(button);
+    }
   }
 
   // 工具栏
@@ -550,6 +565,7 @@ LK.UI('plugins', 'datagrid', function(options) {
   tools : [],
   /**
    * 工具栏-新增按钮
+   * @param titleTools true:在标题栏工具栏中使用;false:在工具栏中使用;
    * @param form see LK.UI.form，其中$appendTo/$renderTo/values/url/param参数无效。
    * @param dialog see LK.UI.dialog，其中title/icon/url/param/data/content/mask/buttons/onAfterCreate/onBeforeLoading/onAfterLoading无效。
    * @param saveUrl 表单提交地址
@@ -559,6 +575,7 @@ LK.UI('plugins', 'datagrid', function(options) {
   toolsAdd : null,
   /**
    * 工具栏-编辑按钮
+   * @param titleTools true:在标题栏工具栏中使用;false:在工具栏中使用;
    * @param form see LK.UI.form，其中$appendTo/$renderTo/values/param参数无效。
    * @param dialog see LK.UI.dialog，其中title/icon/url/param/data/content/mask/buttons/onAfterCreate/onBeforeLoading/onAfterLoading无效。
    * @param saveUrl 表单提交地址
@@ -566,6 +583,7 @@ LK.UI('plugins', 'datagrid', function(options) {
   toolsEdit : null,
   /**
    * 工具栏-删除按钮
+   * @param titleTools true:在标题栏工具栏中使用;false:在工具栏中使用;
    * @param saveUrl 表单提交地址
    */
   toolsRemove : null,
