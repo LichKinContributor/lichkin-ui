@@ -220,14 +220,14 @@ LK.UI('plugins', 'openDialog', function(options) {
     if (typeof options.size.cols == 'undefined') {
       options.size.cols = 2;
     }
-    options.size.width = options.formContent == true ? (options.size.cols * (LK.colWidth + LK.fieldKeyWidth + LK.leftGap)) : (options.size.cols * LK.colWidth);
+    options.size.width = options.size.cols * (LK.colWidth + LK.fieldKeyWidth + LK.leftGap) + (options.formContent == true ? LK.leftGap : 0);
   }
 
   if (typeof options.size.height == 'undefined') {
     if (typeof options.size.rows == 'undefined') {
       options.size.rows = 10;
     }
-    options.size.height = options.formContent == true ? (options.size.rows * (LK.rowHeight + LK.topGap)) : (options.size.rows * LK.rowHeight);
+    options.size.height = options.size.rows * (LK.rowHeight + LK.topGap) + (options.formContent == true ? LK.topGap : 0);
   }
 
   // 添加内容栏

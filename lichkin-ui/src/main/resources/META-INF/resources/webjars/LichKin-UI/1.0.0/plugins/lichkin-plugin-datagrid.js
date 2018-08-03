@@ -81,7 +81,10 @@ LK.UI._datagrid = {
       var $text = LK.UI.text({
         'original' : true,
         'text' : text
-      }).css('width', parseInt(column.width) - 12);
+      }).css({
+        'width' : parseInt(column.width) - 12,
+        'height' : 'auto'
+      });
       if (isString(column.textAlign)) {
         $text.css('text-align', column.textAlign);
       }
