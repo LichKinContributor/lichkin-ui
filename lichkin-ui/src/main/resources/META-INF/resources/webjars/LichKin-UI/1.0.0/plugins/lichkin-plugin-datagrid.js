@@ -72,7 +72,7 @@ LK.UI._datagrid = {
 
     for (var j = 0; j < columns.length; j++) {
       var column = columns[j];
-      var $td = $('<td class="lichkin-table-cell" style="width:' + column.width + 'px;"></td>').appendTo($tr);
+      var $td = $('<td class="lichkin-table-cell"></td>').appendTo($tr).css('width', parseInt(column.width));
       var text = data[column.name];
       if (column.formatter) {
         text = column.formatter(data);
@@ -104,17 +104,15 @@ LK.UI('plugins', 'datagrid', function(options) {
     options : options
   });
 
-  var $pluginContainer = $plugin.parent();
-  var height = $pluginContainer.height();
-
-  var dataWidth = options.cols * (LK.leftGap + LK.fieldKeyWidth + LK.colWidth) + 17 - (options.inForm ? (LK.leftGap + LK.fieldKeyWidth + 17 + 2) : 0);
+  var width = $plugin.width();
+  var height = $plugin.height();
 
   // 查询表单栏
   var $searchFormBar = $('<div class="lichkin-datagrid-searchFormBar"></div>');
   var $searchForm;
   if (options.searchForm.length != 0) {
     $searchFormBar.appendTo($plugin);
-    $searchFormBar.css('width', dataWidth);
+    $searchFormBar.css('width', width);
     $searchFormBar.css('padding-bottom', LK.topGap);
     $searchForm = LK.UI.form({
       $appendTo : $searchFormBar,
@@ -130,7 +128,7 @@ LK.UI('plugins', 'datagrid', function(options) {
     } else {
       $titleBar.appendTo($plugin);
     }
-    $titleBar.css('width', dataWidth);
+    $titleBar.css('width', width);
     if (options.icon != null) {
       $titleBar.append(LK.UI.icon({
         'icon' : options.icon,
@@ -347,7 +345,7 @@ LK.UI('plugins', 'datagrid', function(options) {
   var $toolsBar = $('<div class="lichkin-datagrid-toolsBar"></div>');
   if (options.tools.length != 0) {
     $toolsBar.appendTo($plugin);
-    $toolsBar.css('width', dataWidth);
+    $toolsBar.css('width', width);
     var $buttonsBar = $('<div class="lichkin-buttons"></div>').appendTo($toolsBar);
     for (var i = 0; i < options.tools.length; i++) {
       var button = options.tools[i];
@@ -370,7 +368,7 @@ LK.UI('plugins', 'datagrid', function(options) {
   var $pageBar = $('<div class="lichkin-datagrid-pageBar"></div>');
   if (options.pageable == true) {
     $pageBar.appendTo($plugin);
-    $pageBar.css('width', dataWidth);
+    $pageBar.css('width', width);
 
     // 页面大小选择项
     var pageListData = new Array();
@@ -446,16 +444,16 @@ LK.UI('plugins', 'datagrid', function(options) {
   } else {
     $dataBar.appendTo($plugin);
   }
-  $dataBar.css('width', dataWidth);
+  $dataBar.css('width', width);
   $dataBar.css('height', height - 2 - ((options.title != null || options.icon != null) ? $titleBar.outerHeight() : 0) - (options.searchForm.length != 0 ? $searchFormBar.outerHeight() : 0) - (options.pageable == true ? $pageBar.outerHeight() : 0));
   // 数据标题栏
   var $dataHeaderBar = $('<div class="lichkin-datagrid-dataHeaderBar"></div>').appendTo($dataBar);
-  $dataHeaderBar.css('width', dataWidth);
+  $dataHeaderBar.css('width', width);
   var $tableHeader = $('<table class="lichkin-table"></table>').appendTo($dataHeaderBar);
   var $tr = $('<tr class="lichkin-table-row"></tr>').appendTo($tableHeader);
   for (var i = 0; i < options.columns.length; i++) {
     var column = options.columns[i];
-    var $td = $('<td class="lichkin-table-cell" style="width:' + column.width + 'px;"></td>').appendTo($tr);
+    var $td = $('<td class="lichkin-table-cell"></td>').appendTo($tr).css('width', parseInt(column.width));
     $td.append(LK.UI.text({
       'text' : column.text
     }).css('width', parseInt(column.width) - 12));
@@ -463,7 +461,7 @@ LK.UI('plugins', 'datagrid', function(options) {
 
   // 数据内容栏
   var $dataBodyBar = $('<div class="lichkin-datagrid-dataBodyBar"></div>').appendTo($dataBar);
-  $dataBodyBar.css('width', dataWidth);
+  $dataBodyBar.css('width', width);
   $dataBodyBar.css('height', $dataBar.height() - $dataHeaderBar.outerHeight());
   $dataBodyBar.scroll(function(e) {
     $dataHeaderBar.css('margin-left', -$(this).scrollLeft());

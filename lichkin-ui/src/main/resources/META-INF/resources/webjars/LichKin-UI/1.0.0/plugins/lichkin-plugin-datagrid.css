@@ -220,7 +220,21 @@
 }
 
 .lichkin-form-field .lichkin-form-field-value .lichkin-datagrid .lichkin-datagrid-dataBar {
-  border: none;
+  border-right: none;
+  border-bottom-color: transparent;
+  border-left: none;
+}
+
+.lichkin-form-field .lichkin-form-field-value .lichkin-datagrid .lichkin-datagrid-pageBar {
+  border-top: 1px solid var(--lichkin-plugin-border-color);
+  border-right: none;
+  border-bottom: none;
+  border-left: none;
+}
+
+.lichkin-form-field .lichkin-form-field-value .lichkin-datagrid .lichkin-datagrid-titleBar {
+  border-right: none;
+  border-left: none;
 }
 
 .lichkin-form-field .lichkin-form-field-value .lichkin-datagrid-invalid {
