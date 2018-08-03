@@ -101,6 +101,9 @@
 	</@html>
 <#else>
 	<div id="${mappingUri}" class="lichkin-body" <#nested "body-attributes"/>>
+		<style>
+			<#nested "style"/>
+		</style>
 		<#nested "body-content"/>
 		<#nested "javascript-links"/>
 	</div>
