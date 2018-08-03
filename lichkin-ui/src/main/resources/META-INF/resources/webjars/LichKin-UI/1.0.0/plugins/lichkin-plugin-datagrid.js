@@ -408,7 +408,7 @@ LK.UI('plugins', 'datagrid', function(options) {
       onChange : function($pageList, pluginValues, pluginValue, currentValue) {
         $plugin.LKLoad();
       },
-      cancelabel : false,
+      cancelable : false,
       cls : 'pageList',
       width : 58,
       height : 20

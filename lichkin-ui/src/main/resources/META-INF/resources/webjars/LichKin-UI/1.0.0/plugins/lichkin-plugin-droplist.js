@@ -183,7 +183,7 @@ LK.UI('plugins', 'droplist', function(options) {
   // 支持多选
   multiSelect : false,
   // 是否可以取消选中（仅在单选情况下起作用）
-  cancelabel : true
+  cancelable : true
 });
 
 $('body').mousedown(function(e) {
