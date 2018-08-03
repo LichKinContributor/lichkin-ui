@@ -291,6 +291,9 @@ LK.UI('plugins', 'datagrid', function(options) {
     options.tools.unshift({
       icon : 'add',
       click : function() {
+        if (typeof options.toolsAdd.beforeClick == 'function' && !options.toolsAdd.beforeClick($plugin)) {
+          return;
+        }
         LK.UI.openDialog($.extend({}, options.toolsAdd.dialog, {
           title : 'add',
           icon : 'add',
@@ -309,7 +312,7 @@ LK.UI('plugins', 'datagrid', function(options) {
                   if ($form.LKValidate()) {
                     LK.ajax({
                       url : options.toolsAdd.saveUrl,
-                      data : $form.LKFormGetData(),
+                      data : $.extend($form.LKFormGetData(), typeof options.toolsAdd.beforeSave == 'function' ? options.toolsAdd.beforeSave($plugin) : {}),
                       showSuccess : true,
                       success : function() {
                         $plugin.LKLoad();
@@ -550,6 +553,8 @@ LK.UI('plugins', 'datagrid', function(options) {
    * @param form see LK.UI.form，其中$appendTo/$renderTo/values/url/param参数无效。
    * @param dialog see LK.UI.dialog，其中title/icon/url/param/data/content/mask/buttons/onAfterCreate/onBeforeLoading/onAfterLoading无效。
    * @param saveUrl 表单提交地址
+   * @param beforeClick 点击事件执行前操作，返回值为true继续执行，返回值为false不继续执行。（第一个参数为当前表格控件）
+   * @param beforeSave 保存请求执行前操作，返回值为JSON数据。（第一个参数为当前表格控件）
    */
   toolsAdd : null,
   /**
