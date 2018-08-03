@@ -94,8 +94,7 @@ LK.UI('plugins', 'droplist', function(options) {
   $popup.data('plugin-id', id);
   $popup.css({
     'width' : width + 'px',
-    'height' : LK.rowHeight * 6 - 1 + 'px',
-    'top' : height + 1 + 'px'
+    'height' : LK.rowHeight * 6 - 1 + 'px'
   });
   if (options.cls != '') {
     $popup.addClass(options.cls);
@@ -195,7 +194,7 @@ $('body').mousedown(function(e) {
       $('.lichkin-droplist-popup').hide();
       var offset = $plugin.offset();
       $popup.css({
-        'top' : offset.top + LK.rowHeight,
+        'top' : offset.top + $plugin.height() + 2,
         'left' : offset.left
       });
       $popup.show();
