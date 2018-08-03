@@ -23,8 +23,8 @@ LK.i18n = {
   'page-prefix' : 'Page',
   'page-suffix' : 'of {totalPages}',
 
-  /** 图标 */
-  // 通用图标
+  /** icons */
+  // common icons
   'page' : 'page',
   'folder' : 'folder',
   'starter' : 'open',
@@ -58,7 +58,7 @@ LK.i18n = {
   'datepicker' : 'show/hide date picker',
   'spinner-plus' : 'plus',
   'spinner-minus' : 'minus',
-  // 菜单图标
+  // menu icons
   'sysMgmt' : 'system management',
   'roleMgmt' : 'role management',
   'userMgmt' : 'user management',
