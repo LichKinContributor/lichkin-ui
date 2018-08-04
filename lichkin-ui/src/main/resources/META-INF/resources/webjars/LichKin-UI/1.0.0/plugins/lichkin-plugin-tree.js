@@ -316,7 +316,7 @@ LK.UI('plugins', 'tree', function(options) {
   inForm : false,
   width : null,
   height : null,
-  cols : 1,
+  cols : 2,
   rows : 10,
   cls : '',
   linkages : [],
