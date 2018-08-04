@@ -1,14 +1,63 @@
 ;
 /**
- * 初始化控件，提供简写代码。
- * @param url 数据请求地址
- * @param param 请求参数
+ * 编码工具类
+ * @author SuZhou LichKin Information Technology Co., Ltd.
  */
-LKUI.tree = function(url, param) {
-  return LK.UI.tree({
-    url : url,
-    param : param
-  });
+var LKCodeUtils = {
+
+  /** 编码长度 */
+  LENGHT : 7,
+
+  /** 层级编码 */
+  strs : [
+      "A", "B", "C", "D", "E", "F", "G", "H"
+  ],
+
+  /**
+   * 获取所有上级编码数组
+   * @param code 编码
+   * @return 上级编码数组
+   */
+  getParentCodes : function(code) {
+    var arr = code.split(/A|B|C|D|E|F|G|H/);
+    arr = arr.splice(1, arr.length - 2);
+    for (var i = 0; i < arr.length; i++) {
+      arr[i] = (typeof arr[i - 1] == 'undefined' ? '' : arr[i - 1]) + this.strs[i] + arr[i];
+    }
+    return arr;
+  },
+
+  /**
+   * 真实编码
+   * @param currentCode 当前编码
+   * @return 编码
+   */
+  realCode : function(currentCode) {
+    for (var i = this.strs.length - 1; i >= 0; i--) {
+      var x = parseInt(currentCode.substring((i * (this.LENGHT + 1)) + 1, (i + 1) * (this.LENGHT + 1)));
+      if (x != 0) {
+        return currentCode.substring(0, ((i + 1) * (this.LENGHT + 1)));
+      }
+    }
+    return null;
+  },
+
+  /**
+   * 补全编码
+   * @param code 编码
+   * @return 编码
+   */
+  fillCode : function(code) {
+    var len = code.length / (this.LENGHT + 1);
+    for (var i = len; i < this.strs.length; i++) {
+      code += this.strs[i];
+      for (var j = 0; j < this.LENGHT; j++) {
+        code += '0';
+      }
+    }
+    return code;
+  }
+
 };
 
 /**
@@ -17,212 +66,211 @@ LKUI.tree = function(url, param) {
 LK.UI._tree = {
 
   /**
-   * 获取数据容器对象
+   * 设置值
    * @param $plugin 控件对象
+   * @param $container 数据容器对象
+   * @param values 值数组
+   * @param isCreateEvent 是否为创建是调用
    */
-  getDataContainer : function($plugin) {
-    return $plugin.children('ul.lichkin-tree-nodes-container');
-  },
+  setValues : function($plugin, $container, values, isCreateEvent) {
+    var valueArr = [];
 
-  /**
-   * 获取选中项
-   * @param $plugin 控件对象
-   */
-  getSelected : function($plugin) {
-    return this.getDataContainer($plugin).find('li.selected');
+    var $nodes = $container.find('li');
+    $nodes.removeClass('selected');
+    if (!Array.isArray(values)) {
+      values = [
+        values
+      ];
+    }
+
+    $nodes.each(function() {
+      var $that = $(this);
+      var data = $that.data();
+      for (var i = 0; i < values.length; i++) {
+        if (data.id == values[i]) {
+          $that.addClass('selected');
+          valueArr.push(data.id);
+          break;
+        }
+      }
+    });
+
+    $plugin.LKSetValues(valueArr, isCreateEvent);
   },
 
   /**
    * 添加数据
+   * @param $plugin 控件对象
    * @param $container 数据容器对象
    * @param datas 数据集
    */
-  addDatas : function($container, datas) {
-    this.addNodes(datas, $container, 0);
+  addDatas : function($plugin, $container, datas) {
+    var options = $plugin.data('LKOPTIONS');
+    this.addNodes($plugin, $container, datas, 0, options);
   },
 
   /**
-   * 添加节点
-   * @param json 节点数据
-   * @param $nodesContainer 节点集容器对象
-   * @param level 节点级别
+   * 添加数据
+   * @param $plugin 控件对象
+   * @param $container 数据容器对象
+   * @param datas 数据集
+   * @param level 级别
+   * @param options 参数
    */
-  addNodes : function(json, $nodesContainer, level) {
-    for (var i = 0; i < json.length; i++) {
-      this.addNode(json[i], $nodesContainer, level + 1);
+  addNodes : function($plugin, $container, datas, level, options) {
+    for (var i = 0; i < datas.length; i++) {
+      this.addNode($plugin, $container, datas[i], level + 1, options);
     }
   },
 
   /**
-   * 添加节点
-   * @param json 节点数据
-   * @param $nodesContainer 节点集容器对象
-   * @param level 节点级别
+   * 添加数据
+   * @param $plugin 控件对象
+   * @param $container 数据容器对象
+   * @param data 数据
+   * @param level 级别
+   * @param options 参数
    */
-  addNode : function(json, $nodesContainer, level) {
+  addNode : function($plugin, $container, data, level, options) {
     var that = this;
 
     // 初始化默认图标
-    if (json.icon == '') {
-      json.icon = (json.children.length == 0) ? 'page' : 'folder';
+    if (typeof data.params.icon == 'undefined' || !data.params.icon) {
+      data.params.icon = (data.children.length == 0) ? 'page' : 'folder';
     }
 
     // 节点
-    var $node = $('<li class="lichkin-tree-node"></li>').appendTo($nodesContainer);
+    var $node = $('<li data-code=' + data.code + '></li>').appendTo($container).LKAddPluginClass('tree', 'node').css({
+      'width' : $plugin.width(),
+      'height' : '22px'
+    });
+
+    $node.data(data);
+
+    $node.click(function() {
+      if (options.checkbox) {
+        var realCode = LKCodeUtils.realCode(data.code);
+        var $icon = $(this).find('.lichkin-tree-node-checkbox');
+        var checked = $icon.LKUIicon('has', 'checkbox-checked');
+        // 改变当前状态
+        $icon.LKUIicon('change', 'checkbox-' + (checked ? 'unchecked' : 'checked'));
+        // 联动下级
+        $container.find('[data-code^=' + realCode + ']').find('.lichkin-tree-node-checkbox').each(function() {
+          $(this).LKUIicon('change', 'checkbox-' + (checked ? 'unchecked' : 'checked'));
+        });
+        // 联动上级
+        var parentCodes = LKCodeUtils.getParentCodes(realCode).reverse();
+        for (var i = 0; i < parentCodes.length; i++) {
+          var parentRealCode = parentCodes[i];
+          var parentCode = LKCodeUtils.fillCode(parentRealCode);
+          var childFillCode = parentCode.replace(parentRealCode, '').substring(LKCodeUtils.LENGHT + 1);
+          var tristate = false;
+          $('[data-code^=' + parentRealCode + '][data-code$=' + childFillCode + '][data-code!=' + parentCode + '][data-code!=' + data.code + ']').find('.lichkin-tree-node-checkbox').each(function() {
+            if ($(this).LKUIicon('has', 'checkbox-' + (checked ? 'checked' : 'unchecked')) || $(this).LKUIicon('has', 'checkbox-tristate')) {
+              tristate = true;
+            }
+          });
+          $container.find('[data-code=' + parentCode + ']').find('.lichkin-tree-node-checkbox').LKUIicon('change', tristate ? 'checkbox-tristate' : 'checkbox-' + (checked ? 'unchecked' : 'checked'));
+        }
+        var valueArr = [];
+        $container.find('li').each(function() {
+          if (!$(this).find('.lichkin-tree-node-checkbox').LKUIicon('has', 'checkbox-unchecked')) {
+            valueArr.push($(this).data().id);
+          }
+        });
+        $plugin.LKSetValues(valueArr, false);
+      } else {
+        if (options.multiSelect) {
+          $(this).toggleClass('selected');
+        } else {
+          var selected = $(this).hasClass('selected');
+          $container.find('li').removeClass('selected');
+          if (options.cancelable) {
+            if (selected) {
+              $(this).removeClass('selected');
+            } else {
+              $(this).addClass('selected');
+            }
+          } else {
+            $(this).addClass('selected');
+          }
+        }
+        var valueArr = [];
+        $container.find('li.selected').each(function() {
+          valueArr.push($(this).data().id);
+        });
+        $plugin.LKSetValues(valueArr, false);
+      }
+      $plugin.LKlinkage(data.id, false);
+      $plugin.LKValidate();
+    });
 
     // 节点容器
-    var $nodeContainer = $('<div class="lichkin-tree-node-container"></div>').appendTo($node);
+    var $nodeContainer = $('<div></div>').appendTo($node).LKAddPluginClass('tree', 'node-containter').css({
+      'width' : $plugin.width(),
+      'height' : '22px'
+    });
 
     // 缩进 TODO
     for (var i = 0; i < level; i++) {
-      $nodeContainer.append(LKUI.icon());
+      $nodeContainer.append(LK.UI.icon({
+        style : {
+          'padding' : LK.textPaddingTB + 'px ' + '0px',
+          'float' : 'left',
+        },
+        iStyle : {
+          'top' : LK.textPaddingTB + 'px'
+        }
+      }));
     }
 
-    // checkbox
-    var $checkbox = LKUI.icon().addClass('lichkin-tree-node-checkbox').data('id', json.id).appendTo($nodeContainer);
-    // 默认不选状态
-    that.uncheck($checkbox);
+    // 多选框
+    if (options.checkbox == true) {
+      var $checkbox = LK.UI.icon({
+        icon : 'checkbox-unchecked',
+        style : {
+          'padding' : LK.textPaddingTB + 'px ' + '0px',
+          'float' : 'left'
+        },
+        iStyle : {
+          'top' : LK.textPaddingTB + 'px'
+        }
+      }).data('id', data.id).appendTo($nodeContainer).LKAddPluginClass('tree', 'node-checkbox');
+    } else {
+      $nodeContainer.data('id', data.id);
+      $nodeContainer.data(data);
+    }
 
     // 节点图标
-    $nodeContainer.append(LKUI.icon(json.icon));
+    $nodeContainer.append(LK.UI.icon({
+      icon : data.params.icon,
+      style : {
+        'padding' : LK.textPaddingTB + 'px ' + '0px',
+        'float' : 'left'
+      },
+      iStyle : {
+        'top' : LK.textPaddingTB + 'px'
+      }
+    }));
 
     // 节点文字
-    $nodeContainer.append('<div class="lichkin-text">' + json.menuName + '</div>');
+    $nodeContainer.append(LK.UI.text({
+      original : !options.i18nText,
+      text : data.name,
+      style : {
+        'height' : '16px',
+        'line-height' : '16px',
+        'float' : 'left'
+      }
+    }));
 
     // 清除浮动
     $node.append('<div style="clear:both;"></div>');
 
-    // HOVER效果
-    $nodeContainer.mouseover(function() {
-      $(this).addClass('lichkin-tree-node-container-hover');
-    }).mouseout(function() {
-      $(this).removeClass('lichkin-tree-node-container-hover');
-    }).click(function() {
-      var $that = $(this);
-
-      // checkbox联动
-      if (that.isChecked($checkbox) == true) {
-        that.uncheck($checkbox);
-        $that.siblings('.lichkin-tree-nodes-container').find('.lichkin-tree-node-checkbox').each(function() {
-          that.uncheck($(this));
-        });
-        that.checkParents($(this), false);
-      } else {
-        that.check($checkbox);
-        $that.siblings('.lichkin-tree-nodes-container').find('.lichkin-tree-node-checkbox').each(function() {
-          that.check($(this));
-        });
-        that.checkParents($(this), true);
-      }
-    });
-
     // 添加子节点
-    if (json.children.length != 0) {
-      that.addNodes(json.children, $('<ul class="lichkin-tree-nodes-container"></ul>').appendTo($node), level);
+    if (data.children.length != 0) {
+      that.addNodes($plugin, $container, data.children, level, options);
     }
-  },
-
-  /**
-   * 切换到选中状态
-   * @param $checkbox checkbox控件
-   */
-  check : function($checkbox) {
-    $checkbox.LKUIicon('change', 'checkbox-checked');
-  },
-
-  /**
-   * 切换到中间状态
-   * @param $checkbox checkbox控件
-   */
-  tristate : function($checkbox) {
-    $checkbox.LKUIicon('change', 'checkbox-tristate');
-  },
-
-  /**
-   * 切换到不选状态
-   * @param $checkbox checkbox控件
-   */
-  uncheck : function($checkbox) {
-    $checkbox.LKUIicon('change', 'checkbox-unchecked');
-  },
-
-  /**
-   * 判断是否为选中状态
-   * @param $checkbox checkbox控件
-   * @return 选中返回true，不选中返回false，中间状态返回null.
-   */
-  isChecked : function($checkbox) {
-    if ($checkbox.LKUIicon('has', 'checkbox-checked')) {
-      return true;
-    }
-    if ($checkbox.LKUIicon('has', 'checkbox-unchecked')) {
-      return false;
-    }
-    if ($checkbox.LKUIicon('has', 'checkbox-tristate')) {
-      return null;
-    }
-  },
-
-  /**
-   * 联动上级控件
-   * @param $container 当前控件
-   * @param check true:选中;false:不选.
-   */
-  checkParents : function($container, check) {
-    var that = this;
-
-    if ($container.length == 0) {
-      return;
-    }
-
-    var tristate = false;
-    var $checkbox = $container.parent('li').siblings('li').children('.lichkin-tree-node-container').children('.lichkin-tree-node-checkbox');
-    for (var i = 0; i < $checkbox.length; i++) {
-      if (that.isChecked($($checkbox[i])) != check) {
-        tristate = true;
-        break;
-      }
-    }
-
-    var $parentContainer = $container.parent('li').parent('ul').siblings('.lichkin-tree-node-container');
-    if ($parentContainer.length == 0) {
-      return;
-    }
-    var $parentCheckbox = $parentContainer.children('.lichkin-tree-node-checkbox');
-    if (check) {
-      if (!tristate && that.isChecked($container.children('.lichkin-tree-node-checkbox')) == check) {
-        that.check($parentCheckbox);
-      } else {
-        that.tristate($parentCheckbox);
-      }
-    } else {
-      if (!tristate && that.isChecked($container.children('.lichkin-tree-node-checkbox')) == check) {
-        that.uncheck($parentCheckbox);
-      } else {
-        that.tristate($parentCheckbox);
-      }
-    }
-
-    that.checkParents($parentContainer, check);
-  },
-
-  /**
-   * 获取选中节点
-   * @param $plugin 控件对象
-   * @param statusArr 选中状态数组
-   */
-  getChecked : function($plugin, statusArr) {
-    var nodes = new Array();
-    $plugin.find('.lichkin-tree-node-checkbox').each(function() {
-      var $that = $(this);
-
-      for (var i = 0; i < statusArr.length; i++) {
-        if ($that.hasClass('lichkin-icon-checkbox-' + statusArr[i])) {
-          nodes.push($that);
-        }
-      }
-    });
-    return nodes;
   }
 
 };
@@ -235,44 +283,67 @@ LK.UI('plugins', 'tree', function(options) {
   var plugin = 'tree';
 
   // 创建控件对象
-  var $plugin = LKUI._createUIPlugin(plugin, options);
+  var $plugin = LK.UI.create({
+    plugin : plugin,
+    options : options
+  });
 
-  // 存值对象
-  var $value = LKUI._createUIPluginValue(options, plugin, $plugin);
-
-  // 添加节点容器
-  var $container = $('<ul class="lichkin-tree-nodes-container"></ul>').appendTo($plugin);
+  // 数据容器
+  var $container = $('<ul></ul>').appendTo($plugin).LKAddPluginClass(plugin, 'dataContainer').LKAddPluginClass(plugin, 'nodes-containter');
+  $container.css({
+    height : $plugin.height()
+  });
 
   // 加载数据
-  if (options.lazy != true) {
-    LKUI._load(options, plugin, $container);
-  }
+  LK.UI.load({
+    $plugin : $plugin,
+    isCreateEvent : true,
+    options : options
+  });
+
+  $plugin.LKValidate();
 
   // 返回控件对象
   return $plugin;
 }, {
-  // @see createUIPlugin
+  // @see LK.UI.create
   id : '',
   $appendTo : null,
-
-  // @see createUIPluginValue
+  $renderTo : null,
   name : '',
-  validator : '',
+  validator : null,
+  value : null,
+  inForm : false,
+  width : null,
+  height : null,
+  cols : 1,
+  rows : 10,
+  cls : '',
+  linkages : [],
+  onLinkaged : function($plugin, linkage) {
+  },
+  onChange : function($plugin, pluginValues, pluginValue, currentValue) {
+  },
 
-  // 创建时不加载数据。需要通过reload方法触发数据的加载。
+  // @see LK.UI.load
   lazy : false,
-  // 支持多选
-  multiSelect : false,
-
-  // @see load
   url : '',
   param : {},
-  data : [],
-  onBeforeAddDatas : function(responseDatas, url, param) {
+  data : null,
+  onBeforeAddDatas : function($plugin, responseDatas, url, param) {
     return responseDatas;
   },
-  onAfterAddDatas : function(responseDatas, url, param) {
+  onAfterAddDatas : function($plugin, responseDatas, url, param) {
   },
-  onLoadDatasError : function(ajaxErrorArguments, url, param) {
-  }
+  onLoadDatasError : function($plugin, ajaxErrorArguments, url, param) {
+  },
+
+  // 多选框（有多选框时，将执行联动上下级逻辑，取值将为多选框是已选中状态和半选中状态的数据。）
+  checkbox : true,
+  // 支持多选（仅在无多选框情况下起作用，取值将为已选中状态的数据。）
+  multiSelect : true,
+  // 是否可以取消选中（仅在单选情况下起作用）
+  cancelable : true,
+  // 显示内容是否使用i18n
+  i18nText : true
 });

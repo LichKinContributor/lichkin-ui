@@ -1,0 +1,6 @@
+@charset "UTF-8";
+
+.lichkin-tree .lichkin-tree-dataContainer {
+  overflow-y: auto;
+  overflow-x: hidden;
+}

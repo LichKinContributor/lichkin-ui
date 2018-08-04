@@ -398,7 +398,7 @@ $.fn.extend({
       values = values.split(LK.SPLITOR);
     }
     var plugin = this.LKGetPluginType();
-    if (plugin == 'droplist' || plugin == 'datagrid') {
+    if (plugin == 'droplist' || plugin == 'datagrid' || plugin == 'tree') {
       this.LKGetImplementor().setValues(this, this.LKGetDataContainer(), values, isCreateEvent);
     } else {
       this.LKSetValues(values, isCreateEvent);
