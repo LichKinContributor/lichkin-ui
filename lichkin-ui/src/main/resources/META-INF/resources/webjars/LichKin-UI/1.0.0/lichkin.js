@@ -95,7 +95,7 @@ String.prototype.extarctInteger = function() {
     }
   }
   return '';
-}
+};
 
 /**
  * 扩展JQuery功能
