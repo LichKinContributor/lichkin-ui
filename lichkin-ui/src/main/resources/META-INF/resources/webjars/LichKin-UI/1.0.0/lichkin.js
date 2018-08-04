@@ -125,13 +125,13 @@ var LK = {
   // 控件文字颜色
   pluginInvalidFontColor : '#d43f3a',
   // 表单内控件距离顶部间距
-  topGap : 10,
+  topGap : 3,
   // 表单内控件距离左部间距
-  leftGap : 10,
+  leftGap : 6,
   // 表单内控件键宽
-  fieldKeyWidth : 200,// 七个汉字
+  fieldKeyWidth : 113,// 七个汉字
   // 列宽
-  colWidth : 200,// UEditor最小宽度为695
+  colWidth : 174,// UEditor最小宽度为695
   // 行高
   rowHeight : 30,
   // 文本上下内边距
