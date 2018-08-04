@@ -14,3 +14,7 @@
   float: left;
   display: inline-block;
 }
+
+.lichkin-form-field-invalid .lichkin-form-field-key .lichkin-text {
+  color: var(--lichkin-plugin-font-color-invalid);
+}

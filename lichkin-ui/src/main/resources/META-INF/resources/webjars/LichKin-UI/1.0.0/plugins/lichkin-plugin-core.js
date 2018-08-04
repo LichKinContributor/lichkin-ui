@@ -139,6 +139,7 @@ $.fn.extend({
               });
               break;
           }
+          $plugin.parents('.lichkin-form-field:first').addClass('lichkin-form-field-invalid');
           return false;// 验证未通过返回失败
         }
       }
@@ -157,6 +158,7 @@ $.fn.extend({
           });
           break;
       }
+      $plugin.parents('.lichkin-form-field:first').removeClass('lichkin-form-field-invalid');
     }
 
     return true;// 验证通过或无验证器返回成功
