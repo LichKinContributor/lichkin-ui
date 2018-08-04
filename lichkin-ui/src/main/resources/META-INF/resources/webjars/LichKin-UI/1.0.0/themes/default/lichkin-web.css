@@ -76,6 +76,7 @@ TABLE.lichkin-table .lichkin-table .lichkin-table-row .lichkin-table-cell:last-c
 .lichkin-plugin .lichkin-plugin-dataContainer .lichkin-plugin-node.selected:hover {background-color:var(--lichkin-plugin-background-color-selected-hover);border-color:var(--lichkin-plugin-border-color-selected-hover);}
 .lichkin-plugin .lichkin-plugin-dataContainer .lichkin-plugin-node.selected:hover .lichkin-text {color:var(--lichkin-plugin-font-color-selected-hover);}
 
+.lichkin-plugin-invalid .lichkin-plugin {border:1px solid var(--lichkin-plugin-border-color-invalid);background-color:var(--lichkin-plugin-background-color-invalid);}
 .lichkin-plugin-invalid {border:1px solid var(--lichkin-plugin-border-color-invalid);background-color:var(--lichkin-plugin-background-color-invalid);}
 .lichkin-plugin-invalid .lichkin-plugin-text {color:var(--lichkin-plugin-font-color-invalid);background-color:var(--lichkin-plugin-background-color-invalid);}
 .lichkin-plugin-invalid .lichkin-plugin-button {background-color:var(--lichkin-plugin-background-color-invalid);}

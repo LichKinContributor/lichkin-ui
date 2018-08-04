@@ -45,3 +45,7 @@
 .lichkin-numberspinner-invalid .lichkin-numberspinner-button .lichkin-numberspinner-button-container .lichkin-icon i {
   color: var(--lichkin-plugin-background-color-invalid);
 }
+
+.lichkin-plugin-invalid .lichkin-numberspinner .lichkin-numberspinner-button .lichkin-numberspinner-button-container .lichkin-icon {
+  background-color: var(--lichkin-plugin-font-color-invalid);
+}

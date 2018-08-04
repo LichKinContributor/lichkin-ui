@@ -247,6 +247,14 @@
   background-color: var(--lichkin-plugin-background-color-invalid);
 }
 
+.lichkin-datagrid-invalid .lichkin-datagrid-titleBar {
+  background-color: var(--lichkin-plugin-border-color-invalid);
+}
+
+.lichkin-datagrid-invalid .lichkin-datagrid-toolsBar {
+  background-color: var(--lichkin-plugin-border-color-invalid);
+}
+
 .lichkin-datagrid-invalid .lichkin-datagrid-dataBar {
   border-color: var(--lichkin-plugin-border-color-invalid);
 }
@@ -255,6 +263,18 @@
   background-color: var(--lichkin-plugin-border-color-invalid);
 }
 
+.lichkin-datagrid-invalid .lichkin-datagrid-dataHeaderBar .lichkin-table .lichkin-table-row .lichkin-table-cell {
+  background-color: var(--lichkin-plugin-border-color-invalid);
+}
+
 .lichkin-datagrid-invalid .lichkin-plugin-dataContainer .lichkin-table-row .lichkin-table-cell {
   border-color: var(--lichkin-plugin-border-color-invalid);
+}
+
+.lichkin-form-field .lichkin-form-field-value .lichkin-datagrid-invalid .lichkin-datagrid-pageBar {
+  border-top-color: var(--lichkin-plugin-border-color-invalid);
+}
+
+.lichkin-datagrid-invalid .lichkin-datagrid-pageBar .buttons .lichkin-button i {
+  color: var(--lichkin-plugin-font-color-invalid);
 }
