@@ -31,6 +31,9 @@
 			btn12:'遮罩测试',
 		});
 		LK.UI.button({text:'btn1',click:function(){
+			LK.UI.openDialog({title:'tip',url:'/dictMgmt/index',size:{rows:15,cols:4},formContent:false});
+		}}).appendTo('#buttons');
+		LK.UI.button({text:'btn1',click:function(){
 			LK.UI.openDialog({title:'tip'});
 		}}).appendTo('#buttons');
 		LK.UI.button({text:'btn2',click:function(){

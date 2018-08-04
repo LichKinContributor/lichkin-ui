@@ -7,6 +7,7 @@ $.extend(LK.i18n, {
   'content' : '内容',
   'textbox' : '文本框',
   'droplist' : '下拉框',
+  'tree' : '树',
   'numberspinner' : '数字微调器',
   'datagrid' : '数据表格',
   'categoryCode' : '类目编码',
@@ -24,7 +25,8 @@ LK.UI.form({
     'datagrid' : 'USING_STATUS',
     'textbox' : 'fffff',
     'droplist' : 'MALE',
-    'numberspinner' : '123'
+    'numberspinner' : '123',
+    'tree' : 'A0000008B0000001C0000001D0000000E0000000F0000000G0000000H0000000'
   },
   plugins : [
       {
@@ -52,6 +54,7 @@ LK.UI.form({
         options : {
           name : 'rows14',
           validator : true,
+          cols : 2,
           rows : 14
         }
       }, {
@@ -61,11 +64,222 @@ LK.UI.form({
           validator : true
         }
       }, {
-        plugin : 'textbox',
+        plugin : 'tree',
         options : {
-          name : 'rows14',
+          name : 'tree',
           validator : true,
-          rows : 14
+          data : [
+            {
+              id : 'A0000008B0000000C0000000D0000000E0000000F0000000G0000000H0000000',
+              name : 'page',
+              code : 'A0000008B0000000C0000000D0000000E0000000F0000000G0000000H0000000',
+              parentCode : 'ROOT',
+              params : {
+                icon : 'page'
+              },
+              children : [
+                  {
+                    id : 'A0000008B0000001C0000000D0000000E0000000F0000000G0000000H0000000',
+                    name : 'page',
+                    code : 'A0000008B0000001C0000000D0000000E0000000F0000000G0000000H0000000',
+                    parentCode : 'ROOT',
+                    params : {
+                      icon : 'page'
+                    },
+                    children : [
+                        {
+                          id : 'A0000008B0000001C0000001D0000000E0000000F0000000G0000000H0000000',
+                          name : 'page',
+                          code : 'A0000008B0000001C0000001D0000000E0000000F0000000G0000000H0000000',
+                          parentCode : 'ROOT',
+                          params : {
+                            icon : 'page'
+                          },
+                          children : []
+                        }, {
+                          id : 'A0000008B0000001C0000002D0000000E0000000F0000000G0000000H0000000',
+                          name : 'page',
+                          code : 'A0000008B0000001C0000002D0000000E0000000F0000000G0000000H0000000',
+                          parentCode : 'ROOT',
+                          params : {
+                            icon : 'page'
+                          },
+                          children : []
+                        }, {
+                          id : 'A0000008B0000001C0000003D0000000E0000000F0000000G0000000H0000000',
+                          name : 'page',
+                          code : 'A0000008B0000001C0000003D0000000E0000000F0000000G0000000H0000000',
+                          parentCode : 'ROOT',
+                          params : {
+                            icon : 'page'
+                          },
+                          children : []
+                        }
+                    ]
+                  }, {
+                    id : 'A0000008B0000002C0000000D0000000E0000000F0000000G0000000H0000000',
+                    name : 'page',
+                    code : 'A0000008B0000002C0000000D0000000E0000000F0000000G0000000H0000000',
+                    parentCode : 'ROOT',
+                    params : {
+                      icon : 'page'
+                    },
+                    children : [
+                        {
+                          id : 'A0000008B0000002C0000001D0000000E0000000F0000000G0000000H0000000',
+                          name : 'page',
+                          code : 'A0000008B0000002C0000001D0000000E0000000F0000000G0000000H0000000',
+                          parentCode : 'ROOT',
+                          params : {
+                            icon : 'page'
+                          },
+                          children : []
+                        }, {
+                          id : 'A0000008B0000002C0000002D0000000E0000000F0000000G0000000H0000000',
+                          name : 'page',
+                          code : 'A0000008B0000002C0000002D0000000E0000000F0000000G0000000H0000000',
+                          parentCode : 'ROOT',
+                          params : {
+                            icon : 'page'
+                          },
+                          children : [
+                              {
+                                id : 'A0000008B0000002C0000002D0000001E0000000F0000000G0000000H0000000',
+                                name : 'page',
+                                code : 'A0000008B0000002C0000002D0000001E0000000F0000000G0000000H0000000',
+                                parentCode : 'ROOT',
+                                params : {
+                                  icon : 'page'
+                                },
+                                children : [
+                                    {
+                                      id : 'A0000008B0000002C0000002D0000001E0000001F0000000G0000000H0000000',
+                                      name : 'page',
+                                      code : 'A0000008B0000002C0000002D0000001E0000001F0000000G0000000H0000000',
+                                      parentCode : 'ROOT',
+                                      params : {
+                                        icon : 'page'
+                                      },
+                                      children : []
+                                    }, {
+                                      id : 'A0000008B0000002C0000002D0000001E0000002F0000000G0000000H0000000',
+                                      name : 'page',
+                                      code : 'A0000008B0000002C0000002D0000001E0000002F0000000G0000000H0000000',
+                                      parentCode : 'ROOT',
+                                      params : {
+                                        icon : 'page'
+                                      },
+                                      children : [
+                                          {
+                                            id : 'A0000008B0000002C0000002D0000001E0000002F0000001G0000000H0000000',
+                                            name : 'page',
+                                            code : 'A0000008B0000002C0000002D0000001E0000002F0000001G0000000H0000000',
+                                            parentCode : 'ROOT',
+                                            params : {
+                                              icon : 'page'
+                                            },
+                                            children : []
+                                          }, {
+                                            id : 'A0000008B0000002C0000002D0000001E0000002F0000002G0000000H0000000',
+                                            name : 'page',
+                                            code : 'A0000008B0000002C0000002D0000001E0000002F0000002G0000000H0000000',
+                                            parentCode : 'ROOT',
+                                            params : {
+                                              icon : 'page'
+                                            },
+                                            children : []
+                                          }, {
+                                            id : 'A0000008B0000002C0000002D0000001E0000002F0000003G0000000H0000000',
+                                            name : 'page',
+                                            code : 'A0000008B0000002C0000002D0000001E0000002F0000003G0000000H0000000',
+                                            parentCode : 'ROOT',
+                                            params : {
+                                              icon : 'page'
+                                            },
+                                            children : []
+                                          }
+                                      ]
+                                    }, {
+                                      id : 'A0000008B0000002C0000002D0000001E0000003F0000000G0000000H0000000',
+                                      name : 'page',
+                                      code : 'A0000008B0000002C0000002D0000001E0000003F0000000G0000000H0000000',
+                                      parentCode : 'ROOT',
+                                      params : {
+                                        icon : 'page'
+                                      },
+                                      children : []
+                                    }
+                                ]
+                              }, {
+                                id : 'A0000008B0000002C0000002D0000002E0000000F0000000G0000000H0000000',
+                                name : 'page',
+                                code : 'A0000008B0000002C0000002D0000002E0000000F0000000G0000000H0000000',
+                                parentCode : 'ROOT',
+                                params : {
+                                  icon : 'page'
+                                },
+                                children : [
+                                  {
+                                    id : 'A0000008B0000002C0000002D0000002E0000001F0000000G0000000H0000000',
+                                    name : 'page',
+                                    code : 'A0000008B0000002C0000002D0000002E0000001F0000000G0000000H0000000',
+                                    parentCode : 'ROOT',
+                                    params : {
+                                      icon : 'page'
+                                    },
+                                    children : [
+                                      {
+                                        id : 'A0000008B0000002C0000002D0000002E0000001F0000001G0000000H0000000',
+                                        name : 'page',
+                                        code : 'A0000008B0000002C0000002D0000002E0000001F0000001G0000000H0000000',
+                                        parentCode : 'ROOT',
+                                        params : {
+                                          icon : 'page'
+                                        },
+                                        children : [
+                                          {
+                                            id : 'A0000008B0000002C0000002D0000002E0000001F0000001G0000001H0000000',
+                                            name : 'page',
+                                            code : 'A0000008B0000002C0000002D0000002E0000001F0000001G0000001H0000000',
+                                            parentCode : 'ROOT',
+                                            params : {
+                                              icon : 'page'
+                                            },
+                                            children : [
+                                              {
+                                                id : 'A0000008B0000002C0000002D0000002E0000001F0000001G0000001H0000001',
+                                                name : 'page',
+                                                code : 'A0000008B0000002C0000002D0000002E0000001F0000001G0000001H0000001',
+                                                parentCode : 'ROOT',
+                                                params : {
+                                                  icon : 'page'
+                                                },
+                                                children : []
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                          ]
+                        }
+                    ]
+                  }, {
+                    id : 'A0000008B0000003C0000000D0000000E0000000F0000000G0000000H0000000',
+                    name : 'page',
+                    code : 'A0000008B0000003C0000000D0000000E0000000F0000000G0000000H0000000',
+                    parentCode : 'ROOT',
+                    params : {
+                      icon : 'page'
+                    },
+                    children : []
+                  }
+              ]
+            }
+          ]
         }
       }, {
         plugin : 'datepicker',
