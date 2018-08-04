@@ -97,11 +97,16 @@ LK.UI._icon = {
   /**
    * 获取图标对应的FontAwesome
    * @param icon 图标
+   * @param style 样式
    */
-  getFontAwesome : function(icon) {
+  getFontAwesome : function(icon, style) {
     var fa = this.mappings[icon];
     if (fa) {
-      return '<i class="fa fa-' + fa + '"></i>';
+      $fa = $('<i class="fa fa-' + fa + '"></i>');
+      if (typeof style != 'undefined' && !$.isEmptyObject(style)) {
+        $fa.css(style);
+      }
+      return $fa.prop('outerHTML');
     }
 
     fa = this.originalMappings[icon];
@@ -153,8 +158,13 @@ LK.UI('plugins', 'icon', function(options) {
     // 设置文字图标
     if (((options.type == null) ? LK.UI.iconType : options.type) == false) {
       $plugin.addClass('lichkin-hidden-icon');// 文字图标环境下隐藏图片图标
-      $plugin.append(LK.UI._icon.getFontAwesome(options.icon));
+      $plugin.append(LK.UI._icon.getFontAwesome(options.icon, options.iStyle));
     }
+  }
+
+  // 设置样式
+  if (!$.isEmptyObject(options.style)) {
+    $plugin.css(options.style);
   }
 
   $plugin.data('LKOPTIONS', options);
@@ -167,7 +177,11 @@ LK.UI('plugins', 'icon', function(options) {
   // 图标
   icon : null,
   // 图标类型
-  type : null
+  type : null,
+  // 样式
+  style : {},
+  // I样式
+  iStyle : {}
 });
 
 /**
@@ -215,7 +229,7 @@ LK.UI('plugins', 'changeIcon', function(options) {
     $icon.addClass('lichkin-icon-' + options.icon);
     if (type) {
       // 更换文字图标
-      $icon.append(LK.UI._icon.getFontAwesome(options.icon));
+      $icon.append(LK.UI._icon.getFontAwesome(options.icon, $icon.data('LKOPTIONS').iStyle));
     }
   }
   return $icon;
