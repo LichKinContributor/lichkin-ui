@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+.lichkin-cropper {
+  cursor: pointer;
+}
+
+.lichkin-cropper .lichkin-icon {
+  display: none;
+}
+
+.lichkin-cropper img {
+  display: none;
+}
+
+.lichkin-cropper-invalid .lichkin-icon i {
+  color: var(--lichkin-plugin-font-color-invalid);
+}
+
+.lichkin-cropper-popup {
+  border: none;
+  overflow: hidden;
+}

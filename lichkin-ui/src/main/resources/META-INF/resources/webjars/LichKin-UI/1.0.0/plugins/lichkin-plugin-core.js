@@ -396,11 +396,13 @@ $.fn.extend({
    * @param isCreateEvent 是否为创建是调用
    */
   LKInvokeSetValues : function(values, isCreateEvent) {
-    if (isString(values)) {
+    if (values == null || typeof values == 'undefined') {
+      values = [];
+    } else if (isString(values)) {
       values = values.split(LK.SPLITOR);
     }
     var plugin = this.LKGetPluginType();
-    if (plugin == 'droplist' || plugin == 'datagrid' || plugin == 'tree') {
+    if (plugin == 'droplist' || plugin == 'datagrid' || plugin == 'tree' || plugin == 'cropper') {
       this.LKGetImplementor().setValues(this, this.LKGetDataContainer(), values, isCreateEvent);
     } else {
       this.LKSetValues(values, isCreateEvent);

@@ -65,6 +65,12 @@
 				<li><a href="javascript:;">tree</a></li>
 			</ul>
 		</div>
+		<div class="title">cropper</div>
+		<div class="content">
+			<ul>
+				<li><a href="javascript:;">cropper</a></li>
+			</ul>
+		</div>
 		<div class="title">form</div>
 		<div class="content">
 			<ul>

@@ -77,6 +77,10 @@
 		LK.UI.icon({size:32,icon:'dropdown',type:false}).appendTo('#demo2');
 		LK.UI.icon({size:32,icon:'datepicker',type:false}).appendTo('#demo2');
 		LK.UI.icon({size:32,icon:'cropper-no-image',type:false}).appendTo('#demo2');
+		LK.UI.icon({size:32,icon:'zoomIn',type:false}).appendTo('#demo2');
+		LK.UI.icon({size:32,icon:'zoomOut',type:false}).appendTo('#demo2');
+		LK.UI.icon({size:32,icon:'reverseX',type:false}).appendTo('#demo2');
+		LK.UI.icon({size:32,icon:'reverseY',type:false}).appendTo('#demo2');
 		LK.UI.icon({size:32,icon:'spinner-plus',type:false}).appendTo('#demo2');
 		LK.UI.icon({size:32,icon:'spinner-minus',type:false}).appendTo('#demo2');
 		LK.UI.icon({size:32,icon:'sysMgmt',type:false}).appendTo('#demo2');
@@ -139,6 +143,10 @@
 		LK.UI.icon({size:32,icon:'dropdown',type:true}).appendTo('#demo3');
 		LK.UI.icon({size:32,icon:'datepicker',type:true}).appendTo('#demo3');
 		LK.UI.icon({size:32,icon:'cropper-no-image',type:true}).appendTo('#demo3');
+		LK.UI.icon({size:32,icon:'zoomIn',type:true}).appendTo('#demo3');
+		LK.UI.icon({size:32,icon:'zoomOut',type:true}).appendTo('#demo3');
+		LK.UI.icon({size:32,icon:'reverseX',type:true}).appendTo('#demo3');
+		LK.UI.icon({size:32,icon:'reverseY',type:true}).appendTo('#demo3');
 		LK.UI.icon({size:32,icon:'spinner-plus',type:true}).appendTo('#demo3');
 		LK.UI.icon({size:32,icon:'spinner-minus',type:true}).appendTo('#demo3');
 		LK.UI.icon({size:32,icon:'sysMgmt',type:true}).appendTo('#demo3');
