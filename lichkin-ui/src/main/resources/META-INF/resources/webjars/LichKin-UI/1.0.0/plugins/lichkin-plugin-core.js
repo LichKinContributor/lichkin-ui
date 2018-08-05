@@ -429,6 +429,62 @@ $.fn.extend({
 });
 
 /**
+ * 创建UI控件对象参数
+ */
+LK.UI.createOptions = {
+  // 控件ID
+  id : '',
+  // 控件填充到对象
+  $appendTo : null,
+  // 控件渲染到对象
+  $renderTo : null,
+
+  // 值对象名称
+  name : '',
+  // 验证器方法名
+  validator : null,
+  // 值对象值
+  value : null,
+  // 是否在表单中
+  inForm : false,
+  // 表单显示名
+  key : null,
+  // 宽度（特殊情况下使用）
+  width : null,
+  // 高度（特殊情况下使用）
+  height : null,
+  // 列数
+  cols : 1,
+  // 行数
+  rows : 1,
+  // 样式
+  cls : '',
+
+  // 联动控件名称（需在同一表单中）
+  linkages : [],
+  /**
+   * 控件被联动事件
+   * @param $plugin 当前控件
+   * @param linkage[$linkage] 触发联动的控件
+   * @param linkage[linkageName] 触发联动的控件表单值名
+   * @param linkage[linkageValues] 触发联动的控件值
+   * @param linkage[linkageValue] 触发联动的控件值
+   * @param linkage[linkageCurrentValue] 触发联动的控件当前值
+   */
+  onLinkaged : function($plugin, linkage) {
+  },
+  /**
+   * 值改变事件
+   * @param $plugin 当前控件
+   * @param pluginValues 控件值
+   * @param pluginValue 控件值
+   * @param currentValue 当前值
+   */
+  onChange : function($plugin, pluginValues, pluginValue, currentValue) {
+  }
+};
+
+/**
  * 创建UI控件对象
  */
 LK.UI('plugins', 'create', function(opts) {
@@ -511,7 +567,7 @@ LK.UI('plugins', 'create', function(opts) {
 
     var $fieldKey = $('<div class="lichkin-form-field-key"></div>').appendTo($field).append(LK.UI.text({
       original : true,
-      text : $.LKGetI18N(options.name) + ' :',
+      text : (options.key == null ? $.LKGetI18N(options.name) : $.LKGetI18N(options.key)) + ' :',
       style : {
         'height' : LK.rowHeight - 2 * LK.textPaddingTB,
         'line-height' : LK.rowHeight - 2 * LK.textPaddingTB + 'px'
@@ -577,58 +633,54 @@ LK.UI('plugins', 'create', function(opts) {
   plugin : '',
 
   // 创建控件的参数
-  options : {
-    // 控件ID
-    id : '',
-    // 控件填充到对象
-    $appendTo : null,
-    // 控件渲染到对象
-    $renderTo : null,
-
-    // 值对象名称
-    name : '',
-    // 验证器方法名
-    validator : null,
-    // 值对象值
-    value : null,
-    // 是否在表单中
-    inForm : false,
-    // 宽度（特殊情况下使用）
-    width : null,
-    // 高度（特殊情况下使用）
-    height : null,
-    // 列数
-    cols : 1,
-    // 行数
-    rows : 1,
-    // 样式
-    cls : '',
-
-    // 联动控件名称（需在同一表单中）
-    linkages : [],
-    /**
-     * 控件被联动事件
-     * @param $plugin 当前控件
-     * @param linkage[$linkage] 触发联动的控件
-     * @param linkage[linkageName] 触发联动的控件表单值名
-     * @param linkage[linkageValues] 触发联动的控件值
-     * @param linkage[linkageValue] 触发联动的控件值
-     * @param linkage[linkageCurrentValue] 触发联动的控件当前值
-     */
-    onLinkaged : function($plugin, linkage) {
-    },
-    /**
-     * 值改变事件
-     * @param $plugin 当前控件
-     * @param pluginValues 控件值
-     * @param pluginValue 控件值
-     * @param currentValue 当前值
-     */
-    onChange : function($plugin, pluginValues, pluginValue, currentValue) {
-    }
-  }
+  options : LK.UI.createOptions
 
 });
+
+/**
+ * 加载数据参数
+ */
+LK.UI.loadOptions = {
+  // 延迟加载
+  lazy : false,
+  // 数据请求地址
+  url : '',
+  // 数据请求参数
+  param : {},
+  // 数据（优先处理数据，没有数据才会尝请求服务器。）
+  data : null,
+
+  // 事件
+  /**
+   * 添加数据前
+   * @param $plugin 当前控件
+   * @param responseDatas 响应数据
+   * @param url 请求地址
+   * @param param 请求参数
+   * @return 待添加的数据
+   */
+  onBeforeAddDatas : function($plugin, responseDatas, url, param) {
+    return responseDatas;
+  },
+  /**
+   * 添加数据后
+   * @param $plugin 当前控件
+   * @param responseDatas 响应数据
+   * @param url 请求地址
+   * @param param 请求参数
+   */
+  onAfterAddDatas : function($plugin, responseDatas, url, param) {
+  },
+  /**
+   * 加载数据失败
+   * @param $plugin 当前控件
+   * @param ajaxErrorArguments AJAX请求失败参数列表
+   * @param url 请求地址
+   * @param param 请求参数
+   */
+  onLoadDatasError : function($plugin, ajaxErrorArguments, url, param) {
+  }
+};
 
 /**
  * 加载数据
@@ -718,47 +770,7 @@ LK.UI('plugins', 'load', function(opts) {
   linkage : null,
 
   // 创建控件的参数
-  options : {
-    // 延迟加载
-    lazy : false,
-    // 数据请求地址
-    url : '',
-    // 数据请求参数
-    param : {},
-    // 数据（优先处理数据，没有数据才会尝请求服务器。）
-    data : null,
-
-    // 事件
-    /**
-     * 添加数据前
-     * @param $plugin 当前控件
-     * @param responseDatas 响应数据
-     * @param url 请求地址
-     * @param param 请求参数
-     * @return 待添加的数据
-     */
-    onBeforeAddDatas : function($plugin, responseDatas, url, param) {
-      return responseDatas;
-    },
-    /**
-     * 添加数据后
-     * @param $plugin 当前控件
-     * @param responseDatas 响应数据
-     * @param url 请求地址
-     * @param param 请求参数
-     */
-    onAfterAddDatas : function($plugin, responseDatas, url, param) {
-    },
-    /**
-     * 加载数据失败
-     * @param $plugin 当前控件
-     * @param ajaxErrorArguments AJAX请求失败参数列表
-     * @param url 请求地址
-     * @param param 请求参数
-     */
-    onLoadDatasError : function($plugin, ajaxErrorArguments, url, param) {
-    }
-  }
+  options : LK.UI.loadOptions
 });
 
 // 验证器集合

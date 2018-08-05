@@ -44,25 +44,10 @@ LK.UI('plugins', 'datepicker', function(options) {
 
   // 返回控件对象
   return $plugin;
-}, {
-  // @see LK.UI.create
-  id : '',
-  $appendTo : null,
-  $renderTo : null,
-  name : '',
-  validator : null,
-  value : null,
-  inForm : false,
-  width : null,
-  height : null,
-  cols : 1,
-  // rows : 1,
-  cls : '',
-  linkages : [],
-  onLinkaged : function($plugin, linkage) {
-  },
-  onChange : function($plugin, pluginValues, pluginValue, currentValue) {
-  },
-
+}, $.extend({},
+// @see LK.UI.create
+LK.UI.createOptions,
+// 控件特有参数
+{
   format : 'yyyy-mm-dd'
-});
+}));

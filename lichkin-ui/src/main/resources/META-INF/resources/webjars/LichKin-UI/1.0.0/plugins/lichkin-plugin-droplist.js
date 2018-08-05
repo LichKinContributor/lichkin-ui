@@ -146,44 +146,18 @@ LK.UI('plugins', 'droplist', function(options) {
 
   // 返回控件对象
   return $plugin;
-}, {
-  // @see LK.UI.create
-  id : '',
-  $appendTo : null,
-  $renderTo : null,
-  name : '',
-  validator : null,
-  value : null,
-  inForm : false,
-  width : null,
-  height : null,
-  cols : 1,
-  rows : 1,
-  cls : '',
-  linkages : [],
-  onLinkaged : function($plugin, linkage) {
-  },
-  onChange : function($plugin, pluginValues, pluginValue, currentValue) {
-  },
-
-  // @see LK.UI.load
-  lazy : false,
-  url : '',
-  param : {},
-  data : null,
-  onBeforeAddDatas : function($plugin, responseDatas, url, param) {
-    return responseDatas;
-  },
-  onAfterAddDatas : function($plugin, responseDatas, url, param) {
-  },
-  onLoadDatasError : function($plugin, ajaxErrorArguments, url, param) {
-  },
-
+}, $.extend({},
+// @see LK.UI.create
+LK.UI.createOptions,
+// @see LK.UI.load
+LK.UI.loadOptions,
+// 控件特有参数
+{
   // 支持多选
   multiSelect : false,
   // 是否可以取消选中（仅在单选情况下起作用）
   cancelable : true
-});
+}));
 
 $('body').mousedown(function(e) {
   var $that = $(e.target);

@@ -70,23 +70,13 @@ LK.UI('plugins', 'ueditor', function(options) {
 
   // 返回控件对象
   return $plugin;
-}, {
-  // @see LK.UI.create
-  id : '',
-  $appendTo : null,
-  $renderTo : null,
-  name : '',
-  validator : null,
-  value : null,
-  inForm : false,
-  width : null,
-  height : null,
+}, $.extend({},
+// @see LK.UI.create
+LK.UI.createOptions,
+// 控件特殊定义
+{
   cols : 4,
   rows : 14,
-  cls : '',
-  linkages : [],
-  onLinkaged : function($plugin, linkage) {
-  },
-  onChange : function($plugin, pluginValues, pluginValue, currentValue) {
-  }
-});
+},
+// 控件特有参数
+{}));

@@ -305,39 +305,18 @@ LK.UI('plugins', 'tree', function(options) {
 
   // 返回控件对象
   return $plugin;
-}, {
-  // @see LK.UI.create
-  id : '',
-  $appendTo : null,
-  $renderTo : null,
-  name : '',
-  validator : null,
-  value : null,
-  inForm : false,
-  width : null,
-  height : null,
+}, $.extend({},
+// @see LK.UI.create
+LK.UI.createOptions,
+// 控件特殊定义
+{
   cols : 2,
-  rows : 10,
-  cls : '',
-  linkages : [],
-  onLinkaged : function($plugin, linkage) {
-  },
-  onChange : function($plugin, pluginValues, pluginValue, currentValue) {
-  },
-
-  // @see LK.UI.load
-  lazy : false,
-  url : '',
-  param : {},
-  data : null,
-  onBeforeAddDatas : function($plugin, responseDatas, url, param) {
-    return responseDatas;
-  },
-  onAfterAddDatas : function($plugin, responseDatas, url, param) {
-  },
-  onLoadDatasError : function($plugin, ajaxErrorArguments, url, param) {
-  },
-
+  rows : 10
+},
+// @see LK.UI.load
+LK.UI.loadOptions,
+// 控件特有参数
+{
   // 多选框（有多选框时，将执行联动上下级逻辑，取值将为多选框是已选中状态和半选中状态的数据。）
   checkbox : true,
   // 支持多选（仅在无多选框情况下起作用，取值将为已选中状态的数据。）
@@ -346,4 +325,4 @@ LK.UI('plugins', 'tree', function(options) {
   cancelable : true,
   // 显示内容是否使用i18n
   i18nText : true
-});
+}));
