@@ -53,6 +53,9 @@ LK.UI._datagrid = {
    */
   addDatas : function($plugin, $container, datas) {
     var columns = $plugin.data('LKOPTIONS').columns;
+    if (typeof datas.content != 'undefined') {
+      datas = datas.content;
+    }
     for (var i = 0; i < datas.length; i++) {
       this.addData($plugin, $container, datas, columns, datas[i]);
     }
