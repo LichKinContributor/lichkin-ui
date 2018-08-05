@@ -56,6 +56,7 @@ LK.i18n = {
   'close' : '关闭',
   'dropdown' : '显示/隐藏选项',
   'datepicker' : '显示/隐藏日期控件',
+  'cropper-no-image' : '无图片',
   'spinner-plus' : '加',
   'spinner-minus' : '减',
   // 菜单图标

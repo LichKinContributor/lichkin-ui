@@ -56,6 +56,7 @@ LK.i18n = {
   'close' : 'close',
   'dropdown' : 'show/hide options',
   'datepicker' : 'show/hide date picker',
+  'cropper-no-image' : 'no image',
   'spinner-plus' : 'plus',
   'spinner-minus' : 'minus',
   // menu icons
