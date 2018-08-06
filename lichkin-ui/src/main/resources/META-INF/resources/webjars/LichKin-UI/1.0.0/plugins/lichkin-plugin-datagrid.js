@@ -359,7 +359,12 @@ LK.UI('plugins', 'datagrid', function(options) {
             size : 24
           },
           click : function($button) {
-            click($button, $plugin);
+            var $selecteds = $plugin.LKGetDataContainer().find('tr.selected');
+            var selectedDatas = [];
+            $selecteds.each(function() {
+              selectedDatas.push($(this).data());
+            });
+            click($button, $plugin, $selecteds, selectedDatas);
           },
           tip : button.tip
         }));
@@ -383,7 +388,12 @@ LK.UI('plugins', 'datagrid', function(options) {
         }
         $buttonsBar.append(LK.UI.button($.extend(button, {
           click : function($button) {
-            click($button, $plugin);
+            var $selecteds = $plugin.LKGetDataContainer().find('tr.selected');
+            var selectedDatas = [];
+            $selecteds.each(function() {
+              selectedDatas.push($(this).data());
+            });
+            click($button, $plugin, $selecteds, selectedDatas);
           }
         })));
       })(button);
@@ -551,13 +561,13 @@ LK.UI.loadOptions,
   searchForm : [],
   /**
    * 标题栏工具栏
-   * @see LK.UI.button（click方法被重写，第一个参数保持按钮控件不变，增加第二个参数当前对话框控件。仅支持图标按钮。）
+   * @see LK.UI.button（click方法被重写，第一个参数保持按钮控件不变，增加第二个参数当前对话框控件，增加第三个参数当前选中行，增加第四个参数当前选中数据集。仅支持图标按钮。）
    * @tip 如果输入了title或icon，则框架内部会补充刷新按钮。如果有查询表单时，则框架内部会补充重置按钮和查询按钮。
    */
   titleTools : [],
   /**
    * 工具栏
-   * @see LK.UI.button（click方法被重写，第一个参数保持按钮控件不变，增加第二个参数当前对话框控件。）
+   * @see LK.UI.button（click方法被重写，第一个参数保持按钮控件不变，增加第二个参数当前对话框控件，增加第三个参数当前选中行，增加第四个参数当前选中数据集。）
    */
   tools : [],
   /**

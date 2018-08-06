@@ -25,7 +25,7 @@ LK.UI.datagrid({
       {
         icon : 'tip',
         click : function() {
-          alert();
+          console.log(arguments);
         }
       }, {
         icon : 'warning',
@@ -43,7 +43,7 @@ LK.UI.datagrid({
       {
         icon : 'add',
         click : function() {
-          alert();
+          console.log(arguments);
         }
       }, {
         icon : 'edit',
