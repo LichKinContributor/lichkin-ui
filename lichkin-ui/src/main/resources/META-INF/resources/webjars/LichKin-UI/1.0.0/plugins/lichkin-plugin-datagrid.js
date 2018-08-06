@@ -131,13 +131,9 @@ LK.UI('plugins', 'datagrid', function(options) {
   // 删除按钮
   if (options.toolsRemove != null) {
     var json = {
+      singleCheck : false,
       icon : 'remove',
       click : function() {
-        var value = $plugin.LKGetValue();
-        if (value == '') {
-          LK.alert($.LKGetI18N('noSelect'));
-          return;
-        }
         LK.web.confirm($.LKGetI18N('confirmRemove'), function() {
           LK.ajax({
             url : options.toolsRemove.saveUrl,
@@ -163,17 +159,9 @@ LK.UI('plugins', 'datagrid', function(options) {
   // 编辑按钮
   if (options.toolsEdit != null) {
     var json = {
+      singleCheck : true,
       icon : 'edit',
       click : function() {
-        var value = $plugin.LKGetValue();
-        if (value == '') {
-          LK.alert($.LKGetI18N('noSelect'));
-          return;
-        }
-        if (value.indexOf(LK.SPLITOR) > 0) {
-          LK.alert($.LKGetI18N('singleSelect'));
-          return;
-        }
         LK.UI.openDialog($.extend({}, options.toolsEdit.dialog, {
           title : 'edit',
           icon : 'edit',
@@ -241,6 +229,7 @@ LK.UI('plugins', 'datagrid', function(options) {
   // 新增按钮
   if (options.toolsAdd != null) {
     var json = {
+      singleCheck : null,
       icon : 'add',
       click : function() {
         if (typeof options.toolsAdd.beforeClick == 'function' && !options.toolsAdd.beforeClick($plugin)) {
@@ -323,12 +312,14 @@ LK.UI('plugins', 'datagrid', function(options) {
     }
     if (options.searchForm.length != 0) {
       options.titleTools.push({
+        singleCheck : null,
         icon : 'reset',
         click : function() {
           $searchForm.LKFormBindData();
         }
       });
       options.titleTools.push({
+        singleCheck : null,
         icon : 'search',
         click : function() {
           $plugin.LKLoad({
@@ -338,6 +329,7 @@ LK.UI('plugins', 'datagrid', function(options) {
       });
     } else {
       options.titleTools.push({
+        singleCheck : null,
         icon : 'search',
         click : function() {
           $plugin.LKLoad();
@@ -347,6 +339,9 @@ LK.UI('plugins', 'datagrid', function(options) {
     var $buttonsBar = $('<div class="lichkin-buttons"></div>').appendTo($titleBar);
     for (var i = 0; i < options.titleTools.length; i++) {
       var button = options.titleTools[i];
+      if (typeof button.singleCheck == 'undefined') {
+        button.singleCheck = true;
+      }
       (function(button) {
         var click = button.click;
         if (typeof click != 'function') {
@@ -359,6 +354,20 @@ LK.UI('plugins', 'datagrid', function(options) {
             size : 24
           },
           click : function($button) {
+            if (button.singleCheck == true || button.singleCheck == false) {
+              var value = $plugin.LKGetValue();
+              if (value == '') {
+                LK.alert($.LKGetI18N('noSelect'));
+                return;
+              }
+            }
+            if (button.singleCheck == true) {
+              if (value.indexOf(LK.SPLITOR) > 0) {
+                LK.alert($.LKGetI18N('singleSelect'));
+                return;
+              }
+            }
+
             var $selecteds = $plugin.LKGetDataContainer().find('tr.selected');
             var selectedDatas = [];
             $selecteds.each(function() {
@@ -380,6 +389,9 @@ LK.UI('plugins', 'datagrid', function(options) {
     var $buttonsBar = $('<div class="lichkin-buttons"></div>').appendTo($toolsBar);
     for (var i = 0; i < options.tools.length; i++) {
       var button = options.tools[i];
+      if (typeof button.singleCheck == 'undefined') {
+        button.singleCheck = true;
+      }
       (function(button) {
         var click = button.click;
         if (typeof click != 'function') {
@@ -388,6 +400,20 @@ LK.UI('plugins', 'datagrid', function(options) {
         }
         $buttonsBar.append(LK.UI.button($.extend(button, {
           click : function($button) {
+            if (button.singleCheck == true || button.singleCheck == false) {
+              var value = $plugin.LKGetValue();
+              if (value == '') {
+                LK.alert($.LKGetI18N('noSelect'));
+                return;
+              }
+            }
+            if (button.singleCheck == true) {
+              if (value.indexOf(LK.SPLITOR) > 0) {
+                LK.alert($.LKGetI18N('singleSelect'));
+                return;
+              }
+            }
+
             var $selecteds = $plugin.LKGetDataContainer().find('tr.selected');
             var selectedDatas = [];
             $selecteds.each(function() {
@@ -562,12 +588,14 @@ LK.UI.loadOptions,
   /**
    * 标题栏工具栏
    * @see LK.UI.button（click方法被重写，第一个参数保持按钮控件不变，增加第二个参数当前对话框控件，增加第三个参数当前选中行，增加第四个参数当前选中数据集。仅支持图标按钮。）
+   * @extend 额外增加singleCheck定义。true:必须选择一行数据进行操作;false:至少选择一行数据进行操作;null:可不选数据进行操作;
    * @tip 如果输入了title或icon，则框架内部会补充刷新按钮。如果有查询表单时，则框架内部会补充重置按钮和查询按钮。
    */
   titleTools : [],
   /**
    * 工具栏
    * @see LK.UI.button（click方法被重写，第一个参数保持按钮控件不变，增加第二个参数当前对话框控件，增加第三个参数当前选中行，增加第四个参数当前选中数据集。）
+   * @extend 额外增加singleCheck定义。true:必须选择一行数据进行操作;false:至少选择一行数据进行操作;null:可不选数据进行操作;
    */
   tools : [],
   /**
