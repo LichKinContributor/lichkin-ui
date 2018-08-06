@@ -57,6 +57,7 @@ LK.i18n = {
   'close' : 'close',
   'dropdown' : 'show/hide options',
   'datepicker' : 'show/hide date picker',
+  'selector' : 'show/hide selector',
   'cropper-no-image' : 'no image',
   'zoomIn' : 'zoom in',
   'zoomOut' : 'zoom out',

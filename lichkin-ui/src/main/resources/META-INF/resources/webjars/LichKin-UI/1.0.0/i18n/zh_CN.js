@@ -57,6 +57,7 @@ LK.i18n = {
   'close' : '关闭',
   'dropdown' : '显示/隐藏选项',
   'datepicker' : '显示/隐藏日期控件',
+  'selector' : '显示/隐藏选项',
   'cropper-no-image' : '无图片',
   'zoomIn' : '放大',
   'zoomOut' : '缩小',

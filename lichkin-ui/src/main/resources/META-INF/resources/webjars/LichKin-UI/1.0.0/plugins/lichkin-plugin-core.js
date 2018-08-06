@@ -402,7 +402,7 @@ $.fn.extend({
       values = values.split(LK.SPLITOR);
     }
     var plugin = this.LKGetPluginType();
-    if (plugin == 'droplist' || plugin == 'datagrid' || plugin == 'tree' || plugin == 'cropper') {
+    if (plugin == 'droplist' || plugin == 'datagrid' || plugin == 'tree' || plugin == 'cropper' || plugin == 'selector') {
       this.LKGetImplementor().setValues(this, this.LKGetDataContainer(), values, isCreateEvent);
     } else {
       this.LKSetValues(values, isCreateEvent);

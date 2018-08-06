@@ -280,6 +280,7 @@ LK.UI('plugins', 'changeIcon', function(options) {
     'close' : 'times',
     'dropdown' : 'caret-square-down',
     'datepicker' : 'calendar-alt',
+    'selector' : 'ellipsis-h',
     'cropper-no-image' : 'image',
     'zoomIn' : 'search-plus',
     'zoomOut' : 'search-minus',

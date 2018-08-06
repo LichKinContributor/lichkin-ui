@@ -44,6 +44,7 @@
 			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-form${compressSuffix}.css" />
 			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-datagrid${compressSuffix}.css" />
 			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-dialog${compressSuffix}.css" />
+			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-selector${compressSuffix}.css" />
 			<#else>
 			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugins${compressSuffix}.css" />
 			</#if>
@@ -95,6 +96,7 @@
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-form${compressSuffix}.js" />
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-datagrid${compressSuffix}.js" />
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-dialog${compressSuffix}.js" />
+			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-selector${compressSuffix}.js" />
 			<#else>
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugins${compressSuffix}.js" />
 			</#if>

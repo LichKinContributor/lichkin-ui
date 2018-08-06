@@ -151,6 +151,81 @@ LK.UI._dialog = {
 
 };
 
+LK.UI.dialogOptions = {
+  // 控件ID
+  id : '',
+  // 对话框标题
+  title : null,
+  // 图标
+  icon : null,
+  // 对话框加载页面地址
+  url : '',
+  // 对话框加载页面参数
+  param : {},
+  // 对话框加载页面数据
+  data : {},
+  // 对话框文本内容
+  content : '',
+  // 是否增加遮罩层
+  mask : true,
+  // 对话框大小
+  size : {
+    // 对话框内容宽度
+    width : 2 * LK.colWidth,
+    // 对话框内容高度
+    height : 10 * LK.rowHeight,
+    // 表格列数
+    cols : 2,
+    // 表格行数
+    rows : 10
+  },
+  // 表单内容，决定大小的设置。
+  formContent : true,
+  /**
+   * 对话框按钮数组
+   * @see LK.UI.button（click方法被重写，第一个参数保持按钮控件不变，增加第二个参数当前对话框控件，增加第三个参数当前对话框内容栏。）
+   */
+  buttons : [],
+
+  // 事件
+  /**
+   * 控件创建结束
+   * @param $plugin 当前对话框对象
+   * @param $contentBar 内容栏
+   */
+  onAfterCreate : function($plugin, $contentBar) {
+  },
+  /**
+   * 页面加载前
+   * @param $plugin 当前对话框对象
+   */
+  onBeforeLoading : function($plugin) {
+  },
+  /**
+   * 页面加载后
+   * @param $plugin 当前对话框对象
+   */
+  onAfterLoading : function($plugin) {
+  },
+  /**
+   * 对话框被聚焦后
+   * @param $plugin 当前对话框对象
+   */
+  onFocus : function($plugin) {
+  },
+  /**
+   * 对话框关闭前
+   * @param $plugin 当前对话框对象
+   */
+  onBeforeClose : function($plugin) {
+  },
+  /**
+   * 对话框关闭后
+   */
+  onAfterClose : function() {
+  }
+};
+
 /**
  * 打开对话框
  */
@@ -272,7 +347,8 @@ LK.UI('plugins', 'openDialog', function(options) {
         }
         $buttonsBar.append(LK.UI.button($.extend(button, {
           click : function($button) {
-            click($button, $plugin);
+            var $dialog = $button.parents('.lichkin-dialog:first');
+            click($button, $dialog, $dialog.find('.lichkin-dialog-contentBar'));
           }
         })));
       })(button);
@@ -305,80 +381,7 @@ LK.UI('plugins', 'openDialog', function(options) {
 
   // 返回控件对象
   return $plugin;
-}, {
-  // 控件ID
-  id : '',
-  // 对话框标题
-  title : null,
-  // 图标
-  icon : null,
-  // 对话框加载页面地址
-  url : '',
-  // 对话框加载页面参数
-  param : {},
-  // 对话框加载页面数据
-  data : {},
-  // 对话框文本内容
-  content : '',
-  // 是否增加遮罩层
-  mask : true,
-  // 对话框大小
-  size : {
-    // 对话框内容宽度
-    width : 2 * LK.colWidth,
-    // 对话框内容高度
-    height : 10 * LK.rowHeight,
-    // 表格列数
-    cols : 2,
-    // 表格行数
-    rows : 10
-  },
-  // 表单内容，决定大小的设置。
-  formContent : true,
-  /**
-   * 对话框按钮数组
-   * @see LK.UI.button（click方法被重写，第一个参数保持按钮控件不变，增加第二个参数当前对话框控件。）
-   */
-  buttons : [],
-
-  // 事件
-  /**
-   * 控件创建结束
-   * @param $plugin 当前对话框对象
-   * @param $contentBar 内容栏
-   */
-  onAfterCreate : function($plugin, $contentBar) {
-  },
-  /**
-   * 页面加载前
-   * @param $plugin 当前对话框对象
-   */
-  onBeforeLoading : function($plugin) {
-  },
-  /**
-   * 页面加载后
-   * @param $plugin 当前对话框对象
-   */
-  onAfterLoading : function($plugin) {
-  },
-  /**
-   * 对话框被聚焦后
-   * @param $plugin 当前对话框对象
-   */
-  onFocus : function($plugin) {
-  },
-  /**
-   * 对话框关闭前
-   * @param $plugin 当前对话框对象
-   */
-  onBeforeClose : function($plugin) {
-  },
-  /**
-   * 对话框关闭后
-   */
-  onAfterClose : function() {
-  }
-});
+}, LK.UI.dialogOptions);
 
 $('body').keydown(function(e) {
   if (e.keyCode == 27) {// ESC关闭最顶层对话框

@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+.lichkin-selector .lichkin-selector-wrapper {
+  cursor: pointer;
+}
+
+.lichkin-selector .lichkin-selector-button {
+  pointer-events:none;
+}
