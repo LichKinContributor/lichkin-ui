@@ -451,6 +451,12 @@ LK.UI.createOptions = {
   inForm : false,
   // 表单显示名
   key : null,
+  /**
+   * 表单显示名替换内容
+   * @param regex 正则表达式
+   * @param replacement 替换结果
+   */
+  keyTextReplaces : [],
   // 宽度（特殊情况下使用）
   width : null,
   // 高度（特殊情况下使用）
@@ -567,9 +573,16 @@ LK.UI('plugins', 'create', function(opts) {
       'padding' : LK.topGap + 'px 0px 0px ' + LK.leftGap + 'px'
     });
 
+    var keyText = options.key == null ? $.LKGetI18N(options.name) : $.LKGetI18N(options.key);
+    if (options.keyTextReplaces.length != 0) {
+      for (var i = 0; i < options.keyTextReplaces.length; i++) {
+        var keyTextReplace = options.keyTextReplaces[i];
+        keyText.replace(keyTextReplace.regex, keyTextReplace.replacement);
+      }
+    }
     var $fieldKey = $('<div class="lichkin-form-field-key"></div>').appendTo($field).append(LK.UI.text({
       original : true,
-      text : (options.key == null ? $.LKGetI18N(options.name) : $.LKGetI18N(options.key)) + ' :',
+      text : keyText + ' :',
       style : {
         'height' : LK.rowHeight - 2 * LK.textPaddingTB,
         'line-height' : LK.rowHeight - 2 * LK.textPaddingTB + 'px'
