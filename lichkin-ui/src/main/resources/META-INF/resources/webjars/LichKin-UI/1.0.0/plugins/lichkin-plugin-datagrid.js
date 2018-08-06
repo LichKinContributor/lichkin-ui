@@ -133,7 +133,7 @@ LK.UI('plugins', 'datagrid', function(options) {
     var json = {
       singleCheck : false,
       icon : 'remove',
-      click : function() {
+      click : function($button, $datagrid, $selecteds, selectedDatas, value) {
         LK.web.confirm($.LKGetI18N('confirmRemove'), function() {
           LK.ajax({
             url : options.toolsRemove.saveUrl,
@@ -161,7 +161,7 @@ LK.UI('plugins', 'datagrid', function(options) {
     var json = {
       singleCheck : true,
       icon : 'edit',
-      click : function() {
+      click : function($button, $datagrid, $selecteds, selectedDatas, value) {
         LK.UI.openDialog($.extend({}, options.toolsEdit.dialog, {
           title : 'edit',
           icon : 'edit',
@@ -231,7 +231,7 @@ LK.UI('plugins', 'datagrid', function(options) {
     var json = {
       singleCheck : null,
       icon : 'add',
-      click : function() {
+      click : function($button, $datagrid, $selecteds, selectedDatas, value) {
         if (typeof options.toolsAdd.beforeClick == 'function' && !options.toolsAdd.beforeClick($plugin)) {
           return;
         }
@@ -354,8 +354,8 @@ LK.UI('plugins', 'datagrid', function(options) {
             size : 24
           },
           click : function($button) {
+            var value = $plugin.LKGetValue();
             if (button.singleCheck == true || button.singleCheck == false) {
-              var value = $plugin.LKGetValue();
               if (value == '') {
                 LK.alert($.LKGetI18N('noSelect'));
                 return;
@@ -373,7 +373,7 @@ LK.UI('plugins', 'datagrid', function(options) {
             $selecteds.each(function() {
               selectedDatas.push($(this).data());
             });
-            click($button, $plugin, $selecteds, selectedDatas);
+            click($button, $plugin, $selecteds, selectedDatas, value);
           },
           tip : button.tip
         }));
@@ -400,8 +400,8 @@ LK.UI('plugins', 'datagrid', function(options) {
         }
         $buttonsBar.append(LK.UI.button($.extend(button, {
           click : function($button) {
+            var value = $plugin.LKGetValue();
             if (button.singleCheck == true || button.singleCheck == false) {
-              var value = $plugin.LKGetValue();
               if (value == '') {
                 LK.alert($.LKGetI18N('noSelect'));
                 return;
@@ -419,7 +419,7 @@ LK.UI('plugins', 'datagrid', function(options) {
             $selecteds.each(function() {
               selectedDatas.push($(this).data());
             });
-            click($button, $plugin, $selecteds, selectedDatas);
+            click($button, $plugin, $selecteds, selectedDatas, value);
           }
         })));
       })(button);
@@ -587,14 +587,14 @@ LK.UI.loadOptions,
   searchForm : [],
   /**
    * 标题栏工具栏
-   * @see LK.UI.button（click方法被重写，第一个参数保持按钮控件不变，增加第二个参数当前对话框控件，增加第三个参数当前选中行，增加第四个参数当前选中数据集。仅支持图标按钮。）
+   * @see LK.UI.button（click方法被重写，第一个参数保持按钮控件不变，增加第二个参数当前对话框控件，增加第三个参数当前选中行，增加第四个参数当前选中数据集,增加第五个参数当前表格值。仅支持图标按钮。）
    * @extend 额外增加singleCheck定义。true:必须选择一行数据进行操作;false:至少选择一行数据进行操作;null:可不选数据进行操作;
    * @tip 如果输入了title或icon，则框架内部会补充刷新按钮。如果有查询表单时，则框架内部会补充重置按钮和查询按钮。
    */
   titleTools : [],
   /**
    * 工具栏
-   * @see LK.UI.button（click方法被重写，第一个参数保持按钮控件不变，增加第二个参数当前对话框控件，增加第三个参数当前选中行，增加第四个参数当前选中数据集。）
+   * @see LK.UI.button（click方法被重写，第一个参数保持按钮控件不变，增加第二个参数当前对话框控件，增加第三个参数当前选中行，增加第四个参数当前选中数据集,增加第五个参数当前表格值。）
    * @extend 额外增加singleCheck定义。true:必须选择一行数据进行操作;false:至少选择一行数据进行操作;null:可不选数据进行操作;
    */
   tools : [],
