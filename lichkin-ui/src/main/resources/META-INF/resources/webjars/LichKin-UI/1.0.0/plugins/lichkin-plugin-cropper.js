@@ -40,6 +40,9 @@ LK.UI._cropper = {
    * @param isCreateEvent 是否为创建是调用
    */
   setValues : function($plugin, $container, values, isCreateEvent) {
+    if (values == null) {
+      values = '';
+    }
     if (Array.isArray(values)) {
       values = values[0];
       if (typeof values == 'undefined') {

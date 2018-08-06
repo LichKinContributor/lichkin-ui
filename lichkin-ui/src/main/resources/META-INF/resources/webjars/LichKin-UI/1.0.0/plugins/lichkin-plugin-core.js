@@ -396,7 +396,7 @@ $.fn.extend({
    * @param isCreateEvent 是否为创建是调用
    */
   LKInvokeSetValues : function(values, isCreateEvent) {
-    if (values == null || typeof values == 'undefined') {
+    if (typeof values == 'undefined') {
       values = [];
     } else if (isString(values)) {
       values = values.split(LK.SPLITOR);
