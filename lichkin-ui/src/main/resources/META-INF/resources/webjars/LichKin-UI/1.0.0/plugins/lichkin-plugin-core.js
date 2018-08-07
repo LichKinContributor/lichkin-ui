@@ -215,6 +215,9 @@ $.fn.extend({
    * 获取控件值
    */
   LKGetValue : function() {
+    if (this.LKGetPluginType() == 'ueditor') {
+      return this.data('ue').getContent();
+    }
     return this.LKGetValueObj().val();
   },
 
@@ -688,6 +691,9 @@ LK.UI('plugins', 'create', function(opts) {
 
   // 缓存参数
   $plugin.data('LKOPTIONS', options);
+  if (options.inForm == true) {
+    $plugin.data('LKName', options.name);
+  }
 
   // 返回控件对象
   return $plugin;

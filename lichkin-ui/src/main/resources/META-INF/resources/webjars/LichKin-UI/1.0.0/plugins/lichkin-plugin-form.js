@@ -88,12 +88,16 @@ $.fn.extend({
     var $frm = this.LKGetFormPlugin();
 
     var json = {};
-    $frm.find('.lichkin-plugin-value').each(function() {
-      var name = $(this).attr('name');
-      if (typeof json[name] == 'undefined') {
-        json[name] = $(this).val();
-      } else {
-        json[name] += LK.SPLITOR + $(this).val();
+    $frm.find('.lichkin-plugin').each(function() {
+      var $subPlugin = $(this);
+      var name = $subPlugin.data('LKName');
+      if (isString(name) && name != '') {
+        var value = $subPlugin.LKGetValue();
+        if (typeof json[name] == 'undefined') {
+          json[name] = value;
+        } else {
+          json[name] += LK.SPLITOR + value;
+        }
       }
     });
 
