@@ -596,7 +596,7 @@ LK.UI('plugins', 'create', function(opts) {
     if (options.keyTextReplaces.length != 0) {
       for (var i = 0; i < options.keyTextReplaces.length; i++) {
         var keyTextReplace = options.keyTextReplaces[i];
-        keyText.replace(keyTextReplace.regex, keyTextReplace.replacement);
+        keyText = keyText.replace(keyTextReplace.regex, keyTextReplace.replacement);
       }
     }
     var $fieldKey = $('<div class="lichkin-form-field-key"></div>').appendTo($field).append(LK.UI.text({
