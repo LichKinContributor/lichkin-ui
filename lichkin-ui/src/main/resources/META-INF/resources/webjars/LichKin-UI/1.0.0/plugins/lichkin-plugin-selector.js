@@ -22,18 +22,21 @@ LK.UI._selector = {
         ];
       }
       if (Array.isArray(values) && values.length != 0) {
-        var options = $plugin.data('LKOPTIONS');
-        $container.find('li').each(function() {
-          var data = $(this).data();
+        var datas = $plugin.data('LKDatas');
+        if (Array.isArray(datas) && datas.length != 0) {
+          var options = $plugin.data('LKOPTIONS');
           for (var i = 0; i < values.length; i++) {
-            var v = data[options.valueFieldName];
-            if (v == values[i]) {
-              valueArr.push(v);
-              textArr.push(data[options.textFieldName]);
-              break;
+            for (var j = 0; j < datas.length; j++) {
+              var data = datas[j];
+              var v = data[options.valueFieldName];
+              if (v == values[i]) {
+                valueArr.push(v);
+                textArr.push(data[options.textFieldName]);
+                break;
+              }
             }
           }
-        });
+        }
       }
     }
 
@@ -48,9 +51,6 @@ LK.UI._selector = {
    * @param datas 数据集
    */
   addDatas : function($plugin, $container, datas) {
-    for (var i = 0; i < datas.length; i++) {
-      $('<li></li>').appendTo($container).data(datas[i]);
-    }
   }
 
 };
@@ -71,6 +71,7 @@ LK.UI.loadOptions,
    * @see LK.UI.openDialog
    * @tip id为selector控件id+'_dialog'
    * @tip 内部已经提供了三个按钮（确定、还原、取消）
+   * @tip onAfterCreate增加第三个参数selector对象
    */
   dialog : LK.UI.dialogOptions,
 
@@ -161,6 +162,10 @@ LK.UI('plugins', 'selector', function(options) {
       $dialog.LKCloseDialog();
     }
   });
+  var onAfterCreate = options.dialog.onAfterCreate;
+  options.dialog.onAfterCreate = function($dialog, $contentBar) {
+    onAfterCreate($dialog, $contentBar, $plugin);
+  };
   $wrapper.click(function() {
     LK.UI.openDialog(options.dialog);
   });
@@ -174,9 +179,6 @@ LK.UI('plugins', 'selector', function(options) {
   }).appendTo($plugin).LKAddPluginClass(plugin, 'button');
   $button.css('height', height);
   $button.find('.lichkin-icon').css('top', (height - 24) / 2 + 'px');
-
-  // 数据容器
-  var $container = $('<ul style="display:none;"></ul>').appendTo($plugin).LKAddPluginClass(plugin, 'dataContainer');
 
   // 加载数据
   LK.UI.load({
