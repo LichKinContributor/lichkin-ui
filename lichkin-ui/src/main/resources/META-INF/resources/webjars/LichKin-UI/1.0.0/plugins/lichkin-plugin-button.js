@@ -75,6 +75,10 @@ LK.UI('plugins', 'button', function(options) {
     $plugin.attr('title', $.LKGetI18N(options.icon));
   }
 
+  if (!$.isEmptyObject(options.style)) {
+    $plugin.css(options.style);
+  }
+
   // 返回控件对象
   return $plugin;
 }, {
@@ -94,10 +98,12 @@ LK.UI('plugins', 'button', function(options) {
    * 点击事件
    * @param $plugin 当前按钮控件
    */
-  click : function(plugin) {
+  click : function($plugin) {
   },
   // 按钮提示信息
   tip : null,
   // 样式
-  cls : null
+  cls : null,
+  // 样式
+  style : {}
 });

@@ -10,6 +10,7 @@
 	<#if section="body-content">
 		<div class="title">初始化</div>
 		<div class="content" id="demo"></div>
+		<div class="content" id="demo2"></div>
 	</#if>
 	<#if section="javascript-links">
 		<@lichkin@jsTag />

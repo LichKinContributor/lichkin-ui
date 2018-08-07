@@ -22,12 +22,14 @@ LK.UI._selector = {
         ];
       }
       if (Array.isArray(values) && values.length != 0) {
+        var options = $plugin.data('LKOPTIONS');
         $container.find('li').each(function() {
           var data = $(this).data();
           for (var i = 0; i < values.length; i++) {
-            if (data.value == values[i]) {
-              valueArr.push(data.value);
-              textArr.push(data.text);
+            var v = data[options.valueFieldName];
+            if (v == values[i]) {
+              valueArr.push(v);
+              textArr.push(data[options.textFieldName]);
               break;
             }
           }
@@ -52,6 +54,50 @@ LK.UI._selector = {
   }
 
 };
+
+// 选择器控件参数
+LK.UI.selectorOptions = $.extend({},
+// @see LK.UI.create
+LK.UI.createOptions,
+// @see LK.UI.load
+LK.UI.loadOptions,
+// 控件特有参数
+{
+  // 值字段名
+  valueFieldName : 'id',
+  // 显示字段名
+  textFieldName : 'text',
+  /**
+   * @see LK.UI.openDialog
+   * @tip id为selector控件id+'_dialog'
+   * @tip 内部已经提供了三个按钮（确定、还原、取消）
+   */
+  dialog : LK.UI.dialogOptions,
+
+  /**
+   * 对话框确定按钮点击事件
+   * @param $button 按钮
+   * @param $dialog 对话框
+   * @param $contentBar 对话框内容栏
+   * @param $plugin 选择器控件
+   * @param value 选择器控件值
+   * @return 结果值
+   */
+  onOkButtonClick : function($button, $dialog, $contentBar, $plugin, value) {
+    return value;
+  },
+
+  /**
+   * 对话框还原按钮点击事件
+   * @param $button 按钮
+   * @param $dialog 对话框
+   * @param $contentBar 对话框内容栏
+   * @param $plugin 选择器控件
+   * @param value 选择器控件值
+   */
+  onResetButtonClick : function($button, $dialog, $contentBar, $plugin, value) {
+  }
+});
 
 /**
  * 选择器控件
@@ -106,7 +152,12 @@ LK.UI('plugins', 'selector', function(options) {
     text : 'ok',
     cls : 'success',
     click : function($button, $dialog, $contentBar) {
-      $plugin.LKInvokeSetValues(options.onOkButtonClick($button, $dialog, $contentBar, $plugin, $plugin.LKGetValue()), false);
+      var value = options.onOkButtonClick($button, $dialog, $contentBar, $plugin, $plugin.LKGetValue());
+      if (value == null) {
+        LK.alert($.LKGetI18N('noSelect'));
+        return;
+      }
+      $plugin.LKInvokeSetValues(value, false);
       $dialog.LKCloseDialog();
     }
   });
@@ -138,41 +189,4 @@ LK.UI('plugins', 'selector', function(options) {
 
   // 返回控件对象
   return $plugin;
-}, $.extend({},
-// @see LK.UI.create
-LK.UI.createOptions,
-// @see LK.UI.load
-LK.UI.loadOptions,
-// 控件特有参数
-{
-  /**
-   * @see LK.UI.openDialog
-   * @tip id为selector控件id+'_dialog'
-   * @tip 内部已经提供了三个按钮（确定、还原、取消）
-   */
-  dialog : LK.UI.dialogOptions,
-
-  /**
-   * 对话框确定按钮点击事件
-   * @param $button 按钮
-   * @param $dialog 对话框
-   * @param $contentBar 对话框内容栏
-   * @param $plugin 选择器控件
-   * @param value 选择器控件值
-   * @return 结果值
-   */
-  onOkButtonClick : function($button, $dialog, $contentBar, $plugin, value) {
-    return value;
-  },
-
-  /**
-   * 对话框还原按钮点击事件
-   * @param $button 按钮
-   * @param $dialog 对话框
-   * @param $contentBar 对话框内容栏
-   * @param $plugin 选择器控件
-   * @param value 选择器控件值
-   */
-  onResetButtonClick : function($button, $dialog, $contentBar, $plugin, value) {
-  }
-}));
+}, LK.UI.selectorOptions);

@@ -18,3 +18,8 @@
 .lichkin-form-field-invalid .lichkin-form-field-key .lichkin-text {
   color: var(--lichkin-plugin-font-color-invalid);
 }
+
+.lichkin-form-field .lichkin-form-field-value .lichkin-plugin .lichkin-plugin-titleBar {
+  border-right: none;
+  border-left: none;
+}

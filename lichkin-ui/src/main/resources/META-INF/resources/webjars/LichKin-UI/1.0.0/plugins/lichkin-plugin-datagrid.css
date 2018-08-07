@@ -3,7 +3,6 @@
 :root {
   --lichkin-datagrid-title-font-size: 16px;
   --lichkin-datagrid-header-background-color: var(--lichkin-plugin-border-color);
-  --lichkin-datagrid-header-border-color: #FFFFFF;
   --lichkin-datagrid-header-font-color: var(--lichkin-plugin-background-color);
   --lichkin-datagrid-header-font-size: 14px;
   --lichkin-datagrid-body-border-color: #CCCCCC;
@@ -14,83 +13,6 @@
 .lichkin-datagrid {
   border: none;
   background-color: transparent;
-}
-
-.lichkin-datagrid .lichkin-datagrid-titleBar {
-  position: relative;
-  padding: 3px 0px;
-  height: 30px;
-  line-height: 30px;
-  background-color: var(--lichkin-plugin-border-color);
-  border-top: 1px solid var(--lichkin-plugin-border-color);
-  border-right: 1px solid var(--lichkin-plugin-border-color);
-  border-bottom: 1px solid var(--lichkin-datagrid-header-border-color);
-  border-left: 1px solid var(--lichkin-plugin-border-color);
-}
-
-.lichkin-datagrid .lichkin-datagrid-titleBar>.lichkin-icon {
-  position: absolute;
-  left: 6px;
-  top: 6px;
-}
-
-.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-icon i {
-  color: var(--lichkin-plugin-background-color);
-}
-
-.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-text {
-  position: absolute;
-  left: 6px;
-  top: 0px;
-  height: 29px !important;
-  line-height: 29px !important;
-  color: var(--lichkin-plugin-background-color);
-  font-size: var(--lichkin-datagrid-title-font-size);
-}
-
-.lichkin-datagrid .lichkin-datagrid-titleBar>.lichkin-icon+.lichkin-text {
-  left: 27px;
-}
-
-.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-buttons {
-  position: absolute;
-  cursor: pointer;
-  right: 6px;
-  top: 1px;
-}
-
-.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-buttons .lichkin-button {
-  background-color: transparent;
-  border-color: transparent;
-  height: 24px;
-}
-
-.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-buttons .lichkin-button .lichkin-button-container {
-  height: 24px;
-}
-
-.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-buttons .lichkin-icon i {
-  color: var(--lichkin-plugin-background-color);
-}
-
-.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-buttons .lichkin-button .lichkin-icon-add i {
-  color: #60ff60;
-}
-
-.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-buttons .lichkin-button .lichkin-icon-edit i {
-  color: #ffff00;
-}
-
-.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-buttons .lichkin-button .lichkin-icon-remove i {
-  color: #ff9c9c;
-}
-
-.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-buttons .lichkin-icon-reset i {
-  color: #ff7979;
-}
-
-.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-buttons .lichkin-icon-search i {
-  color: #fff45d;
 }
 
 .lichkin-datagrid .lichkin-datagrid-searchFormBar {
@@ -105,7 +27,7 @@
   background-color: var(--lichkin-plugin-border-color);
   border-top: none;
   border-right: 1px solid var(--lichkin-plugin-border-color);
-  border-bottom: 1px solid var(--lichkin-datagrid-header-border-color);
+  border-bottom: 1px solid var(--lichkin-plugin-header-border-color);
   border-left: 1px solid var(--lichkin-plugin-border-color);
 }
 
@@ -145,10 +67,7 @@
 }
 
 .lichkin-datagrid .lichkin-datagrid-dataHeaderBar .lichkin-table .lichkin-table-row .lichkin-table-cell {
-  border-top: none;
-  border-bottom: none;
-  border-right-color: var(--lichkin-datagrid-header-border-color);
-  border-left: none;
+  border-right: 1px solid var(--lichkin-plugin-header-border-color);
   background-color: var(--lichkin-datagrid-header-background-color);
 }
 
@@ -237,18 +156,9 @@
   border-left: none;
 }
 
-.lichkin-form-field .lichkin-form-field-value .lichkin-datagrid .lichkin-datagrid-titleBar {
-  border-right: none;
-  border-left: none;
-}
-
 .lichkin-form-field .lichkin-form-field-value .lichkin-datagrid-invalid {
   border: 1px solid var(--lichkin-plugin-border-color-invalid);
   background-color: var(--lichkin-plugin-background-color-invalid);
-}
-
-.lichkin-datagrid-invalid .lichkin-datagrid-titleBar {
-  background-color: var(--lichkin-plugin-border-color-invalid);
 }
 
 .lichkin-datagrid-invalid .lichkin-datagrid-toolsBar {

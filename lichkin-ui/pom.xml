@@ -8,6 +8,12 @@
   <artifactId>lichkin-ui</artifactId>
   <version>1.0.0.RELEASE</version>
 
+  <parent>
+    <groupId>com.lichkin.springframework.boot</groupId>
+    <artifactId>lichkin-spring-boot</artifactId>
+    <version>1.0.0.RELEASE</version>
+  </parent>
+
   <name>lichkin-ui</name>
   <description>使用springboot基础封装</description>
   <url>http://codes.lichkin.com/lichkin-ui</url>
@@ -30,6 +36,11 @@
   </properties>
 
   <dependencies>
+    <!-- lichkin starter -->
+    <dependency>
+      <groupId>com.lichkin.springframework.boot</groupId>
+      <artifactId>lichkin-spring-boot-starter-web</artifactId>
+    </dependency>
     <!-- lichkin-ui dependency webjars -->
     <dependency>
       <groupId>org.webjars</groupId>

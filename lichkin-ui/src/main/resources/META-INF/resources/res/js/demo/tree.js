@@ -245,3 +245,43 @@ LK.UI.tree({
   cancelable : false,
   data : data
 });
+
+LK.UI.tree({
+  $appendTo : $('#demo2'),
+  validator : true,
+  data : data,
+  title : 'tip'
+});
+
+LK.UI.tree({
+  $appendTo : $('#demo2'),
+  data : data,
+  title : 'tip'
+});
+
+LK.UI.tree({
+  $appendTo : $('#demo2'),
+  validator : true,
+  checkbox : false,
+  data : data,
+  title : 'tip'
+});
+
+LK.UI.tree({
+  $appendTo : $('#demo2'),
+  validator : true,
+  checkbox : false,
+  multiSelect : false,
+  data : data,
+  title : 'tip'
+});
+
+LK.UI.tree({
+  $appendTo : $('#demo2'),
+  validator : true,
+  checkbox : false,
+  multiSelect : false,
+  cancelable : false,
+  data : data,
+  title : 'tip'
+});

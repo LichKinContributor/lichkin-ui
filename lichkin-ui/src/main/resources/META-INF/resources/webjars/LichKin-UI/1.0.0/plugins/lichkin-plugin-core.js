@@ -449,6 +449,8 @@ LK.UI.createOptions = {
   value : null,
   // 是否在表单中
   inForm : false,
+  // inForm=true时是否包含field
+  withField : true,
   // 表单显示名
   key : null,
   /**
@@ -467,6 +469,8 @@ LK.UI.createOptions = {
   rows : 1,
   // 样式
   cls : '',
+  // 样式
+  style : {},
 
   // 联动控件名称（需在同一表单中）
   linkages : [],
@@ -567,7 +571,7 @@ LK.UI('plugins', 'create', function(opts) {
     $value.val(options.value);
   }
 
-  if (options.inForm) {
+  if (options.inForm && options.withField == true) {
     var $field = $('<div class="lichkin-form-field"></div>').appendTo(options.$appendTo);
     $field.css({
       'padding' : LK.topGap + 'px 0px 0px ' + LK.leftGap + 'px'
@@ -636,6 +640,10 @@ LK.UI('plugins', 'create', function(opts) {
 
   if (options.cls != '') {
     $plugin.addClass(options.cls);
+  }
+
+  if (!$.isEmptyObject(options.style)) {
+    $plugin.css(options.style);
   }
 
   // 缓存参数

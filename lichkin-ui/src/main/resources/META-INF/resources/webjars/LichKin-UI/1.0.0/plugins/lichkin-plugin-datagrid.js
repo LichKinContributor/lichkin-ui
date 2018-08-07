@@ -114,7 +114,7 @@ LK.UI('plugins', 'datagrid', function(options) {
   var height = $plugin.height();
 
   // 查询表单栏
-  var $searchFormBar = $('<div class="lichkin-datagrid-searchFormBar"></div>');
+  var $searchFormBar = $('<div></div>').LKAddPluginClass(plugin, 'searchFormBar');
   var $searchForm;
   if (options.searchForm.length != 0) {
     $searchFormBar.appendTo($plugin);
@@ -291,7 +291,7 @@ LK.UI('plugins', 'datagrid', function(options) {
   }
 
   // 标题栏
-  var $titleBar = $('<div class="lichkin-datagrid-titleBar"></div>');
+  var $titleBar = $('<div></div>').LKAddPluginClass(plugin, 'titleBar');
   if (options.title != null || options.icon != null) {
     if (options.searchForm.length != 0) {
       $titleBar.insertBefore($searchFormBar);
@@ -328,13 +328,15 @@ LK.UI('plugins', 'datagrid', function(options) {
         }
       });
     } else {
-      options.titleTools.push({
-        singleCheck : null,
-        icon : 'search',
-        click : function() {
-          $plugin.LKLoad();
-        }
-      });
+      if (options.showSearchButton == true) {
+        options.titleTools.push({
+          singleCheck : null,
+          icon : 'search',
+          click : function() {
+            $plugin.LKLoad();
+          }
+        });
+      }
     }
     var $buttonsBar = $('<div class="lichkin-buttons"></div>').appendTo($titleBar);
     for (var i = 0; i < options.titleTools.length; i++) {
@@ -382,7 +384,7 @@ LK.UI('plugins', 'datagrid', function(options) {
   }
 
   // 工具栏
-  var $toolsBar = $('<div class="lichkin-datagrid-toolsBar"></div>');
+  var $toolsBar = $('<div></div>').LKAddPluginClass(plugin, 'toolsBar');
   if (options.tools.length != 0) {
     $toolsBar.appendTo($plugin);
     $toolsBar.css('width', width - 2);
@@ -427,7 +429,7 @@ LK.UI('plugins', 'datagrid', function(options) {
   }
 
   // 分页栏
-  var $pageBar = $('<div class="lichkin-datagrid-pageBar"></div>');
+  var $pageBar = $('<div></div>').LKAddPluginClass(plugin, 'pageBar');
   if (options.pageable == true) {
     $pageBar.appendTo($plugin);
     $pageBar.css('width', width - 2);
@@ -506,7 +508,7 @@ LK.UI('plugins', 'datagrid', function(options) {
   }
 
   // 数据栏
-  var $dataBar = $('<div class="lichkin-datagrid-dataBar"></div>');
+  var $dataBar = $('<div></div>').LKAddPluginClass(plugin, 'dataBar');
   if (options.pageable == true) {
     $dataBar.insertBefore($pageBar);
   } else {
@@ -585,6 +587,8 @@ LK.UI.loadOptions,
    * @see LK.UI.form中的plugins参数
    */
   searchForm : [],
+  // 显示查询按钮（无searchForm时起作用）
+  showSearchButton : true,
   /**
    * 标题栏工具栏
    * @see LK.UI.button（click方法被重写，第一个参数保持按钮控件不变，增加第二个参数当前对话框控件，增加第三个参数当前选中行，增加第四个参数当前选中数据集,增加第五个参数当前表格值。仅支持图标按钮。）
@@ -644,7 +648,7 @@ $('body').mousedown(function(e) {
   var $that = $(e.target);
   if ($that.is('.lichkin-datagrid .lichkin-datagrid-dataBodyBar .lichkin-table .lichkin-table-row .lichkin-table-cell') || $that.is('.lichkin-datagrid .lichkin-datagrid-dataBodyBar .lichkin-table .lichkin-table-row .lichkin-table-cell .lichkin-text')) {
     if (!$that.is('td')) {
-      $that = $that.parent('td');
+      $that = $that.parents('td:first');
     }
     var $plugin = $that.parents('.lichkin-datagrid:first');
     var options = $plugin.data('LKOPTIONS');

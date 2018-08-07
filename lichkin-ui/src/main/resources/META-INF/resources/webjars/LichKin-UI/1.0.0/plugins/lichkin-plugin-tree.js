@@ -288,11 +288,30 @@ LK.UI('plugins', 'tree', function(options) {
     options : options
   });
 
+  var width = $plugin.width() + (options.inForm ? 2 : 0);
+  var height = $plugin.height();
+
+  // 标题栏
+  var $titleBar = $('<div></div>').LKAddPluginClass(plugin, 'titleBar');
+  if (options.title != null || options.icon != null) {
+    $titleBar.appendTo($plugin);
+    $titleBar.css('width', width - 2);
+    if (options.icon != null) {
+      $titleBar.append(LK.UI.icon({
+        'icon' : options.icon,
+        'size' : 24
+      }));
+    }
+    if (options.title != null) {
+      $titleBar.append(LK.UI.text({
+        'text' : options.title
+      }));
+    }
+  }
+
   // 数据容器
   var $container = $('<ul></ul>').appendTo($plugin).LKAddPluginClass(plugin, 'dataContainer').LKAddPluginClass(plugin, 'nodes-containter');
-  $container.css({
-    height : $plugin.height()
-  });
+  $container.css('height', height - 2 - $titleBar.outerHeight());
 
   // 加载数据
   LK.UI.load({
@@ -324,5 +343,9 @@ LK.UI.loadOptions,
   // 是否可以取消选中（仅在单选情况下起作用）
   cancelable : true,
   // 显示内容是否使用i18n
-  i18nText : true
+  i18nText : true,
+  // 标题
+  title : null,
+  // 图标
+  icon : null
 }));
