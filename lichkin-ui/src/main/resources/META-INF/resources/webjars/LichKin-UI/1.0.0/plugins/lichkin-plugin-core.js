@@ -332,6 +332,18 @@ $.fn.extend({
   },
 
   /**
+   * 获取同表单中的控件对象
+   * @param name 同一表单下控件值名
+   */
+  LKGetSiblingPlugins : function(name) {
+    var $plugins = [];
+    this.LKGetForm().find('[name=' + name + ']').each(function() {
+      $plugins.push($(this).parents('.lichkin-plugin').first());
+    });
+    return $plugins;
+  },
+
+  /**
    * 获取控件值名
    */
   LKGetName : function() {
@@ -368,9 +380,12 @@ $.fn.extend({
         isCreateEvent : isCreateEvent
       };
       for (var i = 0; i < linkagesLength; i++) {
-        var $plugin = $linkage.LKGetSiblingPlugin(linkages[i]);
-        $plugin.data('LKOPTIONS').onLinkaged($plugin, linkage);
-        $plugin.LKValidate();
+        var $plugins = $linkage.LKGetSiblingPlugins(linkages[i]);
+        for (var i = 0; i < $plugins.length; i++) {
+          var $plugin = $plugins[i];
+          $plugin.data('LKOPTIONS').onLinkaged($plugin, linkage);
+          $plugin.LKValidate();
+        }
       }
     }
   },
