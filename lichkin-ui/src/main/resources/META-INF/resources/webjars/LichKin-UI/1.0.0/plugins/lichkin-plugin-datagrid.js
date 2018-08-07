@@ -79,6 +79,13 @@ LK.UI._datagrid = {
       var text = data[column.name];
       if (column.formatter) {
         text = column.formatter(data);
+        if (!isString(text)) {
+          $td.append(text);
+          continue;
+        }
+      }
+      if (typeof text == 'undefined' || text == null) {
+        text = '';
       }
       text = '' + text;
       var $text = LK.UI.text({
