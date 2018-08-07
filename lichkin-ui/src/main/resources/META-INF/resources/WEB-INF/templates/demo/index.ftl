@@ -71,12 +71,6 @@
 				<li><a href="javascript:;">cropper</a></li>
 			</ul>
 		</div>
-		<div class="title">selector</div>
-		<div class="content">
-			<ul>
-				<li><a href="javascript:;">selector</a></li>
-			</ul>
-		</div>
 		<div class="title">form</div>
 		<div class="content">
 			<ul>
@@ -93,6 +87,18 @@
 		<div class="content">
 			<ul>
 				<li><a href="javascript:;">dialog</a></li>
+			</ul>
+		</div>
+		<div class="title">selector</div>
+		<div class="content">
+			<ul>
+				<li><a href="javascript:;">selector</a></li>
+			</ul>
+		</div>
+		<div class="title">selector-employee</div>
+		<div class="content">
+			<ul>
+				<li><a href="javascript:;">selector-employee</a></li>
 			</ul>
 		</div>
 	</#if>

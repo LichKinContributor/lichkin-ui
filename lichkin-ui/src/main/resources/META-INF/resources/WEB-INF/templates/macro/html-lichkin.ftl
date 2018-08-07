@@ -97,6 +97,8 @@
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-datagrid${compressSuffix}.js" />
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-dialog${compressSuffix}.js" />
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-selector${compressSuffix}.js" />
+
+			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-selector-employee${compressSuffix}.js" />
 			<#else>
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugins${compressSuffix}.js" />
 			</#if>

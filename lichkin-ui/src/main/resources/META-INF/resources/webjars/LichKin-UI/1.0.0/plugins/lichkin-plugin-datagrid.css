@@ -97,6 +97,7 @@
   color: var(--lichkin-datagrid-body-font-color);
   font-size: var(--lichkin-datagrid-body-font-size);
   padding: 6px;
+  overflow: hidden;
 }
 
 .lichkin-datagrid .lichkin-datagrid-pageBar {
