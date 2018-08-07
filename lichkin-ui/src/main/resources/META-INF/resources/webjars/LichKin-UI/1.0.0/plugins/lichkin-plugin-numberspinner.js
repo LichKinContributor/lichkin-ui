@@ -1,4 +1,28 @@
 ;
+/**
+ * 数字微调器内部实现相关
+ */
+LK.UI._numberspinner = {
+
+  /**
+   * 校验取值范围
+   * @param $value 值对象
+   * @param min 最小值
+   * @param max 最大值
+   */
+  checkRange : function($value, min, max) {
+    var value = parseInt($value.val());
+    if (value != 'NaN') {
+      if (min != null && value < min) {
+        $value.val(min);
+      }
+      if (max != null && value > max) {
+        $value.val(max);
+      }
+    }
+  }
+
+};
 
 /**
  * 数字微调器控件
@@ -22,6 +46,7 @@ LK.UI('plugins', 'numberspinner', function(options) {
   $value.bind({
     'keyup' : function() {
       $plugin.LKSetValues($plugin.LKGetValue().extarctInteger());
+      LK.UI._numberspinner.checkRange($value, options.min, options.max);
     }
   });
 
@@ -43,6 +68,7 @@ LK.UI('plugins', 'numberspinner', function(options) {
     } else {
       $plugin.LKSetValues(parseInt(value) + 1);
     }
+    LK.UI._numberspinner.checkRange($value, options.min, options.max);
     $plugin.LKValidate();
   }).find('i').css({
     'height' : buttonHeight,
@@ -62,6 +88,7 @@ LK.UI('plugins', 'numberspinner', function(options) {
     } else {
       $plugin.LKSetValues(parseInt(value) - 1);
     }
+    LK.UI._numberspinner.checkRange($value, options.min, options.max);
     $plugin.LKValidate();
   }).find('i').css({
     'height' : buttonHeight,
@@ -69,6 +96,7 @@ LK.UI('plugins', 'numberspinner', function(options) {
     'font-size' : buttonHeight + 'px'
   });
 
+  LK.UI._numberspinner.checkRange($value, options.min, options.max);
   $plugin.LKValidate();
 
   // 返回控件对象
@@ -77,4 +105,9 @@ LK.UI('plugins', 'numberspinner', function(options) {
 // @see LK.UI.create
 LK.UI.createOptions,
 // 控件特有参数
-{}));
+{
+  // 最大值
+  max : null,
+  // 最小值
+  min : null
+}));

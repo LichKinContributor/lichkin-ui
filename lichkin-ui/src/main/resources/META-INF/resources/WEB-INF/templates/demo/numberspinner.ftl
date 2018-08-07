@@ -14,5 +14,7 @@
 	<#if section="javascript-contents-after-links">
 		LK.UI.numberspinner({$appendTo:$('#demo'),validator:true});
 		LK.UI.numberspinner({$appendTo:$('#demo')});
+
+		LK.UI.numberspinner({$appendTo:$('#demo'),min:0,max:3});
 	</#if>
 </@html>
