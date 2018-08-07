@@ -273,6 +273,7 @@ LK.UI('plugins', 'changeIcon', function(options) {
     'lock' : 'lock',
     'unlock' : 'unlock',
     'resetPwd' : 'key',
+    'set' : 'cog',
     'view' : 'eye',
     'cut' : 'cut',
     'search' : 'search',
