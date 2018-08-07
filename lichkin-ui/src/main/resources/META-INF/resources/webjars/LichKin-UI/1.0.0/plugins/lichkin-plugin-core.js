@@ -248,7 +248,11 @@ $.fn.extend({
    * 获取控件值
    */
   LKGetValues : function() {
-    return this.LKGetValue().split(LK.SPLITOR);
+    var value = this.LKGetValue();
+    if (value == '') {
+      return [];
+    }
+    return value.split(LK.SPLITOR);
   },
 
   /**
@@ -441,6 +445,27 @@ $.fn.extend({
         'lichkin-plugin-' + cls, 'lichkin-' + plugin + '-' + cls
     ]);
     return this;
+  },
+
+  /**
+   * 获取值控件对应的数据集
+   */
+  LKGetValueDatas : function() {
+    var results = [];
+    var values = this.LKGetValues();
+    if (values.length != 0) {
+      var valueFieldName = this.data('LKOPTIONS').valueFieldName;
+      var datas = this.LKGetDatas();
+      out: for (var i = 0; i < values.length; i++) {
+        for (var j = 0; j < datas.length; j++) {
+          if (values[i] == datas[j][valueFieldName]) {
+            results.push(datas[j]);
+            continue out;
+          }
+        }
+      }
+    }
+    return results;
   }
 
 });

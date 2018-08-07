@@ -19,8 +19,11 @@ LKUI.button = function(text, icon, click, tip) {
  * 按钮控件
  */
 LK.UI('plugins', 'button', function(options) {
+  // 设置id
+  var id = options.id = (options.id != '') ? options.id : 'LK_' + randomInRange(100000, 999999);
+
   // 创建控件对象
-  var $plugin = $('<a href="javascript:;" class="lichkin-button"></a>');
+  var $plugin = $('<a id="' + id + '" href="javascript:;" class="lichkin-button"></a>');
   $plugin.css('height', LK.rowHeight - 2 + 'px');
 
   // 增加样式
@@ -79,9 +82,22 @@ LK.UI('plugins', 'button', function(options) {
     $plugin.css(options.style);
   }
 
+  if (options.$appendTo != null) {// 填充对象
+    $plugin.appendTo(options.$appendTo);
+  } else if (options.$renderTo != null) { // 渲染对象
+    $plugin.insertAfter(options.$renderTo);
+    options.$renderTo.remove();
+  }
+
   // 返回控件对象
   return $plugin;
 }, {
+  // 控件ID
+  id : '',
+  // 控件填充到对象
+  $appendTo : null,
+  // 控件渲染到对象
+  $renderTo : null,
   // 图标控件
   $icon : null,
   // 图标控件约定的内容

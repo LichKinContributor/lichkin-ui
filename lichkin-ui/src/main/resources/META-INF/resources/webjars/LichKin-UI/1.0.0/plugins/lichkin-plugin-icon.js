@@ -147,8 +147,11 @@ LK.UI('plugins', 'bindIcon', function(options) {
  * 图标控件
  */
 LK.UI('plugins', 'icon', function(options) {
+  // 设置id
+  var id = options.id = (options.id != '') ? options.id : 'LK_' + randomInRange(100000, 999999);
+
   // 创建控件对象
-  var $plugin = $('<span class="lichkin-icon lichkin-icon-' + options.size + '"></span>');
+  var $plugin = $('<span id="' + id + '" class="lichkin-icon lichkin-icon-' + options.size + '"></span>');
 
   // 不传图标时即只创建空白控件
   if (options.icon != null) {
@@ -167,11 +170,24 @@ LK.UI('plugins', 'icon', function(options) {
     $plugin.css(options.style);
   }
 
+  if (options.$appendTo != null) {// 填充对象
+    $plugin.appendTo(options.$appendTo);
+  } else if (options.$renderTo != null) { // 渲染对象
+    $plugin.insertAfter(options.$renderTo);
+    options.$renderTo.remove();
+  }
+
   $plugin.data('LKOPTIONS', options);
 
   // 返回控件对象
   return $plugin;
 }, {
+  // 控件ID
+  id : '',
+  // 控件填充到对象
+  $appendTo : null,
+  // 控件渲染到对象
+  $renderTo : null,
   // 图标大小
   size : 16,
   // 图标
