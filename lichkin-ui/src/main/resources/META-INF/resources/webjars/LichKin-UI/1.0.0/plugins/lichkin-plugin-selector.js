@@ -63,6 +63,10 @@ LK.UI.createOptions,
 LK.UI.loadOptions,
 // 控件特有参数
 {
+  // 支持多选
+  multiSelect : false,
+  // 是否可为空
+  nullable : true,
   // 值字段名
   valueFieldName : 'id',
   // 显示字段名
@@ -155,8 +159,10 @@ LK.UI('plugins', 'selector', function(options) {
     click : function($button, $dialog, $contentBar) {
       var value = options.onOkButtonClick($button, $dialog, $contentBar, $plugin, $plugin.LKGetValue());
       if (value == null) {
-        LK.alert($.LKGetI18N('noSelect'));
-        return;
+        if (options.nullable != true) {
+          LK.alert($.LKGetI18N('noSelect'));
+          return;
+        }
       }
       $plugin.LKInvokeSetValues(value, false);
       $dialog.LKCloseDialog();

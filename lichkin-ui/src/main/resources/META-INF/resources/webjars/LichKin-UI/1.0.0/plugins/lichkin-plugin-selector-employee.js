@@ -67,7 +67,7 @@ LK.UI('plugins', 'selector_employee', function(options) {
       name : 'source',
       title : 'source',
       withField : false,
-      multiSelect : true,
+      multiSelect : options.multiSelect,
       width : w - wt,
       height : (h - LK.rowHeight) / 2,
       pageable : false,
@@ -153,6 +153,12 @@ LK.UI('plugins', 'selector_employee', function(options) {
         if (value == '') {
           LK.alert($.LKGetI18N('noSelect'));
           return;
+        }
+        if (options.multiSelect == false) {
+          if ($target.LKGetDataContainer().find('tr').length != 0) {
+            LK.alert($.LKGetI18N('singleSelect'));
+            return;
+          }
         }
 
         var $selecteds = $source.LKGetDataContainer().find('tr.selected');

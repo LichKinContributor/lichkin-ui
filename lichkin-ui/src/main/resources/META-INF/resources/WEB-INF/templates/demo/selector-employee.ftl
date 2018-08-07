@@ -12,7 +12,10 @@
 		<div class="content" id="demo"></div>
 	</#if>
 	<#if section="javascript-contents-after-links">
-		LK.UI.selector_employee({$appendTo:$('#demo'),validator:true,value:'MALE'});
-		LK.UI.selector_employee({$appendTo:$('#demo'),value:'MALE'});
+		LK.UI.selector_employee({$appendTo:$('#demo'),validator:true,multiSelect:true});
+		LK.UI.selector_employee({$appendTo:$('#demo'),multiSelect:true});
+
+		LK.UI.selector_employee({$appendTo:$('#demo'),validator:true});
+		LK.UI.selector_employee({$appendTo:$('#demo')});
 	</#if>
 </@html>
