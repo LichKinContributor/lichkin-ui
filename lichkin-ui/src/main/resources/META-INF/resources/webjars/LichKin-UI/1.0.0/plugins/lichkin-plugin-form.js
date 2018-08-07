@@ -89,7 +89,12 @@ $.fn.extend({
 
     var json = {};
     $frm.find('.lichkin-plugin-value').each(function() {
-      json[$(this).attr('name')] = $(this).val();
+      var name = $(this).attr('name');
+      if (typeof json[name] == 'undefined') {
+        json[name] = $(this).val();
+      } else {
+        json[name] += LK.SPLITOR + $(this).val();
+      }
     });
 
     return json;
