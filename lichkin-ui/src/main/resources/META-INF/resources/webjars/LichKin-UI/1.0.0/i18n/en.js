@@ -15,6 +15,7 @@ LK.i18n = {
   singleSelect : 'Single select to do this.',
   noSelect : 'No select to do this.',
   noSelectImage : 'No select image to do this.',
+  confirmRelease : 'confirm release?',
   confirmRemove : 'The data cannot be recovered after deletion, make sure you know that.',
   'datagrid-statistics' : 'Displaying {from} to {to} of {total} records',
   'go-first' : 'first',
@@ -50,6 +51,7 @@ LK.i18n = {
   'lock' : 'lock',
   'unlock' : 'unlock',
   'resetPwd' : 'reset password',
+  'set' : 'set',
   'view' : 'view',
   'cut' : 'cut',
   'search' : 'search',
@@ -95,5 +97,62 @@ LK.i18n = {
   'checkbox-checked' : 'checked',
   'checkbox-tristate' : 'tristate',
   'checkbox-unchecked' : 'unchecked',
+
+  /** dictionary enumeration */
+  'USING_STATUS' : 'using status',
+  'DEPRECATED' : 'deprecated',
+  'STAND_BY' : 'stand by',
+  'USING' : 'using',
+  'DISABLE' : 'disable',
+  'LOCKED' : 'locked',
+
+  'YES_NO' : 'yes or no',
+  'YES' : 'yes',
+  'NO' : 'no',
+
+  'CLIENT_TYPE' : 'client type',
+  'JAVASCRIPT' : 'javascript',
+  'ANDROID' : 'android',
+  'IOS' : 'ios',
+
+  'OPERATION_TYPE' : 'operation type',
+  'ADD' : 'add',
+  'REMOVE' : 'remove',
+  'EDIT' : 'edit',
+  'SEARCH' : 'search',
+  'LOGIN' : 'login',
+  'OTHER' : 'other',
+
+  'GENDER' : 'gender',
+  'FEMALE' : 'female',
+  'MALE' : 'male',
+  'ALIEN' : 'alien',
+  'UNKNOWN' : 'unknown',
+  'SECRECY' : 'secrecy',
+
+  'AUTHENTICATION' : 'authentication',
+  'NO' : 'no',
+  'AUTHENTICATING' : 'authenticating',
+  'AUTHENTICATED' : 'authenticated',
+  'CARD_BINDED' : 'card binded',
+  'USER_CARD_UPLOADED' : 'user card uploaded',
+
+  'PROCESS_KEY' : 'process_key',
+  'GeneralSingleLineProcess' : 'single line',
+
+  'PROCESS_TYPE' : 'process_type',
+  'SINGLE_LINE' : 'single line',
+
+  'SCHEDULE_TYPE' : 'schedule_type',
+  'NORMAL' : 'standard',
+  'DOUBLE_SHIFT' : 'double shift',
+  'THREE_SHIFTS' : 'three shifts',
+
+  /** dictionary configuration */
+  'NATION' : 'nation',
+  'EDUCATION' : 'education',
+  'DEGREE' : 'degree',
+  'MARITAL_STATUS' : 'marital status',
+  'APP_KEY' : 'application key',
 
 };
