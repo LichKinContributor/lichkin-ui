@@ -93,6 +93,7 @@ $.fn.extend({
       var name = $subPlugin.data('LKName');
       if (isString(name) && name != '') {
         var value = $subPlugin.LKGetValue();
+        value = value == '' ? null : value;
         if (typeof json[name] == 'undefined') {
           json[name] = value;
         } else {
