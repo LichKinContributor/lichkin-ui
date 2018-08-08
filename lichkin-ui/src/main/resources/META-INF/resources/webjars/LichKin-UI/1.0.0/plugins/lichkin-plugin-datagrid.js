@@ -401,13 +401,13 @@ LK.UI('plugins', 'datagrid', function(options) {
             var value = $plugin.LKGetValue();
             if (button.singleCheck == true || button.singleCheck == false) {
               if (value == '') {
-                LK.alert($.LKGetI18N('noSelect'));
+                LK.alert('noSelect');
                 return;
               }
             }
             if (button.singleCheck == true) {
               if (value.indexOf(LK.SPLITOR) > 0) {
-                LK.alert($.LKGetI18N('singleSelect'));
+                LK.alert('singleSelect');
                 return;
               }
             }
@@ -447,13 +447,13 @@ LK.UI('plugins', 'datagrid', function(options) {
             var value = $plugin.LKGetValue();
             if (button.singleCheck == true || button.singleCheck == false) {
               if (value == '') {
-                LK.alert($.LKGetI18N('noSelect'));
+                LK.alert('noSelect');
                 return;
               }
             }
             if (button.singleCheck == true) {
               if (value.indexOf(LK.SPLITOR) > 0) {
-                LK.alert($.LKGetI18N('singleSelect'));
+                LK.alert('singleSelect');
                 return;
               }
             }

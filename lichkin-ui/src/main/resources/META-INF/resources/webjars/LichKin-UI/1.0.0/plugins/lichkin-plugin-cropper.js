@@ -234,7 +234,7 @@ LK.UI('plugins', 'cropper', function(options) {
                 $cropper.cropper('destroy').attr('src', imageFileURL).cropper(cropperOptions);
               }
             } else {
-              LK.alert(LK.i18n.noSelectImage);
+              LK.alert('noSelectImage');
             }
           }
         });
@@ -328,7 +328,7 @@ LK.UI('plugins', 'cropper', function(options) {
                   return;
                 }
               }
-              LK.alert(LK.i18n.noSelectImage);
+              LK.alert('noSelectImage');
             }
           }, {
             icon : 'cancel',

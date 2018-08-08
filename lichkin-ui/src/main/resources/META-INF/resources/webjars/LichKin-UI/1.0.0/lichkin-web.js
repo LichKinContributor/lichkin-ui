@@ -52,7 +52,7 @@ LK.web = {
   },
 
   alert : function(options, callback) {
-    alert(options.msg);
+    alert($.LKGetI18N(options.msg));
     if (typeof callback == 'function') {
       callback();
     }

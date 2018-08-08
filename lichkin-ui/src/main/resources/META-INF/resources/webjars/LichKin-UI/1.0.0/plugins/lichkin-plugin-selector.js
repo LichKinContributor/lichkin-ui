@@ -160,7 +160,7 @@ LK.UI('plugins', 'selector', function(options) {
       var value = options.onOkButtonClick($button, $dialog, $contentBar, $plugin, $plugin.LKGetValue());
       if (value == null) {
         if (options.nullable != true) {
-          LK.alert($.LKGetI18N('noSelect'));
+          LK.alert('noSelect');
           return;
         }
       }

@@ -151,12 +151,12 @@ LK.UI('plugins', 'selector_employee', function(options) {
       click : function() {
         var value = $source.LKGetValue();
         if (value == '') {
-          LK.alert($.LKGetI18N('noSelect'));
+          LK.alert('noSelect');
           return;
         }
         if (options.multiSelect == false) {
           if ($target.LKGetDataContainer().find('tr').length != 0) {
-            LK.alert($.LKGetI18N('singleSelect'));
+            LK.alert('singleSelect');
             return;
           }
         }
@@ -197,7 +197,7 @@ LK.UI('plugins', 'selector_employee', function(options) {
       click : function() {
         var value = $target.LKGetValue();
         if (value == '') {
-          LK.alert($.LKGetI18N('noSelect'));
+          LK.alert('noSelect');
           return;
         }
 
