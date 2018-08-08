@@ -426,7 +426,7 @@ LK.web.confirm = function(msg, callbackOk, callbackCancel) {
   $.LKOpenDialog({
     title : 'warning',
     icon : 'warning',
-    content : '<div style="padding:30px 10px;height:40px;line-height:40px;text-align:center;font-size:16px;color:' + LK.pluginFontColor + ';">' + msg + '</div>',
+    content : '<div style="padding:30px 10px;height:40px;line-height:40px;text-align:center;font-size:16px;color:' + LK.pluginFontColor + ';">' + $.LKGetI18N(msg) + '</div>',
     size : {
       width : 300,
       height : 100,

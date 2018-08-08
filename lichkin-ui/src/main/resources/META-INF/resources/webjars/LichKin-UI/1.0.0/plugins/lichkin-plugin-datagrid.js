@@ -168,7 +168,7 @@ LK.UI('plugins', 'datagrid', function(options) {
       singleCheck : false,
       icon : 'remove',
       click : function($button, $datagrid, $selecteds, selectedDatas, value) {
-        LK.web.confirm($.LKGetI18N('confirmRemove'), function() {
+        LK.web.confirm('confirmRemove', function() {
           LK.ajax({
             url : options.toolsRemove.saveUrl,
             data : {
