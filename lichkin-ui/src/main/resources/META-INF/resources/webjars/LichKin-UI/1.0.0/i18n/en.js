@@ -105,6 +105,11 @@ LK.i18n = {
   'checkbox-tristate' : 'tristate',
   'checkbox-unchecked' : 'unchecked',
 
+  /** menu */
+  'operLog-Admin' : 'admin operation log',
+  'operLog-User' : 'user operation log',
+  'operLog-Employee' : 'employee operation log',
+
   /** dictionary enumeration */
   'USING_STATUS' : 'using status',
   'DEPRECATED' : 'deprecated',

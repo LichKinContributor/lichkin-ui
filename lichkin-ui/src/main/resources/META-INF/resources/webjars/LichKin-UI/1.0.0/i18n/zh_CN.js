@@ -105,6 +105,11 @@ LK.i18n = {
   'checkbox-tristate' : '被选中',
   'checkbox-unchecked' : '未选中',
 
+  /** 菜单 */
+  'operLog-Admin' : '操作日志-管理员',
+  'operLog-User' : '操作日志-用户',
+  'operLog-Employee' : '操作日志-员工',
+
   /** 字典-枚举类型 */
   'USING_STATUS' : '在用状态',
   'DEPRECATED' : '删除',
