@@ -54,6 +54,14 @@ LK.UI._datagrid = {
   addDatas : function($plugin, $container, datas) {
     var columns = $plugin.data('LKOPTIONS').columns;
     if (typeof datas.content != 'undefined') {
+      $plugin.data('totalPages', datas.totalPages);
+      var totalPages = datas.totalPages;
+      totalPages = totalPages == 0 ? 1 : totalPages;
+      $plugin.find('.lichkin-datagrid-pageBar .pageNumberShow').html($.LKGetI18N('page-suffix').replace('{totalPages}', totalPages));
+      var total = datas.totalElements;
+      var from = total == 0 ? 0 : datas.number * datas.size + 1;
+      var to = total == 0 ? 0 : from - 1 + datas.numberOfElements;
+      $plugin.find('.lichkin-datagrid-pageBar .statistics .lichkin-text').html($.LKGetI18N('datagrid-statistics').replace('{from}', from).replace('{to}', to).replace('{total}', total));
       datas = datas.content;
     }
     for (var i = 0; i < datas.length; i++) {
@@ -100,6 +108,25 @@ LK.UI._datagrid = {
       }
       $td.append($text);
     }
+  },
+
+  /**
+   * 获取请求参数
+   * @param $plugin 控件对象
+   * @param options 控件参数
+   */
+  getParam : function($plugin, options) {
+    var param = {};
+    if (options.pageable == true) {
+      param = $.extend({}, param, {
+        pageNumber : parseInt($plugin.find('.lichkin-datagrid-pageBar .pageNumber').LKGetValue()) - 1,
+        pageSize : parseInt($plugin.find('.lichkin-datagrid-pageBar .pageList').LKGetValue())
+      });
+    }
+    if (options.searchForm.length != 0) {
+      param = $.extend({}, param, $plugin.find('.lichkin-datagrid-searchFormBar .lichkin-form').LKFormGetData());
+    }
+    return param;
   }
 
 };
@@ -150,7 +177,9 @@ LK.UI('plugins', 'datagrid', function(options) {
             },
             showSuccess : true,
             success : function() {
-              $plugin.LKLoad();
+              $plugin.LKLoad({
+                param : LK.UI._datagrid.getParam($plugin, options)
+              });
             }
           });
         });
@@ -190,7 +219,9 @@ LK.UI('plugins', 'datagrid', function(options) {
                       data : $form.LKFormGetData(),
                       showSuccess : true,
                       success : function() {
-                        $plugin.LKLoad();
+                        $plugin.LKLoad({
+                          param : LK.UI._datagrid.getParam($plugin, options)
+                        });
                         $dialog.LKCloseDialog();
                       }
                     });
@@ -263,7 +294,9 @@ LK.UI('plugins', 'datagrid', function(options) {
                       data : $.extend($form.LKFormGetData(), typeof options.toolsAdd.beforeSave == 'function' ? options.toolsAdd.beforeSave($plugin) : {}),
                       showSuccess : true,
                       success : function() {
-                        $plugin.LKLoad();
+                        $plugin.LKLoad({
+                          param : LK.UI._datagrid.getParam($plugin, options)
+                        });
                         $dialog.LKCloseDialog();
                       }
                     });
@@ -330,7 +363,7 @@ LK.UI('plugins', 'datagrid', function(options) {
         icon : 'search',
         click : function() {
           $plugin.LKLoad({
-            param : $searchForm.LKFormGetData()
+            param : LK.UI._datagrid.getParam($plugin, options)
           });
         }
       });
@@ -340,7 +373,9 @@ LK.UI('plugins', 'datagrid', function(options) {
           singleCheck : null,
           icon : 'search',
           click : function() {
-            $plugin.LKLoad();
+            $plugin.LKLoad({
+              param : LK.UI._datagrid.getParam($plugin, options)
+            });
           }
         });
       }
@@ -454,7 +489,7 @@ LK.UI('plugins', 'datagrid', function(options) {
       data : pageListData,
       value : options.pageSize,
       onChange : function($pageList, pluginValues, pluginValue, currentValue) {
-        $plugin.LKLoad();
+        $pageBar.find('.pageNumber').LKInvokeSetValues(1, false);
       },
       cancelable : false,
       cls : 'pageList',
@@ -474,40 +509,60 @@ LK.UI('plugins', 'datagrid', function(options) {
     LK.UI.button({
       icon : 'go-first',
       click : function() {
-        $plugin.LKLoad();
+        $pageBar.find('.pageNumber').LKInvokeSetValues(1, false);
       }
     }).appendTo($jumpButtons);
     LK.UI.button({
       icon : 'go-previous',
       click : function() {
-        $plugin.LKLoad();
+        var $pageNumber = $pageBar.find('.pageNumber');
+        var pageNumber = parseInt($pageNumber.LKGetValue());
+        if (pageNumber != 1) {
+          $pageNumber.LKInvokeSetValues(pageNumber - 1, false);
+        }
       }
     }).appendTo($jumpButtons);
     LK.UI.text({
       'original' : true,
-      text : $.LKGetI18N('page-prefix').replace('{totalPages}', 0)
+      text : $.LKGetI18N('page-prefix').replace('{totalPages}', 1)
     }).appendTo($jumpButtons);
     LK.UI.numberspinner({
       $appendTo : $jumpButtons,
       cls : 'pageNumber',
       width : 58,
       height : 20,
-      value : 0
+      value : 1,
+      onChange : function($numberspinner, numberspinnerValues, numberspinnerValue, currentValue) {
+        var maxValue = $plugin.data('totalPages');
+        if (numberspinnerValue > maxValue) {
+          $numberspinner.LKGetValueObj().val(maxValue);
+        }
+        if (numberspinnerValue < 1) {
+          $numberspinner.LKGetValueObj().val(1);
+        }
+        $plugin.LKLoad({
+          param : LK.UI._datagrid.getParam($plugin, options)
+        });
+      }
     });
     LK.UI.text({
       'original' : true,
-      text : $.LKGetI18N('page-suffix').replace('{totalPages}', 0)
-    }).appendTo($jumpButtons);
+      text : $.LKGetI18N('page-suffix').replace('{totalPages}', 1)
+    }).appendTo($jumpButtons).addClass('pageNumberShow');
     LK.UI.button({
       icon : 'go-next',
       click : function() {
-        $plugin.LKLoad();
+        var $pageNumber = $pageBar.find('.pageNumber');
+        var pageNumber = parseInt($pageNumber.LKGetValue());
+        if (pageNumber < parseInt($plugin.data('totalPages'))) {
+          $pageNumber.LKInvokeSetValues(pageNumber + 1, false);
+        }
       }
     }).appendTo($jumpButtons);
     LK.UI.button({
       icon : 'go-last',
       click : function() {
-        $plugin.LKLoad();
+        $pageBar.find('.pageNumber').LKInvokeSetValues(parseInt($plugin.data('totalPages')), false);
       }
     }).appendTo($jumpButtons);
 
@@ -547,6 +602,7 @@ LK.UI('plugins', 'datagrid', function(options) {
   var $container = $('<table class="lichkin-table"></table>').appendTo($dataBodyBar).LKAddPluginClass(plugin, 'dataContainer');
 
   // 加载数据
+  options.param = $.extend({}, options.param, LK.UI._datagrid.getParam($plugin, options));
   LK.UI.load({
     $plugin : $plugin,
     isCreateEvent : true,
