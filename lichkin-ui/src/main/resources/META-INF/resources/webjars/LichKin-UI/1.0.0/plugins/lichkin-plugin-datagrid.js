@@ -509,7 +509,11 @@ LK.UI('plugins', 'datagrid', function(options) {
     LK.UI.button({
       icon : 'go-first',
       click : function() {
-        $pageBar.find('.pageNumber').LKInvokeSetValues(1, false);
+        var $pageNumber = $pageBar.find('.pageNumber');
+        var pageNumber = parseInt($pageNumber.LKGetValue());
+        if (pageNumber != 1) {
+          $pageNumber.LKInvokeSetValues(1, false);
+        }
       }
     }).appendTo($jumpButtons);
     LK.UI.button({
@@ -562,7 +566,11 @@ LK.UI('plugins', 'datagrid', function(options) {
     LK.UI.button({
       icon : 'go-last',
       click : function() {
-        $pageBar.find('.pageNumber').LKInvokeSetValues(parseInt($plugin.data('totalPages')), false);
+        var $pageNumber = $pageBar.find('.pageNumber');
+        var pageNumber = parseInt($pageNumber.LKGetValue());
+        if (pageNumber < parseInt($plugin.data('totalPages'))) {
+          $pageNumber.LKInvokeSetValues(parseInt($plugin.data('totalPages')), false);
+        }
       }
     }).appendTo($jumpButtons);
 
