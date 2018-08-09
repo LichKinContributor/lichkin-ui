@@ -72,32 +72,6 @@ LK.UI._ = function(plugin, options) {
 };
 
 /**
- * JQuery扩展
- */
-$.extend($, {
-
-  /**
-   * 获取i18n内容
-   * @param key 键
-   * @return i18n内容
-   */
-  LKGetI18N : function(key) {
-    if (isString(key)) {
-      var value = LK.i18n[key];
-      if (isString(value)) {
-        return value;
-      }
-      if (_LANG == 'en') {
-        return key;
-      }
-      throw 'can not read from i18n by key -> ' + key;
-    }
-    return '';
-  }
-
-});
-
-/**
  * 控件功能性方法，提供JQuery扩展。
  */
 $.fn.extend({
