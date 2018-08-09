@@ -125,7 +125,7 @@
 		                  validator : true,
 		                  url : '/L/SysDictionary/Droplist',
 		                  param : {
-		                    categoryCode : 'appKey'
+		                    categoryCode : 'APP_KEY'
 		                  },
 		                  linkages : [
 		                      'busClientType', 'versions'

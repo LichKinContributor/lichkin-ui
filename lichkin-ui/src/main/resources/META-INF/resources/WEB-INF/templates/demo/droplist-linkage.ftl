@@ -25,7 +25,7 @@
 		  value : 'com.lichkin.app.android.demo2',
 		  url : '/L/SysDictionary/Droplist',
 		  param : {
-		    categoryCode : 'appKey'
+		    categoryCode : 'APP_KEY'
 		  },
 		  $appendTo : $('#demo'),
 		  linkages : [
@@ -89,7 +89,7 @@
 		  value : 'com.lichkin.app.android.demo2',
 		  url : '/L/SysDictionary/Droplist',
 		  param : {
-		    categoryCode : 'appKey'
+		    categoryCode : 'APP_KEY'
 		  },
 		  $appendTo : $('#demo2'),
 		  linkages : [
@@ -152,7 +152,7 @@
 		  value : 'com.lichkin.app.android.demo2',
 		  url : '/L/SysDictionary/Droplist',
 		  param : {
-		    categoryCode : 'appKey'
+		    categoryCode : 'APP_KEY'
 		  },
 		  $appendTo : $('#demo3'),
 		  linkages : [
@@ -214,7 +214,7 @@
 		  name : 'busAppKey',
 		  url : '/L/SysDictionary/Droplist',
 		  param : {
-		    categoryCode : 'appKey'
+		    categoryCode : 'APP_KEY'
 		  },
 		  $appendTo : $('#demo4'),
 		  linkages : [
@@ -277,7 +277,7 @@
 		  name : 'busAppKey',
 		  url : '/L/SysDictionary/Droplist',
 		  param : {
-		    categoryCode : 'appKey'
+		    categoryCode : 'APP_KEY'
 		  },
 		  $appendTo : $('#demo5'),
 		  linkages : [
