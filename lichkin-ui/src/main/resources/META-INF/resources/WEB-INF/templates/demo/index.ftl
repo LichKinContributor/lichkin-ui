@@ -53,6 +53,12 @@
 				<li><a href="javascript:;">datepicker</a></li>
 			</ul>
 		</div>
+		<div class="title">timepicker</div>
+		<div class="content">
+			<ul>
+				<li><a href="javascript:;">timepicker</a></li>
+			</ul>
+		</div>
 		<div class="title">numberspinner</div>
 		<div class="content">
 			<ul>

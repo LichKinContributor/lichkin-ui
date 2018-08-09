@@ -18,6 +18,7 @@
 		<#if section="link-bofore-plugins">
 			<@lichkin@cssTag url="/webjars/ueditor/themes/default/css/ueditor.css" />
 			<@lichkin@cssTag url="/webjars/datepicker/datepicker.css" />
+			<@lichkin@cssTag url="/webjars/timepicker/timePicker.css" />
             <@lichkin@cssTag url="/webjars/cropper/cropper${compressSuffix}.css" />
 		</#if>
 		<#if section="link">
@@ -25,6 +26,7 @@
 			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-droplist${compressSuffix}.css" />
 			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-ueditor${compressSuffix}.css" />
 			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-datepicker${compressSuffix}.css" />
+			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-timepicker${compressSuffix}.css" />
 			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-numberspinner${compressSuffix}.css" />
 			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-tree${compressSuffix}.css" />
 			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-cropper${compressSuffix}.css" />
@@ -55,6 +57,7 @@
 			<@lichkin@jsTag url="/webjars/ueditor/lang/${locale}/${locale}.js" />
 			<@lichkin@jsTag url="/webjars/datepicker/datepicker.js" />
 			<@lichkin@jsTag url="/webjars/datepicker/i18n/datepicker.${locale}.js" />
+			<@lichkin@jsTag url="/webjars/timepicker/jquery-timepicker.js" />
 			<@lichkin@jsTag url="/webjars/cropper/cropper.js" />
 		</#if>
 		<#if section="javascript-links">
@@ -62,6 +65,7 @@
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-droplist${compressSuffix}.js" />
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-ueditor${compressSuffix}.js" />
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-datepicker${compressSuffix}.js" />
+			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-timepicker${compressSuffix}.js" />
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-numberspinner${compressSuffix}.js" />
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-tree${compressSuffix}.js" />
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-cropper${compressSuffix}.js" />

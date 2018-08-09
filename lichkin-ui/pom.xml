@@ -77,6 +77,11 @@
       <artifactId>lichkin-datepicker</artifactId>
       <version>1.0.0.RELEASE</version>
     </dependency>
+    <dependency>
+      <groupId>com.lichkin.ui</groupId>
+      <artifactId>lichkin-timepicker</artifactId>
+      <version>1.0.0.RELEASE</version>
+    </dependency>
     <!-- https://mvnrepository.com/artifact/org.webjars/webjars-locator -->
     <dependency>
       <groupId>org.webjars</groupId>

@@ -299,6 +299,7 @@ LK.UI('plugins', 'changeIcon', function(options) {
     'close' : 'times',
     'dropdown' : 'caret-square-down',
     'datepicker' : 'calendar-alt',
+    'timepicker' : 'clock',
     'selector' : 'ellipsis-h',
     'cropper-no-image' : 'image',
     'zoomIn' : 'search-plus',
