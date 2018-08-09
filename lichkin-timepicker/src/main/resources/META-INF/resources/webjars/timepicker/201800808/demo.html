@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="timePicker.css">
+</head>
+<body>
+<script type="text/javascript" src="jquery-2.1.3.min.js"></script>
+<script type="text/javascript" src="jquery-timepicker.js"></script>
+<script>
+	$().ready(function(e) {
+//		var timePicker = new HunterTimePicker({
+//			target: '#timeChoice1'
+//		});
+//		timePicker.init();
+
+//		$(".time-picker").show(function () {
+//			var timePicker = new HunterTimePicker({
+//			target: $(this)
+//			});
+//			timePicker.init();
+//		});
+
+		$("#timePicker").hunterTimePicker();
+		$(".time-picker").hunterTimePicker();
+	});
+</script>
+
+<input type="text" id="timePicker" name="1" readonly style="margin: 134px 0 0 357px;">
+<input type="text" class="time-picker" name="2" value="15:30" readonly style="margin: 234px 0 0 357px;">
+<input type="text" class="time-picker" name="3" readonly style="margin: 334px 0 0 357px;">
+</body>
+</html>
