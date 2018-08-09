@@ -83,12 +83,33 @@ LK.UI._tree = {
       ];
     }
 
+    var checkbox = $plugin.data('LKOPTIONS').checkbox == true;
+
     $nodes.each(function() {
       var $that = $(this);
       var data = $that.data();
       for (var i = 0; i < values.length; i++) {
         if (data.id == values[i]) {
-          $that.addClass('selected');
+          if (checkbox) {
+            if (data.children.length == 0) {
+              $that.find('.lichkin-tree-node-checkbox').LKUIicon('change', 'checkbox-checked');
+              var parentCodes = LKCodeUtils.getParentCodes(LKCodeUtils.realCode(data.code)).reverse();
+              for (var i = 0; i < parentCodes.length; i++) {
+                var parentRealCode = parentCodes[i];
+                var parentCode = LKCodeUtils.fillCode(parentRealCode);
+                var childFillCode = parentCode.replace(parentRealCode, '').substring(LKCodeUtils.LENGHT + 1);
+                var tristate = false;
+                $container.find('[data-code^=' + parentRealCode + ']' + (childFillCode == '' ? '' : '[data-code$=' + childFillCode + ']') + '[data-code!=' + parentCode + '][data-code!=' + data.code + ']').find('.lichkin-tree-node-checkbox').each(function() {
+                  if ($(this).LKUIicon('has', 'checkbox-unchecked')) {
+                    tristate = true;
+                  }
+                });
+                $container.find('[data-code=' + parentCode + ']').find('.lichkin-tree-node-checkbox').LKUIicon('change', tristate ? 'checkbox-tristate' : 'checkbox-checked');
+              }
+            }
+          } else {
+            $that.addClass('selected');
+          }
           valueArr.push(data.id);
           break;
         }
@@ -165,7 +186,7 @@ LK.UI._tree = {
           var parentCode = LKCodeUtils.fillCode(parentRealCode);
           var childFillCode = parentCode.replace(parentRealCode, '').substring(LKCodeUtils.LENGHT + 1);
           var tristate = false;
-          $('[data-code^=' + parentRealCode + '][data-code$=' + childFillCode + '][data-code!=' + parentCode + '][data-code!=' + data.code + ']').find('.lichkin-tree-node-checkbox').each(function() {
+          $container.find('[data-code^=' + parentRealCode + ']' + (childFillCode == '' ? '' : '[data-code$=' + childFillCode + ']') + '[data-code!=' + parentCode + '][data-code!=' + data.code + ']').find('.lichkin-tree-node-checkbox').each(function() {
             if ($(this).LKUIicon('has', 'checkbox-' + (checked ? 'checked' : 'unchecked')) || $(this).LKUIicon('has', 'checkbox-tristate')) {
               tristate = true;
             }
