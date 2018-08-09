@@ -9,7 +9,7 @@
  */
 
 .datepicker-container {
-  background-color: #fff;
+  background-color: var(--lichkin-plugin-background-color);
   direction: ltr;
   font-size: 12px;
   left: 0;
@@ -22,7 +22,7 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  width: 210px;
+  width: 224px;
   z-index: -1;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
@@ -39,9 +39,7 @@
 }
 
 .datepicker-dropdown {
-  border: 1px solid #ccc;
-  -webkit-box-shadow: 0 3px 6px #ccc;
-  box-shadow: 0 3px 6px #ccc;
+  border: 1px solid var(--lichkin-plugin-border-color);
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
   position: absolute;
@@ -54,7 +52,7 @@
 
 .datepicker-top-left,
 .datepicker-top-right {
-  border-top-color: #39f;
+  border-top-color: var(--lichkin-plugin-border-color);
 }
 
 .datepicker-top-left::before,
@@ -68,18 +66,18 @@
 
 .datepicker-top-left::before,
 .datepicker-top-right::before {
-  border-bottom-color: #39f;
+  border-bottom-color: var(--lichkin-plugin-border-color);
 }
 
 .datepicker-top-left::after,
 .datepicker-top-right::after {
-  border-bottom-color: #fff;
+  border-bottom-color: var(--lichkin-plugin-background-color);
   top: -4px;
 }
 
 .datepicker-bottom-left,
 .datepicker-bottom-right {
-  border-bottom-color: #39f;
+  border-bottom-color: var(--lichkin-plugin-border-color);
 }
 
 .datepicker-bottom-left::before,
@@ -93,12 +91,12 @@
 
 .datepicker-bottom-left::before,
 .datepicker-bottom-right::before {
-  border-top-color: #39f;
+  border-top-color: var(--lichkin-plugin-border-color);
 }
 
 .datepicker-bottom-left::after,
 .datepicker-bottom-right::after {
-  border-top-color: #fff;
+  border-top-color: var(--lichkin-plugin-background-color);
   bottom: -4px;
 }
 
@@ -113,7 +111,7 @@
 .datepicker-panel > ul {
   margin: 0;
   padding: 0;
-  width: 102%;
+  width: 100%;
 }
 
 .datepicker-panel > ul::before,
@@ -127,7 +125,9 @@
 }
 
 .datepicker-panel > ul > li {
-  background-color: #fff;
+  border: 1px solid var(--lichkin-plugin-background-color);
+  background-color: var(--lichkin-plugin-background-color);
+  color: var(--lichkin-plugin-font-color);
   cursor: pointer;
   float: left;
   height: 30px;
@@ -136,40 +136,49 @@
   padding: 0;
   text-align: center;
   width: 30px;
+  opacity: 0.8;
 }
 
 .datepicker-panel > ul > li:hover {
-  background-color: rgb(229, 242, 255);
+  border-color: var(--lichkin-plugin-border-color-hover);
+  color: var(--lichkin-plugin-font-color-hover);
+  background-color: var(--lichkin-plugin-background-color-hover);
 }
 
 .datepicker-panel > ul > li.muted,
 .datepicker-panel > ul > li.muted:hover {
-  color: #999;
+  opacity: 0.3;
 }
 
 .datepicker-panel > ul > li.highlighted {
-  background-color: rgb(229, 242, 255);
+  border-color: var(--lichkin-plugin-border-color);
+  opacity: 1.0;
 }
 
 .datepicker-panel > ul > li.highlighted:hover {
-  background-color: rgb(204, 229, 255);
 }
 
-.datepicker-panel > ul > li.picked,
+.datepicker-panel > ul > li.picked {
+  border-color: var(--lichkin-plugin-border-color);
+  color: var(--lichkin-plugin-font-color-selected);
+  background-color: var(--lichkin-plugin-background-color-selected);
+}
+
 .datepicker-panel > ul > li.picked:hover {
-  color: #39f;
+  color: var(--lichkin-plugin-font-color-selected-hover);
+  background-color: var(--lichkin-plugin-background-color-selected-hover);
 }
 
 .datepicker-panel > ul > li.disabled,
 .datepicker-panel > ul > li.disabled:hover {
-  background-color: #fff;
-  color: #ccc;
+  border-color: var(--lichkin-plugin-border-color-invalid);
+  color: var(--lichkin-plugin-font-color-invalid);
+  background-color: var(--lichkin-plugin-background-color-invalid);
   cursor: default;
 }
 
 .datepicker-panel > ul > li.disabled.highlighted,
 .datepicker-panel > ul > li.disabled:hover.highlighted {
-  background-color: rgb(229, 242, 255);
 }
 
 .datepicker-panel > ul > li[data-view="years prev"],
@@ -197,7 +206,6 @@
 
 .datepicker-panel > ul[data-view="week"] > li,
 .datepicker-panel > ul[data-view="week"] > li:hover {
-  background-color: #fff;
   cursor: default;
 }
 

@@ -839,7 +839,7 @@
 
       this.$yearsPrev.toggleClass(disabledClass, prevDisabled);
       this.$yearsNext.toggleClass(disabledClass, nextDisabled);
-      this.$yearsCurrent.toggleClass(disabledClass, true).html(viewYear + start + yearSuffix + ' - ' + (viewYear + end) + yearSuffix);
+      this.$yearsCurrent.html(viewYear + start + yearSuffix + ' - ' + (viewYear + end) + yearSuffix);
       this.$years.html(items.join(''));
     },
     renderMonths: function renderMonths() {
