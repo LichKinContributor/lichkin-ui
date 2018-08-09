@@ -58,6 +58,8 @@
 		LK.UI.icon({size:32,icon:'MALE',type:false}).appendTo('#demo2');
 		LK.UI.icon({size:32,icon:'tip',type:false}).appendTo('#demo2');
 		LK.UI.icon({size:32,icon:'warning',type:false}).appendTo('#demo2');
+		LK.UI.icon({size:32,icon:'loginName',type:false}).appendTo('#demo2');
+		LK.UI.icon({size:32,icon:'pwd',type:false}).appendTo('#demo2');
 		LK.UI.icon({size:32,icon:'save',type:false}).appendTo('#demo2');
 		LK.UI.icon({size:32,icon:'ok',type:false}).appendTo('#demo2');
 		LK.UI.icon({size:32,icon:'cancel',type:false}).appendTo('#demo2');
@@ -126,6 +128,8 @@
 		LK.UI.icon({size:32,icon:'MALE',type:true}).appendTo('#demo3');
 		LK.UI.icon({size:32,icon:'tip',type:true}).appendTo('#demo3');
 		LK.UI.icon({size:32,icon:'warning',type:true}).appendTo('#demo3');
+		LK.UI.icon({size:32,icon:'loginName',type:true}).appendTo('#demo3');
+		LK.UI.icon({size:32,icon:'pwd',type:true}).appendTo('#demo3');
 		LK.UI.icon({size:32,icon:'save',type:true}).appendTo('#demo3');
 		LK.UI.icon({size:32,icon:'ok',type:true}).appendTo('#demo3');
 		LK.UI.icon({size:32,icon:'cancel',type:true}).appendTo('#demo3');

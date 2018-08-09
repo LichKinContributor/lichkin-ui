@@ -40,6 +40,8 @@ LK.i18n = {
   'MALE' : 'MALE',
   'tip' : 'tip',
   'warning' : 'warning',
+  'loginName' : 'login name',
+  'pwd' : 'password',
   'save' : 'save',
   'ok' : 'ok',
   'cancel' : 'cancel',

@@ -40,6 +40,8 @@ LK.i18n = {
   'MALE' : '男',
   'tip' : '提示',
   'warning' : '警告',
+  'loginName' : '登录名',
+  'pwd' : '密码',
   'save' : '保存',
   'ok' : '确定',
   'cancel' : '取消',

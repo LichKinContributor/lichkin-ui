@@ -278,6 +278,8 @@ LK.UI('plugins', 'changeIcon', function(options) {
     'MALE' : 'male',
     'tip' : 'exclamation-circle',
     'warning' : 'exclamation-triangle',
+    'loginName' : 'user',
+    'pwd' : 'lock',
     'save' : 'save',
     'ok' : 'check',
     'cancel' : 'times',
