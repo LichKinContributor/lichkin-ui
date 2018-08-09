@@ -60,7 +60,7 @@
 		};
 
 		function buildHourTpl(){
-			var hour_html = '<p>小时</p>';
+			var hour_html = '<p>'+$.LKGetI18N('hour')+'</p>';
 			for(var i = 0; i < dates.hour.length; i++){
 				var temp = box.val().split(":")[0];
 				if(dates.hour[i]==temp){
@@ -70,14 +70,14 @@
 				}
 			}
 
-			hour_html += '<li class="Hunter-clean"><input type="button" class="Hunter-clean-btn" id="Hunter_clean_btn" value="清 空"></li>'
+			hour_html += '<li class="Hunter-clean"><input type="button" class="Hunter-clean-btn" id="Hunter_clean_btn" value="'+$.LKGetI18N('clear')+'"></li>'
 			
 			time_wrap.html(hour_html);
 		};
 
 		function buildMinuteTpl(cur_time){
 			var poi = cur_time.position();
-			var minute_html = '<p>分钟</p>';
+			var minute_html = '<p>'+$.LKGetI18N('minutes')+'</p>';
 			var temp = box.val().split(":")[1];
 			for(var j = 0; j < dates.minute.length;j++){
 				if(dates.minute[j]==temp){
