@@ -76,14 +76,19 @@ LK.UI._tree = {
     var valueArr = [];
 
     var $nodes = $container.find('li');
-    $nodes.removeClass('selected');
+    var checkbox = $plugin.data('LKOPTIONS').checkbox == true;
+    if (checkbox) {
+      $nodes.each(function() {
+        $(this).find('.lichkin-tree-node-checkbox').LKUIicon('change', 'checkbox-unchecked');
+      });
+    } else {
+      $nodes.removeClass('selected');
+    }
     if (!Array.isArray(values)) {
       values = [
         values
       ];
     }
-
-    var checkbox = $plugin.data('LKOPTIONS').checkbox == true;
 
     $nodes.each(function() {
       var $that = $(this);
