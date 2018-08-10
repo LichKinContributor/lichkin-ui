@@ -249,7 +249,7 @@ var addMenu = function(menuJson, $container) {
             url : menuJson.params.url + '/index',
             title : menuJson.params.menuName,
             icon : menuJson.params.icon,
-            size : LK.home.menuSizes[menuJson.params.menuName],
+            size : menuSizes[menuJson.params.menuName],
             mask : false,
             onFocus : function() {
               activeTask(menuJson.id);

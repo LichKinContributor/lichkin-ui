@@ -21,7 +21,7 @@
 		</div>
 	</#if>
 	<#if section="javascript-contents-before-links">
-LK.home.menuSizes = {
+var menuSizes = {
     'dictMgmt':           {width:1172,height:495},
     'roleMgmt':           {cols:1,rows:1},
     'userMgmt':           {cols:1,rows:1},
