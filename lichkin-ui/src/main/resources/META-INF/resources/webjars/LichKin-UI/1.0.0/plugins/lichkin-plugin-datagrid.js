@@ -138,6 +138,15 @@ LK.UI('plugins', 'datagrid', function(options) {
   // 控件类型
   var plugin = 'datagrid';
 
+  if (options.$appendTo == true) {
+    var $topDialog = $.LKGetTopDialog();
+    if ($topDialog) {
+      options.$appendTo = $topDialog.find('.lichkin-body');
+    } else {
+      options.$appendTo = $('body');
+    }
+  }
+
   // 创建控件对象
   var $plugin = LK.UI.create({
     plugin : plugin,
