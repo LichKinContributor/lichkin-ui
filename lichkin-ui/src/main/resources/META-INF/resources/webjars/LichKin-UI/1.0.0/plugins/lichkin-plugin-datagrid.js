@@ -658,7 +658,7 @@ LK.UI.createOptions,
 // 控件特殊定义
 {
   cols : 4,
-  rows : 14
+  rows : 20
 },
 // @see LK.UI.load
 LK.UI.loadOptions,
