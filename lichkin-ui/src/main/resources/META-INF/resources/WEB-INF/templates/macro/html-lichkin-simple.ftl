@@ -51,7 +51,7 @@
 			<#nested "body-content"/>
 		</#if>
 		<#if section="javascript-contents-before-links">
-			let _CTX='${ctx}',_LANG='${locale}',_MAPPING_PAGES='${mappingPages}',_MAPPING_API='${mappingApi}';
+			let _CTX='${ctx}',_LANG='${locale}',_MAPPING_PAGES='${mappingPages}',_MAPPING_API='${mappingApi}',LKI18N={};
 			<#nested "javascript-contents-before-links"/>
 		</#if>
 		<#if section="javascript-links">
@@ -59,6 +59,7 @@
 			<@lichkin@jsTag url="/webjars/LichKin-UI/lichkin${compressSuffix}.js" />
 			<@lichkin@jsTag url="/webjars/LichKin-UI/i18n/${locale}${compressSuffix}.js" />
 			<@lichkin@jsTag url="/res/js/i18n/${locale}.js" />
+			<@lichkin@jsTag url="/res/js${mappingUri}/i18n/${locale}.js" />
 			<@lichkin@jsTag url="/webjars/LichKin-UI/lichkin-${calculateType}${compressSuffix}.js" />
 			<#nested "javascript-links-bofore-plugins"/>
 			<#if webDebug==true>

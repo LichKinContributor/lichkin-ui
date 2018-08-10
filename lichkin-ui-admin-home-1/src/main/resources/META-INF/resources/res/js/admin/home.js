@@ -178,7 +178,7 @@ var addCommonMenus = function() {
   var i = 0;
   for ( var key in LK.home.commonMenus) {
     setTimeout(function(key, commonMenus) {
-      var $menu = $('<div id="lichkin-menu-' + key + '" class="lichkin-menu-item lichkin-menu lichkin-div-' + commonMenus[key].type + '">' + LK.i18n[key] + '</div>').appendTo(LK.home.$menusCommonContainer);
+      var $menu = $('<div id="lichkin-menu-' + key + '" class="lichkin-menu-item lichkin-menu lichkin-div-' + commonMenus[key].type + '">' + $.LKGetI18N(key) + '</div>').appendTo(LK.home.$menusCommonContainer);
       var width = $menu.width();
       $menu.css({
         'width' : '0px'
@@ -240,6 +240,10 @@ var addMenu = function(menuJson, $container) {
 
   if (menuJson.children.length == 0) {
     if (typeof menuJson.params.url != 'undefined' && menuJson.params.url != '') {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = _CTX + '/res/js' + menuJson.params.url + '/index/i18n/' + _LANG + '.js';
+      document.getElementsByTagName("head")[0].appendChild(script);
       $menu.click(function() {
         addTask(menuJson.id, menuJson.params.menuName, menuJson.params.icon, menuJson.url);
         var $dlg = $('[data-id=dialog_' + menuJson.id + ']');

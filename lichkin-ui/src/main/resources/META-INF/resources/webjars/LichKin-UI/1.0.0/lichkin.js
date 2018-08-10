@@ -109,7 +109,7 @@ $.extend($, {
    */
   LKGetI18N : function(key) {
     if (isString(key)) {
-      var value = LK.i18n[key];
+      var value = LKI18N[key];
       if (isString(value)) {
         return value;
       }
@@ -119,6 +119,27 @@ $.extend($, {
       throw 'can not read from i18n by key -> ' + key;
     }
     return '';
+  },
+
+  /**
+   * 设置i18n内容
+   * @param key 键
+   * @param value 值
+   */
+  LKPutI18N : function(key, value) {
+    if (isString(key) && isString(value)) {
+      LKI18N[key] = value;
+    }
+  },
+
+  /**
+   * 设置i18n内容
+   * @param json 键值对
+   */
+  LKExtendI18N : function(json) {
+    if (typeof json != 'undefined' && isJSON(json) && !$.isEmptyObject(json)) {
+      $.extend(LKI18N, json);
+    }
   }
 
 });
@@ -736,7 +757,7 @@ var LK = {
           LK.closeLoading(loadingId);
         }
       }, 333);
-      error(-999, LK.i18n.ajaxError, options);
+      error(-999, $.LKGetI18N('ajaxError'), options);
     };
 
     if (options.showLoading) {
@@ -828,7 +849,7 @@ LK.ajax.timeoutValue = 30000;
  * @param options 调用ajax方法时传入的参数
  */
 var LK_ajax_timeout = function(options) {
-  LK.toast(LK.i18n.timeout);
+  LK.toast($.LKGetI18N('timeout'));
   setTimeout(function() {
     window.location.href = LK.ajax.timeoutPageUrl;
   }, 2000);

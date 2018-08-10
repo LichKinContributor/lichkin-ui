@@ -1,4 +1,4 @@
-$.extend(LK.i18n, {
+$.LKExtendI18N({
   'category' : '类目',
   'categoryCode' : '类目编码',
   'categoryName' : '类目名称',

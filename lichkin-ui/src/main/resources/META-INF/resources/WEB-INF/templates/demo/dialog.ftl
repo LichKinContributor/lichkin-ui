@@ -5,7 +5,7 @@
 		<div id="buttons"></div>
 	</#if>
 	<#if section="javascript-contents-after-links">
-		$.extend(LK.i18n, {
+		$.LKExtendI18N({
 		  'textarea' : '多行文本框',
 		  'busAppKey' : '客户端唯一标识',
 		  'busClientType' : '客户端类型',
@@ -16,7 +16,7 @@
 		  'droplist' : '下拉框',
   	      'numberspinner' : '数字微调器'
 		});
-		$.extend(LK.i18n,{
+		$.LKExtendI18N({
 			btn1:'设置标题',
 			btn2:'设置图标',
 			btn3:'设置图标标题',

@@ -4,7 +4,7 @@
  * @author SuZhou LichKin Information Technology Co., Ltd.
  */
 
-LK.i18n = {
+$.LKExtendI18N({
   userInfo : '个人信息',
   changePwd : '修改密码',
   changeTheme : '更换主题',
@@ -172,4 +172,4 @@ LK.i18n = {
   'MARITAL_STATUS' : '婚姻状态',
   'APP_KEY' : '客户端唯一标识',
 
-};
+});

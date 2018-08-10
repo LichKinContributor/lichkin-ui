@@ -1,4 +1,4 @@
-$.extend(LK.i18n, {
+$.LKExtendI18N({
   'rows14' : '14行',
   'busAppKey' : '客户端唯一标识',
   'busClientType' : '客户端类型',
