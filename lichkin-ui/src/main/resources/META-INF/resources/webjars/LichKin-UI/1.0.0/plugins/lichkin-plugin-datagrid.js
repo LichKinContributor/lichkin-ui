@@ -436,6 +436,28 @@ LK.UI('plugins', 'datagrid', function(options) {
 
   // 工具栏
   var $toolsBar = $('<div></div>').LKAddPluginClass(plugin, 'toolsBar');
+  if (options.title == null && options.icon == null && (options.showSearchButton == true || options.searchForm.length != 0) && options.tools.length != 0) {
+    var $buttonsBar = $('<div class="lichkin-buttons lichkin-buttons-right"></div>').appendTo($toolsBar);
+    if (options.searchForm.length != 0) {
+      options.showSearchButton = true;
+      $buttonsBar.append(LK.UI.button({
+        icon : 'reset',
+        click : function($button) {
+          $searchForm.LKFormBindData();
+        }
+      }));
+    }
+    if (options.showSearchButton == true) {
+      $buttonsBar.append(LK.UI.button({
+        icon : 'search',
+        click : function($button) {
+          $plugin.LKLoad({
+            param : LK.UI._datagrid.getParam($plugin, options)
+          });
+        }
+      }));
+    }
+  }
   if (options.tools.length != 0) {
     $toolsBar.appendTo($plugin);
     $toolsBar.css('width', width - 2);
