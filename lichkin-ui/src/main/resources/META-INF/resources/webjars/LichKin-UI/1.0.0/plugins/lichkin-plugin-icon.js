@@ -109,7 +109,7 @@ LK.UI._icon = {
  * 绑定图标
  */
 LK.UI('plugins', 'bindIcon', function(options) {
-  $('#lichkin-icons').append('.lichkin-icon-' + options.icon + '{background-image:url("../../res/img/icons/' + options.icon + '.' + ((options.icon == 'loading') ? 'gif' : 'png') + '") !important;}');
+  $('#lichkin-icons').append('.lichkin-icon-' + options.icon + '{background-image:url("' + LK.toStandardPath(_CTX) + '/res/img/icons/' + options.icon + '.' + ((options.icon == 'loading') ? 'gif' : 'png') + '") !important;}');
 
   if (options.fontAwesome != '') {
     LK.UI._icon.mappings[options.icon] = options.fontAwesome;
