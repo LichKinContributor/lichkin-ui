@@ -34,6 +34,7 @@ LK.app = {
   },
 
   alert : function(options, callback) {
+    options.msg = (typeof options.original != 'undefined' && options.original == true ? options.msg : $.LKGetI18N(options.msg));
     if (typeof callback == 'function') {
       window.WebViewJavascriptBridge.callHandler('alert', options, function(responseData) {
         callback();
