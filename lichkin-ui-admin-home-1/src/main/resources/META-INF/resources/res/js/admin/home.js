@@ -16,49 +16,160 @@ LK.home.commonMenus = {
   userInfo : {
     type : 'info',
     click : function() {
+      LK.UI.openDialog($.extend({}, {
+        size : {
+          cols : 1,
+          rows : 5
+        }
+      }, {
+        title : 'view',
+        icon : 'view',
+        mask : true,
+        buttons : [
+          {
+            text : 'cancel',
+            icon : 'cancel',
+            cls : 'danger',
+            click : function($button, $dialog, $contentBar) {
+              $dialog.LKCloseDialog();
+            }
+          }
+        ],
+        onAfterCreate : function($dialog, $contentBar) {
+          LK.ajax({
+            url : '/getUserInfo',
+            success : function(data) {
+              var formFields = [];
+              formFields.push({
+                plugin : 'cropper',
+                options : {
+                  key : 'photo',
+                  name : 'photo',
+                  compressWidth : 128,
+                  compressHeight : 128,
+                  cols : 1,
+                  rows : 2,
+                  value : data.photo
+                }
+              }, {
+                plugin : 'textbox',
+                options : {
+                  name : 'userName',
+                  value : data.userName
+                }
+              }, {
+                plugin : 'textbox',
+                options : {
+                  name : 'email',
+                  value : data.email
+                }
+              }, {
+                plugin : 'textbox',
+                options : {
+                  name : 'gender',
+                  value : $.LKGetI18N('GENDER', data.gender)
+                }
+              });
+
+              var formOptions = $.extend({}, {
+                plugins : formFields
+              }, {
+                $appendTo : $contentBar
+              });
+              LK.UI.form(formOptions);
+
+              $dialog.find('form').find('input').attr('readonly', 'readonly');
+
+            }
+          });
+        }
+      }));
     }
   },
   changePwd : {
     type : 'warning',
     click : function() {
-      LK.UI.openDialog({
+      LK.UI.openDialog($.extend({}, {
+        size : {
+          cols : 1,
+          rows : 3
+        }
+      }, {
         title : 'changePwd',
         icon : 'resetPwd',
-        size : {
-          cols : 2,
-          rows : 3
-        },
+        mask : true,
         buttons : [
             {
-              icon : 'save',
               text : 'save',
-              cls : 'success',
+              icon : 'save',
+              cls : 'warning',
               click : function($button, $dialog) {
                 var $form = $dialog.find('form');
-                if ($form.validate()) {
+                if ($form.LKValidate()) {
                   LK.ajax({
                     url : '/U/SysAdminLogin/ModifyPassword',
                     data : {
-                      pwdOld : SparkMD5.hash($form.find('input[name=pwdOld]').val()),
-                      pwdNew : SparkMD5.hash($form.find('input[name=pwdNew]').val())
+                      pwdOld : SparkMD5.hash($('input[name=pwdOld]').val()),
+                      pwdNew : SparkMD5.hash($('input[name=pwdNew]').val())
                     },
                     showSuccess : true,
                     success : function() {
                       $dialog.LKCloseDialog();
+                      LK.alert('pwdModifiedSuccess');
                     }
                   });
                 }
               }
             }, {
-              icon : 'cancel',
               text : 'cancel',
+              icon : 'cancel',
               cls : 'danger',
               click : function($button, $dialog) {
                 $dialog.LKCloseDialog();
               }
             }
-        ]
-      });
+        ],
+        onAfterCreate : function($dialog, $contentBar) {
+          LK.UI.form($.extend({}, {
+            plugins : [
+                {
+                  plugin : 'textbox',
+                  options : {
+                    name : 'pwdOld',
+                    validator : true
+                  }
+                }, {
+                  plugin : 'textbox',
+                  options : {
+                    name : 'pwdNew',
+                    validator : true
+                  }
+                }, {
+                  plugin : 'textbox',
+                  options : {
+                    name : 'surePwdNew',
+                    validator : true
+                  }
+                }
+            ]
+          }, {
+            $appendTo : $contentBar,
+          }));
+
+          $('input[name=pwdOld]').attr({
+            'type' : 'password'
+          });
+
+          $('input[name=pwdNew]').attr({
+            'type' : 'password'
+          });
+
+          $('input[name=surePwdNew]').attr({
+            'type' : 'password'
+          });
+        }
+      }));
+
     }
   },
   changeTheme : {
@@ -133,7 +244,7 @@ $(function() {
     url : '/getUserInfo',
     success : function(datas, options) {
       // 更换头像
-      appendGenderPhoto(userInfo.gender, _CTX + userInfo.photo);
+      appendGenderPhoto(datas.gender, datas.photo);
     }
   });
 
@@ -161,6 +272,8 @@ var appendGenderPhoto = function(gender, photoUrl) {
     'width' : '1px'
   }, 'slow', function() {
     if (photoUrl) {
+      photoUrl = photoUrl.startsWith('http') || photoUrl.startsWith(_CTX + '/res/img') ? photoUrl : 'data:image/png;base64,' + photoUrl;
+
       $(this).LKUIicon('clear').css('background-image', 'url(' + photoUrl + ')');
     } else {
       $(this).css('background-image', 'none').LKUIicon('change', (typeof gender == 'undefined') ? 'UNKNOWN' : gender);
