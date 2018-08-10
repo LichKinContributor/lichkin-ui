@@ -66,20 +66,6 @@ $.fn.extend({
 // 图标类型。true:使用图片图标;false:使用文字图标;
 LK.UI.iconType = false;
 
-// 增加统一图标样式
-(function() {
-  var $icons = $('#lichkin-icons');
-  $icons.append('.lichkin-hidden-icon{}');
-  var sizes = [
-      16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128
-  ];
-  for (var i = 0; i < sizes.length; i++) {
-    var size = sizes[i];
-    $icons.append('.lichkin-icon-' + size + '{background-size:' + size + 'px;width:' + size + 'px;height:' + size + 'px;}');
-    $icons.append('.lichkin-icon-' + size + ' i{font-size:' + (size * 0.75) + 'px;width:' + size + 'px;height:' + size + 'px;line-height:' + size + 'px;}');
-  }
-})();
-
 /**
  * 图标控件内部实现相关
  */
@@ -151,7 +137,20 @@ LK.UI('plugins', 'icon', function(options) {
   var id = options.id = (options.id != '') ? options.id : 'LK_' + randomInRange(100000, 999999);
 
   // 创建控件对象
-  var $plugin = $('<span id="' + id + '" class="lichkin-icon lichkin-icon-' + options.size + '"></span>');
+  var $plugin = $('<span id="' + id + '" class="lichkin-icon"></span>');
+
+  var size = options.size;
+  options.style = $.extend({
+    'background-size' : size + 'px',
+    'width' : size + 'px',
+    'height' : size + 'px'
+  }, options.style);
+  options.iStyle = $.extend({
+    'font-size' : (size * 0.75) + 'px',
+    'width' : size + 'px',
+    'height' : size + 'px',
+    'line-height' : size + 'px'
+  }, options.iStyle);
 
   // 增加样式
   if (options.cls != null) {
