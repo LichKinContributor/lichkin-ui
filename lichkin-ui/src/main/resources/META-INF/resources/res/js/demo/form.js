@@ -11,11 +11,13 @@ $.extend(LK.i18n, {
   'numberspinner' : '数字微调器',
   'datagrid' : '数据表格',
   'categoryCode' : '类目编码',
-  'categoryName' : '类目名称'
+  'categoryName' : '类目名称',
+  'id' : '主键'
 });
 
 LK.UI.form({
   values : {
+    'id' : 'fffffff',
     'rows14' : 'fffffffffffffff',
     'busAppKey' : 'com.lichkin.app.android.demo2',
     'busClientType' : 'ANDROID',
@@ -30,6 +32,11 @@ LK.UI.form({
   },
   plugins : [
       {
+        plugin : 'hidden',
+        options : {
+          name : 'id'
+        }
+      }, {
         plugin : 'datagrid',
         options : {
           name : 'datagrid',

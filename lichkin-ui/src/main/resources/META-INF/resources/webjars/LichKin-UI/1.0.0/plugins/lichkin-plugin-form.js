@@ -16,17 +16,17 @@ LK.UI._form = {
       if (!isString(name)) {
         throw 'plugin name must be setted as a form plugin.';
       }
-      if (plugin.plugin == 'hidden') {
-        var $hiddenInput = $('<input type="hidden" name="' + name + '" />').LKAddPluginClass('hidden', 'value').appendTo($plugin);
-        if (typeof plugin.options.value != 'undefined') {
-          $hiddenInput.val(plugin.options.value);
-        }
-        continue;
-      }
       plugin.options.$appendTo = $plugin;
       plugin.options.inForm = true;
       if (typeof options.values[name] != 'undefined' && typeof plugin.options.value == 'undefined') {
         plugin.options.value = options.values[name];
+      }
+      if (plugin.plugin == 'hidden') {
+        var $hiddenInput = $('<input type="hidden" class="lichkin-plugin lichkin-plugin-hidden" name="' + name + '" />').LKAddPluginClass('hidden', 'value').appendTo($plugin);
+        $hiddenInput.data('plugin-type', 'hidden');
+        $hiddenInput.data('LKName', name);
+        $hiddenInput.val(plugin.options.value);
+        continue;
       }
       LK.UI[plugin.plugin](plugin.options);
     }
@@ -62,22 +62,26 @@ $.fn.extend({
    */
   LKFormBindData : function(data) {
     var $frm = this.LKGetFormPlugin();
+    var $subPlugins = $frm.find('.lichkin-plugin');
+    var notClear = isJSON(data) && !$.isEmptyObject(data);
 
-    $frm.find('.lichkin-plugin-value').each(function() {
-      var $plugin = $(this).parent('.lichkin-plugin:first');
-      $plugin.LKInvokeSetValues();
-      $plugin.LKlinkage(null, false);
-    });
-
-    if (isJSON(data) && !$.isEmptyObject(data)) {
-      $.each(data, function(key, value) {
-        var $plugin = $frm.find('[name=' + key + '].lichkin-plugin-value').parent('.lichkin-plugin:first');
-        if ($plugin.length != 0) {
-          $plugin.LKInvokeSetValues(value);
-          $plugin.LKlinkage(value, false);
+    $subPlugins.each(function() {
+      var $subPlugin = $(this);
+      var name = $subPlugin.data('LKName');
+      if (isString(name) && name != '') {
+        var value = notClear ? data[name] : '';
+        if (typeof value == 'undefined') {
+          value = '';
         }
-      });
-    }
+        var plugin = $subPlugin.LKGetPluginType();
+        if (plugin == 'hidden') {
+          $subPlugin.val(value);
+        } else {
+          $subPlugin.LKInvokeSetValues(value);
+          $subPlugin.LKlinkage(value, false);
+        }
+      }
+    });
   },
 
   /**
@@ -92,7 +96,13 @@ $.fn.extend({
       var $subPlugin = $(this);
       var name = $subPlugin.data('LKName');
       if (isString(name) && name != '') {
-        var value = $subPlugin.LKGetValue();
+        var plugin = $subPlugin.LKGetPluginType();
+        var value = '';
+        if (plugin == 'hidden') {
+          value = $subPlugin.val();
+        } else {
+          value = $subPlugin.LKGetValue();
+        }
         value = value == '' ? null : value;
         if (typeof json[name] == 'undefined') {
           json[name] = value;
@@ -149,7 +159,7 @@ LK.UI('plugins', 'form', function(options) {
       }
     });
   } else {
-    LK.UI._form.createSubPlugin($plugin, options);
+    LK.UI._form.createSubPlugin($plugin, $.extend(true, options));
   }
 
   // 返回控件对象
