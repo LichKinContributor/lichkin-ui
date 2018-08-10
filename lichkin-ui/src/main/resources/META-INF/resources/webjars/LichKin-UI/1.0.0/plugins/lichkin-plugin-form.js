@@ -74,7 +74,7 @@ $.fn.extend({
         var $plugin = $frm.find('[name=' + key + '].lichkin-plugin-value').parent('.lichkin-plugin:first');
         if ($plugin.length != 0) {
           $plugin.LKInvokeSetValues(value);
-          $plugin.LKlinkage(value, true);
+          $plugin.LKlinkage(value, false);
         }
       });
     }
@@ -133,9 +133,10 @@ LK.UI('plugins', 'form', function(options) {
       data : options.param,
       success : function(responseDatas) {
         if (responseDatas) {
+          var opts = $.extend(true, options);
           out: for ( var key in responseDatas) {
-            for (var i = 0; i < options.plugins.length; i++) {
-              var plugin = options.plugins[i];
+            for (var i = 0; i < opts.plugins.length; i++) {
+              var plugin = opts.plugins[i];
               var name = plugin.options.name;
               if (name == key) {
                 plugin.options.value = responseDatas[key];
@@ -143,7 +144,7 @@ LK.UI('plugins', 'form', function(options) {
               }
             }
           }
-          LK.UI._form.createSubPlugin($plugin, options);
+          LK.UI._form.createSubPlugin($plugin, opts);
         }
       }
     });
