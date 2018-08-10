@@ -116,60 +116,78 @@ $.LKExtendI18N({
   'operLog-Employee' : '操作日志-员工',
 
   /** 字典-枚举类型 */
-  'USING_STATUS' : '在用状态',
-  'DEPRECATED' : '删除',
-  'STAND_BY' : '待用',
-  'USING' : '在用',
-  'DISABLE' : '停用',
-  'LOCKED' : '锁定',
+  'usingStatus' : '在用状态',
+  'USING_STATUS' : {
+    'DEPRECATED' : '删除',
+    'STAND_BY' : '待用',
+    'USING' : '在用',
+    'DISABLE' : '停用',
+    'LOCKED' : '锁定',
+  },
 
-  'YES_NO' : '是否',
-  'YES' : '是',
-  'NO' : '否',
+  'yesNo' : '是否',
+  'YES_NO' : {
+    'YES' : '是',
+    'NO' : '否',
+  },
 
-  'CLIENT_TYPE' : '客户端类型',
-  'JAVASCRIPT' : '页面脚本',
-  'ANDROID' : '安卓',
-  'IOS' : '苹果',
+  'clientType' : '客户端类型',
+  'CLIENT_TYPE' : {
+    'JAVASCRIPT' : '页面脚本',
+    'ANDROID' : '安卓',
+    'IOS' : '苹果',
+  },
 
-  'OPERATION_TYPE' : '操作类型',
-  'ADD' : '增加',
-  'REMOVE' : '删除',
-  'EDIT' : '修改',
-  'SEARCH' : '查询',
-  'LOGIN' : '登录',
-  'OTHER' : '其它',
+  'operationType' : '操作类型',
+  'OPERATION_TYPE' : {
+    'ADD' : '增加',
+    'REMOVE' : '删除',
+    'EDIT' : '修改',
+    'SEARCH' : '查询',
+    'LOGIN' : '登录',
+    'OTHER' : '其它',
+  },
 
-  'GENDER' : '性别',
-  'FEMALE' : '女',
-  'MALE' : '男',
-  'ALIEN' : '外星人',
-  'UNKNOWN' : '未知',
-  'SECRECY' : '保密',
+  'gender' : '性别',
+  'GENDER' : {
+    'FEMALE' : '女',
+    'MALE' : '男',
+    'ALIEN' : '外星人',
+    'UNKNOWN' : '未知',
+    'SECRECY' : '保密',
+  },
 
-  'AUTHENTICATION' : '实名认证等级',
-  'NO' : '未认证',
-  'AUTHENTICATING' : '认证中',
-  'AUTHENTICATED' : '已实名',
-  'CARD_BINDED' : '已绑卡',
-  'USER_CARD_UPLOADED' : '已传身份证照片',
+  'authentication' : '实名认证等级',
+  'AUTHENTICATION' : {
+    'NO' : '未认证',
+    'AUTHENTICATING' : '认证中',
+    'AUTHENTICATED' : '已实名',
+    'CARD_BINDED' : '已绑卡',
+    'USER_CARD_UPLOADED' : '已传身份证照片',
+  },
 
-  'PROCESS_KEY' : '流程标识',
-  'GeneralSingleLineProcess' : '单线流程',
+  'processKey' : '流程标识',
+  'PROCESS_KEY' : {
+    'GeneralSingleLineProcess' : '单线流程',
+  },
 
-  'PROCESS_TYPE' : '流程类型',
-  'SINGLE_LINE' : '单线过程',
+  'processType' : '流程类型',
+  'PROCESS_TYPE' : {
+    'SINGLE_LINE' : '单线过程',
+  },
 
-  'SCHEDULE_TYPE' : '排班类型',
-  'NORMAL' : '正常排班',
-  'DOUBLE_SHIFT' : '两班制',
-  'THREE_SHIFTS' : '三班制',
+  'scheduleType' : '排班类型',
+  'SCHEDULE_TYPE' : {
+    'NORMAL' : '正常排班',
+    'DOUBLE_SHIFT' : '两班制',
+    'THREE_SHIFTS' : '三班制',
+  },
 
   /** 字典-配置类型 */
-  'NATION' : '民族',
-  'EDUCATION' : '学历',
-  'DEGREE' : '学位',
-  'MARITAL_STATUS' : '婚姻状态',
-  'APP_KEY' : '客户端唯一标识',
+  'nation' : '民族',
+  'education' : '学历',
+  'degree' : '学位',
+  'maritalStatus' : '婚姻状态',
+  'appKey' : '客户端唯一标识',
 
 });

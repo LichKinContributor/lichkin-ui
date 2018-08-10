@@ -116,60 +116,78 @@ $.LKExtendI18N({
   'operLog-Employee' : 'employee operation log',
 
   /** dictionary enumeration */
-  'USING_STATUS' : 'using status',
-  'DEPRECATED' : 'deprecated',
-  'STAND_BY' : 'stand by',
-  'USING' : 'using',
-  'DISABLE' : 'disable',
-  'LOCKED' : 'locked',
+  'usingStatus' : '在用状态',
+  'USING_STATUS' : {
+    'DEPRECATED' : 'deprecated',
+    'STAND_BY' : 'stand by',
+    'USING' : 'using',
+    'DISABLE' : 'disable',
+    'LOCKED' : 'locked',
+  },
 
-  'YES_NO' : 'yes or no',
-  'YES' : 'yes',
-  'NO' : 'no',
+  'yesNo' : 'yes or no',
+  'YES_NO' : {
+    'YES' : 'yes',
+    'NO' : 'no',
+  },
 
-  'CLIENT_TYPE' : 'client type',
-  'JAVASCRIPT' : 'javascript',
-  'ANDROID' : 'android',
-  'IOS' : 'ios',
+  'clientType' : 'client type',
+  'CLIENT_TYPE' : {
+    'JAVASCRIPT' : 'javascript',
+    'ANDROID' : 'android',
+    'IOS' : 'ios',
+  },
 
-  'OPERATION_TYPE' : 'operation type',
-  'ADD' : 'add',
-  'REMOVE' : 'remove',
-  'EDIT' : 'edit',
-  'SEARCH' : 'search',
-  'LOGIN' : 'login',
-  'OTHER' : 'other',
+  'operationType' : 'operation type',
+  'OPERATION_TYPE' : {
+    'ADD' : 'add',
+    'REMOVE' : 'remove',
+    'EDIT' : 'edit',
+    'SEARCH' : 'search',
+    'LOGIN' : 'login',
+    'OTHER' : 'other',
+  },
 
-  'GENDER' : 'gender',
-  'FEMALE' : 'female',
-  'MALE' : 'male',
-  'ALIEN' : 'alien',
-  'UNKNOWN' : 'unknown',
-  'SECRECY' : 'secrecy',
+  'gender' : 'gender',
+  'GENDER' : {
+    'FEMALE' : 'female',
+    'MALE' : 'male',
+    'ALIEN' : 'alien',
+    'UNKNOWN' : 'unknown',
+    'SECRECY' : 'secrecy',
+  },
 
-  'AUTHENTICATION' : 'authentication',
-  'NO' : 'no',
-  'AUTHENTICATING' : 'authenticating',
-  'AUTHENTICATED' : 'authenticated',
-  'CARD_BINDED' : 'card binded',
-  'USER_CARD_UPLOADED' : 'user card uploaded',
+  'authentication' : 'authentication',
+  'AUTHENTICATION' : {
+    'NO' : 'no',
+    'AUTHENTICATING' : 'authenticating',
+    'AUTHENTICATED' : 'authenticated',
+    'CARD_BINDED' : 'card binded',
+    'USER_CARD_UPLOADED' : 'user card uploaded',
+  },
 
-  'PROCESS_KEY' : 'process_key',
-  'GeneralSingleLineProcess' : 'single line',
+  'processKey' : 'process key',
+  'PROCESS_KEY' : {
+    'GeneralSingleLineProcess' : 'single line',
+  },
 
-  'PROCESS_TYPE' : 'process_type',
-  'SINGLE_LINE' : 'single line',
+  'processType' : 'process type',
+  'PROCESS_TYPE' : {
+    'SINGLE_LINE' : 'single line',
+  },
 
-  'SCHEDULE_TYPE' : 'schedule_type',
-  'NORMAL' : 'standard',
-  'DOUBLE_SHIFT' : 'double shift',
-  'THREE_SHIFTS' : 'three shifts',
+  'scheduleType' : 'schedule type',
+  'SCHEDULE_TYPE' : {
+    'NORMAL' : 'standard',
+    'DOUBLE_SHIFT' : 'double shift',
+    'THREE_SHIFTS' : 'three shifts',
+  },
 
   /** dictionary configuration */
-  'NATION' : 'nation',
-  'EDUCATION' : 'education',
-  'DEGREE' : 'degree',
-  'MARITAL_STATUS' : 'marital status',
-  'APP_KEY' : 'application key',
+  'nation' : 'nation',
+  'education' : 'education',
+  'degree' : 'degree',
+  'maritalStatus' : 'marital status',
+  'appKey' : 'application key',
 
 });
