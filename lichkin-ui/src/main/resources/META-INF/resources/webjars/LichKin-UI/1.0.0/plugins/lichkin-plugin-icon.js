@@ -153,6 +153,11 @@ LK.UI('plugins', 'icon', function(options) {
   // 创建控件对象
   var $plugin = $('<span id="' + id + '" class="lichkin-icon lichkin-icon-' + options.size + '"></span>');
 
+  // 增加样式
+  if (options.cls != null) {
+    $plugin.addClass('lichkin-icon-' + options.cls);
+  }
+
   // 不传图标时即只创建空白控件
   if (options.icon != null) {
     $plugin.attr('title', $.LKGetI18N(options.icon));
@@ -194,6 +199,8 @@ LK.UI('plugins', 'icon', function(options) {
   icon : null,
   // 图标类型
   type : null,
+  // 样式
+  cls : null,
   // 样式
   style : {},
   // I样式
