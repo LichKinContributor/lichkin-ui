@@ -105,10 +105,23 @@ $.extend($, {
   /**
    * 获取i18n内容
    * @param key 键
+   * @param ... 多层键
    * @return i18n内容
    */
   LKGetI18N : function(key) {
     if (isString(key)) {
+      var keys = arguments;
+      if (arguments.length > 1) {
+        var value;
+        for (var i = 0; i < keys.length; i++) {
+          if (i == 0) {
+            value = LKI18N[keys[i]];
+          } else {
+            value = value[keys[i]];
+          }
+        }
+        return value;
+      }
       var value = LKI18N[key];
       if (isString(value)) {
         return value;
