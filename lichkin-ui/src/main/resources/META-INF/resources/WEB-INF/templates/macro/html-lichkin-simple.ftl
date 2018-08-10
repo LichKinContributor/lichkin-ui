@@ -72,6 +72,7 @@
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugins-simple${compressSuffix}.js" />
 			</#if>
 			<#nested "javascript-links"/>
+			<@lichkin@jsTag/>
 		</#if>
 		<#if section="javascript-contents-after-links">
 			let $win = $(window), $doc = $(document), $body = $('body');
@@ -84,7 +85,7 @@
 			<#nested "style"/>
 		</style>
 		<#nested "body-content"/>
-		<#nested "javascript-links"/>
+		<@lichkin@jsTag/>
 	</div>
 </#if>
 
