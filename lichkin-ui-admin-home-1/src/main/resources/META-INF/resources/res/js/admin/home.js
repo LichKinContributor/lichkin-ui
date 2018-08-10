@@ -255,6 +255,7 @@ var addMenu = function(menuJson, $container) {
             icon : menuJson.params.icon,
             size : menuSizes[menuJson.params.menuName],
             mask : false,
+            formContent : false,
             onFocus : function() {
               activeTask(menuJson.id);
             },
