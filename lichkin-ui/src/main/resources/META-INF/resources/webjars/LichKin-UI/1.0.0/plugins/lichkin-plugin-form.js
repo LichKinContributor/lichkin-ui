@@ -143,7 +143,7 @@ LK.UI('plugins', 'form', function(options) {
       data : options.param,
       success : function(responseDatas) {
         if (responseDatas) {
-          var opts = $.extend(true, options);
+          var opts = $.extend(true, {}, options);
           out: for ( var key in responseDatas) {
             for (var i = 0; i < opts.plugins.length; i++) {
               var plugin = opts.plugins[i];
@@ -159,7 +159,7 @@ LK.UI('plugins', 'form', function(options) {
       }
     });
   } else {
-    LK.UI._form.createSubPlugin($plugin, $.extend(true, options));
+    LK.UI._form.createSubPlugin($plugin, $.extend(true, {}, options));
   }
 
   // 返回控件对象
