@@ -24,6 +24,11 @@
   text-align: center;
 }
 
+.systemName {
+  text-align: center;
+  color: var(--lichkin-plugin-font-color);
+}
+
 .copyrightBox {
   padding: 30px 10px 10px 10px;
   text-align: center;

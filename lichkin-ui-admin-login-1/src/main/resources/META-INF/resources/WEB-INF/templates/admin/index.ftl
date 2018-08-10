@@ -6,6 +6,7 @@
 		  <div class="loginBoxMid">
 		    <div class="loginBoxIn">
 		      <div class="logoBox"></div>
+		      <h1 class="systemName"></h1>
 		      <div class="loginNameBox inputBox"></div>
 		      <div class="pwdBox inputBox"></div>
 		      <div class="loginButtonBox"></div>
