@@ -11,8 +11,18 @@ $.LKExtendI18N({
   'starter-back' : 'back',
   'menu-next' : 'next page',
 
+  'photo' : 'head portrait',
+
   'userInfo' : 'User Info',
+  'userName' : 'name',
+  'email' : 'email',
+
   'changePwd' : 'Change Password',
+  'pwdOld' : 'Old password',
+  'pwdNew' : 'New password',
+  'surePwdNew' : 'Confirm password',
+  'pwdModifiedSuccess' : 'Password modified successfully',
+
   'changeTheme' : 'Change Theme',
   'help' : 'Help',
   'exit' : 'Exit',

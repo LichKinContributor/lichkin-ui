@@ -11,8 +11,18 @@ $.LKExtendI18N({
   'starter-back' : '回退',
   'menu-next' : '下一页',
 
+  'photo' : '头像',
+
   'userInfo' : '个人信息',
+  'userName' : '姓名',
+  'email' : '邮箱',
+
   'changePwd' : '修改密码',
+  'pwdOld' : '原密码',
+  'pwdNew' : '新密码',
+  'surePwdNew' : '确认密码',
+  'pwdModifiedSuccess' : '密码修改成功',
+
   'changeTheme' : '更换主题',
   'help' : '使用帮助',
   'exit' : '退出登录',
