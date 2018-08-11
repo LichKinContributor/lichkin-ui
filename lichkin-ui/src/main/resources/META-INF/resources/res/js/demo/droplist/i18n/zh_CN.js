@@ -1,0 +1,1 @@
+$.LKExtendI18N({});

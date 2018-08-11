@@ -1,100 +1,50 @@
-$.LKExtendI18N({
-  'category' : '类目',
-  'categoryCode' : '类目编码',
-  'categoryName' : '类目名称',
-  'busAppKey' : '客户端唯一标识',
-  'busClientType' : '客户端类型',
-  'versions' : '客户端版本号',
-  'startTime' : '开始时间',
-  'textbox' : '文本框',
-  'droplist' : '下拉框',
-  'numberspinner' : '数字微调器'
-
-});
-
 LK.UI.datagrid({
-  url : '/L/SysDictionary',
-  param : {
-    categoryCode : 'nation'
-  },
-  $appendTo : $('#demo'),
+  title : 'roleGridTitle',
+  $appendTo : true,
+  cols : 2.5,
+  rows : 15,
+  url : '/P/SysRole',
   multiSelect : true,
-  title : 'category',
-  icon : 'page',
-  titleTools : [
+  columns : [
       {
-        icon : 'tip',
-        click : function() {
-          console.log(arguments);
-        }
+        text : 'roleName',
+        name : 'roleName',
+        width : LK.colWidth
       }, {
-        icon : 'warning',
-        click : function() {
-          alert();
-        }
-      }, {
-        icon : 'page',
-        click : function() {
-          alert();
-        }
-      }
-  ],
-  tools : [
-      {
-        icon : 'add',
-        click : function() {
-          console.log(arguments);
-        }
-      }, {
-        icon : 'edit',
-        click : function() {
-          alert();
-        }
-      }, {
-        icon : 'remove',
-        click : function() {
-          alert();
-        }
+        text : 'description',
+        name : 'description',
+        width : LK.colWidth
       }
   ],
   toolsAdd : {
-    saveUrl : '/I/SysDictionary',
+    saveUrl : '/I/SysRole',
     dialog : {
       size : {
-        cols : 1,
-        rows : 3
+        cols : 2,
+        rows : 11
       }
     },
     form : {
       plugins : [
           {
             plugin : 'textbox',
-            textKey : 'tip',
             options : {
-              name : 'dictName',
+              name : 'roleName',
               validator : true
             }
           }, {
             plugin : 'textbox',
-            textKey : 'tip',
             options : {
-              name : 'dictCode',
+              name : 'description',
               validator : true
             }
           }, {
-            plugin : 'numberspinner',
-            textKey : 'tip',
+            plugin : 'tree',
             options : {
-              name : 'orderId',
-              value : 0
-            }
-          }, {
-            plugin : 'hidden',
-            textKey : 'tip',
-            options : {
-              name : 'categoryCode',
-              value : 'nation',
-              validator : true
+              key : 'menuName',
+              name : 'menuIds',
+              validator : true,
+              url : '/T/SysMenu'
             }
           }
 
@@ -102,36 +52,35 @@ LK.UI.datagrid({
     }
   },
   toolsEdit : {
-    saveUrl : '/U/SysDictionary',
+    saveUrl : '/U/SysRole',
     dialog : {
       size : {
-        cols : 1,
-        rows : 2
+        cols : 2,
+        rows : 11
       }
     },
     form : {
-      url : '/O/SysDictionary',
+      url : '/O/SysRole',
       plugins : [
           {
             plugin : 'textbox',
-            textKey : 'tip',
             options : {
-              name : 'dictName',
+              name : 'roleName',
               validator : true
             }
           }, {
-            plugin : 'numberspinner',
-            textKey : 'tip',
+            plugin : 'textbox',
             options : {
-              name : 'orderId'
+              name : 'description',
+              validator : true
             }
           }, {
-            plugin : 'hidden',
-            textKey : 'tip',
+            plugin : 'tree',
             options : {
-              name : 'categoryCode',
-              value : 'nation',
-              validator : true
+              key : 'menuName',
+              name : 'menuIds',
+              validator : true,
+              url : '/T/SysMenu'
             }
           }
 
@@ -139,102 +88,14 @@ LK.UI.datagrid({
     }
   },
   toolsRemove : {
-    saveUrl : '/U/SysDictionary/UsingStatus'
+    saveUrl : '/U/SysRole/UsingStatus'
   },
-  cols : 6,
   searchForm : [
-      {
-        plugin : 'textbox',
-        options : {
-          name : 'textbox'
-        }
-      }, {
-        plugin : 'datepicker',
-        options : {
-          name : 'startTime'
-        }
-      }, {
-        plugin : 'numberspinner',
-        options : {
-          name : 'numberspinner'
-        }
-      }, {
-        plugin : 'droplist',
-        options : {
-          name : 'busAppKey',
-          url : '/L/SysDictionary/Droplist',
-          param : {
-            categoryCode : 'APP_KEY'
-          },
-          linkages : [
-              'busClientType', 'versions'
-          ]
-        }
-      }, {
-        plugin : 'droplist',
-        options : {
-          name : 'busClientType',
-          url : '/L/SysAppVersion/ClientType/Droplist',
-          linkages : [
-            'versions'
-          ],
-          onLinkaged : function($plugin, linkage) {
-            switch (linkage.linkageName) {
-              case 'busAppKey':
-                if (linkage.linkageValue == '') {
-                  $plugin.LKClearDatas();
-                } else {
-                  $plugin.LKLoad({
-                    param : {
-                      busAppKey : linkage.linkageValue
-                    }
-                  }, linkage);
-                }
-                break;
-            }
-          }
-        }
-      }, {
-        plugin : 'droplist',
-        options : {
-          name : 'versions',
-          url : '/L/SysAppVersion/Droplist',
-          onLinkaged : function($plugin, linkage) {
-            switch (linkage.linkageName) {
-              case 'busAppKey':
-                $plugin.LKClearDatas();
-                break;
-              case 'busClientType':
-                if (linkage.linkageValue == '') {
-                  $plugin.LKClearDatas();
-                } else {
-                  $plugin.LKLoad({
-                    param : {
-                      busAppKey : $plugin.LKGetSiblingPlugin('busAppKey').LKGetValue(),
-                      busClientType : linkage.linkageValue
-                    }
-                  }, linkage);
-                }
-                break;
-            }
-          }
-        }
+    {
+      plugin : 'textbox',
+      options : {
+        name : 'roleName'
       }
-  ],
-  value : 'USING_STATUS#@#GENDER',
-  columns : [
-      {
-        'name' : 'dictCode',
-        'text' : 'dictCode',
-        'width' : '200'
-      }, {
-        'name' : 'dictName',
-        'text' : 'dictName',
-        'width' : '200'
-      }, {
-        'name' : 'orderId',
-        'text' : 'orderId',
-        'width' : '200'
-      }
+    }
   ]
 });

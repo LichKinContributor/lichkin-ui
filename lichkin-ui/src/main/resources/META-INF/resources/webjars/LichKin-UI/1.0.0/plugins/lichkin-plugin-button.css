@@ -35,22 +35,9 @@
   height: 100%;
 }
 
-.lichkin-button .lichkin-button-container .lichkin-text {
-  margin-top: -1px;
-}
-
-.lichkin-button .lichkin-button-container .lichkin-icon-16 {
-  margin: 6px;
-}
-
-.lichkin-button .lichkin-button-container .lichkin-icon-16+.lichkin-text {
-  margin-top: -19px;
-  margin-left: -10px;
-}
-
-.lichkin-button-default {color:#ffffff;background-color:#ffffff;border-color:#cccccc;}
-.lichkin-button-primary {color:#ffffff;background-color:#337ab7;border-color:#2e6da4;}
-.lichkin-button-success {color:#ffffff;background-color:#5cb85c;border-color:#4cae4c;}
-.lichkin-button-info    {color:#ffffff;background-color:#5bc0de;border-color:#46b8da;}
-.lichkin-button-warning {color:#ffffff;background-color:#f0ad4e;border-color:#eea236;}
-.lichkin-button-danger  {color:#ffffff;background-color:#d9534f;border-color:#d43f3a;}
+.lichkin-button.default {color:#ffffff;background-color:#ffffff;border-color:#cccccc;}
+.lichkin-button.primary {color:#ffffff;background-color:#337ab7;border-color:#2e6da4;}
+.lichkin-button.success {color:#ffffff;background-color:#5cb85c;border-color:#4cae4c;}
+.lichkin-button.info    {color:#ffffff;background-color:#5bc0de;border-color:#46b8da;}
+.lichkin-button.warning {color:#ffffff;background-color:#f0ad4e;border-color:#eea236;}
+.lichkin-button.danger  {color:#ffffff;background-color:#d9534f;border-color:#d43f3a;}

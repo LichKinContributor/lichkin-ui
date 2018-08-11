@@ -4,9 +4,6 @@
 	<#if section="link">
 		<@lichkin@cssTag/>
 	</#if>
-	<#if section="style">
-	</#if>
-	<#if section="body-attributes"></#if>
 	<#if section="body-content">
 		<div id="lichkin-content-container"></div>
 		<div id="lichkin-menus-container">
@@ -42,7 +39,7 @@ var menuSizes = {
     'employeeMgmt':       {cols:4,rows:20},
 };
 	</#if>
-	<#if section="javascript-links">
-		<@lichkin@jsTag/>
+	<#if section="javascript-links-icons">
+		<@lichkin@jsTag url="/res/js/admin/home/icons.js" />
 	</#if>
 </@html>

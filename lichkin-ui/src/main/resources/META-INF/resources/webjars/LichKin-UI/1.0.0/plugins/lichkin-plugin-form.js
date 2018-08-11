@@ -24,6 +24,7 @@ LK.UI._form = {
       if (plugin.plugin == 'hidden') {
         var $hiddenInput = $('<input type="hidden" class="lichkin-plugin lichkin-plugin-hidden" name="' + name + '" />').LKAddPluginClass('hidden', 'value').appendTo($plugin);
         $hiddenInput.data('plugin-type', 'hidden');
+        $hiddenInput.data('validator', typeof plugin.options.validator == 'undefined' || plugin.options.validator == null ? '' : (plugin.options.validator == true ? 'required' : plugin.options.validator));
         $hiddenInput.data('LKName', name);
         $hiddenInput.val(plugin.options.value);
         continue;
@@ -128,12 +129,21 @@ LK.UI('plugins', 'form', function(options) {
   // 创建UI控件对象
   var $plugin = $('<form id="' + id + '" class="lichkin-form" data-plugin-type="form"></form>');
 
+  if (options.$appendTo == true) {
+    var $topDialog = $.LKGetTopDialog();
+    if ($topDialog) {
+      options.$appendTo = $topDialog.find('.lichkin-body');
+    } else {
+      options.$appendTo = $('body');
+    }
+  }
+
   if (options.$appendTo != null) {// 填充对象
     $plugin.appendTo(options.$appendTo);
   } else if (options.$renderTo != null) { // 渲染对象
     $plugin.insertAfter(options.$renderTo);
     options.$renderTo.remove();
-  } else {// 填充到body
+  } else {
     $plugin.appendTo('body');
   }
 

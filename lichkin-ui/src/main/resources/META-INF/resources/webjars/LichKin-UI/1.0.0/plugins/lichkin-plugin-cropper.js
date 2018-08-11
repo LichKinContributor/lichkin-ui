@@ -1,4 +1,16 @@
 ;
+
+// 扩展图标
+$.LKExtendICON({
+  'cut' : 'cut',
+  'cropper-no-image' : 'image',
+  'upload' : 'upload',
+  'zoomIn' : 'search-plus',
+  'zoomOut' : 'search-minus',
+  'reverseX' : 'arrows-alt-h',
+  'reverseY' : 'arrows-alt-v',
+});
+
 /**
  * 图片工具类
  * @author SuZhou LichKin Information Technology Co., Ltd.

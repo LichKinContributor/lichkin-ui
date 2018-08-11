@@ -4,3 +4,7 @@
   overflow-y: auto;
   overflow-x: hidden;
 }
+
+.lichkin-plugin .lichkin-plugin-dataContainer .lichkin-plugin-node {
+  border-bottom: none;
+}

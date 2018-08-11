@@ -1,17 +1,9 @@
 <#include "/_define.ftl"/>
 
-<#macro html type="">
-
-<#assign _$=_$!"">
-<#assign calculateType=type>
-<#if type=="" && _$=="">
-	<#assign calculateType="web">
-</#if>
-
-<#if calculateType!="">
+<#macro html type="",css=false,js=true>
 	<#include "html-lichkin-simple.ftl"/>
 
-	<@html ;section>
+	<@html type=type css=css js=js;section>
 		<#if section="meta">
 			<#nested "meta"/>
 		</#if>
@@ -35,7 +27,7 @@
 			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-dialog${compressSuffix}.css" />
 			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-selector${compressSuffix}.css" />
 			<#else>
-			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugins${compressSuffix}.css" />
+			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugins-complex${compressSuffix}.css" />
 			</#if>
 			<@lichkin@cssTag url="/res/css/app.css" />
 			<#nested "link"/>
@@ -60,7 +52,7 @@
 			<@lichkin@jsTag url="/webjars/timepicker/jquery-timepicker.js" />
 			<@lichkin@jsTag url="/webjars/cropper/cropper.js" />
 		</#if>
-		<#if section="javascript-links">
+		<#if section="javascript-links-after-plugins">
 			<#if webDebug==true>
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-droplist${compressSuffix}.js" />
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-ueditor${compressSuffix}.js" />
@@ -76,21 +68,15 @@
 
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-selector-employee${compressSuffix}.js" />
 			<#else>
-			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugins${compressSuffix}.js" />
+			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugins-complex${compressSuffix}.js" />
 			</#if>
+		</#if>
+		<#if section="javascript-links-icons">
+			<#nested "javascript-links-icons"/>
 		</#if>
 		<#if section="javascript-contents-after-links">
 			<#nested "javascript-contents-after-links"/>
 		</#if>
 	</@html>
-<#else>
-	<div id="${mappingUri}" class="lichkin-body" <#nested "body-attributes"/>>
-		<style>
-			<#nested "style"/>
-		</style>
-		<#nested "body-content"/>
-		<@lichkin@jsTag/>
-	</div>
-</#if>
 
 </#macro>

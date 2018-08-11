@@ -1,4 +1,18 @@
 ;
+
+// 扩展图标
+$.LKExtendICON({
+  'page' : 'file',
+  'folder' : 'folder',
+});
+
+// 扩展组合图标
+$.LKExtendICON({
+  'checkbox-checked' : '<span><i class="far fa-square"></i><i class="fa fa-check"></i></span>',
+  'checkbox-tristate' : '<span><i class="far fa-square"></i><i class="fa fa-square"></i></span>',
+  'checkbox-unchecked' : '<span><i class="far fa-square"></i><i class="fa"></i></span>',
+}, true);
+
 /**
  * 编码工具类
  * @author SuZhou LichKin Information Technology Co., Ltd.
@@ -167,8 +181,7 @@ LK.UI._tree = {
 
     // 节点
     var $node = $('<li data-code=' + data.code + '></li>').appendTo($container).LKAddPluginClass('tree', 'node').css({
-      'width' : $plugin.width(),
-      'height' : '22px'
+      'width' : $plugin.width()
     });
 
     $node.data(data);
@@ -234,18 +247,15 @@ LK.UI._tree = {
     // 节点容器
     var $nodeContainer = $('<div></div>').appendTo($node).LKAddPluginClass('tree', 'node-containter').css({
       'width' : $plugin.width(),
-      'height' : '22px'
+      'height' : options.nodeHeight + 'px'
     });
 
     // 缩进 TODO
     for (var i = 0; i < level; i++) {
       $nodeContainer.append(LK.UI.icon({
+        size : options.nodeHeight,
         style : {
-          'padding' : LK.textPaddingTB + 'px ' + '0px',
           'float' : 'left',
-        },
-        iStyle : {
-          'top' : LK.textPaddingTB + 'px'
         }
       }));
     }
@@ -254,12 +264,9 @@ LK.UI._tree = {
     if (options.checkbox == true) {
       var $checkbox = LK.UI.icon({
         icon : 'checkbox-unchecked',
+        size : options.nodeHeight,
         style : {
-          'padding' : LK.textPaddingTB + 'px ' + '0px',
           'float' : 'left'
-        },
-        iStyle : {
-          'top' : LK.textPaddingTB + 'px'
         }
       }).data('id', data.id).appendTo($nodeContainer).LKAddPluginClass('tree', 'node-checkbox');
     } else {
@@ -270,12 +277,9 @@ LK.UI._tree = {
     // 节点图标
     $nodeContainer.append(LK.UI.icon({
       icon : data.params.icon,
+      size : options.nodeHeight,
       style : {
-        'padding' : LK.textPaddingTB + 'px ' + '0px',
         'float' : 'left'
-      },
-      iStyle : {
-        'top' : LK.textPaddingTB + 'px'
       }
     }));
 
@@ -283,9 +287,9 @@ LK.UI._tree = {
     $nodeContainer.append(LK.UI.text({
       original : !options.i18nText,
       text : data.name,
+      height : options.nodeHeight,
+      fontSize : options.nodeHeight * 0.75,
       style : {
-        'height' : '16px',
-        'line-height' : '16px',
         'float' : 'left'
       }
     }));
@@ -373,5 +377,7 @@ LK.UI.loadOptions,
   // 标题
   title : null,
   // 图标
-  icon : null
+  icon : null,
+  // 节点高度
+  nodeHeight : LK.UI.iconOptions.size
 }));

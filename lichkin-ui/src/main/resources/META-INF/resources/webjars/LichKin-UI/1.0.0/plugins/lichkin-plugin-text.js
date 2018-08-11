@@ -9,54 +9,46 @@ LKUI.text = function(text) {
   });
 };
 
-/**
- * 文字控件
- */
-LK.UI('plugins', 'text', function(options) {
-  // 设置id
-  var id = options.id = (options.id != '') ? options.id : 'LK_' + randomInRange(100000, 999999);
-
-  // 创建控件对象
-  var $plugin = $('<span id="' + id + '" class="lichkin-text">' + (options.original ? options.text : $.LKGetI18N(options.text)) + '</span>');
-
-  // 增加样式
-  if (options.cls != null) {
-    $plugin.addClass('lichkin-text-' + options.cls);
-  }
-
-  $plugin.css({
-    'padding' : LK.textPaddingTB + 'px ' + LK.textPaddingLR + 'px',
-    'height' : LK.rowHeight - 2 * LK.textPaddingTB + 'px',
-    'line-height' : LK.rowHeight - 2 * LK.textPaddingTB - 2 + 'px'
-  });
-
-  // 设置样式
-  if (!$.isEmptyObject(options.style)) {
-    $plugin.css(options.style);
-  }
-
-  if (options.$appendTo != null) {// 填充对象
-    $plugin.appendTo(options.$appendTo);
-  } else if (options.$renderTo != null) { // 渲染对象
-    $plugin.insertAfter(options.$renderTo);
-    options.$renderTo.remove();
-  }
-
-  // 返回控件对象
-  return $plugin;
-}, {
-  // 控件ID
-  id : '',
-  // 控件填充到对象
-  $appendTo : null,
-  // 控件渲染到对象
-  $renderTo : null,
+// 文字控件参数
+LK.UI.textOptions = $.extend({},
+// @see LK.UI.plugin
+LK.UI.coreOptions,
+// 控件特有参数
+{
   // 是否采用原文
   original : false,
   // 文字
   text : null,
-  // 样式
-  cls : null,
-  // 样式
-  style : {}
+  // 文字大小
+  fontSize : LK.pluginFontSize,
+  // 高度
+  height : LK.rowHeight
 });
+
+/**
+ * 文字控件
+ */
+LK.UI('plugins', 'text', function(options) {
+  options.createPlugin = function(id) {
+    // 创建控件对象
+    var $plugin = $('<span id="' + id + '" class="lichkin-text">' + (options.original ? options.text : $.LKGetI18N(options.text)) + '</span>');
+
+    // 特殊样式
+    $plugin.css({
+      'padding' : LK.textPaddingTB + 'px ' + LK.textPaddingLR + 'px',
+      'height' : options.height - 2 * LK.textPaddingTB + 'px',
+      'line-height' : options.height - 2 * LK.textPaddingTB + 'px',
+      'font-size' : options.fontSize + 'px'
+    });
+
+    // 返回控件对象
+    return $plugin;
+  };
+
+  // 创建控件对象
+  var $plugin = LK.UI.plugin(options);
+  // 缓存参数
+  $plugin.data('LKOPTIONS', options);
+  // 返回控件对象
+  return $plugin;
+}, LK.UI.textOptions);

@@ -1,5 +1,10 @@
 ;
 
+// 扩展图标
+$.LKExtendICON({
+  'datepicker' : 'calendar-alt',
+});
+
 /**
  * 日期控件
  */
@@ -34,7 +39,7 @@ LK.UI('plugins', 'datepicker', function(options) {
 
   // 日期按钮
   var $button = LK.UI.button({
-    _icon : {
+    icon : {
       size : 24,
       icon : 'datepicker'
     }

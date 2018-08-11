@@ -1,7 +1,6 @@
 @charset "UTF-8";
 
 .lichkin-text {
-  font-size: var(--lichkin-plugin-font-size);
   display: inline-block;
   vertical-align: middle;
   color: var(--lichkin-plugin-font-color);

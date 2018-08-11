@@ -1,5 +1,12 @@
 ;
 
+// 扩展图标
+$.LKExtendICON({
+  'tip' : 'exclamation-circle',
+  'warning' : 'exclamation-triangle',
+  'close' : 'times',
+});
+
 /**
  * JQuery扩展
  */

@@ -23,7 +23,7 @@ LK.home.commonMenus = {
     click : function() {
       LK.UI.openDialog({
         title : 'changePwd',
-        icon : 'resetPwd',
+        icon : 'pwd',
         size : {
           cols : 2,
           rows : 3
@@ -85,7 +85,7 @@ LK.home.$taskStarter = LK.UI.icon({
   id : 'lichkin-task-starter',
   icon : 'starter',
   size : 32
-});
+}).attr('title', $.LKGetI18N('starter-closed'));
 
 LK.home.$tasksContainer = $('#lichkin-tasks-container');
 LK.home.currentTasks = new Array();
@@ -133,7 +133,7 @@ $(function() {
     url : '/getUserInfo',
     success : function(datas, options) {
       // 更换头像
-      appendGenderPhoto(userInfo.gender, _CTX + userInfo.photo);
+      appendGenderPhoto(datas.gender, datas.photo);
     }
   });
 
@@ -161,7 +161,7 @@ var appendGenderPhoto = function(gender, photoUrl) {
     'width' : '1px'
   }, 'slow', function() {
     if (photoUrl) {
-      $(this).LKUIicon('clear').css('background-image', 'url(' + photoUrl + ')');
+      $(this).LKUIicon('clear').css('background-image', 'url(data:image/png;base64,' + photoUrl + ')');
     } else {
       $(this).css('background-image', 'none').LKUIicon('change', (typeof gender == 'undefined') ? 'UNKNOWN' : gender);
     }
@@ -178,7 +178,7 @@ var addCommonMenus = function() {
   var i = 0;
   for ( var key in LK.home.commonMenus) {
     setTimeout(function(key, commonMenus) {
-      var $menu = $('<div id="lichkin-menu-' + key + '" class="lichkin-menu-item lichkin-menu lichkin-div-' + commonMenus[key].type + '">' + $.LKGetI18N(key) + '</div>').appendTo(LK.home.$menusCommonContainer);
+      var $menu = $('<div id="lichkin-menu-' + key + '" class="lichkin-menu-item lichkin-menu lichkin-div ' + commonMenus[key].type + '">' + $.LKGetI18N(key) + '</div>').appendTo(LK.home.$menusCommonContainer);
       var width = $menu.width();
       $menu.css({
         'width' : '0px'
@@ -222,12 +222,12 @@ var addMenu = function(menuJson, $container) {
     $appendTo : $menu,
     icon : menuJson.params.icon,
     size : 32,
-    cls : 'menu-head'
+    cls : 'lichkin-icon-menu-head'
   });
   LK.UI.text({
     $appendTo : $menu,
     text : menuJson.params.menuName,
-    cls : 'menu-name',
+    cls : 'lichkin-icon-menu-name',
     style : {
       'height' : '32px',
       'line-height' : '32px',
@@ -273,7 +273,7 @@ var addMenu = function(menuJson, $container) {
       $appendTo : $menu,
       icon : 'menu-next',
       size : 32,
-      cls : 'menu-tail'
+      cls : 'lichkin-icon-menu-tail'
     });
     var $container = $('<div id="lichkin-menus-container-getted-' + menuJson.id + '" class="lichkin-menus-container-getted"></div>').appendTo(LK.home.$menusGettedContainer);
     $menu.click(function() {
@@ -292,9 +292,9 @@ var showMainContainer = function() {
   LK.home.$tasksContainer.find('.lichkin-task-active').removeClass('lichkin-task-active');
   LK.home.$taskStarterContainer.css('background-color', 'rgba(255, 255, 255, 0.2)');
   if (LK.home.currentTasks.length == 0) {
-    LK.home.$taskStarter.LKUIicon('change', 'starter');
+    LK.home.$taskStarter.LKUIicon('change', 'starter').attr('title', $.LKGetI18N('starter-closed'));
   } else {
-    LK.home.$taskStarter.LKUIicon('change', 'starter-back');
+    LK.home.$taskStarter.LKUIicon('change', 'starter-back').attr('title', $.LKGetI18N('starter-back'));
   }
   LK.home.$menusContainer.show().css({
     'width' : '0px',
@@ -314,7 +314,7 @@ var showMainContainer = function() {
 var hideMainContainer = function() {
   activeTask(currentTaskId);
   LK.home.$taskStarterContainer.css('background-color', 'transparent');
-  LK.home.$taskStarter.LKUIicon('change', 'starter-closed');
+  LK.home.$taskStarter.LKUIicon('change', 'starter-closed').attr('title', $.LKGetI18N('starter'));
 
   LK.home.$menusCommonContainer.hide();
   $('#lichkin-menu-exit').hide();
@@ -389,7 +389,7 @@ var taskGo = function(taskId) {
 
   var $currentTask;
   if (LK.home.currentTasks.length == 1) {
-    LK.home.$taskStarter.LKUIicon('change', 'starter-back');
+    LK.home.$taskStarter.LKUIicon('change', 'starter-back').attr('title', $.LKGetI18N('starter-back'));
     $currentTask = LK.home.$menusGettedContainerRoot;
   } else {
     $currentTask = $('#lichkin-menus-container-getted-' + LK.home.currentTasks[LK.home.currentTasks.length - 2]);
@@ -419,7 +419,7 @@ var taskGo = function(taskId) {
 var taskGoBack = function() {
   var $previousTask;
   if (LK.home.currentTasks.length == 1) {
-    LK.home.$taskStarter.LKUIicon('change', 'starter');
+    LK.home.$taskStarter.LKUIicon('change', 'starter').attr('title', $.LKGetI18N('starter-closed'));
     $previousTask = LK.home.$menusGettedContainerRoot;
   } else {
     $previousTask = $('#lichkin-menus-container-getted-' + LK.home.currentTasks[LK.home.currentTasks.length - 2]);

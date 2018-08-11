@@ -1,4 +1,27 @@
 ;
+
+/**
+ * JQuery扩展
+ */
+$.extend($, {
+
+  /**
+   * 设置icon内容
+   * @param json 键值对
+   * @param original 是否为组合图标
+   */
+  LKExtendICON : function(json, original) {
+    if (typeof json != 'undefined' && isJSON(json) && !$.isEmptyObject(json)) {
+      if (typeof original == 'undefined') {
+        $.extend(LK.UI._icon.mappings, json);
+      } else {
+        $.extend(LK.UI._icon.originalMappings, json);
+      }
+    }
+  }
+
+});
+
 /**
  * 初始化控件，提供简写代码。
  * @param icon 图标
@@ -75,17 +98,24 @@ LK.UI._icon = {
   plugin : 'icon',
 
   /** 图标与FontAwesome映射关系 */
-  mappings : {},
+  mappings : {
+    'save' : 'save',
+    'ok' : 'check',
+    'cancel' : 'times',
+  },
 
   /** 图标与FontAwesome原文映射关系 */
-  originalMappings : {},
+  originalMappings : {
+    'loading' : '<i class="fa fa-spinner fa-spin"></i>',
+  },
 
   /**
    * 获取图标对应的FontAwesome
    * @param icon 图标
    * @param style 样式
+   * @param size 大小
    */
-  getFontAwesome : function(icon, style) {
+  getFontAwesome : function(icon, style, size) {
     var fa = this.mappings[icon];
     if (fa) {
       $fa = $('<i class="fa fa-' + fa + '"></i>');
@@ -97,7 +127,13 @@ LK.UI._icon = {
 
     fa = this.originalMappings[icon];
     if (fa) {
-      return fa;
+      $fa = $(fa);
+      if (typeof style != 'undefined' && !$.isEmptyObject(style)) {
+        $fa.css(style);
+        $fa.find('i').css(style);
+        $fa.find('i:last').css('font-size', size * 0.4 + 'px');
+      }
+      return $fa.prop('outerHTML');
     }
 
     return '';
@@ -109,7 +145,7 @@ LK.UI._icon = {
  * 绑定图标
  */
 LK.UI('plugins', 'bindIcon', function(options) {
-  $('#lichkin-icons').append('.lichkin-icon-' + options.icon + '{background-image:url("' + LK.toStandardPath(_CTX) + '/res/img/icons/' + options.icon + '.' + ((options.icon == 'loading') ? 'gif' : 'png') + '") !important;}');
+  $('#lichkin-icons').append('.lichkin-icon-' + options.icon + '{background-image:url("' + LK.toStandardPath(_CTX) + '/res/img/icons/' + options.icon + '.' + ((options.icon == 'loading') ? 'gif' : 'png') + '");}');
 
   if (options.fontAwesome != '') {
     LK.UI._icon.mappings[options.icon] = options.fontAwesome;
@@ -129,19 +165,31 @@ LK.UI('plugins', 'bindIcon', function(options) {
   originalFontAwesome : ''
 });
 
+// 图标控件参数
+LK.UI.iconOptions = $.extend({},
+// @see LK.UI.plugin
+LK.UI.coreOptions,
+// 控件特有参数
+{
+  // 图标大小
+  size : 16,
+  // 图标
+  icon : null,
+  // 图标类型
+  type : null,
+  // I样式
+  iStyle : {}
+});
+
 /**
  * 图标控件
  */
 LK.UI('plugins', 'icon', function(options) {
-  // 设置id
-  var id = options.id = (options.id != '') ? options.id : 'LK_' + randomInRange(100000, 999999);
-
-  // 创建控件对象
-  var $plugin = $('<span id="' + id + '" class="lichkin-icon"></span>');
-
+  // 大小动态设置
   var size = options.size;
   options.style = $.extend({
-    'background-size' : size + 'px',
+    'background-size' : (size * 0.75) + 'px',
+    'background-position' : (size * 0.125) + 'px',
     'width' : size + 'px',
     'height' : size + 'px'
   }, options.style);
@@ -152,59 +200,32 @@ LK.UI('plugins', 'icon', function(options) {
     'line-height' : size + 'px'
   }, options.iStyle);
 
-  // 增加样式
-  if (options.cls != null) {
-    $plugin.addClass('lichkin-icon-' + options.cls);
-  }
+  options.createPlugin = function(id) {
+    // 创建控件对象
+    var $plugin = $('<span id="' + id + '" class="lichkin-icon"></span>');
 
-  // 不传图标时即只创建空白控件
-  if (options.icon != null) {
-    $plugin.attr('title', $.LKGetI18N(options.icon));
-    // 设置具体图标
-    $plugin.addClass('lichkin-icon-' + options.icon);
-    // 设置文字图标
-    if (((options.type == null) ? LK.UI.iconType : options.type) == false) {
-      $plugin.addClass('lichkin-hidden-icon');// 文字图标环境下隐藏图片图标
-      $plugin.append(LK.UI._icon.getFontAwesome(options.icon, options.iStyle));
+    // 不传图标时即只创建空白控件
+    if (options.icon != null) {
+      // 设置具体图标
+      $plugin.addClass('lichkin-icon-' + options.icon);
+      // 设置文字图标
+      if (((options.type == null) ? LK.UI.iconType : options.type) == false) {
+        $plugin.addClass('lichkin-hidden-icon');// 文字图标环境下隐藏图片图标
+        $plugin.append(LK.UI._icon.getFontAwesome(options.icon, options.iStyle, size));
+      }
     }
-  }
 
-  // 设置样式
-  if (!$.isEmptyObject(options.style)) {
-    $plugin.css(options.style);
-  }
+    // 返回控件对象
+    return $plugin;
+  };
 
-  if (options.$appendTo != null) {// 填充对象
-    $plugin.appendTo(options.$appendTo);
-  } else if (options.$renderTo != null) { // 渲染对象
-    $plugin.insertAfter(options.$renderTo);
-    options.$renderTo.remove();
-  }
-
+  // 创建控件对象
+  var $plugin = LK.UI.plugin(options);
+  // 缓存参数
   $plugin.data('LKOPTIONS', options);
-
   // 返回控件对象
   return $plugin;
-}, {
-  // 控件ID
-  id : '',
-  // 控件填充到对象
-  $appendTo : null,
-  // 控件渲染到对象
-  $renderTo : null,
-  // 图标大小
-  size : 16,
-  // 图标
-  icon : null,
-  // 图标类型
-  type : null,
-  // 样式
-  cls : null,
-  // 样式
-  style : {},
-  // I样式
-  iStyle : {}
-});
+}, LK.UI.iconOptions);
 
 /**
  * 判断是否包含图标
@@ -263,97 +284,3 @@ LK.UI('plugins', 'changeIcon', function(options) {
   // 图标类型
   type : null
 });
-
-// 绑定图标样式
-(function() {
-  var mappings = {
-    'go-first' : 'step-backward',
-    'go-previous' : 'backward',
-    'go-next' : 'forward',
-    'go-last' : 'step-forward',
-    'page' : 'file',
-    'folder' : 'folder',
-    'starter' : 'chevron-circle-down',
-    'starter-closed' : 'chevron-circle-up',
-    'starter-back' : 'chevron-circle-left',
-    'menu-next' : 'caret-right',
-    'UNKNOWN' : 'question',
-    'SECRECY' : 'user-secret',
-    'ALIEN' : 'bug',
-    'FEMALE' : 'female',
-    'MALE' : 'male',
-    'tip' : 'exclamation-circle',
-    'warning' : 'exclamation-triangle',
-    'loginName' : 'user',
-    'pwd' : 'lock',
-    'save' : 'save',
-    'ok' : 'check',
-    'cancel' : 'times',
-    'edit' : 'pencil-alt',
-    'add' : 'plus',
-    'remove' : 'trash-alt',
-    'release' : 'arrow-alt-circle-up',
-    'upload' : 'upload',
-    'lock' : 'lock',
-    'unlock' : 'unlock',
-    'resetPwd' : 'key',
-    'set' : 'cog',
-    'view' : 'eye',
-    'cut' : 'cut',
-    'search' : 'search',
-    'reset' : 'redo-alt',
-    'close' : 'times',
-    'dropdown' : 'caret-square-down',
-    'datepicker' : 'calendar-alt',
-    'timepicker' : 'clock',
-    'selector' : 'ellipsis-h',
-    'cropper-no-image' : 'image',
-    'zoomIn' : 'search-plus',
-    'zoomOut' : 'search-minus',
-    'reverseX' : 'arrows-alt-h',
-    'reverseY' : 'arrows-alt-v',
-    'spinner-plus' : 'chevron-up',
-    'spinner-minus' : 'chevron-down',
-    'sysMgmt' : 'cog',
-    'roleMgmt' : 'user-secret',
-    'userMgmt' : 'user',
-    'dictMgmt' : 'book',
-    'loginLog' : 'address-book',
-    'operLog' : 'book-open',
-    'errorLog' : 'times',
-    'appMgmt' : 'mobile-alt',
-    'appVersionMgmt' : 'code-branch',
-    'appBannerMgmt' : 'film',
-    'appNewsMgmt' : 'newspaper',
-    'appFeedbackMgmt' : 'comment',
-    'appScoreMgmt' : 'star',
-    'websiteMgmt' : 'desktop',
-    'websiteBannerMgmt' : 'film',
-    'websiteNewsMgmt' : 'newspaper',
-    'orgMgmt' : 'sitemap',
-    'compMgmt' : 'building',
-    'deptMgmt' : 'suitcase',
-    'employeeMgmt' : 'user-friends',
-    'workflowMgmt' : 'project-diagram',
-    'dictTimeMgmt' : 'clock',
-    'employeeAttendance' : 'calendar-check'
-  };
-  for ( var key in mappings) {
-    LK.UI.bindIcon({
-      icon : key,
-      fontAwesome : mappings[key]
-    });
-  }
-  var originalMappings = {
-    'loading' : '<i class="fa fa-spinner fa-spin"></i>',
-    'checkbox-checked' : '<span style="position:relative;left:-1px;"><i class="far fa-square" style="position:absolute;left:-7px;top:0px;font-size:16px;"></i><i class="fa fa-check" style="position:absolute;left:-7px;top:0px;font-size:8px;"></i></span>',
-    'checkbox-tristate' : '<span style="position:relative;left:-1px;"><i class="far fa-square" style="position:absolute;left:-7px;top:0px;font-size:16px;"></i><i class="fa fa-square" style="position:absolute;left:-7px;top:0px;font-size:8px;"></i></span>',
-    'checkbox-unchecked' : '<span style="position:relative;left:-1px;"><i class="far fa-square" style="position:absolute;left:-7px;top:0px;font-size:16px;"></i></span>'
-  };
-  for ( var key in originalMappings) {
-    LK.UI.bindIcon({
-      icon : key,
-      originalFontAwesome : originalMappings[key]
-    });
-  }
-})();

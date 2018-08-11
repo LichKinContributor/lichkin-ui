@@ -1,4 +1,11 @@
 ;
+
+// 扩展图标
+$.LKExtendICON({
+  'plus' : 'chevron-up',
+  'minus' : 'chevron-down',
+});
+
 /**
  * 数字微调器内部实现相关
  */
@@ -57,7 +64,7 @@ LK.UI('plugins', 'numberspinner', function(options) {
   var $span = $('<span class="lichkin-numberspinner-button-container"></span>').appendTo($button);
   LK.UI.icon({
     size : 16,
-    icon : 'spinner-plus'
+    icon : 'plus'
   }).appendTo($span).css({
     'height' : buttonHeight,
     'background-size' : buttonHeight + 'px'
@@ -74,10 +81,10 @@ LK.UI('plugins', 'numberspinner', function(options) {
     'height' : buttonHeight,
     'line-height' : buttonHeight + 'px',
     'font-size' : buttonHeight + 'px'
-  });
+  }).attr('title', $.LKGetI18N('plus'));
   LK.UI.icon({
     size : 16,
-    icon : 'spinner-minus'
+    icon : 'minus'
   }).appendTo($span).css({
     'height' : buttonHeight,
     'background-size' : buttonHeight + 'px'
@@ -94,7 +101,7 @@ LK.UI('plugins', 'numberspinner', function(options) {
     'height' : buttonHeight,
     'line-height' : buttonHeight + 'px',
     'font-size' : buttonHeight + 'px'
-  });
+  }).attr('title', $.LKGetI18N('minus'));
 
   LK.UI._numberspinner.checkRange($value, options.min, options.max);
   $plugin.LKValidate();

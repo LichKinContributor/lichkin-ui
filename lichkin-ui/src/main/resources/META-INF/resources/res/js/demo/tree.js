@@ -212,80 +212,81 @@ var data = [
 ];
 
 LK.UI.tree({
-  $appendTo : $('#demo'),
+  $appendTo : $('body'),
   validator : true,
   data : data
 });
 
 LK.UI.tree({
-  $appendTo : $('#demo'),
+  $appendTo : $('body'),
   data : data
 });
 
 LK.UI.tree({
-  $appendTo : $('#demo'),
-  validator : true,
-  checkbox : false,
-  data : data
-});
-
-LK.UI.tree({
-  $appendTo : $('#demo'),
+  $appendTo : $('body'),
   validator : true,
   checkbox : false,
-  multiSelect : false,
   data : data
 });
 
 LK.UI.tree({
-  $appendTo : $('#demo'),
+  $appendTo : $('body'),
   validator : true,
   checkbox : false,
   multiSelect : false,
-  cancelable : false,
   data : data
 });
 
 LK.UI.tree({
-  $appendTo : $('#demo2'),
-  validator : true,
-  data : data,
-  title : 'tip'
-});
-
-LK.UI.tree({
-  $appendTo : $('#demo2'),
-  data : data,
-  title : 'tip',
-  value: 'A0000008B0000000C0000000D0000000E0000000F0000000G0000000H0000000#@#A0000008B0000002C0000000D0000000E0000000F0000000G0000000H0000000#@#A0000008B0000002C0000002D0000000E0000000F0000000G0000000H0000000#@#A0000008B0000002C0000002D0000002E0000000F0000000G0000000H0000000#@#A0000008B0000002C0000002D0000002E0000001F0000000G0000000H0000000#@#A0000008B0000002C0000002D0000002E0000001F0000001G0000000H0000000#@#A0000008B0000002C0000002D0000002E0000001F0000001G0000001H0000000#@#A0000008B0000002C0000002D0000002E0000001F0000001G0000001H0000001'
-});
-
-LK.UI.tree({
-  $appendTo : $('#demo2'),
-  validator : true,
-  checkbox : false,
-  data : data,
-  title : 'tip',
-  value: 'A0000008B0000001C0000001D0000000E0000000F0000000G0000000H0000000#@#A0000008B0000002C0000000D0000000E0000000F0000000G0000000H0000000#@#A0000008B0000002C0000002D0000001E0000002F0000000G0000000H0000000'
-});
-
-LK.UI.tree({
-  $appendTo : $('#demo2'),
-  validator : true,
-  checkbox : false,
-  multiSelect : false,
-  data : data,
-  title : 'tip',
-  value: 'A0000008B0000002C0000001D0000000E0000000F0000000G0000000H0000000'
-});
-
-LK.UI.tree({
-  $appendTo : $('#demo2'),
+  $appendTo : $('body'),
   validator : true,
   checkbox : false,
   multiSelect : false,
   cancelable : false,
+  data : data
+});
+
+LK.UI.tree({
+  $appendTo : $('body'),
+  validator : true,
   data : data,
-  title : 'tip',
-  value: 'A0000008B0000002C0000001D0000000E0000000F0000000G0000000H0000000'
+  title : 'tree'
+});
+
+LK.UI
+    .tree({
+      $appendTo : $('body'),
+      data : data,
+      title : 'tree',
+      value : 'A0000008B0000000C0000000D0000000E0000000F0000000G0000000H0000000#@#A0000008B0000002C0000000D0000000E0000000F0000000G0000000H0000000#@#A0000008B0000002C0000002D0000000E0000000F0000000G0000000H0000000#@#A0000008B0000002C0000002D0000002E0000000F0000000G0000000H0000000#@#A0000008B0000002C0000002D0000002E0000001F0000000G0000000H0000000#@#A0000008B0000002C0000002D0000002E0000001F0000001G0000000H0000000#@#A0000008B0000002C0000002D0000002E0000001F0000001G0000001H0000000#@#A0000008B0000002C0000002D0000002E0000001F0000001G0000001H0000001'
+    });
+
+LK.UI.tree({
+  $appendTo : $('body'),
+  validator : true,
+  checkbox : false,
+  data : data,
+  title : 'tree',
+  value : 'A0000008B0000001C0000001D0000000E0000000F0000000G0000000H0000000#@#A0000008B0000002C0000000D0000000E0000000F0000000G0000000H0000000#@#A0000008B0000002C0000002D0000001E0000002F0000000G0000000H0000000'
+});
+
+LK.UI.tree({
+  $appendTo : $('body'),
+  validator : true,
+  checkbox : false,
+  multiSelect : false,
+  data : data,
+  title : 'tree',
+  value : 'A0000008B0000002C0000001D0000000E0000000F0000000G0000000H0000000'
+});
+
+LK.UI.tree({
+  $appendTo : $('body'),
+  validator : true,
+  checkbox : false,
+  multiSelect : false,
+  cancelable : false,
+  data : data,
+  title : 'tree',
+  value : 'A0000008B0000002C0000001D0000000E0000000F0000000G0000000H0000000'
 });

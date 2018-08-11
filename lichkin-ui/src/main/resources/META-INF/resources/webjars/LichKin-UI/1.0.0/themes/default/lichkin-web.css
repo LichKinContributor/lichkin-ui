@@ -39,12 +39,12 @@
 #lichkin-html,.lichkin-body {background-color:var(--lichkin-body-background-color);}
 
 /** DIV */
-DIV.lichkin-div-default {color:#ffffff;background-color:#ffffff;border-color:#cccccc;}
-DIV.lichkin-div-primary {color:#ffffff;background-color:#337ab7;border-color:#2e6da4;}
-DIV.lichkin-div-success {color:#ffffff;background-color:#5cb85c;border-color:#4cae4c;}
-DIV.lichkin-div-info    {color:#ffffff;background-color:#5bc0de;border-color:#46b8da;}
-DIV.lichkin-div-warning {color:#ffffff;background-color:#f0ad4e;border-color:#eea236;}
-DIV.lichkin-div-danger  {color:#ffffff;background-color:#d9534f;border-color:#d43f3a;}
+DIV.lichkin-div.default {color:#ffffff;background-color:#ffffff;border-color:#cccccc;}
+DIV.lichkin-div.primary {color:#ffffff;background-color:#337ab7;border-color:#2e6da4;}
+DIV.lichkin-div.success {color:#ffffff;background-color:#5cb85c;border-color:#4cae4c;}
+DIV.lichkin-div.info    {color:#ffffff;background-color:#5bc0de;border-color:#46b8da;}
+DIV.lichkin-div.warning {color:#ffffff;background-color:#f0ad4e;border-color:#eea236;}
+DIV.lichkin-div.danger  {color:#ffffff;background-color:#d9534f;border-color:#d43f3a;}
 
 /** IMG */
 IMG.lichkin-img {vertical-align:middle;}
@@ -70,9 +70,8 @@ TABLE.lichkin-table .lichkin-table .lichkin-table-row .lichkin-table-cell:last-c
 
 /** plugin */
 .lichkin-plugin {position:relative;vertical-align:top;display:inline-block;border:1px solid var(--lichkin-plugin-border-color);background-color:var(--lichkin-plugin-background-color);}
-.lichkin-plugin .lichkin-plugin-text {overflow:auto;border:none;color:var(--lichkin-plugin-font-color);font-size:var(--lichkin-plugin-font-size);}
+.lichkin-plugin .lichkin-plugin-text {position:absolute;overflow:auto;border:none;color:var(--lichkin-plugin-font-color);font-size:var(--lichkin-plugin-font-size);}
 .lichkin-plugin .lichkin-plugin-button {border:none;position:absolute;right:0px;top:0px;background-color:var(--lichkin-plugin-background-color);}
-.lichkin-plugin .lichkin-plugin-button .lichkin-icon {top:2px;}
 .lichkin-plugin .lichkin-plugin-button .lichkin-icon i {color:var(--lichkin-plugin-font-color);}
 
 .lichkin-plugin .lichkin-plugin-dataContainer {list-style:none;padding:0px;margin:0px;}

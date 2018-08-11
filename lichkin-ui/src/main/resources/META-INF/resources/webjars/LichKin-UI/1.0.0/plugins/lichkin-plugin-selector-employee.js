@@ -1,4 +1,11 @@
 ;
+
+// 扩展图标
+$.LKExtendICON({
+  'plus' : 'chevron-up',
+  'minus' : 'chevron-down',
+});
+
 /**
  * 员工选择器控件
  */
@@ -127,27 +134,10 @@ LK.UI('plugins', 'selector_employee', function(options) {
       showSearchButton : false
     });
 
-    var xSize = 14;
-    var iconOptions = {
-      style : {
-        'background-size' : xSize + 'px',
-        'width' : xSize,
-        'height' : xSize,
-        'margin' : '3px'
-      },
-      iStyle : {
-        'font-size' : xSize * 0.75 + 'px',
-        'width' : xSize,
-        'height' : xSize,
-        'line-height' : xSize + 'px'
-      }
-    };
-
     LK.UI.button({
       $appendTo : $controllers,
-      _icon : $.extend({}, iconOptions, {
-        icon : 'spinner-minus'
-      }),
+      height : LK.rowHeight - 4,
+      icon : 'minus',
       click : function() {
         var value = $source.LKGetValue();
         if (value == '') {
@@ -174,26 +164,14 @@ LK.UI('plugins', 'selector_employee', function(options) {
       },
       cls : 'success',
       style : {
-        'width' : 60,
-        'height' : xSize + 3 * 2
-      }
-    });
-
-    LK.UI.text({
-      $appendTo : $controllers,
-      original : true,
-      text : '',
-      style : {
-        'width' : 30,
-        'height' : xSize + 3 * 2
+        'width' : 60
       }
     });
 
     LK.UI.button({
       $appendTo : $controllers,
-      _icon : $.extend({}, iconOptions, {
-        icon : 'spinner-plus'
-      }),
+      height : LK.rowHeight - 4,
+      icon : 'plus',
       click : function() {
         var value = $target.LKGetValue();
         if (value == '') {
@@ -222,7 +200,7 @@ LK.UI('plugins', 'selector_employee', function(options) {
       cls : 'danger',
       style : {
         'width' : 60,
-        'height' : xSize + 3 * 2
+        'margin-left' : '30px'
       }
     });
   };

@@ -1,4 +1,10 @@
 ;
+
+// 扩展图标
+$.LKExtendICON({
+  'timepicker' : 'clock',
+});
+
 /**
  * 时间控件
  */
@@ -27,7 +33,7 @@ LK.UI('plugins', 'timepicker', function(options) {
 
   // 时间按钮
   var $button = LK.UI.button({
-    _icon : {
+    icon : {
       size : 24,
       icon : 'timepicker'
     }

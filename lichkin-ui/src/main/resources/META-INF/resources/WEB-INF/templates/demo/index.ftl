@@ -108,11 +108,4 @@
 			</ul>
 		</div>
 	</#if>
-	<#if section="javascript-contents-after-links">
-		$('a').each(function(){
-			$(this).click(function(){
-				window.open(_CTX + '/demo/' + $(this).html() + _MAPPING_PAGES);
-			});
-		});
-	</#if>
 </@html>

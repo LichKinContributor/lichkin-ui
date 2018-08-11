@@ -86,8 +86,12 @@ $.fn.extend({
       var flag = true;
 
       $plugin.find('.lichkin-plugin').each(function() {
-        if (!$(this).LKValidate()) {
-          flag = false;
+        var $subPlugin = $(this);
+        var name = $subPlugin.data('LKName');
+        if (isString(name) && name != '') {
+          if (!$(this).LKValidate()) {
+            flag = false;
+          }
         }
       });
 
@@ -182,7 +186,11 @@ $.fn.extend({
    * 获取控件值对象
    */
   LKGetValueObj : function() {
-    return this.find('.lichkin-' + this.LKGetPluginType() + '-value');
+    var selector = '.lichkin-' + this.LKGetPluginType() + '-value';
+    if (this.is(selector)) {
+      return this;
+    }
+    return this.find(selector);
   },
 
   /**
@@ -448,16 +456,84 @@ $.fn.extend({
 });
 
 /**
- * 创建UI控件对象参数
+ * 创建UI控件对象核心参数
  */
-LK.UI.createOptions = {
+LK.UI.coreOptions = {
+  /**
+   * 创建控件
+   * @param id 主键
+   * @return 控件对象
+   */
+  createPlugin : function(id) {
+    return null;
+  },
   // 控件ID
   id : '',
   // 控件填充到对象
   $appendTo : null,
   // 控件渲染到对象
   $renderTo : null,
+  // 样式
+  cls : null,
+  // 样式
+  style : {},
+  // 属性
+  attr : {}
+};
 
+/**
+ * 创建UI控件对象
+ */
+LK.UI('plugins', 'plugin', function(options) {
+  // 设置id
+  var id = options.id = (options.id != '') ? options.id : 'LK_' + randomInRange(100000, 999999);
+
+  // 创建控件
+  var $plugin = options.createPlugin(id);
+
+  if (options.$appendTo == true) {
+    var $topDialog = $.LKGetTopDialog();
+    if ($topDialog) {
+      options.$appendTo = $topDialog.find('.lichkin-body');
+    } else {
+      options.$appendTo = $('body');
+    }
+  }
+
+  if (options.$appendTo != null) {// 填充对象
+    $plugin.appendTo(options.$appendTo);
+  } else if (options.$renderTo != null) { // 渲染对象
+    $plugin.insertAfter(options.$renderTo);
+    options.$renderTo.remove();
+  }
+
+  // 增加样式
+  if (options.cls != null) {
+    $plugin.addClass(options.cls);
+  }
+
+  // 设置样式
+  if (!$.isEmptyObject(options.style)) {
+    $plugin.css(options.style);
+  }
+
+  // 设置样式
+  if (!$.isEmptyObject(options.attr)) {
+    $plugin.attr(options.attr);
+  }
+
+  // 返回控件对象
+  return $plugin;
+}, LK.UI.coreOptions);
+
+/**
+ * 创建UI控件对象参数
+ */
+LK.UI.createOptions = $.extend({},
+// @see LK.UI.plugin
+LK.UI.coreOptions,
+// 控件特有参数
+{
   // 值对象名称
   name : '',
   // 验证器方法名
@@ -484,10 +560,6 @@ LK.UI.createOptions = {
   cols : 1,
   // 行数
   rows : 1,
-  // 样式
-  cls : '',
-  // 样式
-  style : {},
 
   // 联动控件名称（需在同一表单中）
   linkages : [],
@@ -511,7 +583,7 @@ LK.UI.createOptions = {
    */
   onChange : function($plugin, pluginValues, pluginValue, currentValue) {
   }
-};
+});
 
 /**
  * 创建UI控件对象
@@ -588,6 +660,15 @@ LK.UI('plugins', 'create', function(opts) {
     $value.val(options.value);
   }
 
+  if (options.$appendTo == true) {
+    var $topDialog = $.LKGetTopDialog();
+    if ($topDialog) {
+      options.$appendTo = $topDialog.find('.lichkin-body');
+    } else {
+      options.$appendTo = $('body');
+    }
+  }
+
   if (options.inForm && options.withField == true) {
     var $field = $('<div class="lichkin-form-field"></div>').appendTo(options.$appendTo);
     $field.css({
@@ -603,11 +684,7 @@ LK.UI('plugins', 'create', function(opts) {
     }
     var $fieldKey = $('<div class="lichkin-form-field-key"></div>').appendTo($field).append(LK.UI.text({
       original : true,
-      text : keyText + ' :',
-      style : {
-        'height' : LK.rowHeight - 2 * LK.textPaddingTB,
-        'line-height' : LK.rowHeight - 2 * LK.textPaddingTB + 'px'
-      }
+      text : keyText + ' :'
     })).css('width', LK.fieldKeyWidth);
 
     var $fieldValue = $('<div class="lichkin-form-field-value"></div>').appendTo($field);
@@ -655,12 +732,19 @@ LK.UI('plugins', 'create', function(opts) {
     }
   }
 
-  if (options.cls != '') {
+  // 增加样式
+  if (options.cls != null) {
     $plugin.addClass(options.cls);
   }
 
+  // 设置样式
   if (!$.isEmptyObject(options.style)) {
     $plugin.css(options.style);
+  }
+
+  // 设置样式
+  if (!$.isEmptyObject(options.attr)) {
+    $plugin.attr(options.attr);
   }
 
   // 缓存参数

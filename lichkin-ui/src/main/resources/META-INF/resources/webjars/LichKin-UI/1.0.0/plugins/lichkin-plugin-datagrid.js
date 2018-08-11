@@ -1,4 +1,26 @@
 ;
+
+// 扩展图标
+$.LKExtendICON({
+  'go-first' : 'step-backward',
+  'go-previous' : 'backward',
+  'go-next' : 'forward',
+  'go-last' : 'step-forward',
+
+  'add' : 'plus',
+  'remove' : 'trash-alt',
+  'edit' : 'pencil-alt',
+  'view' : 'eye',
+  'search' : 'search',
+
+  'release' : 'arrow-alt-circle-up',
+  'lock' : 'lock',
+  'unlock' : 'unlock',
+  'set' : 'cog',
+  'cut' : 'cut',
+  'reset' : 'redo-alt',
+});
+
 /**
  * 数据表格控件内部实现相关
  */
@@ -138,15 +160,6 @@ LK.UI('plugins', 'datagrid', function(options) {
   // 控件类型
   var plugin = 'datagrid';
 
-  if (options.$appendTo == true) {
-    var $topDialog = $.LKGetTopDialog();
-    if ($topDialog) {
-      options.$appendTo = $topDialog.find('.lichkin-body');
-    } else {
-      options.$appendTo = $('body');
-    }
-  }
-
   // 创建控件对象
   var $plugin = LK.UI.create({
     plugin : plugin,
@@ -246,7 +259,7 @@ LK.UI('plugins', 'datagrid', function(options) {
               }
           ],
           onAfterCreate : function($dialog, $contentBar) {
-            var formOptions = $.extend({}, options.toolsEdit.form, {
+            var formOptions = $.extend(true, {}, options.toolsEdit.form, {
               $appendTo : $contentBar,
               $renderTo : null,
               values : {},
@@ -402,7 +415,7 @@ LK.UI('plugins', 'datagrid', function(options) {
           };
         }
         $buttonsBar.append(LK.UI.button({
-          _icon : {
+          icon : {
             icon : button.icon,
             size : 24
           },

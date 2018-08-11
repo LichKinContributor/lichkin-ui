@@ -1,4 +1,10 @@
 ;
+
+// 扩展图标
+$.LKExtendICON({
+  'dropdown' : 'caret-square-down',
+});
+
 /**
  * 下拉列表内部实现相关
  */
@@ -62,10 +68,7 @@ LK.UI._droplist = {
       $li.append(LK.UI.text({
         original : true,
         text : data.text,
-        style : {
-          'height' : LK.rowHeight - 7 + 'px',
-          'line-height' : LK.rowHeight - 7 + 'px'
-        }
+        height : LK.rowHeight - 1
       }));
     }
   }
@@ -94,7 +97,7 @@ LK.UI('plugins', 'droplist', function(options) {
   $popup.data('plugin-id', id);
   $popup.css({
     'width' : width + 'px',
-    'height' : LK.rowHeight * 6 - 1 + 'px'
+    'height' : LK.rowHeight * 6 + 'px'
   });
   if (options.cls != '') {
     $popup.addClass(options.cls);
@@ -110,27 +113,20 @@ LK.UI('plugins', 'droplist', function(options) {
   // 包装层
   var $wrapper = $('<div title=' + $.LKGetI18N('dropdown') + '></div>').appendTo($plugin).LKAddPluginClass(plugin, 'wrapper');
   $wrapper.css('height', height);
-  var textHeight = height - 2 * LK.textPaddingTB;
-  var textLineHeight = LK.rowHeight - 2 * LK.textPaddingTB - 2;
-  if (textHeight < textLineHeight) {
-    textLineHeight = textHeight;
-  }
-  var $text = LK.UI.text().appendTo($wrapper).LKAddPluginClass(plugin, 'text').css({
-    'width' : width - 2 * LK.textPaddingLR + 'px',
-    'height' : textHeight + 'px',
-    'line-height' : textLineHeight + 'px',
-    'margin-top' : (height + 2 - LK.rowHeight) / 2 + 'px'
+  var $text = LK.UI.text({
+    height : height
+  }).appendTo($wrapper).LKAddPluginClass(plugin, 'text').css({
+    'width' : width - 2 * LK.textPaddingLR + 'px'
   });
 
   // 下拉按钮
   var $button = LK.UI.button({
-    _icon : {
-      size : 24,
+    height : height + 2,
+    icon : {
+      size : height,
       icon : 'dropdown'
     }
   }).appendTo($plugin).LKAddPluginClass(plugin, 'button');
-  $button.css('height', height);
-  $button.find('.lichkin-icon').css('top', (height - 24) / 2 + 'px');
 
   // 数据容器
   var $container = $('<ul></ul>').appendTo($popup).LKAddPluginClass(plugin, 'dataContainer');

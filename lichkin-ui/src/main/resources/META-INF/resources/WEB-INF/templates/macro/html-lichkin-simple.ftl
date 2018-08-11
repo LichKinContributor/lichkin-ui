@@ -1,6 +1,6 @@
 <#include "/_define.ftl"/>
 
-<#macro html type="">
+<#macro html type="",css=false,js=true>
 
 <#assign _$=_$!"">
 <#assign calculateType=type>
@@ -37,6 +37,9 @@
 			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugins-simple${compressSuffix}.css" />
 			</#if>
 			<#nested "link"/>
+			<#if css==true>
+				<@lichkin@cssTag/>
+			</#if>
 		</#if>
 		<#if section="style">
 			<style>#lichkin-html{padding:0px;margin:0px;border:none;}.lichkin-body{padding:0px;margin:0px;border:none;}</style>
@@ -44,7 +47,6 @@
 			<style>
 				<#nested "style"/>
 			</style>
-			<style>.lichkin-hidden-icon{background-image:none !important;}</style>
 		</#if>
 		<#if section="body-attributes"><#nested "body-attributes"/></#if>
 		<#if section="body-content">
@@ -71,8 +73,14 @@
 			<#else>
 			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugins-simple${compressSuffix}.js" />
 			</#if>
+			<#nested "javascript-links-after-plugins"/>
+			<#nested "javascript-links-icons"/>
+			<@lichkin@jsTag url="/res/js/icons-addition.js" />
+			<@lichkin@jsTag url="/res/js/icons-init.js" />
 			<#nested "javascript-links"/>
-			<@lichkin@jsTag/>
+			<#if js==true>
+				<@lichkin@jsTag/>
+			</#if>
 		</#if>
 		<#if section="javascript-contents-after-links">
 			let $win = $(window), $doc = $(document), $body = $('body');
@@ -85,7 +93,9 @@
 			<#nested "style"/>
 		</style>
 		<#nested "body-content"/>
-		<@lichkin@jsTag/>
+		<#if js==true>
+			<@lichkin@jsTag/>
+		</#if>
 	</div>
 </#if>
 

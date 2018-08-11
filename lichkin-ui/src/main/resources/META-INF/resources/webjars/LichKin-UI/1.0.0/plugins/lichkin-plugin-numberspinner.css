@@ -18,10 +18,6 @@
   background-color: var(--lichkin-plugin-font-color);
 }
 
-.lichkin-numberspinner .lichkin-numberspinner-button .lichkin-numberspinner-button-container .lichkin-icon-spinner-minus {
-  margin-top: 1px;
-}
-
 .lichkin-numberspinner .lichkin-numberspinner-button .lichkin-numberspinner-button-container .lichkin-icon i {
   color: var(--lichkin-plugin-background-color);
 }

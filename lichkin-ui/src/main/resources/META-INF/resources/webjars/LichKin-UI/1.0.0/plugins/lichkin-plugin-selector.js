@@ -1,4 +1,10 @@
 ;
+
+// 扩展图标
+$.LKExtendICON({
+  'selector' : 'ellipsis-h',
+});
+
 /**
  * 选择器内部实现相关
  */
@@ -178,13 +184,11 @@ LK.UI('plugins', 'selector', function(options) {
 
   // 选择按钮
   var $button = LK.UI.button({
-    _icon : {
+    icon : {
       size : 24,
       icon : 'selector'
     }
   }).appendTo($plugin).LKAddPluginClass(plugin, 'button');
-  $button.css('height', height);
-  $button.find('.lichkin-icon').css('top', (height - 24) / 2 + 'px');
 
   // 加载数据
   LK.UI.load({
