@@ -3,6 +3,7 @@
 :root {
   --lichkin-datagrid-title-font-size: 16px;
   --lichkin-datagrid-header-background-color: var(--lichkin-plugin-border-color);
+  --lichkin-datagrid-header-light-background-color: #f0f0f0;
   --lichkin-datagrid-header-font-color: var(--lichkin-plugin-background-color);
   --lichkin-datagrid-header-font-size: 14px;
   --lichkin-datagrid-body-border-color: #CCCCCC;
@@ -41,31 +42,13 @@
   border-color: transparent;
 }
 
-.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-buttons .lichkin-button .lichkin-icon-add i {
-  color: #60ff60;
-}
-
-.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-buttons .lichkin-button .lichkin-icon-edit i {
-  color: #ffff00;
-}
-
-.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-buttons .lichkin-button .lichkin-icon-remove i {
-  color: #ff9c9c;
-}
-
 .lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-buttons-right {
   position: absolute;
   top: 0;
   right: 0;
 }
 
-.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-buttons-right .lichkin-button .lichkin-icon-reset i {
-  color: #ff7979;
-}
-
-.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-buttons-right .lichkin-button .lichkin-icon-search i {
-  color: #fff45d;
-}
+.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar {background-color:var(--lichkin-plugin-background-color);}
 
 .lichkin-datagrid .lichkin-datagrid-dataBar {
   background-color: var(--lichkin-plugin-background-color);
@@ -92,23 +75,38 @@
   padding: 8px 6px;
 }
 
+.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-dataBar {border-top-color: var(--lichkin-datagrid-header-light-background-color);}
+.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-dataBar .lichkin-datagrid-dataHeaderBar {background-color:var(--lichkin-datagrid-header-light-background-color);}
+.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-dataBar .lichkin-datagrid-dataHeaderBar .lichkin-table .lichkin-table-row .lichkin-table-cell {border-right:1px solid var(--lichkin-datagrid-body-border-color);background-color:var(--lichkin-datagrid-header-light-background-color);}
+.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-dataBar .lichkin-datagrid-dataHeaderBar .lichkin-table .lichkin-table-row .lichkin-table-cell .lichkin-text {color:var(--lichkin-plugin-font-color);}
+
+.lichkin-datagrid .lichkin-datagrid-toolsBar + .lichkin-datagrid-dataBar {border-top-color: var(--lichkin-datagrid-header-light-background-color);}
+.lichkin-datagrid .lichkin-datagrid-toolsBar + .lichkin-datagrid-dataBar .lichkin-datagrid-dataHeaderBar {background-color:var(--lichkin-datagrid-header-light-background-color);}
+.lichkin-datagrid .lichkin-datagrid-toolsBar + .lichkin-datagrid-dataBar .lichkin-datagrid-dataHeaderBar .lichkin-table .lichkin-table-row .lichkin-table-cell {border-right:1px solid var(--lichkin-datagrid-body-border-color);background-color:var(--lichkin-datagrid-header-light-background-color);}
+.lichkin-datagrid .lichkin-datagrid-toolsBar + .lichkin-datagrid-dataBar .lichkin-datagrid-dataHeaderBar .lichkin-table .lichkin-table-row .lichkin-table-cell .lichkin-text {color:var(--lichkin-plugin-font-color);}
+
+.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar + .lichkin-datagrid-dataBar {border-top-color: var(--lichkin-plugin-border-color);}
+.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar + .lichkin-datagrid-dataBar .lichkin-datagrid-dataHeaderBar {background-color:var(--lichkin-datagrid-header-background-color);}
+.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar + .lichkin-datagrid-dataBar .lichkin-datagrid-dataHeaderBar .lichkin-table .lichkin-table-row .lichkin-table-cell {border-right:1px solid var(--lichkin-plugin-header-border-color);background-color:var(--lichkin-datagrid-header-background-color);}
+.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar + .lichkin-datagrid-dataBar .lichkin-datagrid-dataHeaderBar .lichkin-table .lichkin-table-row .lichkin-table-cell .lichkin-text {color:var(--lichkin-datagrid-header-font-color);}
+
 .lichkin-datagrid .lichkin-datagrid-dataBodyBar {
   background-color: var(--lichkin-plugin-background-color);
   overflow: auto;
 }
 
-.lichkin-datagrid .lichkin-plugin-dataContainer {
+.lichkin-datagrid .lichkin-datagrid-dataBodyBar .lichkin-plugin-dataContainer {
   border: none;
 }
 
-.lichkin-datagrid .lichkin-plugin-dataContainer .lichkin-table-row .lichkin-table-cell {
+.lichkin-datagrid .lichkin-datagrid-dataBodyBar .lichkin-plugin-dataContainer .lichkin-table-row .lichkin-table-cell {
   border-top: none;
   border-right: 1px dotted var(--lichkin-datagrid-body-border-color);
   border-bottom: 1px dotted var(--lichkin-datagrid-body-border-color);
   border-left: none;
 }
 
-.lichkin-datagrid .lichkin-plugin-dataContainer .lichkin-text {
+.lichkin-datagrid .lichkin-datagrid-dataBodyBar .lichkin-plugin-dataContainer .lichkin-text {
   color: var(--lichkin-datagrid-body-font-color);
   font-size: var(--lichkin-datagrid-body-font-size);
   padding: 6px;

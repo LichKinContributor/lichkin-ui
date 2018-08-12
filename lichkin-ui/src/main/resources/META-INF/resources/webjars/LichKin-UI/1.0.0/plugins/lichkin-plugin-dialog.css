@@ -51,7 +51,6 @@
   color: var(--lichkin-dialog-font-color);
   cursor: pointer;
   right: 6px;
-  top: 5.5px;
 }
 
 .lichkin-dialog .lichkin-dialog-titleBar .lichkin-buttons .lichkin-icon i {

@@ -3,3 +3,93 @@
 .lichkin-icon{position:relative;display:inline-block;background-repeat:no-repeat;text-align:center;}
 .lichkin-icon i{position:absolute;display:inline-block;left:0px;top:0px;vertical-align:middle;color:var(--lichkin-plugin-font-color);}
 .lichkin-hidden-icon{background-image:none !important;}
+
+.lichkin-icon-add i,
+.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar .lichkin-icon-add i,
+
+.lichkin-icon-ok i,
+.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar .lichkin-icon-ok i,
+
+.lichkin-icon-unlock i,
+.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar .lichkin-icon-unlock i
+{color:#5cb85c;}
+
+.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-icon-add i,
+.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-icon-add i,
+
+.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-icon-ok i,
+.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-icon-ok i,
+
+.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-icon-unlock i,
+.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-icon-unlock i
+{color:#00ff00;}
+
+.lichkin-icon-tip i,
+.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar .lichkin-icon-tip i,
+
+.lichkin-icon-edit i,
+.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar .lichkin-icon-edit i,
+
+.lichkin-icon-search i,
+.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar .lichkin-icon-search i,
+
+.lichkin-icon-pwd i,
+.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar .lichkin-icon-pwd i
+{color:#f0ad4e;}
+
+.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-icon-tip i,
+.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-icon-tip i,
+
+.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-icon-edit i,
+.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-icon-edit i,
+
+.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-icon-search i,
+.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-icon-search i,
+
+.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-icon-pwd i,
+.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-icon-pwd i
+{color:#ffff00;}
+
+.lichkin-icon-cancel i,
+.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar .lichkin-icon-cancel i,
+
+.lichkin-icon-remove i,
+.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar .lichkin-icon-remove i,
+
+.lichkin-icon-reset i,
+.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar .lichkin-icon-reset i,
+
+.lichkin-icon-cut i,
+.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar .lichkin-icon-cut i,
+
+.lichkin-icon-lock i,
+.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar .lichkin-icon-lock i,
+
+.lichkin-icon-warning i,
+.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar .lichkin-icon-warning i,
+
+.lichkin-icon-close i,
+.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar .lichkin-icon-close i
+{color:#d9534f;}
+
+.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-icon-cancel i,
+.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-icon-cancel i,
+
+.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-icon-remove i,
+.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-icon-remove i,
+
+.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-icon-reset i,
+.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-icon-reset i,
+
+.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-icon-cut i,
+.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-icon-cut i,
+
+.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-icon-lock i,
+.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-icon-lock i,
+
+.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-icon-warning i,
+.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-icon-warning i,
+
+.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-icon-close i,
+.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-icon-close i
+{color:#ff7777;}

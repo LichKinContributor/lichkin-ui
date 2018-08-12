@@ -1,7 +1,7 @@
 // 扩展图标
 var extendIcons = {
   'loginName' : 'user',
-  'pwd' : 'lock',
+  'pwd' : 'key',
 
   'starter' : 'chevron-circle-down',
   'starter-closed' : 'chevron-circle-up',

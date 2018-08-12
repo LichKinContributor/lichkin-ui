@@ -19,6 +19,7 @@ var config = {
 };
 
 var title = {
+  icon : 'tip',
   title : 'roleGridTitle',
 };
 
