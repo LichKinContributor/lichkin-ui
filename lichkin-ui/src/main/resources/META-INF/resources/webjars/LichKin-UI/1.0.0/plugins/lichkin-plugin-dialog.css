@@ -1,30 +1,51 @@
 @charset "UTF-8";
 
 :root {
-  --lichkin-dialog-border-color: #a0ecef;
-  --lichkin-dialog-background-color: #ffffff;
-  --lichkin-dialog-titleBar-background-color: #a0ecef;
-  --lichkin-dialog-font-color: #2e6da4;
-  --lichkin-dialog-buttons-color: #ffffff;
-  --lichkin-dialog-mask-background-color: rgba(88, 92, 117, 0.66);
+  --lichkin-dialog-mask-background-color: rgba(0, 0, 0, 0.3);
+}
+
+.lichkin-dialog,
+.lichkin-dialog .lichkin-dialog-titleBar,
+.lichkin-dialog .lichkin-dialog-contentBar,
+.lichkin-dialog .lichkin-dialog-contentBar .lichkin-plugin,
+.lichkin-dialog .lichkin-dialog-buttonsBar
+{
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.lichkin-dialog .lichkin-dialog-contentBar .lichkin-plugin .lichkin-plugin-button .lichkin-icon i
+{
+  color: var(--lichkin-plugin-light-border-color);
+}
+
+.lichkin-dialog .lichkin-dialog-titleBar,
+.lichkin-dialog .lichkin-dialog-contentBar,
+.lichkin-dialog .lichkin-dialog-buttonsBar
+{
+  opacity: 0.5;
+}
+
+.lichkin-dialog,
+.lichkin-dialog .lichkin-dialog-contentBar,
+.lichkin-dialog .lichkin-dialog-buttonsBar
+{
+  background-color: #ffffff;
 }
 
 .lichkin-dialog {
-  background-color:var(--lichkin-dialog-background-color);
   position: fixed;
-  border-bottom: 1px solid var(--lichkin-dialog-border-color);
+  border-width: 0px 0px 1px 0px;
 }
 
 .lichkin-dialog .lichkin-dialog-titleBar {
+  background-color: var(--lichkin-plugin-light-border-color);
+  border-width: 1px 1px 0px 1px;
   position: relative;
-  background-color:var(--lichkin-dialog-titleBar-background-color);
   padding: 3px 0px;
   height: 29px;
   line-height: 29px;
   cursor: move;
-  border-left: 1px solid var(--lichkin-dialog-border-color);
-  border-right: 1px solid var(--lichkin-dialog-border-color);
-  border-top: 1px solid var(--lichkin-dialog-border-color);
 }
 
 .lichkin-dialog .lichkin-dialog-titleBar>.lichkin-icon {
@@ -36,7 +57,6 @@
 .lichkin-dialog .lichkin-dialog-titleBar .lichkin-title {
   position: absolute;
   left: 6px;
-  color: var(--lichkin-dialog-font-color);
   font-size: 16px;
   height: 28px;
   line-height: 28px;
@@ -48,13 +68,8 @@
 
 .lichkin-dialog .lichkin-dialog-titleBar .lichkin-buttons {
   position: absolute;
-  color: var(--lichkin-dialog-font-color);
   cursor: pointer;
   right: 6px;
-}
-
-.lichkin-dialog .lichkin-dialog-titleBar .lichkin-buttons .lichkin-icon i {
-  color: var(--lichkin-dialog-buttons-color);
 }
 
 .lichkin-dialog .lichkin-dialog-titleBar .lichkin-buttons .lichkin-icon-close {
@@ -62,16 +77,13 @@
 }
 
 .lichkin-dialog .lichkin-dialog-contentBar {
-  border-left: 1px solid var(--lichkin-dialog-border-color);
-  border-right: 1px solid var(--lichkin-dialog-border-color);
+  border-width: 0px 1px 0px 1px;
   overflow: auto;
 }
 
 .lichkin-dialog .lichkin-dialog-buttonsBar {
-  background-color: var(--lichkin-dialog-background-color);
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  border-right: 1px solid var(--lichkin-dialog-border-color);
-  border-left: 1px solid var(--lichkin-dialog-border-color);
+  border-width: 1px 1px 0px 1px;
+  border-top-color: rgba(0, 0, 0, 0.1) !important;
   padding: 5px;
   text-align: right;
 }
@@ -80,26 +92,36 @@
   margin-left: 5px;
 }
 
-.lichkin-dialog-focus .lichkin-dialog-titleBar {
-  background-color: var(--lichkin-plugin-border-color);
+.lichkin-dialog .lichkin-dialog-titleBar .lichkin-icon i,
+.lichkin-dialog .lichkin-dialog-titleBar .lichkin-title,
+.lichkin-dialog .lichkin-dialog-titleBar .lichkin-buttons {
+  color: #ffffff;
 }
 
+/** focus */
 .lichkin-dialog-focus,
 .lichkin-dialog-focus .lichkin-dialog-titleBar,
-.lichkin-dialog-focus .lichkin-dialog-contentBar {
+.lichkin-dialog-focus .lichkin-dialog-contentBar,
+.lichkin-dialog-focus .lichkin-dialog-contentBar .lichkin-plugin,
+.lichkin-dialog-focus .lichkin-dialog-buttonsBar
+{
   border-color: var(--lichkin-plugin-border-color);
 }
 
-.lichkin-dialog-focus .lichkin-dialog-buttonsBar {
-  border-right-color: var(--lichkin-plugin-border-color);
-  border-bottom-color: var(--lichkin-plugin-border-color);
-  border-left-color: var(--lichkin-plugin-border-color);
+.lichkin-dialog-focus .lichkin-dialog-contentBar .lichkin-plugin .lichkin-plugin-button .lichkin-icon i
+{
+  color: var(--lichkin-plugin-border-color);
 }
 
-.lichkin-dialog-focus .lichkin-dialog-titleBar .lichkin-icon i,
-.lichkin-dialog-focus .lichkin-dialog-titleBar .lichkin-title,
-.lichkin-dialog-focus .lichkin-dialog-titleBar .lichkin-buttons {
-  color: var(--lichkin-plugin-background-color);
+.lichkin-dialog-focus .lichkin-dialog-titleBar,
+.lichkin-dialog-focus .lichkin-dialog-contentBar,
+.lichkin-dialog-focus .lichkin-dialog-buttonsBar
+{
+  opacity: 1.0;
+}
+
+.lichkin-dialog-focus .lichkin-dialog-titleBar {
+  background-color: var(--lichkin-plugin-border-color);
 }
 
 .lichkin-dialog-mask {padding:0px;background-color:var(--lichkin-dialog-mask-background-color);width:100%;height:100%;border:none;margin:0px;position:fixed;top:0px;display:none;}
