@@ -24,6 +24,7 @@
 }
 
 .lichkin-datagrid .lichkin-datagrid-toolsBar {
+  position: relative;
   background-color: var(--lichkin-plugin-border-color);
   border-top: none;
   border-right: 1px solid var(--lichkin-plugin-border-color);
@@ -53,8 +54,9 @@
 }
 
 .lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-buttons-right {
-  text-align: right;
-  float: right;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-buttons-right .lichkin-button .lichkin-icon-reset i {

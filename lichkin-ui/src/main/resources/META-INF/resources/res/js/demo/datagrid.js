@@ -1,10 +1,10 @@
-LK.UI.datagrid({
-  title : 'roleGridTitle',
+$('body').css('background-color', 'black');
+
+var config = {
   $appendTo : true,
   cols : 2.5,
-  rows : 15,
+  rows : 7,
   url : '/P/SysRole',
-  multiSelect : true,
   columns : [
       {
         text : 'roleName',
@@ -15,7 +15,25 @@ LK.UI.datagrid({
         name : 'description',
         width : LK.colWidth
       }
-  ],
+  ]
+};
+
+var title = {
+  title : 'roleGridTitle',
+};
+
+var searchForm = {
+  searchForm : [
+    {
+      plugin : 'textbox',
+      options : {
+        name : 'roleName'
+      }
+    }
+  ]
+};
+
+var tools = {
   toolsAdd : {
     saveUrl : '/I/SysRole',
     dialog : {
@@ -90,12 +108,354 @@ LK.UI.datagrid({
   toolsRemove : {
     saveUrl : '/U/SysRole/UsingStatus'
   },
-  searchForm : [
-    {
-      plugin : 'textbox',
-      options : {
-        name : 'roleName'
-      }
-    }
-  ]
-});
+};
+
+var pageable = {
+  pageable : false,
+};
+
+var showSearchButton = {
+  showSearchButton : false
+};
+
+var showResetButton = {
+  showResetButton : false
+};
+
+LK.UI.datagrid($.extend({}, config, pageable));
+
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config));
+
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, title, pageable));
+
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, title));
+
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, searchForm, pageable));
+
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, searchForm));
+
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, tools, pageable));
+
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, tools));
+
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, title, searchForm, pageable));
+
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, title, searchForm));
+
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, title, tools, pageable));
+
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, title, tools));
+
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, searchForm, tools, pageable));
+
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, searchForm, tools));
+
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, title, searchForm, tools, pageable));
+
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, title, searchForm, tools));
+
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, pageable, showSearchButton));
+
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, showSearchButton));
+
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, title, pageable, showSearchButton));
+
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, title, showSearchButton));
+
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, searchForm, pageable, showSearchButton));
+
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, searchForm, showSearchButton));
+
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, tools, pageable, showSearchButton));
+
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, tools, showSearchButton));
+
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, title, searchForm, pageable, showSearchButton));
+
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, title, searchForm, showSearchButton));
+
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, title, tools, pageable, showSearchButton));
+
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, title, tools, showSearchButton));
+
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, searchForm, tools, pageable, showSearchButton));
+
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, searchForm, tools, showSearchButton));
+
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, title, searchForm, tools, pageable, showSearchButton));
+
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, title, searchForm, tools, showSearchButton));
+
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, pageable, showSearchButton, showResetButton));
+
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, showSearchButton, showResetButton));
+
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, title, pageable, showSearchButton, showResetButton));
+
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, title, showSearchButton, showResetButton));
+
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, searchForm, pageable, showSearchButton, showResetButton));
+
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, searchForm, showSearchButton, showResetButton));
+
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, tools, pageable, showSearchButton, showResetButton));
+
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, tools, showSearchButton, showResetButton));
+
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, title, searchForm, pageable, showSearchButton, showResetButton));
+
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, title, searchForm, showSearchButton, showResetButton));
+
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, title, tools, pageable, showSearchButton, showResetButton));
+
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, title, tools, showSearchButton, showResetButton));
+
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, searchForm, tools, pageable, showSearchButton, showResetButton));
+
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, searchForm, tools, showSearchButton, showResetButton));
+
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, title, searchForm, tools, pageable, showSearchButton, showResetButton));
+
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, title, searchForm, tools, showSearchButton, showResetButton));
+
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, pageable, showResetButton));
+
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, showResetButton));
+
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, title, pageable, showResetButton));
+
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, title, showResetButton));
+
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, searchForm, pageable, showResetButton));
+
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, searchForm, showResetButton));
+
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, tools, pageable, showResetButton));
+
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, tools, showResetButton));
+
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, title, searchForm, pageable, showResetButton));
+
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, title, searchForm, showResetButton));
+
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, title, tools, pageable, showResetButton));
+
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, title, tools, showResetButton));
+
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, searchForm, tools, pageable, showResetButton));
+
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, searchForm, tools, showResetButton));
+
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, title, searchForm, tools, pageable, showResetButton));
+
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({}, config, title, searchForm, tools, showResetButton));
+
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');

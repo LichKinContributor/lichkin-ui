@@ -170,9 +170,11 @@ LK.UI('plugins', 'datagrid', function(options) {
   var height = $plugin.height();
 
   // 查询表单栏
+  var hasSearchFormBar = options.searchForm.length != 0;
   var $searchFormBar = $('<div></div>').LKAddPluginClass(plugin, 'searchFormBar');
   var $searchForm;
-  if (options.searchForm.length != 0) {
+  var $searchFormToolsBar;
+  if (hasSearchFormBar) {
     $searchFormBar.appendTo($plugin);
     $searchFormBar.css({
       'width' : width - 2,
@@ -182,6 +184,7 @@ LK.UI('plugins', 'datagrid', function(options) {
       $appendTo : $searchFormBar,
       plugins : options.searchForm
     }).css('margin-left', -2 - LK.leftGap + 'px');
+    $searchFormToolsBar = $('<div lichkin-buttons></div>').appendTo($searchFormBar).css('text-align', 'center');
   }
 
   // 删除按钮
@@ -353,128 +356,89 @@ LK.UI('plugins', 'datagrid', function(options) {
   }
 
   // 标题栏
+  var hasTitleBar = options.title != null || options.icon != null || options.titleTools.length != 0;
   var $titleBar = $('<div></div>').LKAddPluginClass(plugin, 'titleBar');
-  if (options.title != null || options.icon != null) {
-    if (options.searchForm.length != 0) {
+  var $titleToolsBar;
+  if (hasTitleBar) {
+    if (hasSearchFormBar) {
       $titleBar.insertBefore($searchFormBar);
     } else {
       $titleBar.appendTo($plugin);
     }
     $titleBar.css('width', width - 2);
+    $titleToolsBar = $('<div class="lichkin-buttons"></div>').appendTo($titleBar);
+
+    // 标题栏图标
     if (options.icon != null) {
       $titleBar.append(LK.UI.icon({
         'icon' : options.icon,
         'size' : 24
       }));
     }
+
+    // 标题栏标题
     if (options.title != null) {
       $titleBar.append(LK.UI.text({
         'text' : options.title
       }));
     }
-    if (options.searchForm.length != 0) {
-      options.titleTools.push({
-        singleCheck : null,
-        icon : 'reset',
-        click : function() {
-          $searchForm.LKFormBindData();
-        }
-      });
-      options.titleTools.push({
-        singleCheck : null,
-        icon : 'search',
-        click : function() {
-          $plugin.LKLoad({
-            param : LK.UI._datagrid.getParam($plugin, options)
-          });
-        }
-      });
-    } else {
-      if (options.showSearchButton == true) {
-        options.titleTools.push({
-          singleCheck : null,
-          icon : 'search',
-          click : function() {
-            $plugin.LKLoad({
-              param : LK.UI._datagrid.getParam($plugin, options)
-            });
-          }
-        });
-      }
-    }
-    var $buttonsBar = $('<div class="lichkin-buttons"></div>').appendTo($titleBar);
-    for (var i = 0; i < options.titleTools.length; i++) {
-      var button = options.titleTools[i];
-      if (typeof button.singleCheck == 'undefined') {
-        button.singleCheck = true;
-      }
-      (function(button) {
-        var click = button.click;
-        if (typeof click != 'function') {
-          click = function() {
-          };
-        }
-        $buttonsBar.append(LK.UI.button({
-          icon : {
-            icon : button.icon,
-            size : 24
-          },
-          click : function($button) {
-            var value = $plugin.LKGetValue();
-            if (button.singleCheck == true || button.singleCheck == false) {
-              if (value == '') {
-                LK.alert('noSelect');
-                return;
-              }
-            }
-            if (button.singleCheck == true) {
-              if (value.indexOf(LK.SPLITOR) > 0) {
-                LK.alert('singleSelect');
-                return;
-              }
-            }
 
-            var $selecteds = $plugin.LKGetDataContainer().find('tr.selected');
-            var selectedDatas = [];
-            $selecteds.each(function() {
-              selectedDatas.push($(this).data());
-            });
-            click($button, $plugin, $selecteds, selectedDatas, value);
-          },
-          tip : button.tip
-        }));
-      })(button);
+    // 标题工具栏
+    if (options.titleTools.length != 0) {
+      for (var i = 0; i < options.titleTools.length; i++) {
+        var button = options.titleTools[i];
+        if (typeof button.singleCheck == 'undefined') {
+          button.singleCheck = true;
+        }
+        (function(button) {
+          var click = button.click;
+          if (typeof click != 'function') {
+            click = function() {
+            };
+          }
+          $titleToolsBar.append(LK.UI.button({
+            icon : {
+              icon : button.icon,
+              size : 24
+            },
+            click : function($button) {
+              var value = $plugin.LKGetValue();
+              if (button.singleCheck == true || button.singleCheck == false) {
+                if (value == '') {
+                  LK.alert('noSelect');
+                  return;
+                }
+              }
+              if (button.singleCheck == true) {
+                if (value.indexOf(LK.SPLITOR) > 0) {
+                  LK.alert('singleSelect');
+                  return;
+                }
+              }
+
+              var $selecteds = $plugin.LKGetDataContainer().find('tr.selected');
+              var selectedDatas = [];
+              $selecteds.each(function() {
+                selectedDatas.push($(this).data());
+              });
+              click($button, $plugin, $selecteds, selectedDatas, value);
+            },
+            tip : button.tip
+          }));
+        })(button);
+      }
     }
   }
 
   // 工具栏
+  var hasToolsBar = options.tools.length != 0;
   var $toolsBar = $('<div></div>').LKAddPluginClass(plugin, 'toolsBar');
-  if (options.title == null && options.icon == null && (options.showSearchButton == true || options.searchForm.length != 0) && options.tools.length != 0) {
-    var $buttonsBar = $('<div class="lichkin-buttons lichkin-buttons-right"></div>').appendTo($toolsBar);
-    if (options.searchForm.length != 0) {
-      options.showSearchButton = true;
-      $buttonsBar.append(LK.UI.button({
-        icon : 'reset',
-        click : function($button) {
-          $searchForm.LKFormBindData();
-        }
-      }));
-    }
-    if (options.showSearchButton == true) {
-      $buttonsBar.append(LK.UI.button({
-        icon : 'search',
-        click : function($button) {
-          $plugin.LKLoad({
-            param : LK.UI._datagrid.getParam($plugin, options)
-          });
-        }
-      }));
-    }
-  }
-  if (options.tools.length != 0) {
+  var $buttonsBarRight;
+  if (hasToolsBar) {
     $toolsBar.appendTo($plugin);
     $toolsBar.css('width', width - 2);
     var $buttonsBar = $('<div class="lichkin-buttons"></div>').appendTo($toolsBar);
+    $buttonsBarRight = $('<div class="lichkin-buttons lichkin-buttons-right"></div>').appendTo($toolsBar);
     for (var i = 0; i < options.tools.length; i++) {
       var button = options.tools[i];
       if (typeof button.singleCheck == 'undefined') {
@@ -515,8 +479,10 @@ LK.UI('plugins', 'datagrid', function(options) {
   }
 
   // 分页栏
+  var hasPageBar = options.pageable == true;
   var $pageBar = $('<div></div>').LKAddPluginClass(plugin, 'pageBar');
-  if (options.pageable == true) {
+  var $pageBarSearButton;
+  if (hasPageBar) {
     $pageBar.appendTo($plugin);
     $pageBar.css('width', width - 2);
 
@@ -617,8 +583,114 @@ LK.UI('plugins', 'datagrid', function(options) {
         }
       }
     }).appendTo($jumpButtons);
+    $pageBarSearButton = LK.UI.button({
+      icon : 'search',
+      click : function() {
+        $plugin.LKLoad({
+          param : LK.UI._datagrid.getParam($plugin, options)
+        });
+      },
+      style : {
+        'display' : 'none'
+      }
+    }).appendTo($jumpButtons);
 
     $pageBar.append('<div style="clear:both;"></div>');
+  }
+
+  // 有查询表单补充重置按钮
+  // 补充查询按钮
+  // 补充位置，工具栏>标题栏>查询表单>分页栏
+  if (hasToolsBar) {
+    if (hasSearchFormBar && options.showResetButton == true) {
+      LK.UI.button({
+        $appendTo : $buttonsBarRight,
+        icon : 'reset',
+        click : function($button) {
+          $searchForm.LKFormBindData();
+        }
+      });
+    }
+    if (options.showSearchButton == true) {
+      LK.UI.button({
+        $appendTo : $buttonsBarRight,
+        icon : 'search',
+        click : function($button) {
+          $plugin.LKLoad({
+            param : LK.UI._datagrid.getParam($plugin, options)
+          });
+        }
+      });
+    }
+  } else {
+    if (hasTitleBar) {
+      if (hasSearchFormBar && options.showResetButton == true) {
+        LK.UI.button({
+          $appendTo : $titleToolsBar,
+          icon : {
+            icon : 'reset',
+            size : 24
+          },
+          click : function($button) {
+            $searchForm.LKFormBindData();
+          }
+        });
+      }
+      if (options.showSearchButton == true) {
+        LK.UI.button({
+          $appendTo : $titleToolsBar,
+          icon : {
+            icon : 'search',
+            size : 24
+          },
+          click : function($button) {
+            $plugin.LKLoad({
+              param : LK.UI._datagrid.getParam($plugin, options)
+            });
+          }
+        });
+      }
+    } else {
+      if (hasSearchFormBar) {
+        if (options.showResetButton == true || options.showSearchButton == true) {
+          $searchFormBar.css('padding-bottom', 2 * LK.topGap + 2 + 'px');
+          $searchFormToolsBar.css('padding-top', 2 * LK.topGap + 2 + 'px');
+        }
+        if (options.showResetButton == true) {
+          LK.UI.button({
+            $appendTo : $searchFormToolsBar,
+            icon : 'reset',
+            text : 'reset',
+            cls : 'warning',
+            height : LK.rowHeight - 2 * LK.topGap,
+            click : function($button) {
+              $searchForm.LKFormBindData();
+            }
+          });
+        }
+        if (options.showSearchButton == true) {
+          LK.UI.button({
+            $appendTo : $searchFormToolsBar,
+            icon : 'search',
+            text : 'search',
+            cls : 'success',
+            height : LK.rowHeight - 2 * LK.topGap,
+            style : {
+              'margin-left' : '10px'
+            },
+            click : function($button) {
+              $plugin.LKLoad({
+                param : LK.UI._datagrid.getParam($plugin, options)
+              });
+            }
+          });
+        }
+      } else {
+        if (hasPageBar && options.showSearchButton == true) {
+          $pageBarSearButton.show();
+        }
+      }
+    }
   }
 
   // 数据栏
@@ -702,13 +774,14 @@ LK.UI.loadOptions,
    * @see LK.UI.form中的plugins参数
    */
   searchForm : [],
-  // 显示查询按钮（无searchForm时起作用）
+  // 是否查询按钮
   showSearchButton : true,
+  // 是否重置按钮
+  showResetButton : true,
   /**
    * 标题栏工具栏
    * @see LK.UI.button（click方法被重写，第一个参数保持按钮控件不变，增加第二个参数当前对话框控件，增加第三个参数当前选中行，增加第四个参数当前选中数据集,增加第五个参数当前表格值。仅支持图标按钮。）
    * @extend 额外增加singleCheck定义。true:必须选择一行数据进行操作;false:至少选择一行数据进行操作;null:可不选数据进行操作;
-   * @tip 如果输入了title或icon，则框架内部会补充刷新按钮。如果有查询表单时，则框架内部会补充重置按钮和查询按钮。
    */
   titleTools : [],
   /**
