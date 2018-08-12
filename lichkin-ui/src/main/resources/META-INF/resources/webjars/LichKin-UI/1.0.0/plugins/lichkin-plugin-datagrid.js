@@ -148,7 +148,7 @@ LK.UI._datagrid = {
     if (options.searchForm.length != 0) {
       param = $.extend({}, param, $plugin.find('.lichkin-datagrid-searchFormBar .lichkin-form').LKFormGetData());
     }
-    return param;
+    return options.reloadParam($plugin, param);
   }
 
 };
@@ -829,6 +829,15 @@ LK.UI.loadOptions,
    * @param rowData 行数据
    */
   onRowClick : function($plugin, $row, rowData) {
+  },
+  /**
+   * 重新加载时参数
+   * @param $plugin 当前控件对象
+   * @param param 当前参数
+   * @return 参数
+   */
+  reloadParam : function($plugin, param) {
+    return param;
   }
 }));
 
