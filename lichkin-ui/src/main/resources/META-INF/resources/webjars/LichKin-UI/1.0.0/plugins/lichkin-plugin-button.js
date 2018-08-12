@@ -51,6 +51,9 @@ LK.UI('plugins', 'button', function(options) {
           'margin' : (options.height - 2 - iconSize) / 2 + 'px'
         }
       });
+      if (options.tip == 'click') {
+        options.tip = options.icon.icon;
+      }
       $icon = LK.UI.icon(options.icon).appendTo($span);
     }
 
