@@ -29,7 +29,7 @@
   background-color: var(--lichkin-plugin-border-color);
   border-top: none;
   border-right: 1px solid var(--lichkin-plugin-border-color);
-  border-bottom: 1px solid var(--lichkin-plugin-header-border-color);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   border-left: 1px solid var(--lichkin-plugin-border-color);
 }
 
@@ -65,7 +65,7 @@
 }
 
 .lichkin-datagrid .lichkin-datagrid-dataHeaderBar .lichkin-table .lichkin-table-row .lichkin-table-cell {
-  border-right: 1px solid var(--lichkin-plugin-header-border-color);
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
   background-color: var(--lichkin-datagrid-header-background-color);
 }
 
@@ -87,7 +87,7 @@
 
 .lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar + .lichkin-datagrid-dataBar {border-top-color: var(--lichkin-plugin-border-color);}
 .lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar + .lichkin-datagrid-dataBar .lichkin-datagrid-dataHeaderBar {background-color:var(--lichkin-datagrid-header-background-color);}
-.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar + .lichkin-datagrid-dataBar .lichkin-datagrid-dataHeaderBar .lichkin-table .lichkin-table-row .lichkin-table-cell {border-right:1px solid var(--lichkin-plugin-header-border-color);background-color:var(--lichkin-datagrid-header-background-color);}
+.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar + .lichkin-datagrid-dataBar .lichkin-datagrid-dataHeaderBar .lichkin-table .lichkin-table-row .lichkin-table-cell {border-right:1px solid rgba(0, 0, 0, 0.1);background-color:var(--lichkin-datagrid-header-background-color);}
 .lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar + .lichkin-datagrid-dataBar .lichkin-datagrid-dataHeaderBar .lichkin-table .lichkin-table-row .lichkin-table-cell .lichkin-text {color:var(--lichkin-datagrid-header-font-color);}
 
 .lichkin-datagrid .lichkin-datagrid-dataBodyBar {

@@ -22,8 +22,8 @@
   width: 425px;
   height: 528px;
   bottom: 43px;
-  border: 2px solid var(--lichkin-plugin-inverse-border-color);
-  background-color: var(--lichkin-plugin-background-color);
+  border: 1px solid var(--lichkin-plugin-dark-border-color);
+  background-color: var(--lichkin-plugin-dark-background-color);
   border-radius: 0px 12px 0px 0px;
   z-index: 88888;
 }
@@ -33,10 +33,10 @@
   width: 277px;
   height: 100%;
   float: left;
-  background: -webkit-linear-gradient(45deg, var(--lichkin-plugin-light-border-color) 0px, var(--lichkin-plugin-inverse-border-color) 275px);
-  background: -o-linear-gradient(45deg, var(--lichkin-plugin-light-border-color) 0px, var(--lichkin-plugin-inverse-border-color) 275px);
-  background: -moz-linear-gradient(45deg, var(--lichkin-plugin-light-border-color) 0px, var(--lichkin-plugin-inverse-border-color) 275px);
-  background-image: linear-gradient(45deg, var(--lichkin-plugin-light-border-color) 0px, var(--lichkin-plugin-inverse-border-color) 275px);
+  background: -webkit-linear-gradient(45deg, var(--lichkin-plugin-light-light-border-color) 0px, var(--lichkin-plugin-background-color-inverse) 275px);
+  background: -o-linear-gradient(45deg, var(--lichkin-plugin-light-light-border-color) 0px, var(--lichkin-plugin-background-color-inverse) 275px);
+  background: -moz-linear-gradient(45deg, var(--lichkin-plugin-light-light-border-color) 0px, var(--lichkin-plugin-background-color-inverse) 275px);
+  background-image: linear-gradient(45deg, var(--lichkin-plugin-light-light-border-color) 0px, var(--lichkin-plugin-background-color-inverse) 275px);
 }
 
 #lichkin-menus-container .lichkin-menus-container-getted {
@@ -57,7 +57,7 @@
 
 #lichkin-menus-container .lichkin-menus-container-getted .lichkin-menu-item .lichkin-text,
 #lichkin-menus-container .lichkin-menus-container-getted .lichkin-menu-item .lichkin-icon i {
-  color: var(--lichkin-plugin-inverse-font-color);
+  color: var(--lichkin-plugin-font-color-inverse);
 }
 
 #lichkin-menus-container .lichkin-menus-container-getted .lichkin-menu-item .lichkin-icon-menu-head {
@@ -75,13 +75,13 @@
 
 #lichkin-menus-container-common {
   width: 148px;
-  height: 528px;
+  height: 526px;
   overflow: hidden;
   background-color: var(--lichkin-plugin-background-color);
   border-radius: 0px 9px 0px 0px;
-  left: 279px;
+  left: 278px;
   position: absolute;
-  bottom: 45px;
+  bottom: 44px;
   z-index: 88888;
 }
 
@@ -133,7 +133,7 @@
   line-height: 32px;
   z-index: 99999;
   padding: 5px;
-  background-color: var(--lichkin-plugin-inverse-background-color);
+  background-color: var(--lichkin-plugin-background-color-inverse);
 }
 
 #lichkin-task-starter-container:hover {
@@ -141,17 +141,17 @@
 }
 
 #lichkin-task-starter-container #lichkin-task-starter i {
-  color: var(--lichkin-plugin-background-color);
+  color: var(--lichkin-plugin-font-color-inverse);
 }
 
 #lichkin-tasks-bar {
   position: fixed;
   bottom: 0px;
   width: 100%;
-  border-top: 1px solid var(--lichkin-plugin-inverse-border-color);
-  border-bottom: 1px solid var(--lichkin-plugin-inverse-border-color);
+  border-top: 1px solid var(--lichkin-plugin-border-color-inverse);
+  border-bottom: 1px solid var(--lichkin-plugin-border-color-inverse);
   z-index: 88888;
-  background: var(--lichkin-plugin-inverse-border-color);
+  background: var(--lichkin-plugin-background-color-inverse);
   overflow: hidden;
 }
 
@@ -165,14 +165,14 @@
   float: left;
   cursor: pointer;
   opacity: 0.6;
-  border-bottom: 2px solid #ffffff;
+  border-bottom: 2px solid var(--lichkin-plugin-font-color-inverse);
   margin-left: 3px;
   padding: 4px 6px;
 }
 
 #lichkin-tasks-bar #lichkin-tasks-container .lichkin-task .lichkin-text,
 #lichkin-tasks-bar #lichkin-tasks-container .lichkin-task .lichkin-icon i {
-  color: #ffffff;
+  color: var(--lichkin-plugin-font-color-inverse);
 }
 
 #lichkin-tasks-bar #lichkin-tasks-container .lichkin-task .lichkin-icon {

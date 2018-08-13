@@ -19,7 +19,7 @@
 }
 
 .lichkin-numberspinner .lichkin-numberspinner-button .lichkin-numberspinner-button-container .lichkin-icon i {
-  color: var(--lichkin-plugin-background-color);
+  color: var(--lichkin-plugin-background-color) !important;
 }
 
 .lichkin-numberspinner .lichkin-numberspinner-button {
@@ -39,7 +39,7 @@
 }
 
 .lichkin-numberspinner-invalid .lichkin-numberspinner-button .lichkin-numberspinner-button-container .lichkin-icon i {
-  color: var(--lichkin-plugin-background-color-invalid);
+  color: var(--lichkin-plugin-background-color-invalid) !important;
 }
 
 .lichkin-plugin-invalid .lichkin-numberspinner .lichkin-numberspinner-button .lichkin-numberspinner-button-container .lichkin-icon {

@@ -1,13 +1,8 @@
 @charset "UTF-8";
 
-:root {
-  --lichkin-dialog-mask-background-color: rgba(0, 0, 0, 0.3);
-}
-
 .lichkin-dialog,
 .lichkin-dialog .lichkin-dialog-titleBar,
 .lichkin-dialog .lichkin-dialog-contentBar,
-.lichkin-dialog .lichkin-dialog-contentBar .lichkin-plugin,
 .lichkin-dialog .lichkin-dialog-buttonsBar
 {
   border-style: solid;
@@ -17,6 +12,11 @@
 .lichkin-dialog .lichkin-dialog-contentBar .lichkin-plugin .lichkin-plugin-button .lichkin-icon i
 {
   color: var(--lichkin-plugin-light-border-color);
+}
+
+.lichkin-dialog .lichkin-dialog-contentBar .lichkin-plugin
+{
+  border-color: var(--lichkin-plugin-light-border-color);
 }
 
 .lichkin-dialog .lichkin-dialog-titleBar,
@@ -102,7 +102,6 @@
 .lichkin-dialog-focus,
 .lichkin-dialog-focus .lichkin-dialog-titleBar,
 .lichkin-dialog-focus .lichkin-dialog-contentBar,
-.lichkin-dialog-focus .lichkin-dialog-contentBar .lichkin-plugin,
 .lichkin-dialog-focus .lichkin-dialog-buttonsBar
 {
   border-color: var(--lichkin-plugin-border-color);
@@ -111,6 +110,11 @@
 .lichkin-dialog-focus .lichkin-dialog-contentBar .lichkin-plugin .lichkin-plugin-button .lichkin-icon i
 {
   color: var(--lichkin-plugin-border-color);
+}
+
+.lichkin-dialog-focus .lichkin-dialog-contentBar .lichkin-plugin
+{
+  border-color: var(--lichkin-plugin-border-color);
 }
 
 .lichkin-dialog-focus .lichkin-dialog-titleBar,
@@ -124,4 +128,15 @@
   background-color: var(--lichkin-plugin-border-color);
 }
 
-.lichkin-dialog-mask {padding:0px;background-color:var(--lichkin-dialog-mask-background-color);width:100%;height:100%;border:none;margin:0px;position:fixed;top:0px;display:none;}
+/** invalid */
+.lichkin-dialog .lichkin-dialog-contentBar .lichkin-plugin-invalid .lichkin-plugin-button .lichkin-icon i
+{
+  color: var(--lichkin-plugin-border-color-invalid);
+}
+
+.lichkin-dialog .lichkin-dialog-contentBar .lichkin-plugin-invalid
+{
+  border-color: var(--lichkin-plugin-border-color-invalid);
+}
+
+.lichkin-dialog-mask {padding:0px;background-color:rgba(0, 0, 0, 0.3);width:100%;height:100%;border:none;margin:0px;position:fixed;top:0px;display:none;}

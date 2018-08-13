@@ -25,7 +25,11 @@ $.LKExtendI18N({
 
   'changeTheme' : 'Change Theme',
   'help' : 'Help',
+  'fullScreen' : 'Full Screen',
+  'existfullScreen' : 'Exist Full Screen',
   'exit' : 'Exit',
+
+  'fullScreenTip' : 'In order to improve the user experience, the system will switch to the full screen display state, you can exit the full screen in the start menu.',
 
   'sysMgmt' : 'system management',
   'roleMgmt' : 'role management',

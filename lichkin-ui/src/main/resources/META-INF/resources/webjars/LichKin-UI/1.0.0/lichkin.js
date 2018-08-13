@@ -178,12 +178,12 @@ $.fn.extend({
 /** 全局定义顶层对象 */
 var LK = {
 
-  // 控件文字大小
-  pluginFontSize : 12,
   // 控件文字颜色
   pluginFontColor : '#2e6da4',
   // 控件文字颜色
   pluginInvalidFontColor : '#d43f3a',
+  // 控件文字大小
+  pluginFontSize : 12,
   // 表单内控件距离顶部间距
   topGap : 3,
   // 表单内控件距离左部间距
@@ -207,6 +207,193 @@ var LK = {
     versionX : 1,
     versionY : 0,
     versionZ : 0
+  },
+
+  // 默认主题
+  defaultTheme : {
+    size : {
+      primary : {
+        font : 12
+      }
+    },
+    color : {
+      light2 : {
+        border : '#6eade4',
+        background : '#ffffff',
+        font : 'var(--lichkin-plugin-light-light-border-color)'
+      },
+      light : {
+        border : '#4e8dc4',
+        background : '#ffffff',
+        font : 'var(--lichkin-plugin-light-border-color)'
+      },
+      primary : {
+        border : '#2e6da4',
+        background : '#ffffff',
+        font : 'var(--lichkin-plugin-border-color)'
+      },
+      dark : {
+        border : '#0e4d84',
+        background : '#ffffff',
+        font : 'var(--lichkin-plugin-dark-border-color)'
+      },
+      dark2 : {
+        border : '#002d64',
+        background : '#ffffff',
+        font : 'var(--lichkin-plugin-dark-dark-border-color)'
+      },
+      selected : {
+        border : 'var(--lichkin-plugin-light-light-background-color)',
+        background : 'var(--lichkin-plugin-light-light-border-color)',
+        font : 'var(--lichkin-plugin-light-light-background-color)'
+      },
+      hover : {
+        border : 'var(--lichkin-plugin-dark-dark-background-color)',
+        background : 'var(--lichkin-plugin-dark-dark-border-color)',
+        font : 'var(--lichkin-plugin-dark-dark-background-color)'
+      },
+      selectedHover : {
+        border : 'var(--lichkin-plugin-dark-background-color)',
+        background : 'var(--lichkin-plugin-dark-border-color)',
+        font : 'var(--lichkin-plugin-dark-background-color)'
+      },
+      inverse : {
+        border : 'var(--lichkin-plugin-dark-border-color)',
+        background : 'var(--lichkin-plugin-border-color)',
+        font : 'var(--lichkin-plugin-background-color)'
+      },
+      invalid : {
+        border : '#d43f3a',
+        background : '#ffe6e6',
+        font : 'var(--lichkin-plugin-border-color-invalid)'
+      }
+    }
+  },
+
+  // 扩展主题
+  extendThemes : {
+    green : {
+      color : {
+        light2 : {
+          border : '#8cee8c'
+        },
+        light : {
+          border : '#6cce6c'
+        },
+        primary : {
+          border : '#4cae4c'
+        },
+        dark : {
+          border : '#2c8e2c'
+        },
+        dark2 : {
+          border : '#0c6e0c'
+        }
+      }
+    },
+    orange : {
+      color : {
+        light2 : {
+          border : '#ffe276'
+        },
+        light : {
+          border : '#ffc256'
+        },
+        primary : {
+          border : '#eea236'
+        },
+        dark : {
+          border : '#ce8216'
+        },
+        dark2 : {
+          border : '#ae6200'
+        }
+      }
+    },
+    red : {
+      color : {
+        light2 : {
+          border : '#ff7f7a'
+        },
+        light : {
+          border : '#f45f5a'
+        },
+        primary : {
+          border : '#d43f3a'
+        },
+        dark : {
+          border : '#b41f1a'
+        },
+        dark2 : {
+          border : '#940000'
+        },
+        invalid : {
+          border : '#2e6da4',
+          background : '#c2e3ff'
+        }
+      }
+    }
+  },
+
+  /**
+   * 更换主题
+   * @param config 配置
+   */
+  changeTheme : function(config) {
+    var config = $.extend(true, {}, this.defaultTheme, isJSON(config) ? config : {});
+
+    color = config.color;
+    size = config.size;
+
+    LK.pluginFontColor = color.primary.font;
+    LK.pluginFontSize = size.primary.font;
+
+    var theme = '\r\n:root{\r\n';
+
+    theme += '--lichkin-plugin-light-light-border-color:' + color.light2.border + ';\r\n';
+    theme += '--lichkin-plugin-light-light-background-color:' + color.light2.background + ';\r\n';
+    theme += '--lichkin-plugin-light-light-font-color:' + color.light2.font + ';\r\n';
+
+    theme += '--lichkin-plugin-light-border-color:' + color.light.border + ';\r\n';
+    theme += '--lichkin-plugin-light-background-color:' + color.light.background + ';\r\n';
+    theme += '--lichkin-plugin-light-font-color:' + color.light.font + ';\r\n';
+
+    theme += '--lichkin-plugin-border-color:' + color.primary.border + ';\r\n';
+    theme += '--lichkin-plugin-background-color:' + color.primary.background + ';\r\n';
+    theme += '--lichkin-plugin-font-color:' + color.primary.font + ';\r\n';
+
+    theme += '--lichkin-plugin-dark-border-color:' + color.dark.border + ';\r\n';
+    theme += '--lichkin-plugin-dark-background-color:' + color.dark.background + ';\r\n';
+    theme += '--lichkin-plugin-dark-font-color:' + color.dark.font + ';\r\n';
+
+    theme += '--lichkin-plugin-dark-dark-border-color:' + color.dark2.border + ';\r\n';
+    theme += '--lichkin-plugin-dark-dark-background-color:' + color.dark2.background + ';\r\n';
+    theme += '--lichkin-plugin-dark-dark-font-color:' + color.dark2.font + ';\r\n';
+
+    theme += '--lichkin-plugin-border-color-selected:' + color.selected.border + ';\r\n';
+    theme += '--lichkin-plugin-background-color-selected:' + color.selected.background + ';\r\n';
+    theme += '--lichkin-plugin-font-color-selected:' + color.selected.font + ';\r\n';
+
+    theme += '--lichkin-plugin-border-color-hover:' + color.hover.border + ';\r\n';
+    theme += '--lichkin-plugin-background-color-hover:' + color.hover.background + ';\r\n';
+    theme += '--lichkin-plugin-font-color-hover:' + color.hover.font + ';\r\n';
+
+    theme += '--lichkin-plugin-border-color-selected-hover:' + color.selectedHover.border + ';\r\n';
+    theme += '--lichkin-plugin-background-color-selected-hover:' + color.selectedHover.background + ';\r\n';
+    theme += '--lichkin-plugin-font-color-selected-hover:' + color.selectedHover.font + ';\r\n';
+
+    theme += '--lichkin-plugin-border-color-inverse:' + color.inverse.border + ';\r\n';
+    theme += '--lichkin-plugin-background-color-inverse:' + color.inverse.background + ';\r\n';
+    theme += '--lichkin-plugin-font-color-inverse:' + color.inverse.font + ';\r\n';
+
+    theme += '--lichkin-plugin-border-color-invalid:' + color.invalid.border + ';\r\n';
+    theme += '--lichkin-plugin-background-color-invalid:' + color.invalid.background + ';\r\n';
+    theme += '--lichkin-plugin-font-color-invalid:' + color.invalid.font + ';\r\n';
+
+    theme += '--lichkin-plugin-font-size:' + size.primary.font + 'px;\r\n';
+
+    theme += '}\r\n';
+    $('#lichkin-themes').html(theme);
   },
 
   // 请求子路径

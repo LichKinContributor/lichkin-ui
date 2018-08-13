@@ -168,17 +168,56 @@ LK.home.commonMenus = {
           });
         }
       }));
-
     }
   },
   changeTheme : {
     type : 'primary',
     click : function() {
+      var size = 64;
+      LK.UI.openDialog({
+        title : 'changeTheme',
+        mask : true,
+        size : {
+          width : size * (2 + 1 + Object.keys(LK.extendThemes).length),
+          height : size * (2 + 1)
+        },
+        onAfterCreate : function($dialog, $contentBar) {
+          var $container = $('<div></div>').css('padding', size + 'px').appendTo($contentBar);
+          var css = {
+            'cursor' : 'pointer',
+            'width' : size + 'px',
+            'height' : size + 'px',
+            'float' : 'left'
+          };
+          $('<div></div>').css(css).css('background-color', LK.defaultTheme.color.primary.border).appendTo($container).click(function() {
+            LK.changeTheme();
+          });
+          for ( var key in LK.extendThemes) {
+            (function(key) {
+              $('<div></div>').css(css).css('background-color', LK.extendThemes[key].color.primary.border).appendTo($container).click(function() {
+                LK.changeTheme(LK.extendThemes[key]);
+              });
+            })(key);
+          }
+          $('<div style="clear:both;"></div>').appendTo($container);
+        }
+      });
     }
   },
   help : {
     type : 'success',
     click : function() {
+    }
+  },
+  existfullScreen : {
+    type : 'info',
+    click : function() {
+      if ($(this).html() == $.LKGetI18N('fullScreen')) {
+        $(this).html($.LKGetI18N('existfullScreen'));
+      } else {
+        $(this).html($.LKGetI18N('fullScreen'));
+      }
+      LK.toggleFullScreen();
     }
   },
   exit : {
@@ -201,6 +240,19 @@ LK.home.$tasksContainer = $('#lichkin-tasks-container');
 LK.home.currentTasks = new Array();
 
 $(function() {
+  var fullScreenTip = $.LKGetI18N('fullScreenTip');
+  LK.UI.openDialog({
+    icon : 'tip',
+    title : 'tip',
+    content : '<div style="padding:10px;font-size:12px;">' + fullScreenTip + '</div>',
+    size : {
+      width : 20 + fullScreenTip.length * (_LANG == 'zh_CN' ? 12 : (12 / 2)),
+      height : 20 + 12 * 1.5
+    },
+    onAfterClose : function() {
+      LK.toggleFullScreen();
+    }
+  });
   // 菜单显示隐藏控制
   $(document).click(function(e) {
     var target = $(e.target);
@@ -558,7 +610,7 @@ LK.home.height = 0;
 $(function() {
   onDocumentResize();
   setInterval(function() {
-    if (LK.home.width != $doc.width() || LK.home.height != $doc.height()) {
+    if (LK.home.width != $win.width() || LK.home.height != $win.height()) {
       onDocumentResize();
     }
   }, 1000);
@@ -569,8 +621,8 @@ $(function() {
  */
 var onDocumentResizeFuncs = [];
 var onDocumentResize = function() {
-  LK.home.width = $doc.width();
-  LK.home.height = $doc.height();
+  LK.home.width = $win.width();
+  LK.home.height = $win.height();
   $body.css({
     'width' : LK.home.width + 'px',
     'height' : LK.home.height + 'px'

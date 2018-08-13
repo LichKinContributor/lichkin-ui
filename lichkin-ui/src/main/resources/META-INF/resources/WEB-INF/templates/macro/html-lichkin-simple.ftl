@@ -47,6 +47,8 @@
 			<style>
 				<#nested "style"/>
 			</style>
+			<style id="lichkin-themes"></style>
+			<style id="lichkin-styles"></style>
 		</#if>
 		<#if section="body-attributes"><#nested "body-attributes"/></#if>
 		<#if section="body-content">

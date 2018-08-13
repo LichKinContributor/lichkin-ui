@@ -25,7 +25,11 @@ $.LKExtendI18N({
 
   'changeTheme' : '更换主题',
   'help' : '使用帮助',
+  'fullScreen' : '全屏',
+  'existfullScreen' : '退出全屏',
   'exit' : '退出登录',
+
+  'fullScreenTip' : '为了提升使用体验，本系统将切换到全屏显示状态，可在开始菜单中退出全屏。',
 
   'sysMgmt' : '系统管理',
   'roleMgmt' : '角色管理',

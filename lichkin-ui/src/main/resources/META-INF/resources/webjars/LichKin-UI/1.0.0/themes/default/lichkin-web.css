@@ -1,42 +1,48 @@
 @charset "UTF-8";
 
 :root {
-  --lichkin-body-background-color: #ffffff;
+  --lichkin-plugin-light-light-border-color: #6eade4;
+  --lichkin-plugin-light-light-background-color: #ffffff;
+  --lichkin-plugin-light-light-font-color: var(--lichkin-plugin-light-light-border-color);
 
-  --lichkin-plugin-font-size: 12px;
+  --lichkin-plugin-light-border-color: #4e8dc4;
+  --lichkin-plugin-light-background-color: #ffffff;
+  --lichkin-plugin-light-font-color: var(--lichkin-plugin-light-border-color);
 
   --lichkin-plugin-border-color: #2e6da4;
   --lichkin-plugin-background-color: #ffffff;
   --lichkin-plugin-font-color: var(--lichkin-plugin-border-color);
 
-  --lichkin-plugin-light-border-color: #46b8da;
-  --lichkin-plugin-light-background-color: #ffffff;
-  --lichkin-plugin-light-font-color: var(--lichkin-plugin-light-border-color);
+  --lichkin-plugin-dark-border-color: #0e4d84;
+  --lichkin-plugin-dark-background-color: #ffffff;
+  --lichkin-plugin-dark-font-color: var(--lichkin-plugin-dark-border-color);
 
-  --lichkin-plugin-inverse-border-color: var(--lichkin-plugin-border-color);
-  --lichkin-plugin-inverse-background-color: var(--lichkin-plugin-border-color);
-  --lichkin-plugin-inverse-font-color: var(--lichkin-plugin-background-color);
+  --lichkin-plugin-dark-dark-border-color: #002d64;
+  --lichkin-plugin-dark-dark-background-color: #ffffff;
+  --lichkin-plugin-dark-dark-font-color: var(--lichkin-plugin-dark-dark-border-color);
 
-  --lichkin-plugin-border-color-selected: #ffffff;
-  --lichkin-plugin-background-color-selected: #c0daef;
-  --lichkin-plugin-font-color-selected: #000033;
+  --lichkin-plugin-border-color-selected: var(--lichkin-plugin-light-light-background-color);
+  --lichkin-plugin-background-color-selected: var(--lichkin-plugin-light-light-border-color);
+  --lichkin-plugin-font-color-selected: var(--lichkin-plugin-light-light-background-color);
 
-  --lichkin-plugin-border-color-hover: #2e6da4;
-  --lichkin-plugin-background-color-hover: #fbe4bf;
-  --lichkin-plugin-font-color-hover: #000033;
+  --lichkin-plugin-border-color-hover: var(--lichkin-plugin-dark-dark-background-color);
+  --lichkin-plugin-background-color-hover: var(--lichkin-plugin-dark-dark-border-color);
+  --lichkin-plugin-font-color-hover: var(--lichkin-plugin-dark-dark-background-color);
 
-  --lichkin-plugin-border-color-selected-hover: #2e6da4;
-  --lichkin-plugin-background-color-selected-hover: #d9eed9;
-  --lichkin-plugin-font-color-selected-hover: #000033;
+  --lichkin-plugin-border-color-selected-hover: var(--lichkin-plugin-dark-background-color);
+  --lichkin-plugin-background-color-selected-hover: var(--lichkin-plugin-dark-border-color);
+  --lichkin-plugin-font-color-selected-hover: var(--lichkin-plugin-dark-background-color);
+
+  --lichkin-plugin-border-color-inverse: var(--lichkin-plugin-dark-border-color);
+  --lichkin-plugin-background-color-inverse: var(--lichkin-plugin-border-color);
+  --lichkin-plugin-font-color-inverse: var(--lichkin-plugin-background-color);
 
   --lichkin-plugin-border-color-invalid: #d43f3a;
   --lichkin-plugin-background-color-invalid: #ffe6e6;
-  --lichkin-plugin-font-color-invalid: #d43f3a;
+  --lichkin-plugin-font-color-invalid: var(--lichkin-plugin-border-color-invalid);
 
-  --lichkin-plugin-header-border-color: #ffffff;
+  --lichkin-plugin-font-size: 12px;
 }
-
-#lichkin-html,.lichkin-body {background-color:var(--lichkin-body-background-color);}
 
 /** DIV */
 DIV.lichkin-div.default {color:#ffffff;background-color:#ffffff;border-color:#cccccc;}
@@ -86,7 +92,7 @@ TABLE.lichkin-table .lichkin-table .lichkin-table-row .lichkin-table-cell:last-c
 .lichkin-plugin .lichkin-plugin-dataContainer .lichkin-plugin-node.selected:hover {background-color:var(--lichkin-plugin-background-color-selected-hover);border-color:var(--lichkin-plugin-border-color-selected-hover);}
 .lichkin-plugin .lichkin-plugin-dataContainer .lichkin-plugin-node.selected:hover .lichkin-text {color:var(--lichkin-plugin-font-color-selected-hover);}
 
-.lichkin-plugin .lichkin-plugin-titleBar {position:relative;padding:3px 0px;height:30px;line-height:30px;background-color:var(--lichkin-plugin-border-color);border-top:1px solid var(--lichkin-plugin-border-color);border-right:1px solid var(--lichkin-plugin-border-color);border-bottom:1px solid var(--lichkin-plugin-header-border-color);border-left:1px solid var(--lichkin-plugin-border-color);}
+.lichkin-plugin .lichkin-plugin-titleBar {position:relative;padding:3px 0px;height:30px;line-height:30px;background-color:var(--lichkin-plugin-border-color);border-top:1px solid var(--lichkin-plugin-border-color);border-right:1px solid var(--lichkin-plugin-border-color);border-bottom:1px solid rgba(0, 0, 0, 0.1);border-left:1px solid var(--lichkin-plugin-border-color);}
 .lichkin-plugin .lichkin-plugin-titleBar>.lichkin-icon {position:absolute;left:6px;top:5px;}
 .lichkin-plugin .lichkin-plugin-titleBar .lichkin-icon i {color:var(--lichkin-plugin-background-color);}
 .lichkin-plugin .lichkin-plugin-titleBar .lichkin-text {position:absolute;left:6px;top:0px;height:29px !important;line-height:29px !important;color:var(--lichkin-plugin-background-color);font-size:var(--lichkin-plugin-title-font-size);}
