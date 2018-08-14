@@ -1012,12 +1012,21 @@ var LK = {
 
   /**
    * 切换全屏显示状态
+   * @param fullScreen true:全屏;false:退出全屏.
    */
-  toggleFullScreen : function() {
+  toggleFullScreen : function(fullScreen) {
     var isFullscreen = document.fullScreen || document.mozFullScreen || document.webkitIsFullScreen;
+    if (typeof fullScreen != 'undefined') {
+      isFullscreen = !fullScreen;
+    }
     if (!isFullscreen) {
-      var el = document.documentElement;
-      (el.requestFullscreen && el.requestFullscreen()) || (el.mozRequestFullScreen && el.mozRequestFullScreen()) || (el.webkitRequestFullscreen && el.webkitRequestFullscreen()) || (el.msRequestFullscreen && el.msRequestFullscreen());
+      (document.documentElement.requestFullscreen && document.documentElement.requestFullscreen())
+
+      || (document.documentElement.mozRequestFullScreen && document.documentElement.mozRequestFullScreen())
+
+      || (document.documentElement.webkitRequestFullscreen && document.documentElement.webkitRequestFullscreen())
+
+      || (document.documentElement.msRequestFullscreen && document.documentElement.msRequestFullscreen());
     } else {
       document.exitFullscreen ? document.exitFullscreen() : document.mozCancelFullScreen ? document.mozCancelFullScreen() : document.webkitExitFullscreen ? document.webkitExitFullscreen() : '';
     }

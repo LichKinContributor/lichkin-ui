@@ -209,15 +209,10 @@ LK.home.commonMenus = {
     click : function() {
     }
   },
-  existfullScreen : {
+  fullScreen : {
     type : 'info',
     click : function() {
-      if ($(this).html() == $.LKGetI18N('fullScreen')) {
-        $(this).html($.LKGetI18N('existfullScreen'));
-      } else {
-        $(this).html($.LKGetI18N('fullScreen'));
-      }
-      LK.toggleFullScreen();
+      toggleFullScreen();
     }
   },
   exit : {
@@ -239,6 +234,18 @@ LK.home.$taskStarter = LK.UI.icon({
 LK.home.$tasksContainer = $('#lichkin-tasks-container');
 LK.home.currentTasks = new Array();
 
+var toggleFullScreen = function(fullScreen) {
+  var $existfullScreen = $('#lichkin-menu-fullScreen');
+  if ($existfullScreen.html() == $.LKGetI18N('fullScreen')) {
+    $existfullScreen.html($.LKGetI18N('existfullScreen'));
+  } else {
+    if (typeof fullScreen == 'undefined') {
+      $existfullScreen.html($.LKGetI18N('fullScreen'));
+    }
+  }
+  LK.toggleFullScreen(fullScreen);
+};
+
 $(function() {
   var fullScreenTip = $.LKGetI18N('fullScreenTip');
   LK.UI.openDialog({
@@ -250,7 +257,7 @@ $(function() {
       height : 20 + 12 * 1.5
     },
     onAfterClose : function() {
-      LK.toggleFullScreen();
+      toggleFullScreen(true);
     }
   });
   // 菜单显示隐藏控制
