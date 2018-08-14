@@ -5,3 +5,8 @@
 /**/target/
 /**/gen/
 /**/.DS_Store
+
+lichkin-ui/src/main/resources/META-INF/resources/webjars/LichKin-UI/1.0.0/plugins/lichkin-plugins-simple.css
+lichkin-ui/src/main/resources/META-INF/resources/webjars/LichKin-UI/1.0.0/plugins/lichkin-plugins-simple.js
+lichkin-ui/src/main/resources/META-INF/resources/webjars/LichKin-UI/1.0.0/plugins/lichkin-plugins-complex.css
+lichkin-ui/src/main/resources/META-INF/resources/webjars/LichKin-UI/1.0.0/plugins/lichkin-plugins-complex.js

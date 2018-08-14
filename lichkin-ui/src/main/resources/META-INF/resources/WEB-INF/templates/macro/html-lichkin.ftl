@@ -8,28 +8,28 @@
 			<#nested "meta"/>
 		</#if>
 		<#if section="link-bofore-plugins">
-			<@lichkin@cssTag url="/webjars/ueditor/themes/default/css/ueditor.css" />
-			<@lichkin@cssTag url="/webjars/datepicker/datepicker.css" />
-			<@lichkin@cssTag url="/webjars/timepicker/timePicker.css" />
-            <@lichkin@cssTag url="/webjars/cropper/cropper${compressSuffix}.css" />
+			<@lichkin@cssTag url="/webjars/ueditor/themes/default/css/ueditor" />
+			<@lichkin@cssTag url="/webjars/datepicker/datepicker" />
+			<@lichkin@cssTag url="/webjars/timepicker/timePicker" />
+            <@lichkin@cssTag url="/webjars/cropper/cropper" />
 		</#if>
 		<#if section="link">
 			<#if webDebug==true>
-			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-droplist${compressSuffix}.css" />
-			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-ueditor${compressSuffix}.css" />
-			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-datepicker${compressSuffix}.css" />
-			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-timepicker${compressSuffix}.css" />
-			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-numberspinner${compressSuffix}.css" />
-			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-tree${compressSuffix}.css" />
-			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-cropper${compressSuffix}.css" />
-			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-form${compressSuffix}.css" />
-			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-datagrid${compressSuffix}.css" />
-			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-dialog${compressSuffix}.css" />
-			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-selector${compressSuffix}.css" />
+			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-droplist" />
+			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-ueditor" />
+			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-datepicker" />
+			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-timepicker" />
+			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-numberspinner" />
+			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-tree" />
+			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-cropper" />
+			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-form" />
+			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-datagrid" />
+			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-dialog" />
+			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-selector" />
 			<#else>
-			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugins-complex${compressSuffix}.css" />
+			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugins-complex" />
 			</#if>
-			<@lichkin@cssTag url="/res/css/app.css" />
+			<@lichkin@cssTag url="/res/css/app" />
 			<#nested "link"/>
 		</#if>
 		<#if section="style">
@@ -43,32 +43,32 @@
 			<#nested "javascript-contents-before-links"/>
 		</#if>
 		<#if section="javascript-links-bofore-plugins">
-			<@lichkin@jsTag url="/webjars/spark-md5/spark-md5${compressSuffix}.js" />
-			<@lichkin@jsTag url="/webjars/ueditor/ueditor.config.js" />
-			<@lichkin@jsTag url="/webjars/ueditor/ueditor.all.js" />
-			<@lichkin@jsTag url="/webjars/ueditor/lang/${locale}/${locale}.js" />
-			<@lichkin@jsTag url="/webjars/datepicker/datepicker.js" />
-			<@lichkin@jsTag url="/webjars/datepicker/i18n/datepicker.${locale}.js" />
-			<@lichkin@jsTag url="/webjars/timepicker/jquery-timepicker.js" />
-			<@lichkin@jsTag url="/webjars/cropper/cropper.js" />
+			<@lichkin@jsTag url="/webjars/spark-md5/spark-md5" />
+			<@lichkin@jsTag url="/webjars/ueditor/ueditor.config" />
+			<@lichkin@jsTag url="/webjars/ueditor/ueditor.all" />
+			<@lichkin@jsTag url="/webjars/ueditor/lang/${locale}/${locale}" />
+			<@lichkin@jsTag url="/webjars/datepicker/datepicker" />
+			<@lichkin@jsTag url="/webjars/datepicker/i18n/datepicker.${locale}" />
+			<@lichkin@jsTag url="/webjars/timepicker/jquery-timepicker" />
+			<@lichkin@jsTag url="/webjars/cropper/cropper" />
 		</#if>
 		<#if section="javascript-links-after-plugins">
 			<#if webDebug==true>
-			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-droplist${compressSuffix}.js" />
-			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-ueditor${compressSuffix}.js" />
-			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-datepicker${compressSuffix}.js" />
-			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-timepicker${compressSuffix}.js" />
-			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-numberspinner${compressSuffix}.js" />
-			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-tree${compressSuffix}.js" />
-			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-cropper${compressSuffix}.js" />
-			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-form${compressSuffix}.js" />
-			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-datagrid${compressSuffix}.js" />
-			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-dialog${compressSuffix}.js" />
-			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-selector${compressSuffix}.js" />
+			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-droplist" />
+			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-ueditor" />
+			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-datepicker" />
+			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-timepicker" />
+			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-numberspinner" />
+			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-tree" />
+			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-cropper" />
+			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-form" />
+			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-datagrid" />
+			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-dialog" />
+			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-selector" />
 
-			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-selector-employee${compressSuffix}.js" />
+			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-selector-employee" />
 			<#else>
-			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugins-complex${compressSuffix}.js" />
+			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugins-complex" />
 			</#if>
 		</#if>
 		<#if section="javascript-links-icons">

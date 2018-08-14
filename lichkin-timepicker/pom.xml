@@ -29,4 +29,32 @@
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
 
+  <build>
+    <plugins>
+      <!-- https://mvnrepository.com/artifact/net.alchim31.maven/yuicompressor-maven-plugin -->
+      <plugin>
+        <groupId>net.alchim31.maven</groupId>
+        <artifactId>yuicompressor-maven-plugin</artifactId>
+        <version>1.5.1</version>
+        <executions>
+          <execution>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>compress</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <includes>
+            <include>**/timePicker.css</include>
+            <include>**/jquery-timepicker.js</include>
+          </includes>
+          <encoding>UTF-8</encoding>
+          <jswarn>false</jswarn>
+          <suffix>.min</suffix>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
 </project>
