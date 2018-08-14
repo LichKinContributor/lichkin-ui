@@ -33,7 +33,8 @@ $.LKExtendI18N({
 
   'sysMgmt' : '系统管理',
   'roleMgmt' : '角色管理',
-  'userMgmt' : '账号管理',
+  'adminMgmt' : '账号管理',
+  'userMgmt' : '用户管理',
   'dictMgmt' : '字典管理',
   'loginLog' : '登录日志查看',
   'operLog-Admin' : '操作日志-管理员',

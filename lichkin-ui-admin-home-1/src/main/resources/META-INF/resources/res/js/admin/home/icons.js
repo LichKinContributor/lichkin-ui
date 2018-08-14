@@ -13,7 +13,8 @@ $.LKExtendICON({
 
   'sysMgmt' : 'cog',
   'roleMgmt' : 'user-secret',
-  'userMgmt' : 'user',
+  'adminMgmt' : 'user-tie',
+  'userMgmt' : 'users',
   'dictMgmt' : 'book',
   'loginLog' : 'address-book',
   'operLog' : 'book-open',

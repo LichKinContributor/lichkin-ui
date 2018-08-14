@@ -21,6 +21,7 @@
 var menuSizes = {
     'dictMgmt':           {cols:4,rows:10},
     'roleMgmt':           {cols:2.5,rows:10},
+    'adminMgmt':          {cols:4,rows:20},
     'userMgmt':           {cols:4,rows:20},
     'loginLog':           {cols:4,rows:20},
     'operLog-Admin':      {cols:4,rows:20},

@@ -33,6 +33,7 @@ $.LKExtendI18N({
 
   'sysMgmt' : 'system management',
   'roleMgmt' : 'role management',
+  'adminMgmt' : 'account management',
   'userMgmt' : 'user management',
   'dictMgmt' : 'dict management',
   'loginLog' : 'login log',
