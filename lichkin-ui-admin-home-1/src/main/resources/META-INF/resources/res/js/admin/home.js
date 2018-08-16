@@ -16,12 +16,11 @@ LK.home.commonMenus = {
   userInfo : {
     type : 'info',
     click : function() {
-      LK.UI.openDialog($.extend({}, {
+      LK.UI.openDialog({
         size : {
           cols : 1,
-          rows : 5
-        }
-      }, {
+          rows : 3
+        },
         title : 'view',
         icon : 'view',
         mask : true,
@@ -39,50 +38,37 @@ LK.home.commonMenus = {
           LK.ajax({
             url : '/getUserInfo',
             success : function(data) {
-              var formFields = [];
-              formFields.push({
-                plugin : 'cropper',
-                options : {
-                  key : 'photo',
-                  name : 'photo',
-                  compressWidth : 128,
-                  compressHeight : 128,
-                  cols : 1,
-                  rows : 2,
-                  value : data.photo
-                }
-              }, {
-                plugin : 'textbox',
-                options : {
-                  name : 'userName',
-                  value : data.userName
-                }
-              }, {
-                plugin : 'textbox',
-                options : {
-                  name : 'email',
-                  value : data.email
-                }
-              }, {
-                plugin : 'textbox',
-                options : {
-                  name : 'gender',
-                  value : $.LKGetI18N('GENDER', data.gender)
-                }
+              var $form = LK.UI.form({
+                $appendTo : $contentBar,
+                plugins : [
+                    {
+                      plugin : 'textbox',
+                      options : {
+                        name : 'userName',
+                        value : data.userName,
+                        readonly : true
+                      }
+                    }, {
+                      plugin : 'textbox',
+                      options : {
+                        name : 'email',
+                        value : data.email,
+                        readonly : true
+                      }
+                    }, {
+                      plugin : 'textbox',
+                      options : {
+                        name : 'gender',
+                        value : $.LKGetI18N('GENDER', data.gender),
+                        readonly : true
+                      }
+                    }
+                ]
               });
-
-              var formOptions = $.extend({}, {
-                plugins : formFields
-              }, {
-                $appendTo : $contentBar
-              });
-              LK.UI.form(formOptions);
-
-              $dialog.find('form').find('input').attr('readonly', 'readonly');
             }
           });
         }
-      }));
+      });
     }
   },
   changePwd : {
@@ -308,7 +294,7 @@ $(function() {
 
   // 加载菜单
   LK.ajax({
-    url : '/T/SysMenu',
+    url : '/T/SysMenu/All',
     success : function(datas, options) {
       // 添加应用菜单
       addMenus(datas, LK.home.$menusGettedContainerRoot);
@@ -377,6 +363,11 @@ var addMenus = function(menusJson, $container) {
  * @param $container 菜单容器对象
  */
 var addMenu = function(menuJson, $container) {
+  if (_WEB_DEBUG && typeof menuJson.params.url != 'undefined' && menuJson.params.url != '') {
+    $('head').append('<script type="text/javascript" src="' + _CTX + '/res/js' + menuJson.params.url + '/index/i18n/' + _LANG + _COMPRESS_SUFFIX + '.js"></script>');
+    $('head').append('<script type="text/javascript" src="' + _CTX + '/res/js' + menuJson.params.url + '/index/icons' + _COMPRESS_SUFFIX + '.js"></script>');
+  }
+
   if (menuJson.params.icon == '') {
     menuJson.params.icon = (menuJson.children.length == 0) ? 'page' : 'folder';
   }
@@ -409,10 +400,6 @@ var addMenu = function(menuJson, $container) {
 
   if (menuJson.children.length == 0) {
     if (typeof menuJson.params.url != 'undefined' && menuJson.params.url != '') {
-      var script = document.createElement("script");
-      script.type = "text/javascript";
-      script.src = _CTX + '/res/js' + menuJson.params.url + '/index/i18n/' + _LANG + '.js';
-      document.getElementsByTagName("head")[0].appendChild(script);
       $menu.click(function() {
         addTask(menuJson.id, menuJson.params.menuName, menuJson.params.icon, menuJson.url);
         var $dlg = $('[data-id=dialog_' + menuJson.id + ']');
@@ -422,9 +409,9 @@ var addMenu = function(menuJson, $container) {
             url : menuJson.params.url + '/index',
             title : menuJson.params.menuName,
             icon : menuJson.params.icon,
-            size : menuSizes[menuJson.params.menuName],
             mask : false,
             formContent : false,
+            fitContent : true,
             onFocus : function() {
               activeTask(menuJson.id);
             },
