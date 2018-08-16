@@ -188,6 +188,8 @@ LK.UI.dialogOptions = {
   },
   // 表单内容，决定大小的设置。
   formContent : true,
+  // 自适应内容大小
+  fitContent : false,
   /**
    * 对话框按钮数组
    * @see LK.UI.button（click方法被重写，第一个参数保持按钮控件不变，增加第二个参数当前对话框控件，增加第三个参数当前对话框内容栏。）
@@ -298,6 +300,13 @@ LK.UI('plugins', 'openDialog', function(options) {
     implementor.close(null, $plugin);
   });
 
+  if (options.fitContent == true) {
+    options.size = {
+      width : 333,
+      height : 333
+    };
+  }
+
   if (typeof options.size.width == 'undefined') {
     if (typeof options.size.cols == 'undefined') {
       options.size.cols = 2;
@@ -331,7 +340,41 @@ LK.UI('plugins', 'openDialog', function(options) {
         options.onAfterLoading($plugin);
       },
       onAfterRender : function(opts) {
-        if ($contentBar.find('.lichkin-body').height() > $contentBar.height()) {
+        var $contentBody = $contentBar.find('.lichkin-body');
+        if (options.fitContent == true) {
+          var w = 0;
+          var h = 0;
+          var $children = $contentBody.children('.lichkin-plugin');
+          if ($children.length == 1 && $children.is('.lichkin-datagrid')) {
+            w = $children.outerWidth() - 2;
+            $children.css('width', w + 'px');
+            h = $children.outerHeight();
+          } else {
+            $contentBody.children().each(function() {
+              if ($(this).outerWidth() > w) {
+                w = $(this).outerWidth();
+              }
+              if ($(this).outerHeight() > h) {
+                h = $(this).outerHeight();
+              }
+            });
+            $contentBody.find('.lichkin-table').each(function() {
+              if ($(this).width() > w) {
+                w = $(this).width();
+              }
+            });
+          }
+          $contentBar.animate({
+            'width' : w + 'px',
+            'height' : h + 'px'
+          }, 'slow');
+          $plugin.animate({
+            'left' : ($doc.width() - w) / 2 + 'px',
+            'top' : ($doc.height() - h - $titleBar.height() - (h != 0 ? $buttonsBar.height() : 0)) / 2 + 'px'
+          }, 'slow');
+          return;
+        }
+        if ($contentBody.height() > $contentBar.height()) {
           $contentBar.css('width', $contentBar.outerWidth() + 17);
         }
       }
