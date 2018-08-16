@@ -202,3 +202,10 @@
 .lichkin-datagrid-invalid .lichkin-datagrid-pageBar .buttons .lichkin-button i {
   color: var(--lichkin-plugin-font-color-invalid);
 }
+
+.lichkin-dialog .lichkin-datagrid .lichkin-datagrid-titleBar,
+.lichkin-dialog .lichkin-datagrid .lichkin-datagrid-searchFormBar,
+.lichkin-dialog .lichkin-datagrid .lichkin-datagrid-toolsBar,
+.lichkin-dialog .lichkin-datagrid .lichkin-datagrid-dataBar,
+.lichkin-dialog .lichkin-datagrid .lichkin-datagrid-pageBar
+{border-left:none;border-right:none;}

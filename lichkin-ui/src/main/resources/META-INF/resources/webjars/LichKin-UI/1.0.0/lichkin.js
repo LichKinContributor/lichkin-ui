@@ -104,25 +104,26 @@ $.extend($, {
 
   /**
    * 获取i18n内容
-   * @param key 键
-   * @param ... 多层键
+   * @param ... 多层键（或用.分割）
    * @return i18n内容
    */
-  LKGetI18N : function(key) {
-    if (isString(key)) {
-      var keys = arguments;
-      if (arguments.length > 1) {
-        var value;
-        for (var i = 0; i < keys.length; i++) {
-          if (i == 0) {
-            value = LKI18N[keys[i]];
-          } else {
-            value = value[keys[i]];
-          }
-        }
-        return value;
+  LKGetI18N : function() {
+    var key;
+    var keys = arguments;
+    var value;
+
+    if (keys.length == 1) {
+      key = keys[0];
+      if (key == null) {
+        return '';
       }
-      var value = LKI18N[key];
+      keys = key.split('.');
+    }
+
+    if (keys.length == 1) {
+      key = keys[0];
+      keys = key.split('.');
+      value = LKI18N[keys[0]];
       if (isString(value)) {
         return value;
       }
@@ -130,8 +131,35 @@ $.extend($, {
         return key;
       }
       throw 'can not read from i18n by key -> ' + key;
+    } else {
+      for (var i = 0; i < keys.length; i++) {
+        if (i == 0) {
+          value = LKI18N[keys[i]];
+        } else {
+          value = value[keys[i]];
+        }
+      }
+      if (isString(value)) {
+        return value;
+      }
+      throw 'can not read from i18n by key -> ' + key;
     }
-    return '';
+  },
+
+  /**
+   * 获取i18n内容
+   * @param prefix 前缀
+   * @param key 键
+   */
+  LKGetI18NWithPrefix : function(prefix, key) {
+    if (key == null) {
+      return '';
+    }
+    try {
+      return $.LKGetI18N(prefix + key);
+    } catch (e) {
+      return $.LKGetI18N(key);
+    }
   },
 
   /**
@@ -176,7 +204,7 @@ $.fn.extend({
 });
 
 /** 全局定义顶层对象 */
-var LK = {
+$.extend(LK, {
 
   // 控件文字颜色
   pluginFontColor : '#2e6da4',
@@ -1032,7 +1060,7 @@ var LK = {
     }
   }
 
-};
+});
 
 // 转为标准路径
 _CTX = LK.toStandardPath(_CTX);

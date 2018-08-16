@@ -160,6 +160,9 @@ LK.UI('plugins', 'datagrid', function(options) {
   // 控件类型
   var plugin = 'datagrid';
 
+  // 国际化处理
+  options.i18nKey = (options.i18nKey.indexOf('.') > 0 ? options.i18nKey : options.i18nKey + '.grid') + '.';
+
   // 创建控件对象
   var $plugin = LK.UI.create({
     plugin : plugin,
@@ -181,6 +184,7 @@ LK.UI('plugins', 'datagrid', function(options) {
       'padding-bottom' : LK.topGap + 'px'
     });
     $searchForm = LK.UI.form({
+      i18nKey : options.i18nKey + 'columns.',
       $appendTo : $searchFormBar,
       plugins : options.searchForm
     }).css('margin-left', -2 - LK.leftGap + 'px');
@@ -192,6 +196,7 @@ LK.UI('plugins', 'datagrid', function(options) {
     var json = {
       singleCheck : false,
       icon : 'remove',
+      text : 'remove',
       click : function($button, $datagrid, $selecteds, selectedDatas, value) {
         LK.web.confirm('confirmRemove', function() {
           LK.ajax({
@@ -222,6 +227,7 @@ LK.UI('plugins', 'datagrid', function(options) {
     var json = {
       singleCheck : true,
       icon : 'edit',
+      text : 'edit',
       click : function($button, $datagrid, $selecteds, selectedDatas, value) {
         LK.UI.openDialog($.extend({}, options.toolsEdit.dialog, {
           title : 'edit',
@@ -277,6 +283,7 @@ LK.UI('plugins', 'datagrid', function(options) {
                 value : value
               }
             });
+            formOptions.i18nKey = options.i18nKey + 'columns.';
             LK.UI.form(formOptions);
           }
         }));
@@ -294,6 +301,7 @@ LK.UI('plugins', 'datagrid', function(options) {
     var json = {
       singleCheck : null,
       icon : 'add',
+      text : 'add',
       click : function($button, $datagrid, $selecteds, selectedDatas, value) {
         if (typeof options.toolsAdd.beforeClick == 'function' && !options.toolsAdd.beforeClick($plugin)) {
           return;
@@ -337,13 +345,15 @@ LK.UI('plugins', 'datagrid', function(options) {
               }
           ],
           onAfterCreate : function($dialog, $contentBar) {
-            LK.UI.form($.extend({}, options.toolsAdd.form, {
+            var formOptions = $.extend({}, options.toolsAdd.form, {
               $appendTo : $contentBar,
               $renderTo : null,
               values : {},
               url : '',
               param : {}
-            }));
+            })
+            formOptions.i18nKey = options.i18nKey + 'columns.';
+            LK.UI.form(formOptions);
           }
         }));
       }
@@ -379,7 +389,7 @@ LK.UI('plugins', 'datagrid', function(options) {
     // 标题栏标题
     if (options.title != null) {
       $titleBar.append(LK.UI.text({
-        'text' : options.title
+        'text' : options.i18nKey + options.title
       }));
     }
 
@@ -397,6 +407,7 @@ LK.UI('plugins', 'datagrid', function(options) {
             };
           }
           $titleToolsBar.append(LK.UI.button({
+            i18nKey : options.i18nKey,
             icon : {
               icon : button.icon,
               size : 24
@@ -451,6 +462,7 @@ LK.UI('plugins', 'datagrid', function(options) {
           };
         }
         $buttonsBar.append(LK.UI.button($.extend(button, {
+          i18nKey : options.i18nKey,
           click : function($button) {
             var value = $plugin.LKGetValue();
             if (button.singleCheck == true || button.singleCheck == false) {
@@ -711,7 +723,8 @@ LK.UI('plugins', 'datagrid', function(options) {
     var column = options.columns[i];
     var $td = $('<td class="lichkin-table-cell"></td>').appendTo($tr).css('width', parseInt(column.width));
     $td.append(LK.UI.text({
-      'text' : column.text
+      'original' : true,
+      'text' : $.LKGetI18NWithPrefix(options.i18nKey + 'columns.', column.text)
     }).css('width', parseInt(column.width) - 12));
   }
 

@@ -1,6 +1,6 @@
 <#include "/_define.ftl"/>
 
-<#macro html type="",css=false,js=true>
+<#macro html type="",css=false,js=true,i18nJs=false,i18nJsAddition=false,iconsJs=false,iconsJsAddition=false>
 
 <#assign _$=_$!"">
 <#assign calculateType=type>
@@ -29,12 +29,12 @@
 			<@lichkin@cssTag url="/webjars/LichKin-UI/themes/default/lichkin-${calculateType}" />
 			<#nested "link-bofore-plugins"/>
 			<#if webDebug==true>
-			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-icon" />
-			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-text" />
-			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-button" />
-			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-textbox" />
+				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-icon" />
+				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-text" />
+				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-button" />
+				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-textbox" />
 			<#else>
-			<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugins-simple" />
+				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugins-simple" />
 			</#if>
 			<#nested "link"/>
 			<#if css==true>
@@ -44,9 +44,7 @@
 		<#if section="style">
 			<style>#lichkin-html{padding:0px;margin:0px;border:none;}.lichkin-body{padding:0px;margin:0px;border:none;}</style>
 			<style id="lichkin-icons"></style>
-			<style>
-				<#nested "style"/>
-			</style>
+			<style><#nested "style"/></style>
 			<style id="lichkin-themes"></style>
 			<style id="lichkin-styles"></style>
 		</#if>
@@ -55,31 +53,55 @@
 			<#nested "body-content"/>
 		</#if>
 		<#if section="javascript-contents-before-links">
-			let _CTX='${ctx}',_LANG='${locale}',_MAPPING_PAGES='${mappingPages}',_MAPPING_API='${mappingApi}',LKI18N={};
+			let LK={},_CTX='${ctx}',_LANG='${locale}',_MAPPING_PAGES='${mappingPages}',_MAPPING_API='${mappingApi}',_WEB_DEBUG=false,_COMPRESS_SUFFIX='${compressSuffix}',LKI18N={};
+			<#if webDebug==true>_WEB_DEBUG=true;</#if>
 			<#nested "javascript-contents-before-links"/>
 		</#if>
 		<#if section="javascript-links">
 			<@lichkin@jsTag url="/webjars/jquery/jquery"/>
 			<@lichkin@jsTag url="/webjars/LichKin-UI/lichkin" />
-			<@lichkin@jsTag url="/webjars/LichKin-UI/i18n/${locale}" />
-			<@lichkin@jsTag url="/res/js/i18n/${locale}" />
-			<@lichkin@jsTag url="/res/js${mappingUri}/i18n/${locale}" />
+
+			<#if webDebug==true>
+				<@lichkin@jsTag url="/webjars/LichKin-UI/i18n/${locale}" />
+				<#if i18nJs==true>
+					<@lichkin@jsTag url="/res/js${mappingUri}/i18n/${locale}" />
+				</#if>
+				<#if i18nJsAddition==true>
+					<@lichkin@jsTag url="/res/js${mappingUri}/i18n/addition/${locale}" />
+				</#if>
+			<#else>
+				<@lichkin@jsTag url="/res/js/i18n/${locale}" />
+			</#if>
+
 			<@lichkin@jsTag url="/webjars/LichKin-UI/lichkin-${calculateType}" />
+
 			<#nested "javascript-links-bofore-plugins"/>
 			<#if webDebug==true>
-			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-core" />
-			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-icon" />
-			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-text" />
-			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-button" />
-			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-textbox" />
+				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-core" />
+				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-icon" />
+				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-text" />
+				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-button" />
+				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-textbox" />
 			<#else>
-			<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugins-simple" />
+				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugins-simple" />
 			</#if>
+
 			<#nested "javascript-links-after-plugins"/>
-			<#nested "javascript-links-icons"/>
-			<@lichkin@jsTag url="/res/js/icons-addition" />
-			<@lichkin@jsTag url="/res/js/icons-init" />
+
+			<#if webDebug==true>
+				<#if iconsJs==true>
+					<@lichkin@jsTag url="/res/js${mappingUri}/icons" />
+				</#if>
+				<#if iconsJsAddition==true>
+					<@lichkin@jsTag url="/res/js${mappingUri}/icons-addition" />
+				</#if>
+				<@lichkin@jsTag url="/res/js/icons-init" />
+			<#else>
+				<@lichkin@jsTag url="/res/js/icons" />
+			</#if>
+
 			<#nested "javascript-links"/>
+
 			<#if js==true>
 				<@lichkin@jsTag/>
 			</#if>
@@ -91,9 +113,7 @@
 	</@html>
 <#else>
 	<div id="${mappingUri}" class="lichkin-body" <#nested "body-attributes"/>>
-		<style>
-			<#nested "style"/>
-		</style>
+		<style><#nested "style"/></style>
 		<#nested "body-content"/>
 		<#if js==true>
 			<@lichkin@jsTag/>

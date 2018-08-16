@@ -473,6 +473,8 @@ LK.UI.coreOptions = {
   $appendTo : null,
   // 控件渲染到对象
   $renderTo : null,
+  // 国际化前缀
+  i18nKey : '',
   // 样式
   cls : null,
   // 样式
@@ -534,6 +536,8 @@ LK.UI.createOptions = $.extend({},
 LK.UI.coreOptions,
 // 控件特有参数
 {
+  // 只读
+  readonly : false,
   // 值对象名称
   name : '',
   // 验证器方法名
@@ -600,6 +604,10 @@ LK.UI('plugins', 'create', function(opts) {
   // 创建UI控件对象
   var $plugin = $('<div id="' + id + '" data-id="' + plugin + '_' + id + '" class="lichkin-plugin lichkin-' + plugin + '" data-plugin-type="' + plugin + '"></div>');
 
+  if (options.readonly == true) {
+    $plugin.LKAddPluginClass(plugin, 'readonly');
+  }
+
   var width = options.width;
   if (options.width == null) {
     if (plugin == 'datagrid') {
@@ -653,6 +661,9 @@ LK.UI('plugins', 'create', function(opts) {
       'line-height' : textLineHeight + 'px',
       'display' : 'block'
     });
+    if (options.readonly == true) {
+      $value.attr('readonly', 'readonly');
+    }
   }
 
   // 设置值
@@ -675,7 +686,7 @@ LK.UI('plugins', 'create', function(opts) {
       'padding' : LK.topGap + 'px 0px 0px ' + LK.leftGap + 'px'
     });
 
-    var keyText = options.key == null ? $.LKGetI18N(options.name) : $.LKGetI18N(options.key);
+    var keyText = $.LKGetI18NWithPrefix(options.i18nKey, (options.key == null ? options.name : options.key));
     if (options.keyTextReplaces.length != 0) {
       for (var i = 0; i < options.keyTextReplaces.length; i++) {
         var keyTextReplace = options.keyTextReplaces[i];

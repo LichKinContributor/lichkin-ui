@@ -112,6 +112,10 @@ TABLE.lichkin-table .lichkin-table .lichkin-table-row .lichkin-table-cell:last-c
 
 .lichkin-plugin-invalid .lichkin-plugin-titleBar {background-color:var(--lichkin-plugin-border-color-invalid);border-color:var(--lichkin-plugin-border-color-invalid);}
 
+.lichkin-plugin-readonly {border-color:transparent !important;}
+.lichkin-plugin.fuzzy-left {border-left-style:dashed !important;}
+.lichkin-plugin.fuzzy-right {border-right-style:dashed !important;}
+
 /** plugin popup */
 .lichkin-plugin-popup {display:none;position:absolute;overflow:auto;left:-1px;z-index:99999;border:1px solid var(--lichkin-plugin-border-color);border-top:none;background-color:var(--lichkin-plugin-background-color);}
 .lichkin-plugin-popup-invalid {border-color:var(--lichkin-plugin-border-color-invalid);background-color:var(--lichkin-plugin-background-color-invalid);}

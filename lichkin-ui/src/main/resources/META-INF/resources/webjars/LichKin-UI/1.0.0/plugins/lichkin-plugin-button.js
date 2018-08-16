@@ -61,10 +61,13 @@ LK.UI('plugins', 'button', function(options) {
     if (options.text != null) {
       if (isString(options.text)) {
         options.text = $.extend({}, LK.UI.textOptions, {
-          text : options.text
+          text : options.text,
+          i18nKey : options.i18nKey
         });
       } else {
-        options.text = $.extend({}, LK.UI.textOptions, options.text);
+        options.text = $.extend({}, LK.UI.textOptions, {
+          i18nKey : options.i18nKey
+        }, options.text);
       }
       if (iconSize != false) {
         options.text.style = $.extend({}, options.text.style, {

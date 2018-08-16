@@ -31,7 +31,7 @@ LK.UI.coreOptions,
 LK.UI('plugins', 'text', function(options) {
   options.createPlugin = function(id) {
     // 创建控件对象
-    var $plugin = $('<span id="' + id + '" class="lichkin-text">' + (options.original ? options.text : $.LKGetI18N(options.text)) + '</span>');
+    var $plugin = $('<span id="' + id + '" class="lichkin-text">' + (options.original ? options.text : $.LKGetI18NWithPrefix(options.i18nKey, options.text)) + '</span>');
 
     // 特殊样式
     $plugin.css({
