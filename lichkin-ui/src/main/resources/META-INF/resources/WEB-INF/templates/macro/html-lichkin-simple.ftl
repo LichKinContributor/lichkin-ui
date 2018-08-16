@@ -40,6 +40,7 @@
 			<#if css==true>
 				<@lichkin@cssTag/>
 			</#if>
+			<#nested "link-after-self"/>
 		</#if>
 		<#if section="style">
 			<style>#lichkin-html{padding:0px;margin:0px;border:none;}.lichkin-body{padding:0px;margin:0px;border:none;}</style>

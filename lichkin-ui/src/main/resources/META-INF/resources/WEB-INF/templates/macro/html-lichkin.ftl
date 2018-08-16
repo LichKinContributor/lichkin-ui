@@ -33,6 +33,9 @@
 			<@lichkin@cssTag url="/res/css/app" />
 			<#nested "link"/>
 		</#if>
+		<#if section="link-after-self">
+			<#nested "link-after-self"/>
+		</#if>
 		<#if section="style">
 			<#nested "style"/>
 		</#if>
