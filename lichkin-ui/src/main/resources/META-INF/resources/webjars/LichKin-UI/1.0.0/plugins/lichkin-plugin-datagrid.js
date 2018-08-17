@@ -326,6 +326,9 @@ LK.UI('plugins', 'datagrid', function(options) {
       icon : 'remove',
       text : 'remove',
       click : function($button, $datagrid, $selecteds, selectedDatas, value) {
+        if (typeof options.toolsRemove.beforeClick == 'function' && !options.toolsRemove.beforeClick($button, $datagrid, $selecteds, selectedDatas, value)) {
+          return;
+        }
         LK.web.confirm('confirmRemove', function() {
           LK.ajax({
             url : options.toolsRemove.saveUrl,
