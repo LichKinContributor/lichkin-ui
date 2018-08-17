@@ -74,21 +74,21 @@ LK.UI._datagrid = {
    * @param datas 数据集
    */
   addDatas : function($plugin, $container, datas) {
-    var columns = $plugin.data('LKOPTIONS').columns;
+    var options = $plugin.data('LKOPTIONS');
     if (typeof datas.content != 'undefined') {
-      $plugin.data('totalPages', datas.totalPages);
-      var totalPages = datas.totalPages;
-      totalPages = totalPages == 0 ? 1 : totalPages;
-      $plugin.find('.lichkin-datagrid-pageBar .pageNumberShow').html($.LKGetI18N('page-suffix').replace('{totalPages}', totalPages));
-      var total = datas.totalElements;
-      var from = total == 0 ? 0 : datas.number * datas.size + 1;
-      var to = total == 0 ? 0 : from - 1 + datas.numberOfElements;
-      $plugin.find('.lichkin-datagrid-pageBar .statistics .lichkin-text').html($.LKGetI18N('datagrid-statistics').replace('{from}', from).replace('{to}', to).replace('{total}', total));
+      if (options.pageable == true) {
+        $plugin.data('totalPages', datas.totalPages);
+        var totalPages = datas.totalPages;
+        totalPages = totalPages == 0 ? 1 : totalPages;
+        $plugin.find('.lichkin-datagrid-pageBar .pageNumberShow').html($.LKGetI18N('page-suffix').replace('{totalPages}', totalPages));
+        var total = datas.totalElements;
+        var from = total == 0 ? 0 : datas.number * datas.size + 1;
+        var to = total == 0 ? 0 : from - 1 + datas.numberOfElements;
+        $plugin.find('.lichkin-datagrid-pageBar .statistics .lichkin-text').html($.LKGetI18N('datagrid-statistics').replace('{from}', from).replace('{to}', to).replace('{total}', total));
+      }
       datas = datas.content;
     }
-    for (var i = 0; i < datas.length; i++) {
-      this.addData($plugin, $container, datas, columns, datas[i]);
-    }
+    this.addNodes($plugin, $container, datas, 0, options, options.columns, options.treeFieldName);
   },
 
   /**
@@ -96,17 +96,36 @@ LK.UI._datagrid = {
    * @param $plugin 控件对象
    * @param $container 数据容器对象
    * @param datas 数据集
+   * @param level 级别
+   * @param options 参数
    * @param columns 列信息
-   * @param data 行数据
+   * @param treeFieldName 树形表格字段名
    */
-  addData : function($plugin, $container, datas, columns, data) {
+  addNodes : function($plugin, $container, datas, level, options, columns, treeFieldName) {
+    for (var i = 0; i < datas.length; i++) {
+      this.addNode($plugin, $container, datas[i], level + 1, options, columns, treeFieldName);
+    }
+  },
+
+  /**
+   * 添加数据
+   * @param $plugin 控件对象
+   * @param $container 数据容器对象
+   * @param data 行数据
+   * @param level 级别
+   * @param options 参数
+   * @param columns 列信息
+   * @param treeFieldName 树形表格字段名
+   */
+  addNode : function($plugin, $container, data, level, options, columns, treeFieldName) {
     var $tr = $('<tr class="lichkin-table-row"></tr>').appendTo($container).LKAddPluginClass('droplist', 'node');
     $tr.data(data);
 
     for (var j = 0; j < columns.length; j++) {
       var column = columns[j];
       var $td = $('<td class="lichkin-table-cell"></td>').appendTo($tr).css('width', parseInt(column.width));
-      var text = data[column.name];
+
+      var text = treeFieldName == null ? data[column.name] : data.params[column.name];
       if (column.formatter) {
         text = column.formatter(data);
         if (!isString(text)) {
@@ -129,6 +148,41 @@ LK.UI._datagrid = {
         $text.css('text-align', column.textAlign);
       }
       $td.append($text);
+
+      if (treeFieldName != null && treeFieldName == column.name) {
+        $text.css({
+          'width' : 'auto',
+          'float' : 'left',
+          fontSize : $text.outerHeight() * 0.75
+        });
+
+        // 缩进 TODO
+        for (var i = 0; i < level; i++) {
+          $text.before(LK.UI.icon({
+            size : $text.outerHeight(),
+            style : {
+              'float' : 'left',
+            }
+          }));
+        }
+
+        // 节点图标
+        $text.before(LK.UI.icon({
+          icon : (typeof data.params.icon != 'undefined' && data.params.icon) ? data.params.icon : (data.children.length == 0 ? 'page' : 'folder'),
+          size : $text.outerHeight(),
+          style : {
+            'float' : 'left'
+          }
+        }));
+
+        // 清除浮动
+        $text.after('<div style="clear:both;"></div>');
+      }
+    }
+
+    // 添加子节点
+    if (treeFieldName != null && data.children.length != 0) {
+      this.addNodes($plugin, $container, data.children, level, options, columns, treeFieldName);
     }
   },
 
@@ -878,7 +932,9 @@ LK.UI.loadOptions,
    */
   reloadParam : function($plugin, param) {
     return param;
-  }
+  },
+  // 树形表格字段名
+  treeFieldName : null
 }));
 
 $('body').mousedown(function(e) {
