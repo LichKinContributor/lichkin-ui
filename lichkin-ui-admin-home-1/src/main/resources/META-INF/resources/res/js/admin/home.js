@@ -401,6 +401,10 @@ var addMenu = function(menuJson, $container) {
   if (menuJson.children.length == 0) {
     if (typeof menuJson.params.url != 'undefined' && menuJson.params.url != '') {
       $menu.click(function() {
+        if (_WEB_DEBUG) {
+          window.open(_CTX + menuJson.params.url + '/index' + _MAPPING_PAGES);
+          return;
+        }
         addTask(menuJson.id, menuJson.params.menuName, menuJson.params.icon, menuJson.url);
         var $dlg = $('[data-id=dialog_' + menuJson.id + ']');
         if ($dlg.length == 0) {
