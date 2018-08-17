@@ -163,7 +163,7 @@ LK.UI._datagrid = {
       icon : 'add',
       text : 'add',
       click : function($button, $datagrid, $selecteds, selectedDatas, value) {
-        if (typeof toolsAdd.beforeClick == 'function' && !toolsAdd.beforeClick($plugin)) {
+        if (typeof toolsAdd.beforeClick == 'function' && !toolsAdd.beforeClick($button, $datagrid, $selecteds, selectedDatas, value)) {
           return;
         }
         LK.UI.openDialog($.extend({}, toolsAdd.dialog, {
@@ -179,12 +179,12 @@ LK.UI._datagrid = {
                 text : 'save',
                 icon : 'save',
                 cls : 'warning',
-                click : function($button, $dialog) {
+                click : function($dialogButton, $dialog) {
                   var $form = $dialog.find('form');
                   if ($form.LKValidate()) {
                     LK.ajax({
                       url : toolsAdd.saveUrl,
-                      data : $.extend($form.LKFormGetData(), typeof toolsAdd.beforeSave == 'function' ? toolsAdd.beforeSave($plugin) : {}),
+                      data : $.extend($form.LKFormGetData(), typeof toolsAdd.beforeSave == 'function' ? toolsAdd.beforeSave($button, $datagrid, $selecteds, selectedDatas, value, $dialogButton, $dialog) : {}),
                       showSuccess : true,
                       success : function() {
                         $plugin.LKLoad({
@@ -199,7 +199,7 @@ LK.UI._datagrid = {
                 text : 'cancel',
                 icon : 'cancel',
                 cls : 'danger',
-                click : function($button, $dialog) {
+                click : function($dialogButton, $dialog) {
                   $dialog.LKCloseDialog();
                 }
               }
@@ -303,12 +303,12 @@ LK.UI('plugins', 'datagrid', function(options) {
       icon : 'edit',
       text : 'edit',
       click : function($button, $datagrid, $selecteds, selectedDatas, value) {
-        if (typeof options.toolsEdit.beforeClick == 'function' && !options.toolsEdit.beforeClick($plugin)) {
+        if (typeof options.toolsEdit.beforeClick == 'function' && !options.toolsEdit.beforeClick($button, $datagrid, $selecteds, selectedDatas, value)) {
           return;
         }
         var editJson = $.extend(true, {}, options.toolsEdit);
         if (typeof options.toolsEdit.beforeOpenDialog == 'function') {
-          editJson = options.toolsEdit.beforeOpenDialog(editJson);
+          editJson = options.toolsEdit.beforeOpenDialog(editJson, $button, $datagrid, $selecteds, selectedDatas, value);
         }
         LK.UI.openDialog($.extend({}, editJson.dialog, {
           title : 'edit',
@@ -323,12 +323,12 @@ LK.UI('plugins', 'datagrid', function(options) {
                 text : 'save',
                 icon : 'save',
                 cls : 'warning',
-                click : function($button, $dialog) {
+                click : function($dialogButton, $dialog) {
                   var $form = $dialog.find('form');
                   if ($form.LKValidate()) {
                     LK.ajax({
                       url : editJson.saveUrl,
-                      data : $form.LKFormGetData(),
+                      data : $.extend($form.LKFormGetData(), typeof editJson.beforeSave == 'function' ? editJson.beforeSave($button, $datagrid, $selecteds, selectedDatas, value, $dialogButton, $dialog) : {}),
                       showSuccess : true,
                       success : function() {
                         $plugin.LKLoad({
@@ -343,7 +343,7 @@ LK.UI('plugins', 'datagrid', function(options) {
                 text : 'cancel',
                 icon : 'cancel',
                 cls : 'danger',
-                click : function($button, $dialog) {
+                click : function($dialogButton, $dialog) {
                   $dialog.LKCloseDialog();
                 }
               }
