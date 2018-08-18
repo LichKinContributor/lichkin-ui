@@ -12,6 +12,7 @@ LK.home.$photo = LK.UI.icon({
   icon : 'loading',
   size : 128
 });
+LK.home.userInfo = {};
 LK.home.commonMenus = {
   userInfo : {
     type : 'info',
@@ -35,37 +36,36 @@ LK.home.commonMenus = {
           }
         ],
         onAfterCreate : function($dialog, $contentBar) {
-          LK.ajax({
-            url : '/getUserInfo',
-            success : function(data) {
-              var $form = LK.UI.form({
-                $appendTo : $contentBar,
-                plugins : [
-                    {
-                      plugin : 'textbox',
-                      options : {
-                        name : 'userName',
-                        value : data.userName,
-                        readonly : true
-                      }
-                    }, {
-                      plugin : 'textbox',
-                      options : {
-                        name : 'email',
-                        value : data.email,
-                        readonly : true
-                      }
-                    }, {
-                      plugin : 'textbox',
-                      options : {
-                        name : 'gender',
-                        value : $.LKGetI18N('GENDER', data.gender),
-                        readonly : true
-                      }
-                    }
-                ]
-              });
-            }
+          if ($.isEmptyObject(LK.home.userInfo)) {
+            $dialog.LKCloseDialog();
+            return;
+          }
+          LK.UI.form({
+            $appendTo : $contentBar,
+            plugins : [
+                {
+                  plugin : 'textbox',
+                  options : {
+                    name : 'userName',
+                    value : LK.home.userInfo.userName,
+                    readonly : true
+                  }
+                }, {
+                  plugin : 'textbox',
+                  options : {
+                    name : 'email',
+                    value : LK.home.userInfo.email,
+                    readonly : true
+                  }
+                }, {
+                  plugin : 'textbox',
+                  options : {
+                    name : 'gender',
+                    value : $.LKGetI18N('GENDER', LK.home.userInfo.gender),
+                    readonly : true
+                  }
+                }
+            ]
           });
         }
       });
@@ -287,8 +287,9 @@ $(function() {
   LK.ajax({
     url : '/getUserInfo',
     success : function(datas, options) {
+      LK.home.userInfo = datas;
       // 更换头像
-      appendGenderPhoto(datas.gender, datas.photo);
+      appendGenderPhoto();
     }
   });
 
@@ -307,16 +308,15 @@ $(function() {
 
 /**
  * 添加头像
- * @param gender 性别
- * @param photoUrl 头像地址
  */
-var appendGenderPhoto = function(gender, photoUrl) {
+var appendGenderPhoto = function() {
+  var gender = LK.home.userInfo.gender, photo = LK.home.userInfo.photo;
   var width = LK.home.$photo.width();
   LK.home.$photo.animate({
     'width' : '1px'
   }, 'slow', function() {
-    if (photoUrl) {
-      $(this).LKUIicon('clear').css('background-image', 'url(data:image/png;base64,' + photoUrl + ')');
+    if (photo) {
+      $(this).LKUIicon('clear').css('background-image', 'url(data:image/png;base64,' + photo + ')');
     } else {
       $(this).css('background-image', 'none').LKUIicon('change', (typeof gender == 'undefined') ? 'UNKNOWN' : gender);
     }
