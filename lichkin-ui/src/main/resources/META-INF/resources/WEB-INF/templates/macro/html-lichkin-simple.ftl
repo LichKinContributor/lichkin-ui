@@ -61,9 +61,9 @@
 		<#if section="javascript-links">
 			<@lichkin@jsTag url="/webjars/jquery/jquery"/>
 			<@lichkin@jsTag url="/webjars/LichKin-UI/lichkin" />
+			<@lichkin@jsTag url="/webjars/LichKin-UI/i18n/${locale}" />
 
 			<#if webDebug==true>
-				<@lichkin@jsTag url="/webjars/LichKin-UI/i18n/${locale}" />
 				<#if i18nJs==true>
 					<@lichkin@jsTag url="/res/js${mappingUri}/i18n/${locale}" />
 				</#if>
@@ -96,10 +96,11 @@
 				<#if iconsJsAddition==true>
 					<@lichkin@jsTag url="/res/js${mappingUri}/icons-addition" />
 				</#if>
-				<@lichkin@jsTag url="/res/js/icons-init" />
 			<#else>
 				<@lichkin@jsTag url="/res/js/icons" />
 			</#if>
+
+			<@lichkin@jsTag url="/res/js/icons-init" />
 
 			<#nested "javascript-links"/>
 
