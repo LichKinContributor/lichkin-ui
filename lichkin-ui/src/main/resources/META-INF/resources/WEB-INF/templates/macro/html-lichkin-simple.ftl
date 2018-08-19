@@ -67,11 +67,12 @@
 				<#if i18nJs==true>
 					<@lichkin@jsTag url="/res/js${mappingUri}/i18n/${locale}" />
 				</#if>
-				<#if i18nJsAddition==true>
-					<@lichkin@jsTag url="/res/js${mappingUri}/i18n/addition/${locale}" />
-				</#if>
 			<#else>
 				<@lichkin@jsTag url="/res/js/i18n/${locale}" />
+			</#if>
+
+			<#if i18nJsAddition==true>
+				<@lichkin@jsTag url="/res/js${mappingUri}/i18n/addition/${locale}" />
 			</#if>
 
 			<@lichkin@jsTag url="/webjars/LichKin-UI/lichkin-${calculateType}" />
@@ -93,11 +94,12 @@
 				<#if iconsJs==true>
 					<@lichkin@jsTag url="/res/js${mappingUri}/icons" />
 				</#if>
-				<#if iconsJsAddition==true>
-					<@lichkin@jsTag url="/res/js${mappingUri}/icons-addition" />
-				</#if>
 			<#else>
 				<@lichkin@jsTag url="/res/js/icons" />
+			</#if>
+
+			<#if iconsJsAddition==true>
+				<@lichkin@jsTag url="/res/js${mappingUri}/icons-addition" />
 			</#if>
 
 			<@lichkin@jsTag url="/res/js/icons-init" />
