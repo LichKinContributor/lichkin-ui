@@ -37,11 +37,17 @@ $.LKExtendI18N({
 
   'selector-employee-title' : '员工选择器',
   'department' : '部门',
-  'source' : '待选数据',
-  'target' : '已选数据',
-  'userName' : '姓名',
-  'gender' : '性别',
-  'jobNumber' : '工号',
+  'selector-employee-dlg' : {
+    'grid' : {
+      'source' : '待选数据',
+      'target' : '已选数据',
+      'columns' : {
+        'userName' : '姓名',
+        'gender' : '性别',
+        'jobNumber' : '工号'
+      }
+    }
+  },
 
   'cropper' : '图片裁切',
   'cropper-no-image' : '无图片',

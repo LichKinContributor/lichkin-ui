@@ -4,6 +4,7 @@
 $.LKExtendICON({
   'plus' : 'chevron-up',
   'minus' : 'chevron-down',
+  'employeeMgmt' : 'user-friends'
 });
 
 /**
@@ -70,6 +71,7 @@ LK.UI('plugins', 'selector_employee', function(options) {
     ];
 
     var $source = LK.UI.datagrid({
+      i18nKey : 'selector-employee-dlg',
       $appendTo : $contentBar.find('.datagrid-source'),
       name : 'source',
       title : 'source',
@@ -121,6 +123,7 @@ LK.UI('plugins', 'selector_employee', function(options) {
     });
 
     var $target = LK.UI.datagrid({
+      i18nKey : 'selector-employee-dlg',
       $appendTo : $contentBar.find('.datagrid-target'),
       name : 'target',
       title : 'target',
