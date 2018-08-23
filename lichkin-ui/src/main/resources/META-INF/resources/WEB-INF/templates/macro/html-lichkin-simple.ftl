@@ -104,6 +104,8 @@
 
 			<@lichkin@jsTag url="/res/js/icons-init" />
 
+			<#nested "javascript-contents-bofore-links"/>
+
 			<#nested "javascript-links"/>
 
 			<#if js==true>
