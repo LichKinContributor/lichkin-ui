@@ -132,6 +132,14 @@
                 <include>lichkin-plugin-text.css</include>
                 <include>lichkin-plugin-button.css</include>
                 <include>lichkin-plugin-textbox.css</include>
+                <include>lichkin-plugin-droplist.css</include>
+                <include>lichkin-plugin-datepicker.css</include>
+                <include>lichkin-plugin-timepicker.css</include>
+                <include>lichkin-plugin-numberspinner.css</include>
+                <include>lichkin-plugin-tree.css</include>
+                <include>lichkin-plugin-form.css</include>
+                <include>lichkin-plugin-datagrid.css</include>
+                <include>lichkin-plugin-dialog.css</include>
               </includes>
             </aggregation>
             <aggregation>
@@ -145,6 +153,14 @@
                 <include>lichkin-plugin-text.js</include>
                 <include>lichkin-plugin-button.js</include>
                 <include>lichkin-plugin-textbox.js</include>
+                <include>lichkin-plugin-droplist.js</include>
+                <include>lichkin-plugin-datepicker.js</include>
+                <include>lichkin-plugin-timepicker.js</include>
+                <include>lichkin-plugin-numberspinner.js</include>
+                <include>lichkin-plugin-tree.js</include>
+                <include>lichkin-plugin-form.js</include>
+                <include>lichkin-plugin-datagrid.js</include>
+                <include>lichkin-plugin-dialog.js</include>
               </includes>
             </aggregation>
             <aggregation>
@@ -153,16 +169,8 @@
               <inputDir>${basedir}/src/main/resources/META-INF/resources/webjars/LichKin-UI/1.0.0/plugins</inputDir>
               <output>${basedir}/src/main/resources/META-INF/resources/webjars/LichKin-UI/1.0.0/plugins/lichkin-plugins-complex.css</output>
               <includes>
-                <include>lichkin-plugin-droplist.css</include>
                 <include>lichkin-plugin-ueditor.css</include>
-                <include>lichkin-plugin-datepicker.css</include>
-                <include>lichkin-plugin-timepicker.css</include>
-                <include>lichkin-plugin-numberspinner.css</include>
-                <include>lichkin-plugin-tree.css</include>
                 <include>lichkin-plugin-cropper.css</include>
-                <include>lichkin-plugin-form.css</include>
-                <include>lichkin-plugin-datagrid.css</include>
-                <include>lichkin-plugin-dialog.css</include>
                 <include>lichkin-plugin-selector.css</include>
               </includes>
             </aggregation>
@@ -172,16 +180,8 @@
               <inputDir>${basedir}/src/main/resources/META-INF/resources/webjars/LichKin-UI/1.0.0/plugins</inputDir>
               <output>${basedir}/src/main/resources/META-INF/resources/webjars/LichKin-UI/1.0.0/plugins/lichkin-plugins-complex.js</output>
               <includes>
-                <include>lichkin-plugin-droplist.js</include>
                 <include>lichkin-plugin-ueditor.js</include>
-                <include>lichkin-plugin-datepicker.js</include>
-                <include>lichkin-plugin-timepicker.js</include>
-                <include>lichkin-plugin-numberspinner.js</include>
-                <include>lichkin-plugin-tree.js</include>
                 <include>lichkin-plugin-cropper.js</include>
-                <include>lichkin-plugin-form.js</include>
-                <include>lichkin-plugin-datagrid.js</include>
-                <include>lichkin-plugin-dialog.js</include>
                 <include>lichkin-plugin-selector.js</include>
                 <include>lichkin-plugin-selector-employee.js</include>
               </includes>

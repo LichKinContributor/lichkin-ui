@@ -33,9 +33,18 @@
 				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-text" />
 				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-button" />
 				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-textbox" />
+				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-droplist" />
+				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-datepicker" />
+				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-timepicker" />
+				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-numberspinner" />
+				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-tree" />
+				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-datagrid" />
+				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-form" />
+				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-dialog" />
 			<#else>
 				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugins-simple" />
 			</#if>
+			<@lichkin@cssTag url="/res/css/app" />
 			<#nested "link"/>
 			<#if css==true>
 				<@lichkin@cssTag/>
@@ -84,6 +93,14 @@
 				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-text" />
 				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-button" />
 				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-textbox" />
+				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-droplist" />
+				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-datepicker" />
+				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-timepicker" />
+				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-numberspinner" />
+				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-tree" />
+				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-datagrid" />
+				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-form" />
+				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-dialog" />
 			<#else>
 				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugins-simple" />
 			</#if>

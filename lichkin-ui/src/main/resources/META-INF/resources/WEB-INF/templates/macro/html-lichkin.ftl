@@ -16,21 +16,12 @@
 		</#if>
 		<#if section="link">
 			<#if webDebug==true>
-				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-droplist" />
 				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-ueditor" />
-				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-datepicker" />
-				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-timepicker" />
-				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-numberspinner" />
-				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-tree" />
 				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-cropper" />
-				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-form" />
-				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-datagrid" />
-				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-dialog" />
 				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-selector" />
 			<#else>
 				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugins-complex" />
 			</#if>
-			<@lichkin@cssTag url="/res/css/app" />
 			<#nested "link"/>
 		</#if>
 		<#if section="link-after-self">
@@ -59,16 +50,8 @@
 		</#if>
 		<#if section="javascript-links-after-plugins">
 			<#if webDebug==true>
-				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-droplist" />
 				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-ueditor" />
-				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-datepicker" />
-				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-timepicker" />
-				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-numberspinner" />
-				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-tree" />
 				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-cropper" />
-				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-form" />
-				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-datagrid" />
-				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-dialog" />
 				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-selector" />
 	
 				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-selector-employee" />
