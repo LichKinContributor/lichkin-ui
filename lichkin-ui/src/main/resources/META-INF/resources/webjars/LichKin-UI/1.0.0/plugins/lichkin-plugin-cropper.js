@@ -339,6 +339,7 @@ LK.UI('plugins', 'cropper', function(options) {
                   });
                   var base64url = canvas.toDataURL('image/' + options.imageType);
                   $plugin.LKInvokeSetValues(base64url.replace('data:image/' + options.imageType + ';base64,', ''), false);
+                  $plugin.LKValidate();
                   $dialog.LKCloseDialog();
                   return;
                 }
