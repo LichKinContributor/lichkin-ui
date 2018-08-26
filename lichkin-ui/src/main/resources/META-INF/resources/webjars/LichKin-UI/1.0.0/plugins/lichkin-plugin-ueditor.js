@@ -43,16 +43,7 @@ LK.UI('plugins', 'ueditor', function(options) {
     });
   }
 
-  ue.addListener('focus blur', function() {
-    if (ue.getContent()) {
-      $value.val('true');
-    } else {
-      $value.val('');
-    }
-    $plugin.LKValidate();
-  });
-
-  ue.addListener('keyup', function() {
+  ue.addListener('contentChange', function() {
     if (ue.getContent()) {
       $value.val('true');
     } else {
