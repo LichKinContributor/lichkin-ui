@@ -20,3 +20,7 @@
   border: none;
   overflow: hidden;
 }
+
+.lichkin-cropper-readonly .lichkin-icon i {
+  color: #CCCCCC;
+}

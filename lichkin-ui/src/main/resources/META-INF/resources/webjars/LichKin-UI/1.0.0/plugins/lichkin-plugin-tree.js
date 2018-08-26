@@ -187,6 +187,9 @@ LK.UI._tree = {
     $node.data(data);
 
     $node.click(function() {
+      if (options.readonly == true) {
+        return;
+      }
       if (options.checkbox) {
         var realCode = LKCodeUtils.realCode(data.code);
         var $icon = $(this).find('.lichkin-tree-node-checkbox');

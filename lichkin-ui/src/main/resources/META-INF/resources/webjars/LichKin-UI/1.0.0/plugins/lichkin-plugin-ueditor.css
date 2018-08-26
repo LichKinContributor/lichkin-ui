@@ -8,8 +8,16 @@
   border-color:var(--lichkin-plugin-border-color);
 }
 
+.lichkin-ueditor-readonly .edui-default .edui-editor-bottomContainer td {
+  border-color:#CCCCCC;
+}
+
 .lichkin-ueditor .edui-default .edui-editor-bottomContainer td .edui-editor-breadcrumb {
   color:var(--lichkin-plugin-font-color);
+}
+
+.lichkin-ueditor-readonly .edui-default .edui-editor-bottomContainer td .edui-editor-breadcrumb {
+  color:#CCCCCC;
 }
 
 .lichkin-ueditor .edui-default .edui-editor-toolbarboxouter {

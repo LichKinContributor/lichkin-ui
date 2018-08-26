@@ -18,6 +18,8 @@
   background-color: var(--lichkin-plugin-font-color);
 }
 
+.lichkin-numberspinner-readonly .lichkin-numberspinner-button .lichkin-numberspinner-button-container .lichkin-icon {background-color:#CCCCCC;}
+
 .lichkin-numberspinner .lichkin-numberspinner-button .lichkin-numberspinner-button-container .lichkin-icon i {
   color: var(--lichkin-plugin-background-color) !important;
 }
@@ -25,6 +27,8 @@
 .lichkin-numberspinner .lichkin-numberspinner-button {
   padding: 0px 3px;
 }
+
+.lichkin-numberspinner-readonly .lichkin-numberspinner-button {cursor:auto;}
 
 .lichkin-numberspinner .lichkin-numberspinner-button .lichkin-numberspinner-button-container .lichkin-icon:hover {
   opacity: 0.6;

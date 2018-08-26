@@ -37,6 +37,10 @@ LK.UI('plugins', 'datepicker', function(options) {
     }
   });
 
+  if (options.readonly == true) {
+    $value.unbind();
+  }
+
   // 日期按钮
   var $button = LK.UI.button({
     icon : {

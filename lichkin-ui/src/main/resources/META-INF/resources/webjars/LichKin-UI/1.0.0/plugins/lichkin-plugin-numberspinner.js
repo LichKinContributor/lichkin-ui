@@ -69,6 +69,9 @@ LK.UI('plugins', 'numberspinner', function(options) {
     'height' : buttonHeight,
     'background-size' : buttonHeight + 'px'
   }).click(function() {
+    if (options.readonly == true) {
+      return;
+    }
     var value = $plugin.LKGetValue().extarctInteger();
     if (value == '' || value == '-') {
       $plugin.LKSetValues(0);
@@ -89,6 +92,9 @@ LK.UI('plugins', 'numberspinner', function(options) {
     'height' : buttonHeight,
     'background-size' : buttonHeight + 'px'
   }).click(function() {
+    if (options.readonly == true) {
+      return;
+    }
     var value = $plugin.LKGetValue().extarctInteger();
     if (value == '' || value == '-') {
       $plugin.LKSetValues(0);

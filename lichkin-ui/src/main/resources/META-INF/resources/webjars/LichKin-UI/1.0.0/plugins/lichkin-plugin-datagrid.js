@@ -822,6 +822,17 @@ LK.UI('plugins', 'datagrid', function(options) {
   // 数据容器
   var $container = $('<table class="lichkin-table"></table>').appendTo($dataBodyBar).LKAddPluginClass(plugin, 'dataContainer');
 
+  if (options.readonly == true) {
+    $('<div></div>').appendTo($plugin).css({
+      'position' : 'absolute',
+      'width' : $plugin.width(),
+      'height' : $plugin.height(),
+      'z-index' : 10000,
+      'top' : '0px',
+      'left' : '0px'
+    });
+  }
+
   // 加载数据
   options.param = $.extend({}, options.param, LK.UI._datagrid.getParam($plugin, options));
   LK.UI.load({

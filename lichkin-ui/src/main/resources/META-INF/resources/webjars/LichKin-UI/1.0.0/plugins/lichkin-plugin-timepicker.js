@@ -31,6 +31,10 @@ LK.UI('plugins', 'timepicker', function(options) {
     }
   });
 
+  if (options.readonly == true) {
+    $value.unbind();
+  }
+
   // 时间按钮
   var $button = LK.UI.button({
     icon : {

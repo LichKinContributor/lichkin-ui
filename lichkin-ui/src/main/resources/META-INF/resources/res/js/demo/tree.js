@@ -290,3 +290,9 @@ LK.UI.tree({
   title : 'tree',
   value : 'A0000008B0000002C0000001D0000000E0000000F0000000G0000000H0000000'
 });
+
+LK.UI.tree({
+  $appendTo : $('body'),
+  data : data,
+  readonly : true
+});

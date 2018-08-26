@@ -8,3 +8,15 @@
 .lichkin-plugin .lichkin-plugin-dataContainer .lichkin-plugin-node {
   border-bottom: none;
 }
+
+.lichkin-tree-readonly .lichkin-icon i {
+  color: #CCCCCC;
+}
+
+.lichkin-tree-readonly .lichkin-text {
+  color: #CCCCCC;
+}
+
+.lichkin-tree-readonly * {
+  cursor: auto;
+}

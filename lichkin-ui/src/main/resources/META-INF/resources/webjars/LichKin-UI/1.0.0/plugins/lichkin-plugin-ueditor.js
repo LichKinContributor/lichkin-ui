@@ -43,6 +43,21 @@ LK.UI('plugins', 'ueditor', function(options) {
     });
   }
 
+  if (options.readonly == true) {
+    ue.ready(function() {
+      var $mask = $('<div></div>').appendTo($plugin);
+      $mask.css({
+        'position' : 'absolute',
+        'width' : $plugin.width(),
+        'height' : $plugin.height(),
+        'top' : '0px',
+        'left' : '0px',
+        'background-color' : 'rgba(255, 255, 255, 0.5)',
+        'z-index' : 10000
+      });
+    });
+  }
+
   ue.addListener('contentChange', function() {
     if (ue.getContent()) {
       $value.val('true');

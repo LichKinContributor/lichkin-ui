@@ -179,6 +179,9 @@ LK.UI('plugins', 'selector', function(options) {
     onAfterCreate($dialog, $contentBar, $plugin);
   };
   $wrapper.click(function() {
+    if (options.readonly == true) {
+      return;
+    }
     LK.UI.openDialog(options.dialog);
   });
 

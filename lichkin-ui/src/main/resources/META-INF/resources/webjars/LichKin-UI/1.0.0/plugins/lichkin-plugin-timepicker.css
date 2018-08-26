@@ -5,6 +5,10 @@
   cursor: pointer;
 }
 
+.lichkin-timepicker-readonly .lichkin-timepicker-text {
+  cursor: text;
+}
+
 .lichkin-timepicker .lichkin-timepicker-button {
   pointer-events:none;
 }

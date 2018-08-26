@@ -5,34 +5,38 @@ LK.UI.cropper({
 LK.UI.cropper({
   $appendTo : $('body')
 });
+LK.UI.cropper({
+  $appendTo : $('body'),
+  readonly : true
+});
 $('body').append('<br>');
 // 横向框
 LK.UI.cropper({
-  $appendTo : $('#demo1'),
+  $appendTo : $('body'),
   value : _CTX + '/res/img/256_144.png',
   compressWidth : 256,
   compressHeight : 144
 });
 LK.UI.cropper({
-  $appendTo : $('#demo1'),
+  $appendTo : $('body'),
   value : _CTX + '/res/img/144_256.png',
   compressWidth : 144,
   compressHeight : 256
 });
 LK.UI.cropper({
-  $appendTo : $('#demo1'),
+  $appendTo : $('body'),
   value : _CTX + '/res/img/256_256.png',
   compressWidth : 256,
   compressHeight : 256
 });
 LK.UI.cropper({
-  $appendTo : $('#demo1'),
+  $appendTo : $('body'),
   value : _CTX + '/res/img/512_144.png',
   compressWidth : 512,
   compressHeight : 144
 });
 LK.UI.cropper({
-  $appendTo : $('#demo1'),
+  $appendTo : $('body'),
   value : _CTX + '/res/img/144_512.png',
   compressWidth : 144,
   compressHeight : 512

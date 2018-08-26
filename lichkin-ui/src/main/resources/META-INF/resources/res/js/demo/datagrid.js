@@ -1,26 +1,28 @@
 $('body').css('background-color', 'black');
 
 var config = {
+  i18nKey : 'roleMgmt',
   $appendTo : true,
   cols : 2.5,
   rows : 7,
   url : '/P/SysRole',
+  multiSelect : true,
   columns : [
       {
         text : 'roleName',
         name : 'roleName',
-        width : LK.colWidth
+        width : ((LK.colWidth + LK.fieldKeyWidth + LK.leftGap - 2) * 2.5) * 1 / 3
       }, {
         text : 'description',
         name : 'description',
-        width : LK.colWidth
+        width : ((LK.colWidth + LK.fieldKeyWidth + LK.leftGap - 2) * 2.5) * 2 / 3
       }
   ]
 };
 
 var title = {
   icon : 'tip',
-  title : 'roleGridTitle',
+  title : 'title',
 };
 
 var searchForm = {
@@ -456,6 +458,14 @@ LK.UI.datagrid($.extend({}, config, title, searchForm, tools, pageable, showRese
 $('body').append('<br><br>');
 
 LK.UI.datagrid($.extend({}, config, title, searchForm, tools, showResetButton));
+
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+$('body').append('<br><br>');
+
+LK.UI.datagrid($.extend({
+  readonly : true
+}, config, title, searchForm, tools, showResetButton));
 
 $('body').append('<br><br>');
 $('body').append('<br><br>');

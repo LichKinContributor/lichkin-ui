@@ -19,6 +19,14 @@ LK.UI.selector({
     categoryCode : 'GENDER'
   },
   $appendTo : $('body'),
+  readonly : true
+});
+LK.UI.selector({
+  url : '/L/SysDictionary/Droplist',
+  param : {
+    categoryCode : 'GENDER'
+  },
+  $appendTo : $('body'),
   validator : true,
   value : 'MALE'
 });

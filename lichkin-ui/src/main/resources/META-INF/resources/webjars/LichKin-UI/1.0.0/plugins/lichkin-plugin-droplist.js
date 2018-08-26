@@ -159,6 +159,9 @@ $('body').mousedown(function(e) {
   var $that = $(e.target);
   if ($that.is('.lichkin-droplist-wrapper') || $that.is('.lichkin-droplist-wrapper .lichkin-droplist-text')) {
     var $plugin = $that.parents('.lichkin-droplist:first');
+    if ($plugin.data('LKOPTIONS').readonly == true) {
+      return;
+    }
     var $popup = $plugin.LKGetPopup();
     if ($popup.is(':hidden')) {
       $('.lichkin-droplist-popup').hide();

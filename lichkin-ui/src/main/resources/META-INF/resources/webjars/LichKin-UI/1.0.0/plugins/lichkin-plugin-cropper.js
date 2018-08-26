@@ -178,6 +178,9 @@ LK.UI('plugins', 'cropper', function(options) {
 
   // 弹窗
   $plugin.click(function() {
+    if (options.readonly == true) {
+      return;
+    }
     var $bannerImgDlg = $.LKOpenDialog({
       title : 'cropper',
       icon : 'cut',

@@ -5,6 +5,10 @@ LK.UI.numberspinner({
 LK.UI.numberspinner({
   $appendTo : $('body')
 });
+LK.UI.numberspinner({
+  $appendTo : $('body'),
+  readonly : true
+});
 
 LK.UI.numberspinner({
   $appendTo : $('body'),

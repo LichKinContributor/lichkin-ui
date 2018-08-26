@@ -11,6 +11,10 @@ LK.UI.textbox({
 });
 LK.UI.textbox({
   $appendTo : $('body'),
+  readonly : true
+});
+LK.UI.textbox({
+  $appendTo : $('body'),
   name : 'a'
 });
 LK.UI.textbox({
@@ -21,6 +25,11 @@ $('body').append('<br>');
 LK.UI.textbox({
   $appendTo : $('body'),
   rows : 2
+});
+LK.UI.textbox({
+  $appendTo : $('body'),
+  rows : 2,
+  readonly : true
 });
 LK.UI.textbox({
   $appendTo : $('body'),

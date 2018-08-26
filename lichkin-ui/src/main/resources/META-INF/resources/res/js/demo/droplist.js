@@ -22,6 +22,14 @@ LK.UI.droplist({
   value : 'MALE#@#FEMALE',
   multiSelect : true
 });
+LK.UI.droplist({
+  url : '/L/SysDictionary/Droplist',
+  param : {
+    categoryCode : 'GENDER'
+  },
+  $appendTo : $('#demo'),
+  readonly : true
+});
 
 LK.UI.droplist({
   url : '/L/SysDictionary/Droplist',

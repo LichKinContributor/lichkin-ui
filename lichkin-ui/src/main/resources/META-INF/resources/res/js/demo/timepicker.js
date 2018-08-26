@@ -5,3 +5,7 @@ LK.UI.timepicker({
 LK.UI.timepicker({
   $appendTo : $('body')
 });
+LK.UI.timepicker({
+  $appendTo : $('body'),
+  readonly : true
+});
