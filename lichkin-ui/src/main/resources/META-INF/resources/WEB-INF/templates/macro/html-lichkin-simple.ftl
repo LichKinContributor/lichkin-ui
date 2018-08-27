@@ -10,6 +10,10 @@
 
 <#if calculateType!="">
 	<#include "html.ftl"/>
+	<#if ctx="/ui">
+		<#assign webDebug=true>
+		<#assign compressSuffix="">
+	</#if>
 
 	<@html ;section>
 		<#if section="DOCTYPE">
@@ -27,6 +31,8 @@
 			<link href="${ctx}/res/img/favicon.ico" type="image/x-icon" rel="shortcut icon">
 			<@lichkin@cssTag url="/webjars/font-awesome/web-fonts-with-css/css/fontawesome-all" />
 			<@lichkin@cssTag url="/webjars/LichKin-UI/themes/default/lichkin-${calculateType}" />
+			<@lichkin@cssTag url="/webjars/datepicker/datepicker" />
+			<@lichkin@cssTag url="/webjars/timepicker/timePicker" />
 			<#nested "link-bofore-plugins"/>
 			<#if webDebug==true>
 				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-icon" />
@@ -44,7 +50,9 @@
 			<#else>
 				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugins-simple" />
 			</#if>
-			<@lichkin@cssTag url="/res/css/app" />
+			<#if ctx!="/ui">
+				<@lichkin@cssTag url="/res/css/app" />
+			</#if>
 			<#nested "link"/>
 			<#if css==true>
 				<@lichkin@cssTag/>
@@ -87,6 +95,9 @@
 			<@lichkin@jsTag url="/webjars/LichKin-UI/lichkin-${calculateType}" />
 
 			<#nested "javascript-links-bofore-plugins"/>
+			<@lichkin@jsTag url="/webjars/datepicker/datepicker" />
+			<@lichkin@jsTag url="/webjars/datepicker/i18n/datepicker.${locale}" />
+			<@lichkin@jsTag url="/webjars/timepicker/jquery-timepicker" />
 			<#if webDebug==true>
 				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-core" />
 				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-icon" />

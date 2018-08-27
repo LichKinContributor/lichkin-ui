@@ -9,8 +9,6 @@
 		</#if>
 		<#if section="link-bofore-plugins">
 			<@lichkin@cssTag url="/webjars/ueditor/themes/default/css/ueditor" />
-			<@lichkin@cssTag url="/webjars/datepicker/datepicker" />
-			<@lichkin@cssTag url="/webjars/timepicker/timePicker" />
             <@lichkin@cssTag url="/webjars/cropper/cropper" />
 			<#nested "link-bofore-plugins"/>
 		</#if>
@@ -42,9 +40,6 @@
 			<@lichkin@jsTag url="/webjars/ueditor/ueditor.config" />
 			<@lichkin@jsTag url="/webjars/ueditor/ueditor.all" />
 			<@lichkin@jsTag url="/webjars/ueditor/lang/${locale}/${locale}" />
-			<@lichkin@jsTag url="/webjars/datepicker/datepicker" />
-			<@lichkin@jsTag url="/webjars/datepicker/i18n/datepicker.${locale}" />
-			<@lichkin@jsTag url="/webjars/timepicker/jquery-timepicker" />
 			<@lichkin@jsTag url="/webjars/cropper/cropper" />
 			<#nested "javascript-links-bofore-plugins"/>
 		</#if>
