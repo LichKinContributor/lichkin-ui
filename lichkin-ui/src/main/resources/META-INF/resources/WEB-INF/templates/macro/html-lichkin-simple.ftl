@@ -139,6 +139,11 @@
 			<#if js==true>
 				<@lichkin@jsTag/>
 			</#if>
+            <script type="text/javascript">
+              if (typeof window['${mappingUri}'.replace(/\//g,'_')] != 'undefined') {
+                window['${mappingUri}'.replace(/\//g,'_')]('${serverDatas!}');
+              }
+            </script>
 		</#if>
 		<#if section="javascript-contents-after-links">
 			let $win = $(window), $doc = $(document), $body = $('body');
@@ -148,6 +153,20 @@
 <#else>
 	<div id="${mappingUri}" class="lichkin-body" <#nested "body-attributes"/>>
 		<style><#nested "style"/></style>
+        <script type="text/javascript">
+           window['${mappingUri}' + '_invoke'] = function() {
+             var functionName = '${mappingUri}'.replace(/\//g, '_');
+             if (typeof window[functionName] != 'undefined') {
+               window[functionName]('${serverDatas!}');
+             } else {
+               window[functionName + '_Interval'] = setInterval(function loadPage() {
+                 if (typeof window[functionName] != 'undefined') {
+                   window[functionName]('${serverDatas!}');
+                 }
+               }, 100);
+             }
+           }
+        </script>
 		<#nested "body-content"/>
 		<#if js==true>
 			<@lichkin@jsTag/>

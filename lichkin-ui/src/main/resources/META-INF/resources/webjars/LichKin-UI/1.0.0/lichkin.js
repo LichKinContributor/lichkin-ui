@@ -833,6 +833,7 @@ $.extend(LK, {
    * @param options[onAfterRender] [function] 页面渲染后事件
    */
   loadPage : function(options) {
+    var scriptId = options.url;
     var loadingId = '';
     var loadingTimeout = true;
     options = $.extend({
@@ -859,18 +860,42 @@ $.extend(LK, {
         var $obj = options.$obj;
         $obj[0].innerHTML = text;
         var head = document.getElementsByTagName("head")[0];
-        $obj.find('script').each(function() {
-          var that = $(this).remove()[0];
-          var src = that.src;
-          var script = document.createElement("script");
-          script.type = "text/javascript";
-          if (src) {
-            script.src = src;
+        var functionName = scriptId.replace(/\//g, '_');
+        if ($('script[id="' + scriptId + '"]').length == 0) {
+          $obj.find('script').each(function() {
+            var that = $(this).remove()[0];
+            var src = that.src;
+            var script = document.createElement("script");
+            script.type = "text/javascript";
+            if (src) {
+              script.id = scriptId;
+              script.src = src;
+              head.appendChild(script);
+            } else {
+              script.innerHTML = that.innerHTML;
+              head.appendChild(script);
+              window[scriptId + '_invoke']();
+            }
+          });
+          window[functionName + '_Interval_clear'] = setInterval(function loadPage() {
+            if (options.$obj.find('.lichkin-plugin').length != 0) {
+              clearInterval(window[functionName + '_Interval_clear']);
+              clearInterval(window[functionName + '_Interval']);
+            }
+          }, 300);
+        } else {
+          if (typeof window[functionName] != 'undefined') {
+            window[scriptId + '_invoke']();
           } else {
-            script.innerHTML = that.innerHTML;
+            var currentScript = $('script[id="' + scriptId + '"]');
+            var script = document.createElement("script");
+            script.type = "text/javascript";
+            script.id = scriptId;
+            script.src = currentScript.attr('src');
+            currentScript.remove();
+            head.appendChild(script);
           }
-          head.appendChild(script);
-        });
+        }
         setTimeout(function() {
           options.onAfterRender(options);
         }, 333);
