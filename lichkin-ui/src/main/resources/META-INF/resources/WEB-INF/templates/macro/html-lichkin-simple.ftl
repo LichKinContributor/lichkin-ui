@@ -141,7 +141,7 @@
 			</#if>
             <script type="text/javascript">
               if (typeof window['${mappingUri}'.replace(/\//g,'_')] != 'undefined') {
-                window['${mappingUri}'.replace(/\//g,'_')]('${serverDatas!}');
+                window['${mappingUri}'.replace(/\//g,'_')](JSON.parse('${serverDatasJson}'));
               }
             </script>
 		</#if>
@@ -157,12 +157,12 @@
            window['${mappingUri}' + '_invoke'] = function() {
              var functionName = '${mappingUri}'.replace(/\//g, '_');
              if (typeof window[functionName] != 'undefined') {
-               window[functionName]('${serverDatas!}');
+               window[functionName](JSON.parse('${serverDatasJson}'));
              } else {
                window[functionName + '_Interval'] = setInterval(function loadPage() {
                  if (typeof window[functionName] != 'undefined') {
                    clearInterval(window[functionName + '_Interval']);
-                   window[functionName]('${serverDatas!}');
+                   window[functionName](JSON.parse('${serverDatasJson}'));
                  }
                }, 100);
              }
