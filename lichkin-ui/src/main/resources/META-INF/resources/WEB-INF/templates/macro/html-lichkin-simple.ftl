@@ -161,6 +161,7 @@
              } else {
                window[functionName + '_Interval'] = setInterval(function loadPage() {
                  if (typeof window[functionName] != 'undefined') {
+                   clearInterval(window[functionName + '_Interval']);
                    window[functionName]('${serverDatas!}');
                  }
                }, 100);
