@@ -6,7 +6,7 @@
 
   <groupId>com.lichkin.ui</groupId>
   <artifactId>lichkin-ui</artifactId>
-  <version>1.0.4.RELEASE</version>
+  <version>1.0.5.RELEASE</version>
 
   <parent>
     <groupId>com.lichkin.springframework.boot</groupId>
