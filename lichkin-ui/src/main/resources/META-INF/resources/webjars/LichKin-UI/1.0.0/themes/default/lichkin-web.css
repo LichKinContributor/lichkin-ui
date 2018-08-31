@@ -82,15 +82,19 @@ TABLE.lichkin-table .lichkin-table .lichkin-table-row .lichkin-table-cell:last-c
 
 .lichkin-plugin .lichkin-plugin-dataContainer {list-style:none;padding:0px;margin:0px;}
 .lichkin-plugin .lichkin-plugin-dataContainer .lichkin-plugin-node {overflow:hidden;cursor:pointer;border-bottom-width:1px;border-bottom-style:dotted;background-color:var(--lichkin-plugin-background-color);border-color:var(--lichkin-plugin-border-color);}
+.lichkin-plugin .lichkin-plugin-dataContainer .lichkin-plugin-node .lichkin-plugin .lichkin-text {color:var(--lichkin-plugin-font-color);}
 
 .lichkin-plugin .lichkin-plugin-dataContainer .lichkin-plugin-node.selected {background-color:var(--lichkin-plugin-background-color-selected);border-color:var(--lichkin-plugin-border-color-selected);}
 .lichkin-plugin .lichkin-plugin-dataContainer .lichkin-plugin-node.selected .lichkin-text {color:var(--lichkin-plugin-font-color-selected);}
+.lichkin-plugin .lichkin-plugin-dataContainer .lichkin-plugin-node.selected .lichkin-plugin .lichkin-text {color:var(--lichkin-plugin-font-color);}
 
 .lichkin-plugin .lichkin-plugin-dataContainer .lichkin-plugin-node:hover {background-color:var(--lichkin-plugin-background-color-hover);border-color:var(--lichkin-plugin-border-color-hover);}
 .lichkin-plugin .lichkin-plugin-dataContainer .lichkin-plugin-node:hover .lichkin-text {color:var(--lichkin-plugin-font-color-hover);}
+.lichkin-plugin .lichkin-plugin-dataContainer .lichkin-plugin-node:hover .lichkin-plugin .lichkin-text {color:var(--lichkin-plugin-font-color);}
 
 .lichkin-plugin .lichkin-plugin-dataContainer .lichkin-plugin-node.selected:hover {background-color:var(--lichkin-plugin-background-color-selected-hover);border-color:var(--lichkin-plugin-border-color-selected-hover);}
 .lichkin-plugin .lichkin-plugin-dataContainer .lichkin-plugin-node.selected:hover .lichkin-text {color:var(--lichkin-plugin-font-color-selected-hover);}
+.lichkin-plugin .lichkin-plugin-dataContainer .lichkin-plugin-node.selected:hover .lichkin-plugin .lichkin-text {color:var(--lichkin-plugin-font-color);}
 
 .lichkin-plugin .lichkin-plugin-titleBar {position:relative;padding:3px 0px;height:30px;line-height:30px;background-color:var(--lichkin-plugin-border-color);border-top:1px solid var(--lichkin-plugin-border-color);border-right:1px solid var(--lichkin-plugin-border-color);border-bottom:1px solid rgba(0, 0, 0, 0.1);border-left:1px solid var(--lichkin-plugin-border-color);}
 .lichkin-plugin .lichkin-plugin-titleBar>.lichkin-icon {position:absolute;left:6px;top:5px;}

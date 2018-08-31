@@ -129,6 +129,19 @@ LK.UI._datagrid = {
       if (column.formatter) {
         text = column.formatter(data);
         if (!isString(text)) {
+          if (isJSON(text)) {
+            text = LK.UI[text.plugin]($.extend(text.options, {
+              'width' : parseInt(column.width) - 12,
+              'height' : 22,
+              'style' : {
+                'margin-left' : '3px',
+                'margin-right' : '3px',
+                'margin-top' : '3px',
+                'margin-bottom' : '3px'
+              }
+            }));
+            text.data('gridRowData', data);
+          }
           $td.append(text);
           continue;
         }

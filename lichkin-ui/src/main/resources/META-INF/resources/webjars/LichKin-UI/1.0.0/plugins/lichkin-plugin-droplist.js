@@ -61,6 +61,7 @@ LK.UI._droplist = {
    * @param datas 数据集
    */
   addDatas : function($plugin, $container, datas) {
+    var height = $plugin.data('LKOPTIONS').height;
     for (var i = 0; i < datas.length; i++) {
       var data = datas[i];
       var $li = $('<li></li>').appendTo($container).LKAddPluginClass('droplist', 'node');
@@ -68,7 +69,7 @@ LK.UI._droplist = {
       $li.append(LK.UI.text({
         original : true,
         text : data.text,
-        height : LK.rowHeight - 1
+        height : height + 1
       }));
     }
   }
@@ -97,7 +98,7 @@ LK.UI('plugins', 'droplist', function(options) {
   $popup.data('plugin-id', id);
   $popup.css({
     'width' : width + 'px',
-    'height' : LK.rowHeight * 6 + 'px'
+    'height' : (height + 2) * 6 + 'px'
   });
   if (options.cls != '') {
     $popup.addClass(options.cls);
@@ -174,6 +175,7 @@ $('body').mousedown(function(e) {
     } else {
       $popup.hide();
     }
+    e.stopImmediatePropagation();
   } else {
     if ($that.is('.lichkin-droplist-popup') || $that.is('.lichkin-droplist-popup .lichkin-droplist-dataContainer')) {
     } else if ($that.is('.lichkin-droplist-popup .lichkin-droplist-dataContainer li') || $that.is('.lichkin-droplist-popup .lichkin-droplist-dataContainer li .lichkin-text')) {
