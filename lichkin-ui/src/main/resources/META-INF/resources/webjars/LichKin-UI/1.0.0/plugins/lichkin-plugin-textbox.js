@@ -12,6 +12,12 @@ LK.UI('plugins', 'textbox', function(options) {
 
   var $value = $plugin.LKGetValueObj();
 
+  if (options.maxlength != null) {
+    $value.attr({
+      maxlength : options.maxlength
+    });
+  }
+
   $value.bind({
     'change' : function() {
       $plugin.LKValidate();
@@ -31,4 +37,6 @@ LK.UI('plugins', 'textbox', function(options) {
 // @see LK.UI.create
 LK.UI.createOptions,
 // 控件特有参数
-{}));
+{
+  maxlength : null
+}));
