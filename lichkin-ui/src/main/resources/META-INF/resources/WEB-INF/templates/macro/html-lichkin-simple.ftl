@@ -132,8 +132,6 @@
 
 			<@lichkin@jsTag url="/res/js/icons-init" />
 
-			<#nested "javascript-contents-bofore-links"/>
-
 			<#nested "javascript-links"/>
 
 			<#if js==true>
@@ -144,6 +142,9 @@
                 window['${mappingUri}'.replace(/\//g,'_')](JSON.parse('${serverDatasJson}'));
               }
             </script>
+			<#if ctx!="/ui">
+            	<@lichkin@jsTag url="/res/js/app" />
+			</#if>
 		</#if>
 		<#if section="javascript-contents-after-links">
 			let $win = $(window), $doc = $(document), $body = $('body');
