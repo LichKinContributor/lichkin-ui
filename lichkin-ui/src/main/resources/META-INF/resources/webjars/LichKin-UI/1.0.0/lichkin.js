@@ -230,6 +230,9 @@ $.extend(LK, {
   // 标准分隔符
   SPLITOR : '#@#',
 
+  // 标准字段分隔符
+  FIELD_SPLITOR : '@#@',
+
   // 版本号
   VERSION : {
     versionX : 1,
