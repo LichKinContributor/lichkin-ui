@@ -137,14 +137,14 @@
 			<#if js==true>
 				<@lichkin@jsTag/>
 			</#if>
+			<#if ctx!="/ui">
+            	<@lichkin@jsTag url="/res/js/app" />
+			</#if>
             <script type="text/javascript">
               if (typeof window['${mappingUri}'.replace(/\//g,'_')] != 'undefined') {
                 window['${mappingUri}'.replace(/\//g,'_')](JSON.parse('${serverDatasJson}'));
               }
             </script>
-			<#if ctx!="/ui">
-            	<@lichkin@jsTag url="/res/js/app" />
-			</#if>
 		</#if>
 		<#if section="javascript-contents-after-links">
 			let $win = $(window), $doc = $(document), $body = $('body');
