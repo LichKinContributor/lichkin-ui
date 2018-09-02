@@ -779,12 +779,17 @@ $.extend(LK, {
   /**
    * 解析URL
    * @param url 地址
+   * @param apiSubUrl 子地址
    * @param isPageUrl 是否为页面地址
    * @param param [JSON] 参数
    */
-  resolveUrl : function(url, isPageUrl, param) {
+  resolveUrl : function(url, apiSubUrl, isPageUrl, param) {
     if (!isString(url)) {
       return null;
+    }
+
+    if (typeof apiSubUrl == 'undefined' || apiSubUrl == '') {
+      apiSubUrl = LK.SUB_URL;
     }
 
     if (!url.startsWith('http')) {
@@ -809,11 +814,11 @@ $.extend(LK, {
           url = url.substring('/Web'.length);
         }
 
-        if (url.startsWith(LK.SUB_URL)) {
-          url = url.substring(LK.SUB_URL.length);
+        if (url.startsWith(apiSubUrl)) {
+          url = url.substring(apiSubUrl.length);
         }
 
-        url = _CTX + _MAPPING_API + '/Web' + LK.SUB_URL + url;
+        url = _CTX + _MAPPING_API + '/Web' + apiSubUrl + url;
       }
     }
 
@@ -825,6 +830,7 @@ $.extend(LK, {
    * @param options 自定义的参数
    * @param options[$obj] [$Object] 页面内容要写入的DOM元素对应的JQuery对象
    * @param options[url] [string] 自动拼接前缀与后缀
+   * @param options[apiSubUrl] [string] 指定接口类型
    * @param options[param] [JSON] 参数将转为URL地址。
    * @param options[data] [JSON] 自动转换为RequestBody内容。
    * @param options[showLoading] [boolean] 是否显示加载效果
@@ -845,7 +851,7 @@ $.extend(LK, {
       headers : {
         'Accept-Language' : _LANG
       },
-      url : LK.resolveUrl(options.url, true, options.param),
+      url : LK.resolveUrl(options.url, options.apiSubUrl, true, options.param),
       data : JSON.stringify($.extend({}, options.data)),
       success : function(text) {
         setTimeout(function() {
@@ -939,6 +945,7 @@ $.extend(LK, {
    * AJAX请求
    * @param options 自定义的参数
    * @param options[url] [string] 自动拼接前缀与后缀
+   * @param options[apiSubUrl] [string] 指定接口类型
    * @param options[data] [JSON] 转换为RequestBody内容
    * @param options[showLoading] [boolean] 是否显示加载效果
    * @param options[showSuccess] [boolean] 调用默认业务成功回调方法时是否显示提示信息
@@ -958,7 +965,7 @@ $.extend(LK, {
       success : 'LK_ajax_success',
       error : 'LK_ajax_error'
     }, options, {
-      url : LK.resolveUrl(options.url, false),
+      url : LK.resolveUrl(options.url, options.apiSubUrl, false),
       data : JSON.stringify($.extend({}, options.data, {
         clientType : 'JAVASCRIPT'
       }, LK.VERSION)),
