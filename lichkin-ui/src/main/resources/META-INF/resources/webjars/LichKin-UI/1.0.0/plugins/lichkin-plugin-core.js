@@ -685,6 +685,9 @@ LK.UI('plugins', 'create', function(opts) {
     $field.css({
       'padding' : LK.topGap + 'px 0px 0px ' + LK.leftGap + 'px'
     });
+    if (options.readonly == true) {
+      $field.addClass('lichkin-form-field-readonly');
+    }
 
     var keyText = $.LKGetI18NWithPrefix(options.i18nKey, (options.key == null ? options.name : options.key));
     if (options.keyTextReplaces.length != 0) {

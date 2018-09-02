@@ -117,11 +117,14 @@ TABLE.lichkin-table .lichkin-table .lichkin-table-row .lichkin-table-cell:last-c
 .lichkin-plugin-invalid .lichkin-plugin-titleBar {background-color:var(--lichkin-plugin-border-color-invalid);border-color:var(--lichkin-plugin-border-color-invalid);}
 
 .lichkin-plugin-readonly {border-color:#CCCCCC !important;}
+.lichkin-plugin-readonly .lichkin-plugin-text {color:#CCCCCC !important;}
 .lichkin-plugin-readonly .lichkin-plugin-button .lichkin-icon i {color:#CCCCCC !important;}
 .lichkin-plugin-readonly .lichkin-plugin-wrapper {cursor: text !important;}
 .lichkin-plugin-readonly .lichkin-plugin-dataContainer .lichkin-plugin-node:hover {background-color:transparent;border-color:transparent;}
 .lichkin-plugin-readonly .lichkin-plugin-dataContainer .lichkin-plugin-node:hover .lichkin-text {color:#CCCCCC;}
 .lichkin-plugin-readonly .lichkin-plugin-titleBar {background-color:#CCCCCC;border-color:#CCCCCC;}
+.lichkin-form-field-readonly .lichkin-form-field-key .lichkin-text {color:#999999 !important;}
+
 .lichkin-plugin.fuzzy-left {border-left-style:dashed !important;}
 .lichkin-plugin.fuzzy-right {border-right-style:dashed !important;}
 
