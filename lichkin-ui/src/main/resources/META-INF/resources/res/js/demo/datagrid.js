@@ -65,7 +65,7 @@ var tools = {
               key : 'menuName',
               name : 'menuIds',
               validator : true,
-              url : '/T/SysMenu'
+              url : '/Menus'
             }
           }
 
@@ -101,7 +101,7 @@ var tools = {
               key : 'menuName',
               name : 'menuIds',
               validator : true,
-              url : '/T/SysMenu'
+              url : '/Menus'
             }
           }
 

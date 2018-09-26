@@ -227,6 +227,28 @@ $.extend(LK, {
   // 文本左右内边距
   textPaddingLR : 6,
 
+  /**
+   * 数据表格内容总宽度
+   * @param cols 列数
+   * @param withoutFields true:不带字段宽;false:带字段宽.
+   */
+  gridContentWidth : function(cols, withoutFields) {
+    if (typeof withoutFields == 'undefined') {
+      return ((LK.colWidth + LK.fieldKeyWidth + LK.leftGap - 2) * cols - 17);
+    }
+    return ((LK.colWidth - 2) * cols - 17);
+  },
+
+  /**
+   * 数据表格内容总宽度
+   * @param cols 列数
+   * @param ratio 比例
+   * @param withoutFields true:不带字段宽;false:带字段宽.
+   */
+  gridColWidth : function(cols, ratio, withoutFields) {
+    return LK.gridContentWidth(cols, withoutFields) * ratio;
+  },
+
   // 标准分隔符
   SPLITOR : '#@#',
 

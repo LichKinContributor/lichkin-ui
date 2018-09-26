@@ -44,7 +44,7 @@ LK.UI('plugins', 'selector_employee', function(options) {
       style : {
         'border-top' : 'none'
       },
-      url : '/L/SysDept',
+      url : '/SysDept/S',
       linkages : [
         'source'
       ]
