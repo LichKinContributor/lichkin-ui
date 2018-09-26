@@ -33,11 +33,11 @@ import lombok.Cleanup;
 public class UEditorController {
 
 	/** 文件服务器保存根路径 */
-	@Value("${com.lichkin.file.save.path:/opt/files}")
+	@Value("${com.lichkin.files.save.path:/opt/files}")
 	private String fileSaveRootPath;
 
 	/** 文件服务器URL根路径 */
-	@Value("${com.lichkin.file.server.rootUrl}")
+	@Value("${com.lichkin.files.server.rootUrl}")
 	private String fileServerRootUrl;
 
 	/** 内容中的图片保存子路径 */
