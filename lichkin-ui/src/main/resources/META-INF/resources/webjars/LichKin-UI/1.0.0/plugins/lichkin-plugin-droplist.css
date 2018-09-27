@@ -11,3 +11,7 @@
 .lichkin-droplist .lichkin-droplist-text {
   position: relative;
 }
+
+.lichkin-datagrid-pageBar .lichkin-droplist .lichkin-droplist-text {
+  top: -2px;
+}
