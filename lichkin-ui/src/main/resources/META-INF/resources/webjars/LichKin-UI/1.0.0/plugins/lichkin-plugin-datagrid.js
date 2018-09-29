@@ -225,17 +225,23 @@ LK.UI._datagrid = {
    * @param toolsAdd 添加按钮参数
    */
   addToolsAdd : function($plugin, options, toolsAdd) {
+    if (typeof toolsAdd.icon == 'undefined') {
+      toolsAdd.icon = 'add';
+    }
+    if (typeof toolsAdd.text == 'undefined') {
+      toolsAdd.text = 'add';
+    }
     var json = {
       singleCheck : null,
-      icon : 'add',
-      text : 'add',
+      icon : toolsAdd.icon,
+      text : toolsAdd.text,
       click : function($button, $datagrid, $selecteds, selectedDatas, value) {
         if (typeof toolsAdd.beforeClick == 'function' && !toolsAdd.beforeClick($button, $datagrid, $selecteds, selectedDatas, value)) {
           return;
         }
         LK.UI.openDialog($.extend({}, toolsAdd.dialog, {
-          title : 'add',
-          icon : 'add',
+          title : toolsAdd.text,
+          icon : toolsAdd.icon,
           url : '',
           param : {},
           data : {},
@@ -334,10 +340,16 @@ LK.UI('plugins', 'datagrid', function(options) {
 
   // 删除按钮
   if (options.toolsRemove != null) {
+    if (typeof options.toolsRemove.icon == 'undefined') {
+      options.toolsRemove.icon = 'remove';
+    }
+    if (typeof options.toolsRemove.text == 'undefined') {
+      options.toolsRemove.text = 'remove';
+    }
     var json = {
       singleCheck : false,
-      icon : 'remove',
-      text : 'remove',
+      icon : options.toolsRemove.icon,
+      text : options.toolsRemove.text,
       click : function($button, $datagrid, $selecteds, selectedDatas, value) {
         if (typeof options.toolsRemove.beforeClick == 'function' && !options.toolsRemove.beforeClick($button, $datagrid, $selecteds, selectedDatas, value)) {
           return;
@@ -368,10 +380,16 @@ LK.UI('plugins', 'datagrid', function(options) {
 
   // 编辑按钮
   if (options.toolsEdit != null) {
+    if (typeof options.toolsEdit.icon == 'undefined') {
+      options.toolsEdit.icon = 'edit';
+    }
+    if (typeof options.toolsEdit.text == 'undefined') {
+      options.toolsEdit.text = 'edit';
+    }
     var json = {
       singleCheck : true,
-      icon : 'edit',
-      text : 'edit',
+      icon : options.toolsEdit.icon,
+      text : options.toolsEdit.text,
       click : function($button, $datagrid, $selecteds, selectedDatas, value) {
         if (typeof options.toolsEdit.beforeClick == 'function' && !options.toolsEdit.beforeClick($button, $datagrid, $selecteds, selectedDatas, value)) {
           return;
@@ -381,8 +399,8 @@ LK.UI('plugins', 'datagrid', function(options) {
           editJson = options.toolsEdit.beforeOpenDialog(editJson, $button, $datagrid, $selecteds, selectedDatas, value);
         }
         LK.UI.openDialog($.extend({}, editJson.dialog, {
-          title : 'edit',
-          icon : 'edit',
+          title : options.toolsEdit.text,
+          icon : options.toolsEdit.icon,
           url : '',
           param : {},
           data : {},
