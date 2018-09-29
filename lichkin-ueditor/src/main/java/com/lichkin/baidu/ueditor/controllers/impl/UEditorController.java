@@ -57,7 +57,7 @@ public class UEditorController {
 					FileOutputStream outputStream = new FileOutputStream(filePath);
 					outputStream.write(upfile.getBytes());
 					state.put("state", "SUCCESS");
-					state.put("url", fileServerRootUrl + filePath);
+					state.put("url", fileServerRootUrl + filePath.replace(fileSaveRootPath, ""));
 					state.put("type", extName);
 					state.put("original", originalFilename);
 				} catch (Exception e) {
