@@ -26,6 +26,11 @@ LK.UI('plugins', 'textbox', function(options) {
     'keyup' : function() {
       $plugin.LKValidate();
       $plugin.data('LKOPTIONS').onChange($plugin, $plugin.LKGetValues(), $plugin.LKGetValue(), $value.val());
+    },
+    'keypress' : function(event) {
+      if (event.keyCode == '13') {
+        $plugin.data('LKOPTIONS').enterKeyClick($plugin, $plugin.LKGetValues(), $plugin.LKGetValue(), $value.val());
+      }
     }
   });
 
@@ -38,5 +43,7 @@ LK.UI('plugins', 'textbox', function(options) {
 LK.UI.createOptions,
 // 控件特有参数
 {
-  maxlength : null
+  maxlength : null,
+  enterKeyClick : function($plugin, values, value, val) {
+  }
 }));
