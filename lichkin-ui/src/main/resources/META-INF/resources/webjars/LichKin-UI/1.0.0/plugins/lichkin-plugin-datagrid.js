@@ -547,6 +547,11 @@ LK.UI('plugins', 'datagrid', function(options) {
               $selecteds.each(function() {
                 selectedDatas.push($(this).data());
               });
+
+              if (button.singleCheck == true) {
+                selectedDatas = selectedDatas[0];
+              }
+
               click($button, $plugin, $selecteds, selectedDatas, value);
             },
             tip : button.tip
@@ -598,6 +603,11 @@ LK.UI('plugins', 'datagrid', function(options) {
             $selecteds.each(function() {
               selectedDatas.push($(this).data());
             });
+
+            if (button.singleCheck == true) {
+              selectedDatas = selectedDatas[0];
+            }
+
             click($button, $plugin, $selecteds, selectedDatas, value);
           }
         })));
