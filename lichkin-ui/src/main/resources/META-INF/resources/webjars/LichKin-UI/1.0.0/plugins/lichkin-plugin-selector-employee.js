@@ -54,9 +54,11 @@ LK.UI('plugins', 'selector_employee', function(options) {
         {
           'name' : 'userName',
           'text' : 'userName',
-          'width' : 100
+          'width' : 160
         }, {
-          'name' : 'gender',
+          'formatter' : function(rowData) {
+            return $.LKGetI18N('GENDER', rowData.gender);
+          },
           'text' : 'gender',
           'width' : 70
         }, {
@@ -65,8 +67,7 @@ LK.UI('plugins', 'selector_employee', function(options) {
           'width' : 170
         }, {
           'name' : 'deptName',
-          'text' : 'department',
-          'width' : 300
+          'text' : 'department'
         }
     ];
 

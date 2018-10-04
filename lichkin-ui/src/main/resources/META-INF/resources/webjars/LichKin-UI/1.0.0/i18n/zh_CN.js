@@ -44,7 +44,8 @@ $.LKExtendI18N({
       'columns' : {
         'userName' : '姓名',
         'gender' : '性别',
-        'jobNumber' : '工号'
+        'jobNumber' : '工号',
+        'department' : '部门'
       }
     }
   },

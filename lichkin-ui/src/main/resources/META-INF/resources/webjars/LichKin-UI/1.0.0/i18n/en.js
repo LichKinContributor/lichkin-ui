@@ -37,11 +37,18 @@ $.LKExtendI18N({
 
   'selector-employee-title' : 'employee selector',
   'department' : 'department',
-  'source' : 'source',
-  'target' : 'target',
-  'userName' : 'user name',
-  'gender' : 'gender',
-  'jobNumber' : 'job number',
+  'selector-employee-dlg' : {
+    'grid' : {
+      'source' : 'source',
+      'target' : 'target',
+      'columns' : {
+        'userName' : 'user name',
+        'gender' : 'gender',
+        'jobNumber' : 'job number',
+        'department' : 'department'
+      }
+    }
+  },
 
   'cropper' : 'image cropper',
   'cropper-no-image' : 'no image',
