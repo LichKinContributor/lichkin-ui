@@ -76,7 +76,7 @@ TABLE.lichkin-table .lichkin-table .lichkin-table-row .lichkin-table-cell:last-c
 
 /** plugin */
 .lichkin-plugin {position:relative;vertical-align:top;display:inline-block;border:1px solid var(--lichkin-plugin-border-color);background-color:var(--lichkin-plugin-background-color);}
-.lichkin-plugin .lichkin-plugin-text {position:absolute;overflow:auto;border:none;color:var(--lichkin-plugin-font-color);font-size:var(--lichkin-plugin-font-size);}
+.lichkin-plugin .lichkin-plugin-text {position:absolute;overflow:auto;border:none;color:var(--lichkin-plugin-font-color);font-size:var(--lichkin-plugin-font-size);font-family:Arial;}
 .lichkin-plugin .lichkin-plugin-button {border:none;position:absolute;right:0px;top:0px;background-color:var(--lichkin-plugin-background-color);}
 .lichkin-plugin .lichkin-plugin-button .lichkin-icon i {color:var(--lichkin-plugin-font-color);}
 
