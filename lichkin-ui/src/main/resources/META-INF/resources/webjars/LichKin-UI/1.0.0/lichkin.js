@@ -234,9 +234,9 @@ $.extend(LK, {
    */
   gridContentWidth : function(cols, withoutFields) {
     if (typeof withoutFields == 'undefined') {
-      return ((LK.colWidth + LK.fieldKeyWidth + LK.leftGap - 2) * cols - 17);
+      return ((LK.colWidth + LK.fieldKeyWidth + LK.leftGap - 2) * cols - 18);
     }
-    return ((LK.colWidth - 2) * cols - 17);
+    return ((LK.colWidth - 2) * cols - 18);
   },
 
   /**
