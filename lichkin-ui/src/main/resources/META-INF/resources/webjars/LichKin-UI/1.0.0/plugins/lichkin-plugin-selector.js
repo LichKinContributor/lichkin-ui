@@ -147,6 +147,7 @@ LK.UI('plugins', 'selector', function(options) {
     text : 'cancel',
     cls : 'danger',
     click : function($button, $dialog, $contentBar) {
+      $plugin.LKValidate();
       $dialog.LKCloseDialog();
     }
   });
@@ -171,6 +172,7 @@ LK.UI('plugins', 'selector', function(options) {
         }
       }
       $plugin.LKInvokeSetValues(value, false);
+      $plugin.LKValidate();
       $dialog.LKCloseDialog();
     }
   });
