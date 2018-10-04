@@ -127,7 +127,7 @@ LK.UI._datagrid = {
 
       var text = treeFieldName == null ? data[column.name] : data.params[column.name];
       if (column.formatter) {
-        text = column.formatter(data);
+        text = column.formatter(data, $plugin, options, $container, level, columns, treeFieldName);
         if (!isString(text)) {
           if (isJSON(text)) {
             text = LK.UI[text.plugin]($.extend(text.options, {
