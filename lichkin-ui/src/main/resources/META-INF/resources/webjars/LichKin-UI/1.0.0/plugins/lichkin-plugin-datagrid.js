@@ -383,6 +383,7 @@ LK.UI('plugins', 'datagrid', function(options) {
               }
             });
             formOptions.i18nKey = options.i18nKey + 'columns.';
+            formOptions.plugins = LK.UI.formUtils.newReadonlyPlugins(formOptions.plugins);
             LK.UI.form(formOptions);
           }
         }));
