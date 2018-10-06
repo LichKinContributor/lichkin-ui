@@ -12,6 +12,10 @@ LK.UI._form = {
   createSubPlugin : function($plugin, options) { // 添加具体控件
     for (var i = 0; i < options.plugins.length; i++) {
       var plugin = options.plugins[i];
+      if (plugin == '-') {
+        $plugin.append('<div class="lichkin-form-field" style="padding:' + LK.textPaddingTB + 'px 0px 0px ' + LK.textPaddingLR + 'px;width:' + (LK.fieldKeyWidth + LK.colWidth) + 'px;height:' + LK.rowHeight + 'px;"></div>');
+        continue;
+      }
       var name = plugin.options.name;
       if (!isString(name)) {
         throw 'plugin name must be setted as a form plugin.';
