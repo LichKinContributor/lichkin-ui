@@ -338,6 +338,63 @@ LK.UI('plugins', 'datagrid', function(options) {
     $searchFormToolsBar = $('<div lichkin-buttons></div>').appendTo($searchFormBar).css('text-align', 'center');
   }
 
+  // 查看按钮
+  if (options.toolsView != null) {
+    if (typeof options.toolsView.icon == 'undefined') {
+      options.toolsView.icon = 'view';
+    }
+    if (typeof options.toolsView.text == 'undefined') {
+      options.toolsView.text = 'view';
+    }
+    var json = {
+      singleCheck : true,
+      icon : options.toolsView.icon,
+      text : options.toolsView.text,
+      click : function($button, $datagrid, $selecteds, selectedDatas, value) {
+        if (typeof options.toolsView.beforeClick == 'function' && !options.toolsView.beforeClick($button, $datagrid, $selecteds, selectedDatas, value)) {
+          return;
+        }
+        var viewJson = $.extend(true, {}, options.toolsView);
+        if (typeof options.toolsView.beforeOpenDialog == 'function') {
+          viewJson = options.toolsView.beforeOpenDialog(viewJson, $button, $datagrid, $selecteds, selectedDatas, value);
+        }
+        LK.UI.openDialog($.extend({}, viewJson.dialog, {
+          title : options.toolsView.text,
+          icon : options.toolsView.icon,
+          url : '',
+          param : {},
+          data : {},
+          content : '',
+          mask : true,
+          onAfterCreate : function($dialog, $contentBar) {
+            var formOptions = $.extend(true, {}, viewJson.form, {
+              $appendTo : $contentBar,
+              $renderTo : null,
+              values : {},
+              param : {
+                id : value
+              }
+            });
+            formOptions.plugins.push({
+              plugin : 'hidden',
+              options : {
+                name : 'id',
+                value : value
+              }
+            });
+            formOptions.i18nKey = options.i18nKey + 'columns.';
+            LK.UI.form(formOptions);
+          }
+        }));
+      }
+    };
+    if (typeof options.toolsView.titleTools != 'undefined' && options.toolsView.titleTools == true) {
+      options.titleTools.unshift(json);
+    } else {
+      options.tools.unshift(json);
+    }
+  }
+
   // 删除按钮
   if (options.toolsRemove != null) {
     if (typeof options.toolsRemove.icon == 'undefined') {
@@ -974,6 +1031,13 @@ LK.UI.loadOptions,
    * @param saveUrl 表单提交地址
    */
   toolsRemove : null,
+  /**
+   * 工具栏-查看按钮
+   * @param titleTools true:在标题栏工具栏中使用;false:在工具栏中使用;
+   * @param form see LK.UI.form，其中$appendTo/$renderTo/values/param参数无效。
+   * @param dialog see LK.UI.dialog，其中title/icon/url/param/data/content/mask/buttons/onAfterCreate/onBeforeLoading/onAfterLoading无效。
+   */
+  toolsView : null,
   // 是否带分页信息
   pageable : true,
   // 分页大小
