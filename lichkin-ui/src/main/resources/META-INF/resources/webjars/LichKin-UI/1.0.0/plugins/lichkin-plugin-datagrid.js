@@ -162,6 +162,10 @@ LK.UI._datagrid = {
       }
       $td.append($text);
 
+      if (typeof column.cssClass != 'undefined') {
+        $td.addClass(column.cssClass);
+      }
+
       if (treeFieldName != null && treeFieldName == column.name) {
         $text.css({
           'width' : 'auto',
