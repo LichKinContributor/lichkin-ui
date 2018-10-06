@@ -162,6 +162,9 @@ LK.UI('plugins', 'form', function(options) {
           out: for ( var key in responseDatas) {
             for (var i = 0; i < opts.plugins.length; i++) {
               var plugin = opts.plugins[i];
+              if (plugin == '-') {
+                continue;
+              }
               var name = plugin.options.name;
               if (name == key) {
                 plugin.options.value = responseDatas[key];
@@ -209,3 +212,74 @@ LK.UI('plugins', 'form', function(options) {
   onAfterCreate : function($plugin) {
   }
 });
+
+/**
+ * 表单工具类
+ */
+LK.UI.formUtils = {
+
+  /**
+   * 创建新插件数组
+   * @param plugins 原插件数组
+   * @param plugin 待添加插件（单个插件JSON或多个插件数组）
+   * @param index 待添加位置
+   * @return 新插件数组
+   */
+  newPlugins : function(plugins, plugin, index) {
+    var newPlugins = [];
+    if (plugins && plugins.length > 0) {
+      $.extend(true, newPlugins, plugins);
+    }
+    if (typeof index == 'undefined') {
+      if (Array.isArray(plugin)) {
+        for (var i = 0; i < plugin.length; i++) {
+          newPlugins.push(plugin[i]);
+        }
+      } else {
+        newPlugins.push(plugin);
+      }
+    } else {
+      if (Array.isArray(plugin)) {
+        for (var i = 0; i < plugin.length; i++) {
+          newPlugins.splice(index + i, 0, plugin[i]);
+        }
+      } else {
+        newPlugins.splice(index, 0, plugin);
+      }
+    }
+    return newPlugins;
+  },
+
+  /**
+   * 设置只读属性
+   * @param plugins 插件数组
+   * @param readonlyPluginNames 需要设置只读属性的插件名数组
+   * @return 新插件数组
+   */
+  newReadonlyPlugins : function(plugins, readonlyPlugins) {
+    var newPlugins = $.extend(true, [], plugins);
+    if (Array.isArray(readonlyPlugins) && readonlyPlugins.length > 0) {
+      for (var i = 0; i < newPlugins.length; i++) {
+        var plugin = newPlugins[i];
+        if (plugin == '-') {
+          continue;
+        }
+        for (var j = 0; j < readonlyPlugins.length; j++) {
+          if (plugin.options.name == readonlyPlugins[j]) {
+            plugin.options.readonly = true;
+          }
+        }
+      }
+    } else {
+      for (var i = 0; i < newPlugins.length; i++) {
+        var plugin = newPlugins[i];
+        if (plugin == '-') {
+          continue;
+        }
+        plugin.options.readonly = true;
+      }
+    }
+    return newPlugins;
+  }
+
+};
