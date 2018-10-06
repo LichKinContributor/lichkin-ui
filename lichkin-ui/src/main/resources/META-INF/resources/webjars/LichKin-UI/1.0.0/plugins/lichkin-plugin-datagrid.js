@@ -723,9 +723,11 @@ LK.UI('plugins', 'datagrid', function(options) {
     $pageBarSearButton = LK.UI.button({
       icon : 'search',
       click : function() {
-        $plugin.LKLoad({
-          param : LK.UI._datagrid.getParam($plugin, options)
-        });
+        if ($searchForm.LKValidate()) {
+          $plugin.LKLoad({
+            param : LK.UI._datagrid.getParam($plugin, options)
+          });
+        }
       },
       style : {
         'display' : 'none'
@@ -745,6 +747,7 @@ LK.UI('plugins', 'datagrid', function(options) {
         icon : 'reset',
         click : function($button) {
           $searchForm.LKFormBindData();
+          $searchForm.LKValidate();
         }
       });
     }
@@ -753,9 +756,11 @@ LK.UI('plugins', 'datagrid', function(options) {
         $appendTo : $buttonsBarRight,
         icon : 'search',
         click : function($button) {
-          $plugin.LKLoad({
-            param : LK.UI._datagrid.getParam($plugin, options)
-          });
+          if ($searchForm.LKValidate()) {
+            $plugin.LKLoad({
+              param : LK.UI._datagrid.getParam($plugin, options)
+            });
+          }
         }
       });
     }
@@ -770,6 +775,7 @@ LK.UI('plugins', 'datagrid', function(options) {
           },
           click : function($button) {
             $searchForm.LKFormBindData();
+            $searchForm.LKValidate();
           }
         });
       }
@@ -781,9 +787,11 @@ LK.UI('plugins', 'datagrid', function(options) {
             size : 24
           },
           click : function($button) {
-            $plugin.LKLoad({
-              param : LK.UI._datagrid.getParam($plugin, options)
-            });
+            if ($searchForm.LKValidate()) {
+              $plugin.LKLoad({
+                param : LK.UI._datagrid.getParam($plugin, options)
+              });
+            }
           }
         });
       }
@@ -802,6 +810,7 @@ LK.UI('plugins', 'datagrid', function(options) {
             height : LK.rowHeight - 2 * LK.topGap,
             click : function($button) {
               $searchForm.LKFormBindData();
+              $searchForm.LKValidate();
             }
           });
         }
@@ -816,9 +825,11 @@ LK.UI('plugins', 'datagrid', function(options) {
               'margin-left' : '10px'
             },
             click : function($button) {
-              $plugin.LKLoad({
-                param : LK.UI._datagrid.getParam($plugin, options)
-              });
+              if ($searchForm.LKValidate()) {
+                $plugin.LKLoad({
+                  param : LK.UI._datagrid.getParam($plugin, options)
+                });
+              }
             }
           });
         }
