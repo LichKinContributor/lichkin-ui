@@ -260,3 +260,7 @@
 .lichkin-dialog .lichkin-datagrid .lichkin-datagrid-dataBar,
 .lichkin-dialog .lichkin-datagrid .lichkin-datagrid-pageBar
 {border-left:none;border-right:none;}
+
+.lichkin-table-cell.monospacedFont .lichkin-text {
+  font-family: 'Courier New';
+}
