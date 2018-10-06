@@ -230,23 +230,26 @@ $.extend(LK, {
   /**
    * 数据表格内容总宽度
    * @param cols 列数
+   * @param columnsLength 表格列数
    * @param withoutFields true:不带字段宽;false:带字段宽.
    */
-  gridContentWidth : function(cols, withoutFields) {
+  gridContentWidth : function(cols, columnsLength, withoutFields) {
+    var colWidth = LK.colWidth;
     if (typeof withoutFields == 'undefined') {
-      return ((LK.colWidth + LK.fieldKeyWidth + LK.leftGap - 2) * cols - 18);
+      colWidth = LK.colWidth + LK.fieldKeyWidth + LK.leftGap;
     }
-    return ((LK.colWidth - 2) * cols - 18);
+    return (colWidth * cols - 2) - columnsLength - 17;
   },
 
   /**
    * 数据表格内容总宽度
    * @param cols 列数
+   * @param columnsLength 表格列数
    * @param ratio 比例
    * @param withoutFields true:不带字段宽;false:带字段宽.
    */
-  gridColWidth : function(cols, ratio, withoutFields) {
-    return LK.gridContentWidth(cols, withoutFields) * ratio;
+  gridColWidth : function(cols, columnsLength, ratio, withoutFields) {
+    return LK.gridContentWidth(cols, columnsLength, withoutFields) * ratio;
   },
 
   // 标准分隔符
