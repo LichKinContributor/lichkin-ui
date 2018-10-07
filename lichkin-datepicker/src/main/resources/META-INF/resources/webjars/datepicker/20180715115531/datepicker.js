@@ -101,7 +101,7 @@
     offset: 10,
 
     // The `z-index` of the datepicker
-    zIndex: 8988,
+    zIndex: 1000,
 
     // Filter each date item (return `false` to disable a date item)
     filter: null,
@@ -1391,7 +1391,7 @@
         $picker.removeClass(CLASS_PLACEMENTS).addClass(placement).css({
           top: top,
           left: left,
-          zIndex: parseInt(options.zIndex, 10)
+          zIndex: parseInt(LK.UI._dialog.maxZIndex+1, 10)
         });
       }
 
