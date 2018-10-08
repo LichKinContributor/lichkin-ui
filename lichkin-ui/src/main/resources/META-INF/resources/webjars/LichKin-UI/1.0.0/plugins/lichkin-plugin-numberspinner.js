@@ -76,9 +76,11 @@ LK.UI('plugins', 'numberspinner', function(options) {
     if (value == '' || value == '-') {
       $plugin.LKSetValues(0);
     } else {
-      $plugin.LKSetValues(parseInt(value) + 1);
+      var newValue = parseInt(value) + 1;
+      if (options.max == null || newValue <= options.max) {
+        $plugin.LKSetValues(newValue);
+      }
     }
-    LK.UI._numberspinner.checkRange($value, options.min, options.max);
     $plugin.LKValidate();
   }).find('i').css({
     'height' : buttonHeight,
@@ -99,9 +101,11 @@ LK.UI('plugins', 'numberspinner', function(options) {
     if (value == '' || value == '-') {
       $plugin.LKSetValues(0);
     } else {
-      $plugin.LKSetValues(parseInt(value) - 1);
+      var newValue = parseInt(value) - 1;
+      if (options.min == null || newValue >= options.min) {
+        $plugin.LKSetValues(newValue);
+      }
     }
-    LK.UI._numberspinner.checkRange($value, options.min, options.max);
     $plugin.LKValidate();
   }).find('i').css({
     'height' : buttonHeight,
