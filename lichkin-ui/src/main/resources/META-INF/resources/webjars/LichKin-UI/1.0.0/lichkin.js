@@ -54,11 +54,54 @@ var randomInRange = function(min, max) {
 
 /**
  * 日期格式化
- * @param time 日期
+ * @param time 日期（yyyyMMddHHmmss）
+ * @return 标准日期格式（yyyy-MM-dd HH:mm:ss）
+ */
+var formatterDate = function(time) {
+  return time.substr(0, 4) + '-' + time.substr(4, 2) + '-' + time.substr(6, 2);
+};
+
+/**
+ * 时间格式化
+ * @param time 日期（yyyyMMddHHmmss）
  * @return 标准日期格式（yyyy-MM-dd HH:mm:ss）
  */
 var formatterTime = function(time) {
   return time.substr(0, 4) + '-' + time.substr(4, 2) + '-' + time.substr(6, 2) + ' ' + time.substr(8, 2) + ':' + time.substr(10, 2) + ':' + time.substr(12, 2);
+};
+
+/**
+ * 时间格式化
+ * @param fmt 格式化
+ * @return 格式化后的时间
+ */
+Date.prototype.format = function(fmt) {
+  var o = {
+    "M+" : this.getMonth() + 1,
+    "d+" : this.getDate(),
+    "h+" : this.getHours(),
+    "m+" : this.getMinutes(),
+    "s+" : this.getSeconds(),
+    "q+" : Math.floor((this.getMonth() + 3) / 3),
+    "S" : this.getMilliseconds()
+  };
+  if (/(y+)/.test(fmt)) {
+    fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+  }
+  for ( var k in o) {
+    if (new RegExp("(" + k + ")").test(fmt)) {
+      fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    }
+  }
+  return fmt;
+};
+
+/**
+ * 当前日期
+ * @return yyyy-MM-dd
+ */
+var today = function() {
+  return new Date().format('yyyy-MM-dd');
 };
 
 /**
