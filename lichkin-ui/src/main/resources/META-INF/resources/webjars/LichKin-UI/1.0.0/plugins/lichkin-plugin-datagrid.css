@@ -85,6 +85,10 @@
   background-color: var(--lichkin-datagrid-header-background-color);
 }
 
+.lichkin-datagrid-readonly .lichkin-datagrid-dataHeaderBar {
+  background-color: #CCCCCC;
+}
+
 .lichkin-datagrid .lichkin-datagrid-dataHeaderBar .lichkin-table {
   border: none;
 }
@@ -92,6 +96,10 @@
 .lichkin-datagrid .lichkin-datagrid-dataHeaderBar .lichkin-table .lichkin-table-row .lichkin-table-cell {
   border-right: 1px solid rgba(0, 0, 0, 0.1);
   background-color: var(--lichkin-datagrid-header-background-color);
+}
+
+.lichkin-datagrid-readonly .lichkin-datagrid-dataHeaderBar .lichkin-table .lichkin-table-row .lichkin-table-cell {
+  background-color: #CCCCCC;
 }
 
 .lichkin-datagrid .lichkin-datagrid-dataHeaderBar .lichkin-table .lichkin-table-row .lichkin-table-cell .lichkin-text {
@@ -133,11 +141,23 @@
   border-left: none;
 }
 
+.lichkin-datagrid-readonly .lichkin-datagrid-dataBodyBar .lichkin-plugin-dataContainer .lichkin-table-row .lichkin-table-cell .lichkin-plugin {
+  border-color: #CCCCCC;
+}
+
+.lichkin-datagrid-readonly .lichkin-datagrid-dataBodyBar .lichkin-plugin-dataContainer .lichkin-table-row .lichkin-table-cell .lichkin-plugin .lichkin-icon {
+  background-color: #CCCCCC;
+}
+
 .lichkin-datagrid .lichkin-datagrid-dataBodyBar .lichkin-plugin-dataContainer .lichkin-text {
   color: var(--lichkin-datagrid-body-font-color);
   font-size: var(--lichkin-datagrid-body-font-size);
   padding: 6px;
   overflow: hidden;
+}
+
+.lichkin-datagrid-readonly .lichkin-datagrid-dataBodyBar .lichkin-plugin-dataContainer .lichkin-text {
+  color: #CCCCCC;
 }
 
 .lichkin-datagrid .lichkin-datagrid-pageBar {
