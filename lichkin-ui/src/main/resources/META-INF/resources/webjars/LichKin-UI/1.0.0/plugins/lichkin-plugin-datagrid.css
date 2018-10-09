@@ -36,6 +36,10 @@
   border-color: #CCCCCC;
 }
 
+.lichkin-datagrid-invalid .lichkin-datagrid-searchFormBar .lichkin-plugin {
+  border-color: var(--lichkin-plugin-border-color-invalid) !important;
+}
+
 .lichkin-datagrid .lichkin-datagrid-toolsBar {
   position: relative;
   background-color: var(--lichkin-plugin-border-color);
@@ -154,6 +158,10 @@
   font-size: var(--lichkin-datagrid-body-font-size);
   padding: 6px;
   overflow: hidden;
+}
+
+.lichkin-datagrid-invalid .lichkin-datagrid-dataBodyBar .lichkin-plugin-dataContainer .lichkin-text {
+  color: var(--lichkin-plugin-font-color-invalid);
 }
 
 .lichkin-datagrid-readonly .lichkin-datagrid-dataBodyBar .lichkin-plugin-dataContainer .lichkin-text {
