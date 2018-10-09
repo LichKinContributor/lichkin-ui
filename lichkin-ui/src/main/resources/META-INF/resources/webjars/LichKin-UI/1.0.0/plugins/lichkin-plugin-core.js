@@ -620,7 +620,7 @@ LK.UI('plugins', 'create', function(opts) {
   }
   var height = options.height;
   if (options.height == null) {
-    if (plugin == 'datagrid') {
+    if (plugin == 'datagrid' && !options.inForm) {
       height = options.height = (LK.rowHeight + LK.topGap) * options.rows;
     } else {
       height = options.height = (LK.rowHeight * options.rows) + (options.inForm ? (options.rows - 1) * LK.topGap : 0) - 2;
