@@ -280,6 +280,55 @@ LK.UI.formUtils = {
       }
     }
     return newPlugins;
+  },
+
+  /**
+   * 修改参数
+   * @param plugins 原插件数组
+   * @param pluginName 待修改参数的插件字段名
+   * @param replace true:替换;false:添加.
+   * @param newOptions 参数
+   */
+  changeOptions : function(plugins, pluginName, replace, newOptions) {
+    for (var i = 0; i < plugins.length; i++) {
+      var plugin = plugins[i];
+      if (plugin.options.name == pluginName) {
+        var options = plugin.options;
+        if (replace) {
+          plugin.options = newOptions;
+          plugin.options.name = pluginName;
+        } else {
+          plugin.options = $.extend(plugin.options, newOptions);
+        }
+        break;
+      }
+    }
+  },
+
+  /**
+   * 删除插件
+   * @param plugins 原插件数组
+   * @param removePluginNames 需要设置只读属性的插件名数组
+   */
+  removePlugins : function(plugins, removePluginNames) {
+    if (Array.isArray(removePluginNames)) {
+      out: for (var i = plugins.length - 1; i >= 0; i--) {
+        var plugin = plugins[i];
+        for (var j = 0; j < removePluginNames.length; j++) {
+          if (plugin.options.name == removePluginNames[j]) {
+            plugins.splice(i, 1);
+            continue out;
+          }
+        }
+      }
+    } else {
+      out: for (var i = plugins.length - 1; i >= 0; i--) {
+        if (plugins[i].options.name == removePluginNames) {
+          plugins.splice(i, 1);
+          break;
+        }
+      }
+    }
   }
 
 };
