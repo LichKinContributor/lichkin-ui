@@ -75,11 +75,13 @@ $.LKExtendI18N({
   'search' : '查询',
   'reset' : '还原',
   'release' : '发布',
+  'submit' : '提交',
   'lock' : '锁定',
   'unlock' : '解锁',
   'set' : '设置',
   'cut' : '剪切',
   'confirmRelease' : '确认发布？',
   'confirmRemove' : '数据删除后将不能恢复，确认删除么？',
+  'confirmSubmit' : '数据提交后将不能修改，确认提交么？',
 
 });

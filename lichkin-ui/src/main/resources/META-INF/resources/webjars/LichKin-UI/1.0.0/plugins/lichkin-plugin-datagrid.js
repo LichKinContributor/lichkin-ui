@@ -388,12 +388,54 @@ LK.UI('plugins', 'datagrid', function(options) {
             });
             formOptions.i18nKey = options.i18nKey + 'columns.';
             formOptions.plugins = LK.UI.formUtils.newReadonlyPlugins(formOptions.plugins);
+            if (typeof options.toolsView.handleFormOptions == 'function') {
+              options.toolsView.handleFormOptions(viewJson, formOptions, $datagrid, $selecteds, selectedDatas, value);
+            }
             LK.UI.form(formOptions);
           }
         }));
       }
     };
     if (typeof options.toolsView.titleTools != 'undefined' && options.toolsView.titleTools == true) {
+      options.titleTools.unshift(json);
+    } else {
+      options.tools.unshift(json);
+    }
+  }
+
+  // 提交按钮
+  if (options.toolsSubmit != null) {
+    if (typeof options.toolsSubmit.icon == 'undefined') {
+      options.toolsSubmit.icon = 'upload';
+    }
+    if (typeof options.toolsSubmit.text == 'undefined') {
+      options.toolsSubmit.text = 'submit';
+    }
+    var json = {
+      singleCheck : false,
+      icon : options.toolsSubmit.icon,
+      text : options.toolsSubmit.text,
+      click : function($button, $datagrid, $selecteds, selectedDatas, value) {
+        if (typeof options.toolsSubmit.beforeClick == 'function' && !options.toolsSubmit.beforeClick($button, $datagrid, $selecteds, selectedDatas, value)) {
+          return;
+        }
+        LK.web.confirm('confirmSubmit', function() {
+          LK.ajax({
+            url : options.toolsSubmit.saveUrl,
+            data : {
+              id : value
+            },
+            showSuccess : true,
+            success : function() {
+              $plugin.LKLoad({
+                param : LK.UI._datagrid.getParam($plugin, options)
+              });
+            }
+          });
+        });
+      }
+    };
+    if (typeof options.toolsSubmit.titleTools != 'undefined' && options.toolsSubmit.titleTools == true) {
       options.titleTools.unshift(json);
     } else {
       options.tools.unshift(json);
@@ -515,6 +557,12 @@ LK.UI('plugins', 'datagrid', function(options) {
               }
             });
             formOptions.i18nKey = options.i18nKey + 'columns.';
+            if (typeof options.toolsEdit.readonlyPlugins == 'function') {
+              formOptions.plugins = LK.UI.formUtils.newReadonlyPlugins(formOptions.plugins, options.toolsEdit.readonlyPlugins(editJson, formOptions, $datagrid, $selecteds, selectedDatas, value));
+            }
+            if (typeof options.toolsEdit.handleFormOptions == 'function') {
+              options.toolsEdit.handleFormOptions(editJson, formOptions, $datagrid, $selecteds, selectedDatas, value);
+            }
             LK.UI.form(formOptions);
           }
         }));
@@ -1043,6 +1091,12 @@ LK.UI.loadOptions,
    * @param dialog see LK.UI.dialog，其中title/icon/url/param/data/content/mask/buttons/onAfterCreate/onBeforeLoading/onAfterLoading无效。
    */
   toolsView : null,
+  /**
+   * 工具栏-删除按钮
+   * @param titleTools true:在标题栏工具栏中使用;false:在工具栏中使用;
+   * @param saveUrl 表单提交地址
+   */
+  toolsSubmit : null,
   // 是否带分页信息
   pageable : true,
   // 分页大小
