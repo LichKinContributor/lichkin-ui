@@ -44,6 +44,13 @@ LK.UI.createOptions,
 // 控件特有参数
 {
   maxlength : null,
-  enterKeyClick : function($plugin, values, value, val) {
+  /**
+   * 回车响应时间
+   * @param $plugin 当前控件
+   * @param pluginValues 控件值
+   * @param pluginValue 控件值
+   * @param currentValue 当前值
+   */
+  enterKeyClick : function($plugin, pluginValues, pluginValue, currentValue) {
   }
 }));
