@@ -88,7 +88,7 @@ LK.UI._datagrid = {
       }
       datas = datas.content;
     }
-    this.addNodes($plugin, $container, datas, 0, options, options.columns, options.treeFieldName);
+    this.addNodes($plugin, $container, datas, 0, options, options.columns, options.treeFieldName, options.i18nKey);
   },
 
   /**
@@ -101,9 +101,9 @@ LK.UI._datagrid = {
    * @param columns 列信息
    * @param treeFieldName 树形表格字段名
    */
-  addNodes : function($plugin, $container, datas, level, options, columns, treeFieldName) {
+  addNodes : function($plugin, $container, datas, level, options, columns, treeFieldName, i18nKey) {
     for (var i = 0; i < datas.length; i++) {
-      this.addNode($plugin, $container, datas[i], level + 1, options, columns, treeFieldName);
+      this.addNode($plugin, $container, datas[i], level + 1, options, columns, treeFieldName, i18nKey);
     }
   },
 
@@ -117,8 +117,8 @@ LK.UI._datagrid = {
    * @param columns 列信息
    * @param treeFieldName 树形表格字段名
    */
-  addNode : function($plugin, $container, data, level, options, columns, treeFieldName) {
-    var $tr = $('<tr class="lichkin-table-row"></tr>').appendTo($container).LKAddPluginClass('droplist', 'node');
+  addNode : function($plugin, $container, data, level, options, columns, treeFieldName, i18nKey) {
+    var $tr = $('<tr class="lichkin-table-row"></tr>').appendTo($container).LKAddPluginClass('datagrid', 'node');
     $tr.data(data);
 
     for (var j = 0; j < columns.length; j++) {
@@ -127,7 +127,7 @@ LK.UI._datagrid = {
 
       var text = treeFieldName == null ? data[column.name] : data.params[column.name];
       if (column.formatter) {
-        text = column.formatter(data, $plugin, options, $container, level, columns, treeFieldName);
+        text = column.formatter(data, $plugin, options, $container, level, columns, treeFieldName, i18nKey);
         if (!isString(text)) {
           if (isJSON(text)) {
             text = LK.UI[text.plugin]($.extend(text.options, {
@@ -199,7 +199,7 @@ LK.UI._datagrid = {
 
     // 添加子节点
     if (treeFieldName != null && data.children.length != 0) {
-      this.addNodes($plugin, $container, data.children, level, options, columns, treeFieldName);
+      this.addNodes($plugin, $container, data.children, level, options, columns, treeFieldName, i18nKey);
     }
   },
 
@@ -240,7 +240,7 @@ LK.UI._datagrid = {
       icon : toolsAdd.icon,
       text : toolsAdd.text,
       click : function($button, $datagrid, $selecteds, selectedDatas, value) {
-        if (typeof toolsAdd.beforeClick == 'function' && !toolsAdd.beforeClick($button, $datagrid, $selecteds, selectedDatas, value)) {
+        if (typeof toolsAdd.beforeClick == 'function' && !toolsAdd.beforeClick($button, $datagrid, $selecteds, selectedDatas, value, options.i18nKey)) {
           return;
         }
         LK.UI.openDialog($.extend({}, toolsAdd.dialog, {
@@ -261,7 +261,7 @@ LK.UI._datagrid = {
                   if ($form.LKValidate()) {
                     LK.ajax({
                       url : toolsAdd.saveUrl,
-                      data : $.extend($form.LKFormGetData(), typeof toolsAdd.beforeSave == 'function' ? toolsAdd.beforeSave($button, $datagrid, $selecteds, selectedDatas, value, $dialogButton, $dialog) : {}),
+                      data : $.extend($form.LKFormGetData(), typeof toolsAdd.beforeSave == 'function' ? toolsAdd.beforeSave($button, $datagrid, $selecteds, selectedDatas, value, $dialogButton, $dialog, options.i18nKey) : {}),
                       showSuccess : true,
                       success : function() {
                         $plugin.LKLoad({
@@ -355,12 +355,12 @@ LK.UI('plugins', 'datagrid', function(options) {
       icon : options.toolsView.icon,
       text : options.toolsView.text,
       click : function($button, $datagrid, $selecteds, selectedDatas, value) {
-        if (typeof options.toolsView.beforeClick == 'function' && !options.toolsView.beforeClick($button, $datagrid, $selecteds, selectedDatas, value)) {
+        if (typeof options.toolsView.beforeClick == 'function' && !options.toolsView.beforeClick($button, $datagrid, $selecteds, selectedDatas, value, options.i18nKey)) {
           return;
         }
         var viewJson = $.extend(true, {}, options.toolsView);
         if (typeof options.toolsView.beforeOpenDialog == 'function') {
-          viewJson = options.toolsView.beforeOpenDialog(viewJson, $button, $datagrid, $selecteds, selectedDatas, value);
+          viewJson = options.toolsView.beforeOpenDialog(viewJson, $button, $datagrid, $selecteds, selectedDatas, value, options.i18nKey);
         }
         LK.UI.openDialog($.extend({}, viewJson.dialog, {
           title : options.toolsView.text,
@@ -389,7 +389,7 @@ LK.UI('plugins', 'datagrid', function(options) {
             formOptions.i18nKey = options.i18nKey + 'columns.';
             formOptions.plugins = LK.UI.formUtils.newReadonlyPlugins(formOptions.plugins);
             if (typeof options.toolsView.handleFormOptions == 'function') {
-              options.toolsView.handleFormOptions(viewJson, formOptions, $datagrid, $selecteds, selectedDatas, value);
+              options.toolsView.handleFormOptions(viewJson, formOptions, $datagrid, $selecteds, selectedDatas, value, options.i18nKey);
             }
             LK.UI.form(formOptions);
           }
@@ -416,7 +416,7 @@ LK.UI('plugins', 'datagrid', function(options) {
       icon : options.toolsSubmit.icon,
       text : options.toolsSubmit.text,
       click : function($button, $datagrid, $selecteds, selectedDatas, value) {
-        if (typeof options.toolsSubmit.beforeClick == 'function' && !options.toolsSubmit.beforeClick($button, $datagrid, $selecteds, selectedDatas, value)) {
+        if (typeof options.toolsSubmit.beforeClick == 'function' && !options.toolsSubmit.beforeClick($button, $datagrid, $selecteds, selectedDatas, value, options.i18nKey)) {
           return;
         }
         LK.web.confirm('confirmSubmit', function() {
@@ -455,7 +455,7 @@ LK.UI('plugins', 'datagrid', function(options) {
       icon : options.toolsRemove.icon,
       text : options.toolsRemove.text,
       click : function($button, $datagrid, $selecteds, selectedDatas, value) {
-        if (typeof options.toolsRemove.beforeClick == 'function' && !options.toolsRemove.beforeClick($button, $datagrid, $selecteds, selectedDatas, value)) {
+        if (typeof options.toolsRemove.beforeClick == 'function' && !options.toolsRemove.beforeClick($button, $datagrid, $selecteds, selectedDatas, value, options.i18nKey)) {
           return;
         }
         LK.web.confirm('confirmRemove', function() {
@@ -495,12 +495,12 @@ LK.UI('plugins', 'datagrid', function(options) {
       icon : options.toolsEdit.icon,
       text : options.toolsEdit.text,
       click : function($button, $datagrid, $selecteds, selectedDatas, value) {
-        if (typeof options.toolsEdit.beforeClick == 'function' && !options.toolsEdit.beforeClick($button, $datagrid, $selecteds, selectedDatas, value)) {
+        if (typeof options.toolsEdit.beforeClick == 'function' && !options.toolsEdit.beforeClick($button, $datagrid, $selecteds, selectedDatas, value, options.i18nKey)) {
           return;
         }
         var editJson = $.extend(true, {}, options.toolsEdit);
         if (typeof options.toolsEdit.beforeOpenDialog == 'function') {
-          editJson = options.toolsEdit.beforeOpenDialog(editJson, $button, $datagrid, $selecteds, selectedDatas, value);
+          editJson = options.toolsEdit.beforeOpenDialog(editJson, $button, $datagrid, $selecteds, selectedDatas, value, options.i18nKey);
         }
         LK.UI.openDialog($.extend({}, editJson.dialog, {
           title : options.toolsEdit.text,
@@ -558,10 +558,10 @@ LK.UI('plugins', 'datagrid', function(options) {
             });
             formOptions.i18nKey = options.i18nKey + 'columns.';
             if (typeof options.toolsEdit.readonlyPlugins == 'function') {
-              formOptions.plugins = LK.UI.formUtils.newReadonlyPlugins(formOptions.plugins, options.toolsEdit.readonlyPlugins(editJson, formOptions, $datagrid, $selecteds, selectedDatas, value));
+              formOptions.plugins = LK.UI.formUtils.newReadonlyPlugins(formOptions.plugins, options.toolsEdit.readonlyPlugins(editJson, formOptions, $datagrid, $selecteds, selectedDatas, value, options.i18nKey));
             }
             if (typeof options.toolsEdit.handleFormOptions == 'function') {
-              options.toolsEdit.handleFormOptions(editJson, formOptions, $datagrid, $selecteds, selectedDatas, value);
+              options.toolsEdit.handleFormOptions(editJson, formOptions, $datagrid, $selecteds, selectedDatas, value, options.i18nKey);
             }
             LK.UI.form(formOptions);
           }
@@ -662,7 +662,7 @@ LK.UI('plugins', 'datagrid', function(options) {
                 selectedDatas = selectedDatas[0];
               }
 
-              click($button, $plugin, $selecteds, selectedDatas, value);
+              click($button, $plugin, $selecteds, selectedDatas, value, options.i18nKey);
             },
             tip : button.tip
           }));
@@ -718,7 +718,7 @@ LK.UI('plugins', 'datagrid', function(options) {
               selectedDatas = selectedDatas[0];
             }
 
-            click($button, $plugin, $selecteds, selectedDatas, value);
+            click($button, $plugin, $selecteds, selectedDatas, value, options.i18nKey);
           }
         })));
       })(button);
