@@ -451,6 +451,47 @@ $.fn.extend({
       }
     }
     return results;
+  },
+
+  /**
+   * 获取下级控件
+   * @param name 控件名
+   */
+  LKGetSubPlugin : function(name) {
+    var $plugins = this.find('.lichkin-plugin');
+    for (var i = 0; i < $plugins.length; i++) {
+      var $plugin = $($plugins[i]);
+      if ($plugin.LKGetName() == name) {
+        return $plugin;
+      }
+    }
+    return null;
+  },
+
+  /**
+   * 获取数据JSON
+   */
+  LKGetDataJson : function() {
+    var json = [];
+    this.LKGetDataContainer().find('.lichkin-plugin-node').each(function() {
+      var data = $(this).data();
+      var $plugins = $(this).find('.lichkin-plugin');
+      if ($plugins.length > 0) {
+        for (var i = 0; i < $plugins.length; i++) {
+          var $plugin = $($plugins[i]);
+          data[$plugin.LKGetName()] = $plugin.LKGetValue();
+        }
+      }
+      json.push(data);
+    });
+    return json;
+  },
+
+  /**
+   * 获取数据JSON字符串
+   */
+  LKGetDataJsonString : function() {
+    return JSON.stringify(this.LKGetDataJson());
   }
 
 });
@@ -641,7 +682,8 @@ LK.UI('plugins', 'create', function(opts) {
   $plugin.data('initValue', options.value);
 
   // 创建UI控件存值对象
-  var $value = $((plugin == 'textbox' || plugin == 'datepicker' || plugin == 'timepicker' || plugin == 'numberspinner') ? '<input type="text" autocomplete="off"' + (plugin == 'datepicker' || plugin == 'timepicker' ? ' readonly="true"' : '') + ' />' : (plugin == 'textarea' ? '<textarea></textarea>' : '<input type="hidden" />')).appendTo($plugin);
+  var $value = $((plugin == 'textbox' || plugin == 'datepicker' || plugin == 'timepicker' || plugin == 'numberspinner') ? '<input type="text" autocomplete="off"' + (plugin == 'datepicker' || plugin == 'timepicker' ? ' readonly="true"' : '') + ' />' : (plugin == 'textarea' ? '<textarea></textarea>' : '<input type="hidden" />'))
+      .appendTo($plugin);
   $value.LKAddPluginClass(plugin, 'value');
   $value.attr('name', options.name);
   $value.data({
