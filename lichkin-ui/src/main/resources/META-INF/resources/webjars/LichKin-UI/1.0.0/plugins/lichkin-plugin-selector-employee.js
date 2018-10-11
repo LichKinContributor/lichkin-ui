@@ -52,22 +52,20 @@ LK.UI('plugins', 'selector_employee', function(options) {
 
     var columns = [
         {
-          'name' : 'userName',
-          'text' : 'userName',
-          'width' : 160
+          text : 'userName',
+          width : 160,
+          name : 'userName'
         }, {
-          'formatter' : function(rowData) {
-            return $.LKGetI18N('GENDER', rowData.gender);
-          },
-          'text' : 'gender',
-          'width' : 70
+          text : 'gender',
+          width : 70,
+          name : 'gender'
         }, {
-          'name' : 'jobNumber',
-          'text' : 'jobNumber',
-          'width' : 170
+          text : 'jobNumber',
+          width : 170,
+          name : 'jobNumber'
         }, {
-          'name' : 'deptName',
-          'text' : 'department'
+          text : 'deptName',
+          name : 'deptName'
         }
     ];
 

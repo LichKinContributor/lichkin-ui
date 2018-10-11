@@ -36,7 +36,7 @@ $.LKExtendI18N({
   'selector' : '显示/隐藏选项',
 
   'selector-employee-title' : '员工选择器',
-  'department' : '部门',
+  'deptName' : '部门',
   'selector-employee-dlg' : {
     'grid' : {
       'source' : '待选数据',
@@ -45,7 +45,7 @@ $.LKExtendI18N({
         'userName' : '姓名',
         'gender' : '性别',
         'jobNumber' : '工号',
-        'department' : '部门'
+        'deptName' : '部门'
       }
     }
   },
