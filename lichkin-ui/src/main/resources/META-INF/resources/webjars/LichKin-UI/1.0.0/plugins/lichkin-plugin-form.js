@@ -92,9 +92,10 @@ $.fn.extend({
 
   /**
    * 获取表单数据
+   * @param ignoreNullValue true:忽略空值;false:不忽略空值;
    * @return JSON数据
    */
-  LKFormGetData : function() {
+  LKFormGetData : function(ignoreNullValue) {
     var $frm = this.LKGetFormPlugin();
 
     var json = {};
@@ -107,13 +108,17 @@ $.fn.extend({
         if (plugin == 'hidden') {
           value = $subPlugin.val();
         } else {
-          value = $subPlugin.LKGetValue();
+          if ($subPlugin.data('LKOPTIONS').readonly != true) {
+            value = $subPlugin.LKGetValue();
+          }
         }
         value = value == '' ? null : value;
-        if (typeof json[name] == 'undefined') {
-          json[name] = value;
-        } else {
-          json[name] += LK.SPLITOR + value;
+        if (!ignoreNullValue || value != null) {
+          if (typeof json[name] == 'undefined') {
+            json[name] = value;
+          } else {
+            json[name] += LK.SPLITOR + value;
+          }
         }
       }
     });
