@@ -300,6 +300,70 @@ LK.UI._datagrid = {
     } else {
       options.tools.unshift(json);
     }
+  },
+
+  /**
+   * 增加修改状态按钮
+   * @param $plugin 控件对象
+   * @param options 控件参数
+   * @param toolsUS 添加按钮参数
+   */
+  addToolsUS : function($plugin, options, toolsUS) {
+    var json = {
+      singleCheck : false,
+      icon : toolsUS.icon,
+      text : options.i18nKey + toolsUS.text,
+      click : function($button, $datagrid, $selecteds, selectedDatas, value) {
+        if (typeof toolsUS.beforeClick == 'function' && !toolsUS.beforeClick($button, $datagrid, $selecteds, selectedDatas, value, options.i18nKey)) {
+          return;
+        }
+
+        if (Array.isArray(toolsUS.disallowUsingStatusArr)) {
+          for (var x = 0; x < toolsUS.disallowUsingStatusArr.length; x++) {
+            var usingStatus = toolsUS.disallowUsingStatusArr[x];
+            for (var i = 0; i < selectedDatas.length; i++) {
+              if (selectedDatas[i].usingStatusDictCode == usingStatus.usingStatus) {
+                LK.alert(options.i18nKey + usingStatus.errorMsg);
+                return;
+              }
+            }
+          }
+        }
+
+        if (Array.isArray(toolsUS.allowUsingStatusArr)) {
+          for (var x = 0; x < toolsUS.allowUsingStatusArr.length; x++) {
+            var usingStatus = toolsUS.allowUsingStatusArr[x];
+            for (var i = 0; i < selectedDatas.length; i++) {
+              if (selectedDatas[i].usingStatusDictCode != usingStatus.usingStatus) {
+                LK.alert(options.i18nKey + usingStatus.errorMsg);
+                return;
+              }
+            }
+          }
+        }
+
+        LK.web.confirm(options.i18nKey + 'confirm.' + toolsUS.text, function() {
+          LK.ajax({
+            url : toolsUS.saveUrl,
+            data : {
+              id : value,
+              usingStatus : toolsUS.usingStatus
+            },
+            showSuccess : true,
+            success : function() {
+              $plugin.LKLoad({
+                param : LK.UI._datagrid.getParam($plugin, options)
+              });
+            }
+          });
+        });
+      }
+    };
+    if (typeof toolsUS.titleTools != 'undefined' && toolsUS.titleTools == true) {
+      options.titleTools.unshift(json);
+    } else {
+      options.tools.unshift(json);
+    }
   }
 
 };
@@ -450,35 +514,32 @@ LK.UI('plugins', 'datagrid', function(options) {
     if (typeof options.toolsRemove.text == 'undefined') {
       options.toolsRemove.text = 'remove';
     }
-    var json = {
-      singleCheck : false,
-      icon : options.toolsRemove.icon,
-      text : options.toolsRemove.text,
-      click : function($button, $datagrid, $selecteds, selectedDatas, value) {
-        if (typeof options.toolsRemove.beforeClick == 'function' && !options.toolsRemove.beforeClick($button, $datagrid, $selecteds, selectedDatas, value, options.i18nKey)) {
-          return;
-        }
-        LK.web.confirm('confirmRemove', function() {
-          LK.ajax({
-            url : options.toolsRemove.saveUrl,
-            data : {
-              id : value,
-              usingStatus : 'DEPRECATED'
-            },
-            showSuccess : true,
-            success : function() {
-              $plugin.LKLoad({
-                param : LK.UI._datagrid.getParam($plugin, options)
-              });
-            }
-          });
-        });
+    options.toolsRemove.usingStatus = 'DEPRECATED';
+    if (options.toolsUS != null) {
+      if (Array.isArray(options.toolsUS)) {
+        options.toolsUS.unshift(options.toolsRemove);
+      } else {
+        options.toolsUS = [
+            options.toolsRemove, options.toolsUS
+        ];
       }
-    };
-    if (typeof options.toolsRemove.titleTools != 'undefined' && options.toolsRemove.titleTools == true) {
-      options.titleTools.unshift(json);
     } else {
-      options.tools.unshift(json);
+      options.toolsUS = options.toolsRemove;
+    }
+  }
+
+  // 修改状态按钮
+  if (options.toolsUS != null) {
+    if (Array.isArray(options.toolsUS)) {
+      for (var i = 0; i < options.toolsUS.length; i++) {
+        (function(toolsUS) {
+          LK.UI._datagrid.addToolsUS($plugin, options, toolsUS);
+        })(options.toolsUS[i]);
+      }
+    } else {
+      (function(toolsUS) {
+        LK.UI._datagrid.addToolsUS($plugin, options, toolsUS);
+      })(options.toolsUS);
     }
   }
 
@@ -520,7 +581,7 @@ LK.UI('plugins', 'datagrid', function(options) {
                   if ($form.LKValidate()) {
                     LK.ajax({
                       url : editJson.saveUrl,
-                      data : $.extend($form.LKFormGetData(), typeof editJson.beforeSave == 'function' ? editJson.beforeSave($button, $datagrid, $selecteds, selectedDatas, value, $dialogButton, $dialog) : {}),
+                      data : $.extend($form.LKFormGetData(true), typeof editJson.beforeSave == 'function' ? editJson.beforeSave($button, $datagrid, $selecteds, selectedDatas, value, $dialogButton, $dialog) : {}),
                       showSuccess : true,
                       success : function() {
                         $plugin.LKLoad({
@@ -1063,40 +1124,70 @@ LK.UI.loadOptions,
   /**
    * 工具栏-新增按钮
    * @param titleTools true:在标题栏工具栏中使用;false:在工具栏中使用;
-   * @param form see LK.UI.form，其中$appendTo/$renderTo/values/url/param参数无效。
-   * @param dialog see LK.UI.dialog，其中title/icon/url/param/data/content/mask/buttons/onAfterCreate/onBeforeLoading/onAfterLoading无效。
+   * @param icon 按钮图标
+   * @param text 按钮文字
    * @param saveUrl 表单提交地址
-   * @param beforeClick 点击事件执行前操作，返回值为true继续执行，返回值为false不继续执行。（第一个参数为当前表格控件）
+   * @param beforeClick 点击事件执行前操作，返回值为true继续执行，返回值为false不继续执行。
    * @param beforeSave 保存请求执行前操作，返回值为JSON数据。（第一个参数为当前表格控件）
+   * @param form see LK.UI.form
+   * @param dialog see LK.UI.dialog
    */
   toolsAdd : null,
   /**
    * 工具栏-编辑按钮
    * @param titleTools true:在标题栏工具栏中使用;false:在工具栏中使用;
-   * @param form see LK.UI.form，其中$appendTo/$renderTo/values/param参数无效。
-   * @param dialog see LK.UI.dialog，其中title/icon/url/param/data/content/mask/buttons/onAfterCreate/onBeforeLoading/onAfterLoading无效。
+   * @param icon 按钮图标
+   * @param text 按钮文字
    * @param saveUrl 表单提交地址
+   * @param beforeClick 点击事件执行前操作，返回值为true继续执行，返回值为false不继续执行。
+   * @param beforeSave 保存请求执行前操作，返回值为JSON数据。（第一个参数为当前表格控件）
+   * @param form see LK.UI.form
+   * @param dialog see LK.UI.dialog
+   * @param readonlyPlugins 需要设置为只读状态的控件名数组
+   * @param handleFormOptions 表单创建执行前操作。无返回值。
    */
   toolsEdit : null,
   /**
    * 工具栏-删除按钮
    * @param titleTools true:在标题栏工具栏中使用;false:在工具栏中使用;
+   * @param icon 按钮图标
+   * @param text 按钮文字
    * @param saveUrl 表单提交地址
+   * @param beforeClick 点击事件执行前操作，返回值为true继续执行，返回值为false不继续执行。
+   * @param disallowUsingStatusArr 不允许执行的数据状态数组
+   * @param allowUsingStatusArr 允许执行的数据状态数组
    */
   toolsRemove : null,
   /**
    * 工具栏-查看按钮
    * @param titleTools true:在标题栏工具栏中使用;false:在工具栏中使用;
-   * @param form see LK.UI.form，其中$appendTo/$renderTo/values/param参数无效。
-   * @param dialog see LK.UI.dialog，其中title/icon/url/param/data/content/mask/buttons/onAfterCreate/onBeforeLoading/onAfterLoading无效。
+   * @param icon 按钮图标
+   * @param text 按钮文字
+   * @param saveUrl 表单提交地址
+   * @param beforeClick 点击事件执行前操作，返回值为true继续执行，返回值为false不继续执行。
+   * @param form see LK.UI.form
+   * @param dialog see LK.UI.dialog
+   * @param handleFormOptions 表单创建执行前操作。无返回值。
    */
   toolsView : null,
   /**
-   * 工具栏-删除按钮
+   * 工具栏-提交按钮
    * @param titleTools true:在标题栏工具栏中使用;false:在工具栏中使用;
    * @param saveUrl 表单提交地址
+   * @param beforeClick 点击事件执行前操作，返回值为true继续执行，返回值为false不继续执行。
    */
   toolsSubmit : null,
+  /**
+   * 工具栏-修改状态按钮
+   * @param titleTools true:在标题栏工具栏中使用;false:在工具栏中使用;
+   * @param icon 按钮图标
+   * @param text 按钮文字
+   * @param saveUrl 表单提交地址
+   * @param beforeClick 点击事件执行前操作，返回值为true继续执行，返回值为false不继续执行。
+   * @param disallowUsingStatusArr 不允许执行的数据状态数组
+   * @param allowUsingStatusArr 允许执行的数据状态数组
+   */
+  toolsUS : null,
   // 是否带分页信息
   pageable : true,
   // 分页大小
