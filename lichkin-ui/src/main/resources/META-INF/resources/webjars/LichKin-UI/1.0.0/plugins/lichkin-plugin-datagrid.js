@@ -483,7 +483,7 @@ LK.UI('plugins', 'datagrid', function(options) {
         if (typeof options.toolsSubmit.beforeClick == 'function' && !options.toolsSubmit.beforeClick($button, $datagrid, $selecteds, selectedDatas, value, options.i18nKey)) {
           return;
         }
-        LK.web.confirm('confirmSubmit', function() {
+        LK.web.confirm(options.i18nKey + 'confirm.' + options.toolsSubmit.text, function() {
           LK.ajax({
             url : options.toolsSubmit.saveUrl,
             data : {
