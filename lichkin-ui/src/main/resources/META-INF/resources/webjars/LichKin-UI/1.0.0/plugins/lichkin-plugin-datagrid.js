@@ -1026,13 +1026,43 @@ LK.UI('plugins', 'datagrid', function(options) {
   $dataHeaderBar.css('width', width - 2);
   var $tableHeader = $('<table class="lichkin-table"></table>').appendTo($dataHeaderBar);
   var $tr = $('<tr class="lichkin-table-row"></tr>').appendTo($tableHeader);
+  var columnTemp = [];
+  var columnTotalWidth = 0;
   for (var i = 0; i < options.columns.length; i++) {
     var column = options.columns[i];
     var $td = $('<td class="lichkin-table-cell"></td>').appendTo($tr).css('width', parseInt(column.width));
-    $td.append(LK.UI.text({
+    var $tdText = LK.UI.text({
       'original' : true,
       'text' : $.LKGetI18NWithPrefix(options.i18nKey + 'columns.', column.text)
-    }).css('width', parseInt(column.width) - 12));
+    });
+    $td.append($tdText);
+    if (typeof column.width == 'number') {
+      columnTotalWidth += parseInt(column.width);
+      $tdText.css('width', column.width - 12);
+    } else {
+      columnTemp.push({
+        idx : i,
+        column : column,
+        $tdText : $tdText
+      });
+    }
+  }
+
+  if (columnTemp.length == 1) {
+    var tmp = columnTemp[0];
+    var column = tmp.column;
+    var w = LK.gridContentWidth(options.cols, options.columns.length) - columnTotalWidth;
+    tmp.$tdText.css('width', w - 12);
+    options.columns[tmp.idx].width = w;
+  } else {
+    for (var i = 0; i < columnTemp.length; i++) {
+      var tmp = columnTemp[i];
+      var column = tmp.column;
+      var nArr = column.width.split('/');
+      var w = (LK.gridContentWidth(options.cols, options.columns.length) - columnTotalWidth) * nArr[0] / nArr[1];
+      tmp.$tdText.css('width', w - 12);
+      options.columns[tmp.idx].width = w;
+    }
   }
 
   // 数据内容栏
