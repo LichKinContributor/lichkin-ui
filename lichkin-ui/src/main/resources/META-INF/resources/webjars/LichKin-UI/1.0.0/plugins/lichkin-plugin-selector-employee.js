@@ -11,7 +11,7 @@ $.LKExtendICON({
  * 员工选择器控件
  */
 LK.UI('plugins', 'selector_employee', function(options) {
-  options.url = '/SysEmployeeLoginComp/L';
+  options.url = '/SysEmployee/L';
   options.textFieldName = 'userName';
   options.dialog.title = 'selector-employee-title';
   options.dialog.icon = 'employeeMgmt';
@@ -64,7 +64,8 @@ LK.UI('plugins', 'selector_employee', function(options) {
           width : 170,
           name : 'jobNumber'
         }, {
-          text : 'deptName',
+          text : 'department',
+          width : 200,
           name : 'deptName'
         }
     ];
