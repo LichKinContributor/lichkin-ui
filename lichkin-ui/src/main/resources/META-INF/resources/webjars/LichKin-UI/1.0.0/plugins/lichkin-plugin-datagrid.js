@@ -119,6 +119,9 @@ LK.UI._datagrid = {
    */
   addNode : function($plugin, $container, data, level, options, columns, treeFieldName, i18nKey) {
     var $tr = $('<tr class="lichkin-table-row"></tr>').appendTo($container).LKAddPluginClass('datagrid', 'node');
+    if (options.valueFieldName == 'random') {
+      data.random = Math.random() * 100000000000000000;
+    }
     $tr.data(data);
 
     for (var j = 0; j < columns.length; j++) {
