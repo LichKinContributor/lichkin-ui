@@ -22,7 +22,9 @@ LK.UI._form = {
       }
       plugin.options.$appendTo = $plugin;
       plugin.options.inForm = true;
-      plugin.options.i18nKey = options.i18nKey;
+      if (typeof plugin.options.i18nKey == 'undefined') {
+        plugin.options.i18nKey = options.i18nKey;
+      }
       if (typeof options.values[name] != 'undefined' && typeof plugin.options.value == 'undefined') {
         plugin.options.value = options.values[name];
       }
