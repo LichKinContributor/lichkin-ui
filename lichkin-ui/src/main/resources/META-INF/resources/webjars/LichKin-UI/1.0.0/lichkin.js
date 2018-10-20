@@ -53,21 +53,15 @@ var randomInRange = function(min, max) {
 };
 
 /**
- * 日期格式化
- * @param time 日期（yyyyMMddHHmmss）
+ * 显示标准时间格式
+ * @param time 日期（yyyyMMddHHmmss或yyyyMMddHHmmssSSS）
  * @return 标准日期格式（yyyy-MM-dd HH:mm:ss）
  */
-var formatterDate = function(time) {
-  return time.substr(0, 4) + '-' + time.substr(4, 2) + '-' + time.substr(6, 2);
-};
-
-/**
- * 时间格式化
- * @param time 日期（yyyyMMddHHmmss）
- * @return 标准日期格式（yyyy-MM-dd HH:mm:ss）
- */
-var formatterTime = function(time) {
-  return time.substr(0, 4) + '-' + time.substr(4, 2) + '-' + time.substr(6, 2) + ' ' + time.substr(8, 2) + ':' + time.substr(10, 2) + ':' + time.substr(12, 2);
+var showStandardTime = function(time) {
+  if (time && (time.length == 14 || time.length == 17)) {
+    return time.substr(0, 4) + '-' + time.substr(4, 2) + '-' + time.substr(6, 2) + ' ' + time.substr(8, 2) + ':' + time.substr(10, 2) + ':' + time.substr(12, 2);
+  }
+  return '';
 };
 
 /**
