@@ -64,6 +64,9 @@ LK.UI._droplist = {
     var height = $plugin.data('LKOPTIONS').height;
     for (var i = 0; i < datas.length; i++) {
       var data = datas[i];
+      if (data.value == null) {
+        data.value = '-';
+      }
       var $li = $('<li></li>').appendTo($container).LKAddPluginClass('droplist', 'node');
       $li.data(data);
       $li.append(LK.UI.text({

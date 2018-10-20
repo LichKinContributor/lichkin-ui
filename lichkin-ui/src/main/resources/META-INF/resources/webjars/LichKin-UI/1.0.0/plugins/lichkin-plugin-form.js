@@ -36,6 +36,11 @@ LK.UI._form = {
         $hiddenInput.val(plugin.options.value);
         continue;
       }
+      if (plugin.plugin == 'droplist') {
+        if (plugin.options.value == null) {
+          plugin.options.value = '-';
+        }
+      }
       LK.UI[plugin.plugin](plugin.options);
     }
 
@@ -115,6 +120,11 @@ $.fn.extend({
           }
         }
         value = value == '' ? null : value;
+        if (plugin == 'droplist') {
+          if (value == '-') {
+            value = null;
+          }
+        }
         if (!ignoreNullValue || value != null) {
           if (typeof json[name] == 'undefined') {
             json[name] = value;
