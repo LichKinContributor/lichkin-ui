@@ -2,21 +2,19 @@
 
 // 扩展图标
 $.LKExtendICON({
-  'plus' : 'chevron-up',
-  'minus' : 'chevron-down',
-  'employeeMgmt' : 'user-friends'
+  'productMgmt' : 'wine-glass'
 });
 
 /**
- * 员工选择器控件
+ * 产品选择器控件
  */
-LK.UI('plugins', 'selector_employee', function(options) {
-  options.url = '/SysEmployee/L';
-  options.textFieldName = 'userName';
-  options.dialog.title = 'selector-employee-title';
-  options.dialog.icon = 'employeeMgmt';
-  options.dialog.content = '<form><table class="lichkin-table"><tr><td rowspan="3" class="tree-dept"></td><td class="datagrid-source"></td></tr><tr><td class="controllers"></td></tr><tr><td class="datagrid-target"></td></tr></table></form>';
-  var w = 900, h = 500, wt = 250;
+LK.UI('plugins', 'selector_product', function(options) {
+  options.url = '/SysPssProduct/L';
+  options.textFieldName = 'productName';
+  options.dialog.title = 'selector-product-title';
+  options.dialog.icon = 'productMgmt';
+  options.dialog.content = '<form><table class="lichkin-table"><tr><td rowspan="3" class="tree-productCategory"></td><td class="datagrid-source"></td></tr><tr><td class="controllers"></td></tr><tr><td class="datagrid-target"></td></tr></table></form>';
+  var w = 1300, h = 500, wt = 250;
   options.dialog.size = {
     width : w + LK.leftGap * 2 - 1,
     height : h + LK.topGap * 2 + 1
@@ -31,9 +29,9 @@ LK.UI('plugins', 'selector_employee', function(options) {
     $controllers.css('padding', '2px 0px');
 
     var $tree = LK.UI.tree({
-      $appendTo : $contentBar.find('.tree-dept'),
+      $appendTo : $contentBar.find('.tree-productCategory'),
       name : 'tree',
-      title : 'department',
+      title : 'productCategory',
       withField : false,
       width : wt,
       height : h + 1,
@@ -44,7 +42,7 @@ LK.UI('plugins', 'selector_employee', function(options) {
       style : {
         'border-top' : 'none'
       },
-      url : '/SysDept/S',
+      url : '/SysPssProductCategory/S',
       linkages : [
         'source'
       ]
@@ -52,26 +50,30 @@ LK.UI('plugins', 'selector_employee', function(options) {
 
     var columns = [
         {
-          text : 'userName',
-          width : 160,
-          name : 'userName'
-        }, {
-          text : 'gender',
-          width : 70,
-          name : 'gender'
-        }, {
-          text : 'jobNumber',
-          width : 170,
-          name : 'jobNumber'
-        }, {
-          text : 'department',
+          text : 'productName',
           width : 200,
-          name : 'deptName'
+          name : 'productName'
+        }, {
+          text : 'productCode',
+          width : 200,
+          name : 'productCode'
+        }, {
+          text : 'unit',
+          width : 60,
+          name : 'unit'
+        }, {
+          text : 'barcode',
+          width : 160,
+          name : 'barcode'
+        }, {
+          text : 'retailPrice',
+          width : 80,
+          name : 'retailPrice'
         }
     ];
 
     var $source = LK.UI.datagrid({
-      i18nKey : 'selector-employee-dlg',
+      i18nKey : 'selector-product-dlg',
       $appendTo : $contentBar.find('.datagrid-source'),
       name : 'source',
       title : 'source',
@@ -83,13 +85,24 @@ LK.UI('plugins', 'selector_employee', function(options) {
       url : options.url,
       columns : columns,
       searchForm : [
-        {
-          plugin : 'textbox',
-          options : {
-            name : 'userName',
-            cls : 'fuzzy-left fuzzy-right'
+          {
+            plugin : 'textbox',
+            options : {
+              name : 'productCode',
+              cls : 'fuzzy-left fuzzy-right'
+            }
+          }, {
+            plugin : 'textbox',
+            options : {
+              name : 'productName',
+              cls : 'fuzzy-left fuzzy-right'
+            }
+          }, {
+            plugin : 'textbox',
+            options : {
+              name : 'barcode',
+            }
           }
-        }
       ],
       onLinkaged : function($plugin, linkage) {
         switch (linkage.linkageName) {
@@ -99,7 +112,7 @@ LK.UI('plugins', 'selector_employee', function(options) {
             } else {
               $plugin.LKLoad({
                 param : {
-                  deptIds : linkage.linkageValue
+                  productCategory : linkage.linkageValue
                 }
               }, linkage);
             }
@@ -124,7 +137,7 @@ LK.UI('plugins', 'selector_employee', function(options) {
     });
 
     var $target = LK.UI.datagrid({
-      i18nKey : 'selector-employee-dlg',
+      i18nKey : 'selector-product-dlg',
       $appendTo : $contentBar.find('.datagrid-target'),
       name : 'target',
       title : 'target',

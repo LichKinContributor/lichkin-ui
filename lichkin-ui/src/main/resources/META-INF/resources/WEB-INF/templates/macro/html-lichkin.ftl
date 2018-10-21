@@ -50,6 +50,7 @@
 				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-selector" />
 	
 				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-selector-employee" />
+				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-selector-product" />
 			<#else>
 				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugins-complex" />
 			</#if>

@@ -50,6 +50,22 @@ $.LKExtendI18N({
     }
   },
 
+  'selector-product-title' : '产品选择器',
+  'productCategory' : '产品类目',
+  'selector-product-dlg' : {
+    'grid' : {
+      'source' : '待选数据',
+      'target' : '已选数据',
+      'columns' : {
+        'productName' : '产品名称',
+        'productCode' : '产品编码',
+        'unit' : '单位',
+        'barcode' : '条形码',
+        'retailPrice' : '零售价',
+      }
+    }
+  },
+
   'cropper' : '图片裁切',
   'cropper-no-image' : '无图片',
   'upload' : '上传',
