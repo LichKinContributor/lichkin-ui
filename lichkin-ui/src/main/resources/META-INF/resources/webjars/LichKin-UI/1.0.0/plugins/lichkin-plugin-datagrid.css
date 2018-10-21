@@ -292,3 +292,7 @@
 .lichkin-table-cell.monospacedFont .lichkin-text {
   font-family: 'Courier New';
 }
+
+.lichkin-dialog-form-div>.lichkin-datagrid .lichkin-plugin-dataBar {
+  border-bottom: none;
+}

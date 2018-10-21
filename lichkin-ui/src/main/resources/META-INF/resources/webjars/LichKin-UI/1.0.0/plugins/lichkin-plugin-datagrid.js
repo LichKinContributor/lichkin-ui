@@ -126,7 +126,7 @@ LK.UI._datagrid = {
 
     for (var j = 0; j < columns.length; j++) {
       var column = columns[j];
-      var $td = $('<td class="lichkin-table-cell"></td>').appendTo($tr).css('width', parseInt(column.width));
+      var $td = $('<td class="lichkin-table-cell"></td>').appendTo($tr).css('width', column.width);
 
       var text = treeFieldName == null ? data[column.name] : data.params[column.name];
       if (column.formatter) {
@@ -134,7 +134,7 @@ LK.UI._datagrid = {
         if (!isString(text)) {
           if (isJSON(text)) {
             text = LK.UI[text.plugin]($.extend(text.options, {
-              'width' : parseInt(column.width) - 12,
+              'width' : column.width - 12,
               'height' : 22,
               'style' : {
                 'margin-left' : '3px',
@@ -157,7 +157,7 @@ LK.UI._datagrid = {
         'original' : true,
         'text' : text
       }).css({
-        'width' : parseInt(column.width) - 12,
+        'width' : column.width - 12,
         'height' : 'auto'
       });
       if (isString(column.textAlign)) {
@@ -367,6 +367,17 @@ LK.UI._datagrid = {
     } else {
       options.tools.unshift(json);
     }
+  },
+
+  /**
+   * 数据表格内容总宽度
+   * @param cols 列数
+   * @param columnsLength 表格列数
+   * @param withField true:带字段宽;false:不带字段宽.
+   * @param contentGap 差量
+   */
+  contentWidth : function(cols, columnsLength, withField, contentGap) {
+    return ((withField ? (LK.colWidth + LK.fieldKeyWidth + LK.leftGap) : LK.colWidth) * cols) - columnsLength - 17 - 2 + contentGap;
   }
 
 };
@@ -381,13 +392,30 @@ LK.UI('plugins', 'datagrid', function(options) {
   // 国际化处理
   options.i18nKey = (options.i18nKey.indexOf('.') > 0 ? options.i18nKey : options.i18nKey + '.grid') + '.';
 
+  // 边框处理
+  var contentGap = 0;
+  if (options.leftBorder) {
+    contentGap++;
+    $.extend(options.style, {
+      'border-left-width' : '1px',
+      'border-left-style' : 'solid'
+    });
+  }
+  if (options.rightBorder) {
+    contentGap++;
+    $.extend(options.style, {
+      'border-right-width' : '1px',
+      'border-right-style' : 'solid'
+    });
+  }
+
   // 创建控件对象
   var $plugin = LK.UI.create({
     plugin : plugin,
     options : options
   });
 
-  var width = $plugin.width() + (options.inForm ? 2 : 0);
+  var width = $plugin.width() + ((options.inForm || (options.$appendTo != null && options.$appendTo.is('.lichkin-dialog-form-div'))) ? 2 : 0);
   var height = $plugin.height();
 
   // 查询表单栏
@@ -1033,14 +1061,14 @@ LK.UI('plugins', 'datagrid', function(options) {
   var columnTotalWidth = 0;
   for (var i = 0; i < options.columns.length; i++) {
     var column = options.columns[i];
-    var $td = $('<td class="lichkin-table-cell"></td>').appendTo($tr).css('width', parseInt(column.width));
+    var $td = $('<td class="lichkin-table-cell"></td>').appendTo($tr);
     var $tdText = LK.UI.text({
       'original' : true,
       'text' : $.LKGetI18NWithPrefix(options.i18nKey + 'columns.', column.text)
     });
     $td.append($tdText);
     if (typeof column.width == 'number') {
-      columnTotalWidth += parseInt(column.width);
+      columnTotalWidth += column.width;
       $tdText.css('width', column.width - 12);
     } else {
       columnTemp.push({
@@ -1054,7 +1082,7 @@ LK.UI('plugins', 'datagrid', function(options) {
   if (columnTemp.length == 1) {
     var tmp = columnTemp[0];
     var column = tmp.column;
-    var w = LK.gridContentWidth(options.cols, options.columns.length) - columnTotalWidth;
+    var w = LK.UI._datagrid.contentWidth(options.cols, options.columns.length, options.withField, contentGap) - columnTotalWidth;
     tmp.$tdText.css('width', w - 12);
     options.columns[tmp.idx].width = w;
   } else {
@@ -1062,7 +1090,7 @@ LK.UI('plugins', 'datagrid', function(options) {
       var tmp = columnTemp[i];
       var column = tmp.column;
       var nArr = column.width.split('/');
-      var w = (LK.gridContentWidth(options.cols, options.columns.length) - columnTotalWidth) * nArr[0] / nArr[1];
+      var w = parseInt((LK.UI._datagrid.contentWidth(options.cols, options.columns.length, options.withField, contentGap) - columnTotalWidth) * nArr[0] / nArr[1]);
       tmp.$tdText.css('width', w - 12);
       options.columns[tmp.idx].width = w;
     }
@@ -1247,7 +1275,11 @@ LK.UI.loadOptions,
     return param;
   },
   // 树形表格字段名
-  treeFieldName : null
+  treeFieldName : null,
+  // 是否显示左边框
+  leftBorder : false,
+  // 是否显示右边框
+  rightBorder : false,
 }));
 
 $('body').mousedown(function(e) {

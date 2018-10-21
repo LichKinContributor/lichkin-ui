@@ -20,3 +20,7 @@
 .lichkin-tree-readonly * {
   cursor: auto;
 }
+
+.lichkin-dialog-form-div>.lichkin-tree {
+  border-bottom: none;
+}

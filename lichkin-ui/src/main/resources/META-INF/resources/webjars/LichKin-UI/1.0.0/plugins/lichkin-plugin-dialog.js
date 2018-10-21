@@ -350,19 +350,32 @@ LK.UI('plugins', 'openDialog', function(options) {
             $children.css('width', w + 'px');
             h = $children.outerHeight();
           } else {
-            $contentBody.children().each(function() {
-              if ($(this).outerWidth() > w) {
-                w = $(this).outerWidth();
-              }
-              if ($(this).outerHeight() > h) {
-                h = $(this).outerHeight();
-              }
-            });
-            $contentBody.find('.lichkin-table').each(function() {
-              if ($(this).width() > w) {
-                w = $(this).width();
-              }
-            });
+            var $formDiv = $contentBody.find('.lichkin-dialog-form-div');
+            if ($formDiv.length == 1) {
+              w = $formDiv.data('cols') * LK.colWidth + $formDiv.data('cols-with-field') * (LK.leftGap + LK.fieldKeyWidth + LK.colWidth) + $formDiv.data('width-fix');
+              $formDiv.children().each(function() {
+                if ($(this).outerHeight() > h) {
+                  h = $(this).outerHeight();
+                }
+              });
+              $formDiv.children().each(function() {
+                $(this).height(h);
+              });
+            } else {
+              $contentBody.children().each(function() {
+                if ($(this).outerWidth() > w) {
+                  w = $(this).outerWidth();
+                }
+                if ($(this).outerHeight() > h) {
+                  h = $(this).outerHeight();
+                }
+              });
+              $contentBody.find('.lichkin-table').each(function() {
+                if ($(this).width() > w) {
+                  w = $(this).width();
+                }
+              });
+            }
           }
           $contentBar.animate({
             'width' : w + 'px',

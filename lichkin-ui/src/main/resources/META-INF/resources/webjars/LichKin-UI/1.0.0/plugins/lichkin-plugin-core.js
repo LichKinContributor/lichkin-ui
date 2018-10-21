@@ -652,7 +652,7 @@ LK.UI('plugins', 'create', function(opts) {
   var width = options.width;
   if (options.width == null) {
     if (plugin == 'datagrid') {
-      width = options.width = options.inForm ? (LK.colWidth * options.cols) + (options.inForm ? (options.cols - 1) * (LK.fieldKeyWidth + LK.leftGap) : 0) - 2 : (LK.leftGap + LK.fieldKeyWidth + LK.colWidth) * options.cols;
+      width = options.width = options.inForm ? (LK.colWidth * options.cols) + ((options.cols - 1) * (LK.fieldKeyWidth + LK.leftGap)) - 2 : ((options.withField ? (LK.leftGap + LK.fieldKeyWidth + LK.colWidth) : (LK.colWidth)) * options.cols);
     } else {
       width = options.width = (LK.colWidth * options.cols) + (options.inForm ? (options.cols - 1) * (LK.fieldKeyWidth + LK.leftGap) : 0) - 2;
     }
