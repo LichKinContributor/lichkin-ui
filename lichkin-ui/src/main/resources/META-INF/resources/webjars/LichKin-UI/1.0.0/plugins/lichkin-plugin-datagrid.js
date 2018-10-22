@@ -574,6 +574,37 @@ LK.UI('plugins', 'datagrid', function(options) {
     }
   }
 
+  // 删除数据按钮
+  if (options.toolsRemoveData != null) {
+    if (typeof options.toolsRemoveData.icon == 'undefined') {
+      options.toolsRemoveData.icon = 'remove';
+    }
+    if (typeof options.toolsRemoveData.text == 'undefined') {
+      options.toolsRemoveData.text = 'remove';
+    }
+    var json = {
+      singleCheck : false,
+      icon : options.toolsRemoveData.icon,
+      text : options.toolsRemoveData.text,
+      click : function($button, $datagrid, $selecteds, selectedDatas, value) {
+        if (typeof options.toolsRemoveData.boforeRemove == 'function' && !options.toolsRemoveData.boforeRemove($button, $datagrid, $selecteds, selectedDatas, value, options.i18nKey)) {
+          return;
+        }
+        $selecteds.each(function() {
+          $(this).remove();
+        });
+        if (typeof options.toolsRemoveData.afterRemove == 'function') {
+          options.toolsRemoveData.afterRemove($button, $datagrid, $selecteds, selectedDatas, value, options.i18nKey);
+        }
+      }
+    };
+    if (typeof options.toolsRemoveData.titleTools != 'undefined' && options.toolsRemoveData.titleTools == true) {
+      options.titleTools.unshift(json);
+    } else {
+      options.tools.unshift(json);
+    }
+  }
+
   // 编辑按钮
   if (options.toolsEdit != null) {
     if (typeof options.toolsEdit.icon == 'undefined') {
@@ -679,6 +710,82 @@ LK.UI('plugins', 'datagrid', function(options) {
       (function(toolsAdd) {
         LK.UI._datagrid.addToolsAdd($plugin, options, toolsAdd);
       })(options.toolsAdd);
+    }
+  }
+
+  // 新增数据按钮
+  if (options.toolsAddData != null) {
+    if (typeof options.toolsAddData.icon == 'undefined') {
+      options.toolsAddData.icon = 'add';
+    }
+    if (typeof options.toolsAddData.text == 'undefined') {
+      options.toolsAddData.text = 'add';
+    }
+    var json = {
+      singleCheck : null,
+      icon : options.toolsAddData.icon,
+      text : options.toolsAddData.text,
+      click : function($button, $datagrid, $selecteds, selectedDatas, value) {
+        if (typeof options.toolsAddData.beforeClick == 'function' && !options.toolsAddData.beforeClick($button, $datagrid, $selecteds, selectedDatas, value, options.i18nKey)) {
+          return;
+        }
+        LK.UI.openDialog($.extend({}, options.toolsAddData.dialog, {
+          title : options.toolsAddData.text,
+          icon : options.toolsAddData.icon,
+          url : '',
+          param : {},
+          data : {},
+          content : '',
+          mask : true,
+          buttons : [
+              {
+                text : 'save',
+                icon : 'save',
+                cls : 'warning',
+                click : function($dialogButton, $dialog) {
+                  var $form = $dialog.find('form');
+                  if ($form.LKValidate()) {
+                    if (typeof options.toolsAddData.handleAddData == 'function') {
+                      $datagrid.LKInvokeAddDatas(options.toolsAddData.handleAddData($button, $datagrid, $selecteds, selectedDatas, value, $dialogButton, $dialog, options.i18nKey, $form));
+                    } else {
+                      $datagrid.LKInvokeAddDatas([
+                        $.extend($form.LKFormGetData(true), typeof options.toolsAddData.beforeAddData == 'function' ? options.toolsAddData.beforeAddData($button, $datagrid, $selecteds, selectedDatas, value, $dialogButton, $dialog, options.i18nKey, $form) : {})
+                      ]);
+                    }
+                    if (typeof options.toolsAddData.afterAddData == 'function') {
+                      options.toolsAddData.afterAddData($button, $datagrid, $selecteds, selectedDatas, value, $dialogButton, $dialog, options.i18nKey, $form);
+                    }
+                    $dialog.LKCloseDialog();
+                  }
+                }
+              }, {
+                text : 'cancel',
+                icon : 'cancel',
+                cls : 'danger',
+                click : function($dialogButton, $dialog) {
+                  $dialog.LKCloseDialog();
+                }
+              }
+          ],
+          onAfterCreate : function($dialog, $contentBar) {
+            var formOptions = $.extend(true, {}, options.toolsAddData.form, {
+              $appendTo : $contentBar,
+              $renderTo : null,
+              values : {},
+              param : {
+                id : value
+              }
+            });
+            formOptions.i18nKey = options.i18nKey + 'columns.';
+            LK.UI.form(formOptions);
+          }
+        }));
+      }
+    };
+    if (typeof options.toolsAddData.titleTools != 'undefined' && options.toolsAddData.titleTools == true) {
+      options.titleTools.unshift(json);
+    } else {
+      options.tools.unshift(json);
     }
   }
 
@@ -1187,8 +1294,8 @@ LK.UI.loadOptions,
    * @param titleTools true:在标题栏工具栏中使用;false:在工具栏中使用;
    * @param icon 按钮图标
    * @param text 按钮文字
-   * @param saveUrl 表单提交地址
    * @param beforeClick 点击事件执行前操作，返回值为true继续执行，返回值为false不继续执行。
+   * @param saveUrl 表单提交地址
    * @param beforeSave 保存请求执行前操作，返回值为JSON数据。（第一个参数为当前表格控件）
    * @param form see LK.UI.form
    * @param dialog see LK.UI.dialog
@@ -1199,8 +1306,9 @@ LK.UI.loadOptions,
    * @param titleTools true:在标题栏工具栏中使用;false:在工具栏中使用;
    * @param icon 按钮图标
    * @param text 按钮文字
-   * @param saveUrl 表单提交地址
    * @param beforeClick 点击事件执行前操作，返回值为true继续执行，返回值为false不继续执行。
+   * @param beforeOpenDialog 打开表单窗口执行前操作，返回值为JSON数据。
+   * @param saveUrl 表单提交地址
    * @param beforeSave 保存请求执行前操作，返回值为JSON数据。（第一个参数为当前表格控件）
    * @param form see LK.UI.form
    * @param dialog see LK.UI.dialog
@@ -1213,10 +1321,10 @@ LK.UI.loadOptions,
    * @param titleTools true:在标题栏工具栏中使用;false:在工具栏中使用;
    * @param icon 按钮图标
    * @param text 按钮文字
-   * @param saveUrl 表单提交地址
    * @param beforeClick 点击事件执行前操作，返回值为true继续执行，返回值为false不继续执行。
    * @param disallowUsingStatusArr 不允许执行的数据状态数组
    * @param allowUsingStatusArr 允许执行的数据状态数组
+   * @param saveUrl 表单提交地址
    */
   toolsRemove : null,
   /**
@@ -1224,8 +1332,8 @@ LK.UI.loadOptions,
    * @param titleTools true:在标题栏工具栏中使用;false:在工具栏中使用;
    * @param icon 按钮图标
    * @param text 按钮文字
-   * @param saveUrl 表单提交地址
    * @param beforeClick 点击事件执行前操作，返回值为true继续执行，返回值为false不继续执行。
+   * @param beforeOpenDialog 打开表单窗口执行前操作，返回值为JSON数据。
    * @param form see LK.UI.form
    * @param dialog see LK.UI.dialog
    * @param handleFormOptions 表单创建执行前操作。无返回值。
@@ -1234,8 +1342,10 @@ LK.UI.loadOptions,
   /**
    * 工具栏-提交按钮
    * @param titleTools true:在标题栏工具栏中使用;false:在工具栏中使用;
-   * @param saveUrl 表单提交地址
+   * @param icon 按钮图标
+   * @param text 按钮文字
    * @param beforeClick 点击事件执行前操作，返回值为true继续执行，返回值为false不继续执行。
+   * @param saveUrl 表单提交地址
    */
   toolsSubmit : null,
   /**
@@ -1243,12 +1353,35 @@ LK.UI.loadOptions,
    * @param titleTools true:在标题栏工具栏中使用;false:在工具栏中使用;
    * @param icon 按钮图标
    * @param text 按钮文字
-   * @param saveUrl 表单提交地址
    * @param beforeClick 点击事件执行前操作，返回值为true继续执行，返回值为false不继续执行。
    * @param disallowUsingStatusArr 不允许执行的数据状态数组
    * @param allowUsingStatusArr 允许执行的数据状态数组
+   * @param saveUrl 表单提交地址
+   * @param usingStatus 在用状态
    */
   toolsUS : null,
+  /**
+   * 工具栏-新增数据按钮
+   * @param titleTools true:在标题栏工具栏中使用;false:在工具栏中使用;
+   * @param icon 按钮图标
+   * @param text 按钮文字
+   * @param beforeClick 点击事件执行前操作，返回值为true继续执行，返回值为false不继续执行。
+   * @param handleAddData 新增数据前操作，返回待新增的数据。（注：该方法将使得beforeAddData方法被忽略）
+   * @param beforeAddData 新增前数据前操作，返回值为true继续执行，返回值为false不继续执行。
+   * @param afterAddData 新增前数据后操作
+   * @param form see LK.UI.form
+   * @param dialog see LK.UI.dialog
+   */
+  toolsAddData : null,
+  /**
+   * 工具栏-删除数据按钮
+   * @param titleTools true:在标题栏工具栏中使用;false:在工具栏中使用;
+   * @param icon 按钮图标
+   * @param text 按钮文字
+   * @param beforeRemove 删除前数据前操作，返回值为true继续执行，返回值为false不继续执行。
+   * @param afterRemove 删除前数据后操作
+   */
+  toolsRemoveData : null,
   // 是否带分页信息
   pageable : true,
   // 分页大小
