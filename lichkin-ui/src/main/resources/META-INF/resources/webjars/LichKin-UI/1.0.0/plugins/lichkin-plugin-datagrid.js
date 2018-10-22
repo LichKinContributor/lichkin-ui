@@ -590,9 +590,17 @@ LK.UI('plugins', 'datagrid', function(options) {
         if (typeof options.toolsRemoveData.boforeRemove == 'function' && !options.toolsRemoveData.boforeRemove($button, $datagrid, $selecteds, selectedDatas, value, options.i18nKey)) {
           return;
         }
+        var values = $datagrid.LKGetValues();
         $selecteds.each(function() {
+          for (var i = values.length - 1; i >= 0; i--) {
+            if ($(this).data(options.valueFieldName) == values[i]) {
+              values.splice(i, 1);
+            }
+          }
           $(this).remove();
         });
+        $datagrid.LKSetValues(values);
+        $datagrid.LKValidate();
         if (typeof options.toolsRemoveData.afterRemove == 'function') {
           options.toolsRemoveData.afterRemove($button, $datagrid, $selecteds, selectedDatas, value, options.i18nKey);
         }
