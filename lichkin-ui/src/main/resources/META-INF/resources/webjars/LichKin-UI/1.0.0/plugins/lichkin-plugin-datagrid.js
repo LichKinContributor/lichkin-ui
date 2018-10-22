@@ -1050,7 +1050,7 @@ LK.UI('plugins', 'datagrid', function(options) {
     $pageBarSearButton = LK.UI.button({
       icon : 'search',
       click : function() {
-        if ($searchForm.LKValidate()) {
+        if (!$searchForm || $searchForm.LKValidate()) {
           $plugin.LKLoad({
             param : LK.UI._datagrid.getParam($plugin, options)
           });
@@ -1083,7 +1083,7 @@ LK.UI('plugins', 'datagrid', function(options) {
         $appendTo : $buttonsBarRight,
         icon : 'search',
         click : function($button) {
-          if ($searchForm.LKValidate()) {
+          if (!$searchForm || $searchForm.LKValidate()) {
             $plugin.LKLoad({
               param : LK.UI._datagrid.getParam($plugin, options)
             });
@@ -1114,7 +1114,7 @@ LK.UI('plugins', 'datagrid', function(options) {
             size : 24
           },
           click : function($button) {
-            if ($searchForm.LKValidate()) {
+            if (!$searchForm || $searchForm.LKValidate()) {
               $plugin.LKLoad({
                 param : LK.UI._datagrid.getParam($plugin, options)
               });
