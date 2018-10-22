@@ -591,15 +591,25 @@ LK.UI('plugins', 'datagrid', function(options) {
           return;
         }
         var values = $datagrid.LKGetValues();
+        var datas = $datagrid.LKGetDatas();
         $selecteds.each(function() {
           for (var i = values.length - 1; i >= 0; i--) {
-            if ($(this).data(options.valueFieldName) == values[i]) {
+            var v = values[i];
+            if ($(this).data(options.valueFieldName) == v) {
               values.splice(i, 1);
+              for (var j = datas.length - 1; j >= 0; j--) {
+                if (datas[j][options.valueFieldName] == v) {
+                  datas.splice(j, 1);
+                  break;
+                }
+              }
+              break;
             }
           }
           $(this).remove();
         });
         $datagrid.LKSetValues(values);
+        $datagrid.data('LKDatas', datas);
         $datagrid.LKValidate();
         if (typeof options.toolsRemoveData.afterRemove == 'function') {
           options.toolsRemoveData.afterRemove($button, $datagrid, $selecteds, selectedDatas, value, options.i18nKey);

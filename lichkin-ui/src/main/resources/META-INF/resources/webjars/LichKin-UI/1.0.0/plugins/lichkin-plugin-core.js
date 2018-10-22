@@ -1,6 +1,28 @@
 ;
 /** 常用功能对象 */
-var LKUI = {};
+var LKUI = {
+
+  /**
+   * 增加验证未通过样式
+   * @param $plugin 控件对象
+   * @param plugin 控件类型
+   */
+  addInvalidClass : function($plugin, plugin) {
+    $plugin.LKAddPluginClass(plugin, 'invalid');
+    switch (plugin) {
+      case 'droplist':
+        $plugin.LKGetPopup().LKAddPluginClass(plugin, 'popup-invalid');
+        break;
+      case 'ueditor':
+        $plugin.data('ue').ready(function() {
+          $plugin.find('.edui-default .edui-editor-iframeholder iframe').contents().find('body').css('color', LK.pluginInvalidFontColor);
+        });
+        break;
+    }
+    $plugin.parents('.lichkin-form-field:first').addClass('lichkin-form-field-invalid');
+  }
+
+};
 
 /**
  * 添加控件实现代码
@@ -105,19 +127,13 @@ $.fn.extend({
       var value = $value.val();// 取控件值
       var validatores = validator.split(',');
       for (var i = 0; i < validatores.length; i++) {
-        if (!LK.UI.validator[validatores[i]](value)) {
-          $plugin.LKAddPluginClass(plugin, 'invalid');// 验证未通过增加样式
-          switch (plugin) {
-            case 'droplist':
-              $plugin.LKGetPopup().LKAddPluginClass(plugin, 'popup-invalid');
-              break;
-            case 'ueditor':
-              $plugin.data('ue').ready(function() {
-                $plugin.find('.edui-default .edui-editor-iframeholder iframe').contents().find('body').css('color', LK.pluginInvalidFontColor);
-              });
-              break;
+        if (validatores[i] == 'datas') {
+          if ($plugin.LKGetDatas().length == 0) {
+            LKUI.addInvalidClass($plugin, plugin);// 验证未通过增加样式
+            return false;// 验证未通过返回失败
           }
-          $plugin.parents('.lichkin-form-field:first').addClass('lichkin-form-field-invalid');
+        } else if (!LK.UI.validator[validatores[i]](value)) {
+          LKUI.addInvalidClass($plugin, plugin);// 验证未通过增加样式
           return false;// 验证未通过返回失败
         }
       }
@@ -391,7 +407,9 @@ $.fn.extend({
    * @param datas 数据集
    */
   LKInvokeAddDatas : function(datas) {
+    this.data('LKDatas', this.LKGetDatas().concat(datas));
     this.LKGetImplementor().addDatas(this, this.LKGetDataContainer(), datas);
+    this.LKValidate();
   },
 
   /**
@@ -417,7 +435,11 @@ $.fn.extend({
    * 获取数据集
    */
   LKGetDatas : function() {
-    return this.data('LKDatas');
+    var datas = this.data('LKDatas');
+    if (typeof datas == 'undefined') {
+      return [];
+    }
+    return datas;
   },
 
   /**
