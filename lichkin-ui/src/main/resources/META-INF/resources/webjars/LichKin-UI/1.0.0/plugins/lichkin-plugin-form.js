@@ -309,6 +309,9 @@ LK.UI.formUtils = {
   changeOptions : function(plugins, pluginName, replace, newOptions) {
     for (var i = 0; i < plugins.length; i++) {
       var plugin = plugins[i];
+      if (plugin == '-') {
+        continue;
+      }
       if (plugin.options.name == pluginName) {
         var options = plugin.options;
         if (replace) {
@@ -331,6 +334,9 @@ LK.UI.formUtils = {
     if (Array.isArray(removePluginNames)) {
       out: for (var i = plugins.length - 1; i >= 0; i--) {
         var plugin = plugins[i];
+        if (plugin == '-') {
+          continue;
+        }
         for (var j = 0; j < removePluginNames.length; j++) {
           if (plugin.options.name == removePluginNames[j]) {
             plugins.splice(i, 1);
@@ -339,8 +345,12 @@ LK.UI.formUtils = {
         }
       }
     } else {
-      out: for (var i = plugins.length - 1; i >= 0; i--) {
-        if (plugins[i].options.name == removePluginNames) {
+      for (var i = plugins.length - 1; i >= 0; i--) {
+        var plugin = plugins[i];
+        if (plugin == '-') {
+          continue;
+        }
+        if (plugin.options.name == removePluginNames) {
           plugins.splice(i, 1);
           break;
         }
