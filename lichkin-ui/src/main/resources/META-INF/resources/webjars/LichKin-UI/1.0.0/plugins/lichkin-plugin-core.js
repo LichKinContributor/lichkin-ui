@@ -492,6 +492,14 @@ $.fn.extend({
    */
   LKGetDataJsonString : function() {
     return JSON.stringify(this.LKGetDataJson());
+  },
+
+  /**
+   * 获取同数据节点中的控件
+   * @param name 控件名
+   */
+  LKGetSameNodePlugin : function(name) {
+    return this.parents('.lichkin-plugin-node:first').LKGetSubPlugin(name);
   }
 
 });
