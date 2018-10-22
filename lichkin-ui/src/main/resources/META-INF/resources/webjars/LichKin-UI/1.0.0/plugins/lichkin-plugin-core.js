@@ -943,7 +943,7 @@ LK.UI('plugins', 'load', function(opts) {
           responseDatas = options.onBeforeAddDatas($plugin, responseDatas, options.url, options.param);
           $plugin.LKInvokeAddDatas(responseDatas);
           options.onAfterAddDatas($plugin, responseDatas, options.url, options.param);
-          $plugin.data('LKDatas', responseDatas);
+          $plugin.data('LKDatas', Array.isArray(responseDatas) ? responseDatas : responseDatas.content);
           if (opts.isCreateEvent) {
             var initValue = $plugin.data('initValue');
             if (initValue != null) {

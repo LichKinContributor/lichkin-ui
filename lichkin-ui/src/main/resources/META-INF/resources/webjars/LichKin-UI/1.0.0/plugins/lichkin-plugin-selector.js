@@ -28,7 +28,7 @@ LK.UI._selector = {
         ];
       }
       if (Array.isArray(values) && values.length != 0) {
-        var datas = $plugin.data('LKDatas');
+        var datas = $plugin.LKGetDatas();
         if (Array.isArray(datas) && datas.length != 0) {
           var options = $plugin.data('LKOPTIONS');
           for (var i = 0; i < values.length; i++) {
