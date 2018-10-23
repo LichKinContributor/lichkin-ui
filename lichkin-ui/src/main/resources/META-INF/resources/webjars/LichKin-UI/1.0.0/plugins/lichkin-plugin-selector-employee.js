@@ -106,6 +106,12 @@ LK.UI('plugins', 'selector_employee', function(options) {
             break;
         }
       },
+      linkager : [
+        {
+          pluginName : 'tree',
+          paramName : 'deptIds'
+        }
+      ],
       onAfterAddDatas : function($plugin, responseDatas, url, param) {
         if (responseDatas.length != 0) {
           var $sourceTrs = $plugin.LKGetDataContainer().find('tr');

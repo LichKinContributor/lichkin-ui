@@ -119,6 +119,12 @@ LK.UI('plugins', 'selector_product', function(options) {
             break;
         }
       },
+      linkager : [
+        {
+          pluginName : 'tree',
+          paramName : 'productCategory'
+        }
+      ],
       onAfterAddDatas : function($plugin, responseDatas, url, param) {
         if (responseDatas.length != 0) {
           var $sourceTrs = $plugin.LKGetDataContainer().find('tr');

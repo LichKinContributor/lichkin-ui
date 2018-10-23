@@ -651,6 +651,12 @@ LK.UI.coreOptions,
   onLinkaged : function($plugin, linkage) {
   },
   /**
+   * 触发联动的控件名称（需在同一表单中）
+   * @param pluginName 控件名
+   * @param paramName 请求参数名
+   */
+  linkager : [],
+  /**
    * 值改变事件
    * @param $plugin 当前控件
    * @param pluginValues 控件值

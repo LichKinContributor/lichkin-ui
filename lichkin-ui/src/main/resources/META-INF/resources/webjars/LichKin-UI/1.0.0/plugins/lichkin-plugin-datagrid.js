@@ -222,6 +222,11 @@ LK.UI._datagrid = {
     if (options.searchForm.length != 0) {
       param = $.extend({}, param, $plugin.find('.lichkin-datagrid-searchFormBar .lichkin-form').LKFormGetData());
     }
+    if (options.linkager.length != 0) {
+      for (var i = 0; i < options.linkager.length; i++) {
+        param[options.linkager[i].paramName] = $plugin.LKGetSiblingPlugin(options.linkager[i].pluginName).LKGetValue();
+      }
+    }
     return options.reloadParam($plugin, param);
   },
 
