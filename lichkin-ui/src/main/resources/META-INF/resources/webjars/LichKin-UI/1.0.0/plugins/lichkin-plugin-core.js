@@ -316,6 +316,7 @@ $.fn.extend({
     LK.UI.load({
       $plugin : this,
       isCreateEvent : false,
+      triggerLinkage : true,
       options : options,
       linkage : linkage
     });
@@ -926,6 +927,8 @@ LK.UI('plugins', 'load', function(opts) {
         var initValue = $plugin.data('initValue');
         $plugin.LKInvokeSetValues(initValue, true);
         $plugin.LKlinkage(initValue, true);
+      } else if (opts.triggerLinkage == true) {
+        $plugin.LKlinkage(null, false);
       }
     }
     $plugin.LKValidate();
@@ -955,10 +958,12 @@ LK.UI('plugins', 'load', function(opts) {
               var initValue = $plugin.data('initValue');
               $plugin.LKInvokeSetValues(initValue, true);
               $plugin.LKlinkage(initValue, true);
+            } else if (opts.triggerLinkage == true) {
+              $plugin.LKlinkage(null, false);
             }
           }
         } else {
-          $plugin.LKlinkage(null, true);
+          $plugin.LKlinkage(null, opts.isCreateEvent);
         }
         $plugin.LKValidate();
       },
@@ -981,6 +986,8 @@ LK.UI('plugins', 'load', function(opts) {
   isCreateEvent : false,
   // 联动信息（被联动时加载数据需要传入，实现类不提供此参数。）
   linkage : null,
+  // 是否触发联动（在不是创建情况下调用时使用）
+  triggerLinkage : false,
 
   // 创建控件的参数
   options : LK.UI.loadOptions
