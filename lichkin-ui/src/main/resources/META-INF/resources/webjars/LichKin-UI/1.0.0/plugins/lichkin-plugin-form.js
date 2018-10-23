@@ -72,8 +72,9 @@ $.fn.extend({
   /**
    * 绑定表单数据
    * @param data 数据集
+   * @param keepHidden 保留hidden控件值
    */
-  LKFormBindData : function(data) {
+  LKFormBindData : function(data, keepHidden) {
     var $frm = this.LKGetFormPlugin();
     var $subPlugins = $frm.find('.lichkin-plugin');
     var notClear = isJSON(data) && !$.isEmptyObject(data);
@@ -88,7 +89,9 @@ $.fn.extend({
         }
         var plugin = $subPlugin.LKGetPluginType();
         if (plugin == 'hidden') {
-          $subPlugin.val(value);
+          if (!keepHideen) {
+            $subPlugin.val(value);
+          }
         } else {
           $subPlugin.LKInvokeSetValues(value);
           $subPlugin.LKlinkage(value, false);
