@@ -8,12 +8,6 @@
   <artifactId>lichkin-ui</artifactId>
   <version>1.1.4.RELEASE</version>
 
-  <parent>
-    <groupId>com.lichkin.springframework.boot</groupId>
-    <artifactId>lichkin-spring-boot</artifactId>
-    <version>1.2.3.RELEASE</version>
-  </parent>
-
   <name>lichkin-ui</name>
   <description>使用springboot基础封装</description>
   <url>http://codes.lichkin.com/lichkin-ui</url>
@@ -36,11 +30,6 @@
   </properties>
 
   <dependencies>
-    <!-- lichkin starter -->
-    <dependency>
-      <groupId>com.lichkin.springframework.boot</groupId>
-      <artifactId>lichkin-spring-boot-starter-web</artifactId>
-    </dependency>
     <!-- lichkin-ui dependency webjars -->
     <dependency>
       <groupId>org.webjars</groupId>
@@ -66,6 +55,12 @@
       <groupId>org.webjars.npm</groupId>
       <artifactId>spark-md5</artifactId>
       <version>3.0.0</version>
+    </dependency>
+    <!-- lichkin-uis -->
+    <dependency>
+      <groupId>com.lichkin.ui</groupId>
+      <artifactId>lichkin-icons</artifactId>
+      <version>1.0.0.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>com.lichkin.ui</groupId>

@@ -1,0 +1,1 @@
+mvn clean source:jar install deploy -DaltDeploymentRepository=releases::default::http://nexus.lichkin.com:8081/repository/maven-releases/
