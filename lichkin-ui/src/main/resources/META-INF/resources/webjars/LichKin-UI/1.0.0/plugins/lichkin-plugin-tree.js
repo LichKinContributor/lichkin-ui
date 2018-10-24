@@ -340,6 +340,18 @@ LK.UI('plugins', 'tree', function(options) {
         'text' : options.title
       }));
     }
+    if (options.showSearchButton) {
+      LK.UI.button({
+        $appendTo : $('<div class="lichkin-buttons"></div>').appendTo($titleBar),
+        icon : {
+          icon : 'search',
+          size : 24
+        },
+        click : function($button) {
+          $plugin.LKLoad();
+        }
+      });
+    }
   }
 
   // 数据容器
@@ -382,5 +394,7 @@ LK.UI.loadOptions,
   // 图标
   icon : null,
   // 节点高度
-  nodeHeight : LK.UI.iconOptions.size
+  nodeHeight : LK.UI.iconOptions.size,
+  // 是否查询按钮
+  showSearchButton : true,
 }));

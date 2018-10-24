@@ -5,91 +5,91 @@
 .lichkin-hidden-icon{background-image:none !important;}
 
 .lichkin-icon-add i,
-.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar .lichkin-button .lichkin-icon-add i,
+.lichkin-plugin .lichkin-plugin-titleBar + .lichkin-plugin-toolsBar .lichkin-button .lichkin-icon-add i,
 
 .lichkin-icon-ok i,
-.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar .lichkin-button .lichkin-icon-ok i,
+.lichkin-plugin .lichkin-plugin-titleBar + .lichkin-plugin-toolsBar .lichkin-button .lichkin-icon-ok i,
 
 .lichkin-icon-unlock i,
-.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar .lichkin-button .lichkin-icon-unlock i
+.lichkin-plugin .lichkin-plugin-titleBar + .lichkin-plugin-toolsBar .lichkin-button .lichkin-icon-unlock i
 {color:#5cb85c;}
 
-.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-button .lichkin-icon-add i,
-.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-button .lichkin-icon-add i,
+.lichkin-plugin .lichkin-plugin-titleBar .lichkin-button .lichkin-icon-add i,
+.lichkin-plugin .lichkin-plugin-toolsBar .lichkin-button .lichkin-icon-add i,
 
-.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-button .lichkin-icon-ok i,
-.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-button .lichkin-icon-ok i,
+.lichkin-plugin .lichkin-plugin-titleBar .lichkin-button .lichkin-icon-ok i,
+.lichkin-plugin .lichkin-plugin-toolsBar .lichkin-button .lichkin-icon-ok i,
 
-.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-button .lichkin-icon-unlock i,
-.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-button .lichkin-icon-unlock i
+.lichkin-plugin .lichkin-plugin-titleBar .lichkin-button .lichkin-icon-unlock i,
+.lichkin-plugin .lichkin-plugin-toolsBar .lichkin-button .lichkin-icon-unlock i
 {color:#00ff00;}
 
 .lichkin-icon-tip i,
-.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar .lichkin-button .lichkin-icon-tip i,
+.lichkin-plugin .lichkin-plugin-titleBar + .lichkin-plugin-toolsBar .lichkin-button .lichkin-icon-tip i,
 
 .lichkin-icon-edit i,
-.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar .lichkin-button .lichkin-icon-edit i,
+.lichkin-plugin .lichkin-plugin-titleBar + .lichkin-plugin-toolsBar .lichkin-button .lichkin-icon-edit i,
 
 .lichkin-icon-search i,
-.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar .lichkin-button .lichkin-icon-search i,
+.lichkin-plugin .lichkin-plugin-titleBar + .lichkin-plugin-toolsBar .lichkin-button .lichkin-icon-search i,
 
 .lichkin-icon-pwd i,
-.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar .lichkin-button .lichkin-icon-pwd i
+.lichkin-plugin .lichkin-plugin-titleBar + .lichkin-plugin-toolsBar .lichkin-button .lichkin-icon-pwd i
 {color:#f0ad4e;}
 
-.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-button .lichkin-icon-tip i,
-.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-button .lichkin-icon-tip i,
+.lichkin-plugin .lichkin-plugin-titleBar .lichkin-button .lichkin-icon-tip i,
+.lichkin-plugin .lichkin-plugin-toolsBar .lichkin-button .lichkin-icon-tip i,
 
-.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-button .lichkin-icon-edit i,
-.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-button .lichkin-icon-edit i,
+.lichkin-plugin .lichkin-plugin-titleBar .lichkin-button .lichkin-icon-edit i,
+.lichkin-plugin .lichkin-plugin-toolsBar .lichkin-button .lichkin-icon-edit i,
 
-.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-button .lichkin-icon-search i,
-.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-button .lichkin-icon-search i,
+.lichkin-plugin .lichkin-plugin-titleBar .lichkin-button .lichkin-icon-search i,
+.lichkin-plugin .lichkin-plugin-toolsBar .lichkin-button .lichkin-icon-search i,
 
-.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-button .lichkin-icon-pwd i,
-.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-button .lichkin-icon-pwd i
+.lichkin-plugin .lichkin-plugin-titleBar .lichkin-button .lichkin-icon-pwd i,
+.lichkin-plugin .lichkin-plugin-toolsBar .lichkin-button .lichkin-icon-pwd i
 {color:#ffff00;}
 
 .lichkin-icon-cancel i,
-.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar .lichkin-button .lichkin-icon-cancel i,
+.lichkin-plugin .lichkin-plugin-titleBar + .lichkin-plugin-toolsBar .lichkin-button .lichkin-icon-cancel i,
 
 .lichkin-icon-remove i,
-.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar .lichkin-button .lichkin-icon-remove i,
+.lichkin-plugin .lichkin-plugin-titleBar + .lichkin-plugin-toolsBar .lichkin-button .lichkin-icon-remove i,
 
 .lichkin-icon-reset i,
-.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar .lichkin-button .lichkin-icon-reset i,
+.lichkin-plugin .lichkin-plugin-titleBar + .lichkin-plugin-toolsBar .lichkin-button .lichkin-icon-reset i,
 
 .lichkin-icon-cut i,
-.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar .lichkin-button .lichkin-icon-cut i,
+.lichkin-plugin .lichkin-plugin-titleBar + .lichkin-plugin-toolsBar .lichkin-button .lichkin-icon-cut i,
 
 .lichkin-icon-lock i,
-.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar .lichkin-button .lichkin-icon-lock i,
+.lichkin-plugin .lichkin-plugin-titleBar + .lichkin-plugin-toolsBar .lichkin-button .lichkin-icon-lock i,
 
 .lichkin-icon-warning i,
-.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar .lichkin-button .lichkin-icon-warning i,
+.lichkin-plugin .lichkin-plugin-titleBar + .lichkin-plugin-toolsBar .lichkin-button .lichkin-icon-warning i,
 
 .lichkin-icon-close i,
-.lichkin-datagrid .lichkin-datagrid-titleBar + .lichkin-datagrid-toolsBar .lichkin-button .lichkin-icon-close i
+.lichkin-plugin .lichkin-plugin-titleBar + .lichkin-plugin-toolsBar .lichkin-button .lichkin-icon-close i
 {color:#d9534f;}
 
-.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-button .lichkin-icon-cancel i,
-.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-button .lichkin-icon-cancel i,
+.lichkin-plugin .lichkin-plugin-titleBar .lichkin-button .lichkin-icon-cancel i,
+.lichkin-plugin .lichkin-plugin-toolsBar .lichkin-button .lichkin-icon-cancel i,
 
-.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-button .lichkin-icon-remove i,
-.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-button .lichkin-icon-remove i,
+.lichkin-plugin .lichkin-plugin-titleBar .lichkin-button .lichkin-icon-remove i,
+.lichkin-plugin .lichkin-plugin-toolsBar .lichkin-button .lichkin-icon-remove i,
 
-.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-button .lichkin-icon-reset i,
-.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-button .lichkin-icon-reset i,
+.lichkin-plugin .lichkin-plugin-titleBar .lichkin-button .lichkin-icon-reset i,
+.lichkin-plugin .lichkin-plugin-toolsBar .lichkin-button .lichkin-icon-reset i,
 
-.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-button .lichkin-icon-cut i,
-.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-button .lichkin-icon-cut i,
+.lichkin-plugin .lichkin-plugin-titleBar .lichkin-button .lichkin-icon-cut i,
+.lichkin-plugin .lichkin-plugin-toolsBar .lichkin-button .lichkin-icon-cut i,
 
-.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-button .lichkin-icon-lock i,
-.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-button .lichkin-icon-lock i,
+.lichkin-plugin .lichkin-plugin-titleBar .lichkin-button .lichkin-icon-lock i,
+.lichkin-plugin .lichkin-plugin-toolsBar .lichkin-button .lichkin-icon-lock i,
 
-.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-button .lichkin-icon-warning i,
-.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-button .lichkin-icon-warning i,
+.lichkin-plugin .lichkin-plugin-titleBar .lichkin-button .lichkin-icon-warning i,
+.lichkin-plugin .lichkin-plugin-toolsBar .lichkin-button .lichkin-icon-warning i,
 
-.lichkin-datagrid .lichkin-datagrid-titleBar .lichkin-button .lichkin-icon-close i,
-.lichkin-datagrid .lichkin-datagrid-toolsBar .lichkin-button .lichkin-icon-close i
+.lichkin-plugin .lichkin-plugin-titleBar .lichkin-button .lichkin-icon-close i,
+.lichkin-plugin .lichkin-plugin-toolsBar .lichkin-button .lichkin-icon-close i
 {color:#ff7777;}
