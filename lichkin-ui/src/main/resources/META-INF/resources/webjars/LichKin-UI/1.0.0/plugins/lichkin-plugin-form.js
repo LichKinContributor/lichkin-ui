@@ -321,7 +321,7 @@ LK.UI.formUtils = {
           plugin.options = newOptions;
           plugin.options.name = pluginName;
         } else {
-          plugin.options = $.extend(plugin.options, newOptions);
+          plugin.options = $.extend(true, plugin.options, newOptions);
         }
         break;
       }
