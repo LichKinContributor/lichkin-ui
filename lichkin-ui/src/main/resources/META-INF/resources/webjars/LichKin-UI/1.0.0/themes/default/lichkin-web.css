@@ -120,6 +120,7 @@ TABLE.lichkin-table .lichkin-table .lichkin-table-row .lichkin-table-cell:last-c
 .lichkin-plugin-readonly .lichkin-plugin-text {color:#CCCCCC !important;}
 .lichkin-plugin-readonly .lichkin-plugin-button .lichkin-icon i {color:#CCCCCC !important;}
 .lichkin-plugin-readonly .lichkin-plugin-wrapper {cursor: text !important;}
+.lichkin-plugin-readonly .lichkin-plugin-dataContainer .lichkin-plugin-node {cursor:auto;}
 .lichkin-plugin-readonly .lichkin-plugin-dataContainer .lichkin-plugin-node:hover {background-color:transparent;border-color:transparent;}
 .lichkin-plugin-readonly .lichkin-plugin-dataContainer .lichkin-plugin-node:hover .lichkin-text {color:#CCCCCC;}
 .lichkin-plugin-readonly .lichkin-plugin-titleBar {background-color:#CCCCCC;border-color:#CCCCCC;}

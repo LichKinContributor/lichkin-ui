@@ -12,3 +12,7 @@
 .lichkin-datepicker .lichkin-datepicker-text:focus {
   outline: none;
 }
+
+.lichkin-datepicker-readonly .lichkin-datepicker-text {
+  cursor: auto;
+}
