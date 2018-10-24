@@ -296,3 +296,15 @@
 .lichkin-dialog-form-div>.lichkin-datagrid .lichkin-plugin-dataBar {
   border-bottom: none;
 }
+
+.lichkin-table-cell.primary {background-color:#b4dcff;}
+.lichkin-table-cell.success {background-color:#cdfdcd;}
+.lichkin-table-cell.info    {background-color:#bdf0ff;}
+.lichkin-table-cell.warning {background-color:#ffdcaa;}
+.lichkin-table-cell.danger  {background-color:#ffdcda;}
+
+.lichkin-datagrid .lichkin-datagrid-dataBodyBar .lichkin-plugin-dataContainer .lichkin-table-cell.primary .lichkin-text {color:#2e6da4;}
+.lichkin-datagrid .lichkin-datagrid-dataBodyBar .lichkin-plugin-dataContainer .lichkin-table-cell.success .lichkin-text {color:#4cae4c;}
+.lichkin-datagrid .lichkin-datagrid-dataBodyBar .lichkin-plugin-dataContainer .lichkin-table-cell.info    .lichkin-text {color:#2d8ca9;}
+.lichkin-datagrid .lichkin-datagrid-dataBodyBar .lichkin-plugin-dataContainer .lichkin-table-cell.warning .lichkin-text {color:#eea236;}
+.lichkin-datagrid .lichkin-datagrid-dataBodyBar .lichkin-plugin-dataContainer .lichkin-table-cell.danger  .lichkin-text {color:#d43f3a;}

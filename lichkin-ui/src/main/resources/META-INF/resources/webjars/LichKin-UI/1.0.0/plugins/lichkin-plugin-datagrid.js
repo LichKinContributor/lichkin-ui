@@ -100,6 +100,7 @@ LK.UI._datagrid = {
    * @param options 参数
    * @param columns 列信息
    * @param treeFieldName 树形表格字段名
+   * @param i18nKey 国际化配置主键
    */
   addNodes : function($plugin, $container, datas, level, options, columns, treeFieldName, i18nKey) {
     for (var i = 0; i < datas.length; i++) {
@@ -116,6 +117,7 @@ LK.UI._datagrid = {
    * @param options 参数
    * @param columns 列信息
    * @param treeFieldName 树形表格字段名
+   * @param i18nKey 国际化配置主键
    */
   addNode : function($plugin, $container, data, level, options, columns, treeFieldName, i18nKey) {
     var $tr = $('<tr class="lichkin-table-row"></tr>').appendTo($container).LKAddPluginClass('datagrid', 'node');
@@ -123,6 +125,16 @@ LK.UI._datagrid = {
       data.random = Math.random() * 100000000000000000;
     }
     $tr.data(data);
+
+    if (options.rowStyler) {
+      var rowStyler = options.rowStyler;
+      if (typeof rowStyler == 'function') {
+        rowStyler = options.rowStyler($plugin, $container, data, level, options, columns, treeFieldName, i18nKey);
+      }
+      if (isJSON(rowStyler)) {
+        $tr.css(rowStyler);
+      }
+    }
 
     for (var j = 0; j < columns.length; j++) {
       var column = columns[j];
@@ -166,8 +178,34 @@ LK.UI._datagrid = {
       }
       $td.append($text);
 
-      if (typeof column.cssClass != 'undefined') {
-        $td.addClass(column.cssClass);
+      if (column.cssClass) {
+        var cssClass = column.cssClass;
+        if (typeof cssClass == 'function') {
+          cssClass = column.cssClass($plugin, $container, data, level, options, columns, treeFieldName, i18nKey, text);
+        }
+        if (isString(cssClass)) {
+          $td.addClass(cssClass);
+        }
+      }
+
+      if (column.columnStyler) {
+        var columnStyler = column.columnStyler;
+        if (typeof columnStyler == 'function') {
+          columnStyler = column.columnStyler($plugin, $container, data, level, options, columns, treeFieldName, i18nKey, text);
+        }
+        if (isJSON(columnStyler)) {
+          $td.css(columnStyler);
+        }
+      }
+
+      if (column.columnTextStyler) {
+        var columnTextStyler = column.columnTextStyler;
+        if (typeof columnTextStyler == 'function') {
+          columnTextStyler = column.columnTextStyler($plugin, $container, data, level, options, columns, treeFieldName, i18nKey, text);
+        }
+        if (isJSON(columnTextStyler)) {
+          $text.css(columnTextStyler);
+        }
       }
 
       if (treeFieldName != null && treeFieldName == column.name) {
@@ -1286,6 +1324,9 @@ LK.UI.loadOptions,
    * @param formatter 格式化方法
    * @param formatter[rowData] 行数据
    * @param textAlign 文本对齐方式
+   * @param cssClass 单元格样式
+   * @param columnStyler 单元格样式
+   * @param columnTextStyler 单元格内容演示
    */
   columns : [],
   // 标题
@@ -1441,6 +1482,19 @@ LK.UI.loadOptions,
   rightBorder : false,
   // withField为true时是否包含fieldKey的宽度。true:不包含;false:包含;
   withoutFieldKey : false,
+  /**
+   * 行样式方法
+   * @param $plugin 控件对象
+   * @param $container 数据容器对象
+   * @param data 行数据
+   * @param level 级别
+   * @param options 参数
+   * @param columns 列信息
+   * @param treeFieldName 树形表格字段名
+   * @param i18nKey 国际化配置主键
+   * @returns css样式JSON
+   */
+  rowStyler : null,
 }));
 
 $('body').mousedown(function(e) {
