@@ -657,6 +657,7 @@ LK.UI('plugins', 'datagrid', function(options) {
           data : {},
           content : '',
           mask : true,
+        }, editJson.hideButtons ? {} : {
           buttons : [
               {
                 text : 'save',
@@ -687,11 +688,12 @@ LK.UI('plugins', 'datagrid', function(options) {
                 }
               }
           ],
+        }, {
           onAfterCreate : function($dialog, $contentBar) {
             var formOptions = $.extend(true, {}, editJson.form, {
               $appendTo : $contentBar,
               $renderTo : null,
-              values : {},
+              values : typeof editJson.formValues == 'function' ? editJson.formValues($button, $datagrid, $selecteds, selectedDatas, value, options.i18nKey) : {},
               param : {
                 id : value
               }
@@ -1327,6 +1329,8 @@ LK.UI.loadOptions,
    * @param dialog see LK.UI.dialog
    * @param readonlyPlugins 需要设置为只读状态的控件名数组
    * @param handleFormOptions 表单创建执行前操作。无返回值。
+   * @param hideButtons true:隐藏弹窗按钮（保存+取消）;false:显示弹窗按钮（保存+取消）;
+   * @param formValues 表单值初始化方法
    */
   toolsEdit : null,
   /**
