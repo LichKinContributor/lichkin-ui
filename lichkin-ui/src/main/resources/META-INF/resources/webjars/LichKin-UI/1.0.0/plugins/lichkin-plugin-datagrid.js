@@ -380,10 +380,19 @@ LK.UI._datagrid = {
    * @param cols 列数
    * @param columnsLength 表格列数
    * @param withField true:带字段宽;false:不带字段宽.
+   * @param withoutFieldKey withField为true时是否包含fieldKey的宽度。true:不包含;false:包含;
    * @param contentGap 差量
    */
-  contentWidth : function(cols, columnsLength, withField, contentGap) {
-    return ((withField ? (LK.colWidth + LK.fieldKeyWidth + LK.leftGap) : LK.colWidth) * cols) - columnsLength - 17 - 2 + contentGap;
+  contentWidth : function(cols, columnsLength, withField, withoutFieldKey, contentGap) {
+    return (
+
+    withField ?
+
+    (withoutFieldKey ? (LK.colWidth + (LK.colWidth + LK.fieldKeyWidth + LK.leftGap) * (cols - 1)) : ((LK.colWidth + LK.fieldKeyWidth + LK.leftGap) * cols))
+
+    : (LK.colWidth * cols)
+
+    ) - columnsLength - 17 - 2 + contentGap;
   }
 
 };
@@ -1215,7 +1224,7 @@ LK.UI('plugins', 'datagrid', function(options) {
   if (columnTemp.length == 1) {
     var tmp = columnTemp[0];
     var column = tmp.column;
-    var w = LK.UI._datagrid.contentWidth(options.cols, options.columns.length, options.withField, contentGap) - columnTotalWidth;
+    var w = LK.UI._datagrid.contentWidth(options.cols, options.columns.length, options.withField, options.withoutFieldKey, contentGap) - columnTotalWidth;
     tmp.$tdText.css('width', w - 12);
     options.columns[tmp.idx].width = w;
   } else {
@@ -1223,7 +1232,7 @@ LK.UI('plugins', 'datagrid', function(options) {
       var tmp = columnTemp[i];
       var column = tmp.column;
       var nArr = column.width.split('/');
-      var w = parseInt((LK.UI._datagrid.contentWidth(options.cols, options.columns.length, options.withField, contentGap) - columnTotalWidth) * nArr[0] / nArr[1]);
+      var w = parseInt((LK.UI._datagrid.contentWidth(options.cols, options.columns.length, options.withField, options.withoutFieldKey, contentGap) - columnTotalWidth) * nArr[0] / nArr[1]);
       tmp.$tdText.css('width', w - 12);
       options.columns[tmp.idx].width = w;
     }
@@ -1430,6 +1439,8 @@ LK.UI.loadOptions,
   leftBorder : false,
   // 是否显示右边框
   rightBorder : false,
+  // withField为true时是否包含fieldKey的宽度。true:不包含;false:包含;
+  withoutFieldKey : false,
 }));
 
 $('body').mousedown(function(e) {
