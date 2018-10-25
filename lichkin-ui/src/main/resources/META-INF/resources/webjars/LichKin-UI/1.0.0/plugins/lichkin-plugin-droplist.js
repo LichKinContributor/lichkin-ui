@@ -135,6 +135,11 @@ LK.UI('plugins', 'droplist', function(options) {
   // 数据容器
   var $container = $('<ul></ul>').appendTo($popup).LKAddPluginClass(plugin, 'dataContainer');
 
+  // 默认地址
+  if (options.data == null && options.url == '') {
+    options.url = '/SysDictionary/LD';
+  }
+
   // 加载数据
   LK.UI.load({
     $plugin : $plugin,
