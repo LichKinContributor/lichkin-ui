@@ -89,7 +89,7 @@ $.fn.extend({
         }
         var plugin = $subPlugin.LKGetPluginType();
         if (plugin == 'hidden') {
-          if (!keepHideen) {
+          if (!keepHidden) {
             $subPlugin.val(value);
           }
         } else {
