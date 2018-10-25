@@ -195,7 +195,11 @@ $.extend($, {
     try {
       return $.LKGetI18N(prefix + key);
     } catch (e) {
-      return $.LKGetI18N(key);
+      try {
+        return $.LKGetI18N(key);
+      } catch (e) {
+        return 'error[' + prefix + key + ']';
+      }
     }
   },
 
