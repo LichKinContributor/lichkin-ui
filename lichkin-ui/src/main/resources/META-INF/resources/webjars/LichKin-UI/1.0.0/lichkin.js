@@ -1006,9 +1006,13 @@ $.extend(LK, {
       error : 'LK_ajax_error'
     }, options, {
       url : LK.resolveUrl(options.url, options.apiSubUrl, false),
-      data : JSON.stringify($.extend({}, options.data, {
-        clientType : 'JAVASCRIPT'
-      }, LK.VERSION)),
+      data : JSON.stringify($.extend(true, {}, options.data, {
+        datas : {
+          clientType : 'JAVASCRIPT'
+        }
+      }, {
+        datas : LK.VERSION
+      })),
       method : 'POST',
       dataType : 'json',
       contentType : 'application/json;charset=UTF-8',
