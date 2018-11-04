@@ -610,6 +610,8 @@ LK.UI.coreOptions,
 {
   // 只读
   readonly : false,
+  // 只读情况下，是否可用于提交
+  commitable : false,
   // 值对象名称
   name : '',
   // 验证器方法名

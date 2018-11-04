@@ -118,7 +118,12 @@ $.fn.extend({
         if (plugin == 'hidden') {
           value = $subPlugin.val();
         } else {
-          if ($subPlugin.data('LKOPTIONS').readonly != true) {
+          var options = $subPlugin.data('LKOPTIONS');
+          if (options.readonly == true) {
+            if (options.commitable == true) {// 只读情况下该参数才起作用
+              value = $subPlugin.LKGetValue();
+            }
+          } else {
             value = $subPlugin.LKGetValue();
           }
         }
