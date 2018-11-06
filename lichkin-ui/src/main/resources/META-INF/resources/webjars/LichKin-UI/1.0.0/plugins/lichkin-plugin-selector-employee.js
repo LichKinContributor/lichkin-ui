@@ -53,7 +53,7 @@ LK.UI('plugins', 'selector_employee', function(options) {
     var columns = [
         {
           text : 'userName',
-          width : 160,
+          width : 120,
           name : 'userName'
         }, {
           text : 'gender',
@@ -61,12 +61,13 @@ LK.UI('plugins', 'selector_employee', function(options) {
           name : 'gender'
         }, {
           text : 'jobNumber',
-          width : 170,
+          width : 100,
           name : 'jobNumber'
         }, {
           text : 'department',
-          width : 200,
-          name : 'deptName'
+          width : null,
+          name : 'fullName',
+          textAlign: 'left'
         }
     ];
 
