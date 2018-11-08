@@ -291,7 +291,7 @@ LK.UI._datagrid = {
           return;
         }
         LK.UI.openDialog($.extend({}, toolsAdd.dialog, {
-          title : toolsAdd.text,
+          title : options.i18nKey + toolsAdd.text,
           icon : toolsAdd.icon,
           url : '',
           param : {},
@@ -511,7 +511,7 @@ LK.UI('plugins', 'datagrid', function(options) {
           viewJson = options.toolsView.beforeOpenDialog(viewJson, $button, $datagrid, $selecteds, selectedDatas, value, options.i18nKey);
         }
         LK.UI.openDialog($.extend({}, viewJson.dialog, {
-          title : options.toolsView.text,
+          title : options.i18nKey + options.toolsView.text,
           icon : options.toolsView.icon,
           url : '',
           param : {},
@@ -680,7 +680,7 @@ LK.UI('plugins', 'datagrid', function(options) {
           editJson = options.toolsEdit.beforeOpenDialog(editJson, $button, $datagrid, $selecteds, selectedDatas, value, options.i18nKey);
         }
         LK.UI.openDialog($.extend({}, editJson.dialog, {
-          title : options.toolsEdit.text,
+          title : options.i18nKey + options.toolsEdit.text,
           icon : options.toolsEdit.icon,
           url : '',
           param : {},
@@ -786,7 +786,7 @@ LK.UI('plugins', 'datagrid', function(options) {
           return;
         }
         LK.UI.openDialog($.extend({}, options.toolsAddData.dialog, {
-          title : options.toolsAddData.text,
+          title : options.i18nKey + options.toolsAddData.text,
           icon : options.toolsAddData.icon,
           url : '',
           param : {},
