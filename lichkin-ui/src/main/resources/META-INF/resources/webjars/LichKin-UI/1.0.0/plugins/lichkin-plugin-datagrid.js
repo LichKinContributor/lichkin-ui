@@ -148,13 +148,14 @@ LK.UI._datagrid = {
             text = LK.UI[text.plugin]($.extend(text.options, {
               'readonly' : options.readonly == true ? true : text.options.readonly,
               'width' : column.width - 12,
-              'height' : 22,
               'style' : {
                 'margin-left' : '3px',
                 'margin-right' : '3px',
                 'margin-top' : '3px',
                 'margin-bottom' : '3px'
               }
+            }, text.plugin == 'cropper' ? {} : {
+              'height' : 22
             }));
             text.data('gridRowData', data);
           }

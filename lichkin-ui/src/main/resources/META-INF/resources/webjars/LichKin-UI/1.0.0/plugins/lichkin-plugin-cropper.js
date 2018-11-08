@@ -75,6 +75,9 @@ LK.UI._cropper = {
       $img.attr('src', src);
       $('#' + options.id + '_popup').find('img').attr('src', src);
       $img.show();
+      $img.css({
+        'display' : 'block'
+      });
     }
 
     if (!isCreateEvent) {
