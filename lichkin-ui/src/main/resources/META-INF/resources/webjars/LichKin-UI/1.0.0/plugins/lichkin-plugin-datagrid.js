@@ -1279,6 +1279,11 @@ LK.UI('plugins', 'datagrid', function(options) {
 
   $plugin.LKValidate();
 
+  // 补充弹窗提示方法
+  $plugin.alert = function(msg) {
+    LK.alert(options.i18nKey + msg);
+  };
+
   // 返回控件对象
   return $plugin;
 }, $.extend({},
