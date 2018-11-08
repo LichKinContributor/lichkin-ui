@@ -148,7 +148,7 @@ $.fn.extend({
           break;
         case 'ueditor':
           $plugin.data('ue').ready(function() {
-            $plugin.find('.edui-default .edui-editor-iframeholder iframe').contents().find('body').css('color', LK.pluginFontColor);
+            $plugin.find('.edui-default .edui-editor-iframeholder iframe').contents().find('body').css('color', $plugin.data('LKOPTIONS').readonly == true ? '#999999' : LK.pluginFontColor);
           });
           break;
       }
