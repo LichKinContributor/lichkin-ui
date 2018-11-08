@@ -392,10 +392,10 @@ LK.UI._datagrid = {
         LK.web.confirm(options.i18nKey + 'confirm.' + toolsUS.text, function() {
           LK.ajax({
             url : toolsUS.saveUrl,
-            data : {
+            data : $.extend({
               id : value,
               usingStatus : toolsUS.usingStatus
-            },
+            }, options.toolsUS.saveData),
             showSuccess : true,
             success : function() {
               $plugin.LKLoad({
@@ -551,45 +551,6 @@ LK.UI('plugins', 'datagrid', function(options) {
     }
   }
 
-  // 提交按钮
-  if (options.readonly == false && options.toolsSubmit != null) {
-    if (typeof options.toolsSubmit.icon == 'undefined') {
-      options.toolsSubmit.icon = 'upload';
-    }
-    if (typeof options.toolsSubmit.text == 'undefined') {
-      options.toolsSubmit.text = 'submit';
-    }
-    var json = {
-      singleCheck : false,
-      icon : options.toolsSubmit.icon,
-      text : options.toolsSubmit.text,
-      click : function($button, $datagrid, $selecteds, selectedDatas, value) {
-        if (typeof options.toolsSubmit.beforeClick == 'function' && !options.toolsSubmit.beforeClick($button, $datagrid, $selecteds, selectedDatas, value, options.i18nKey)) {
-          return;
-        }
-        LK.web.confirm(options.i18nKey + 'confirm.' + options.toolsSubmit.text, function() {
-          LK.ajax({
-            url : options.toolsSubmit.saveUrl,
-            data : {
-              id : value
-            },
-            showSuccess : true,
-            success : function() {
-              $plugin.LKLoad({
-                param : LK.UI._datagrid.getParam($plugin, options)
-              });
-            }
-          });
-        });
-      }
-    };
-    if (typeof options.toolsSubmit.titleTools != 'undefined' && options.toolsSubmit.titleTools == true) {
-      options.titleTools.unshift(json);
-    } else {
-      options.tools.unshift(json);
-    }
-  }
-
   // 删除按钮
   if (options.readonly == false && options.toolsRemove != null) {
     if (typeof options.toolsRemove.icon == 'undefined') {
@@ -609,6 +570,28 @@ LK.UI('plugins', 'datagrid', function(options) {
       }
     } else {
       options.toolsUS = options.toolsRemove;
+    }
+  }
+
+  // 提交按钮
+  if (options.readonly == false && options.toolsSubmit != null) {
+    if (typeof options.toolsSubmit.icon == 'undefined') {
+      options.toolsSubmit.icon = 'upload';
+    }
+    if (typeof options.toolsSubmit.text == 'undefined') {
+      options.toolsSubmit.text = 'submit';
+    }
+    options.toolsSubmit.usingStatus = 'USING';
+    if (options.toolsUS != null) {
+      if (Array.isArray(options.toolsUS)) {
+        options.toolsUS.unshift(options.toolsSubmit);
+      } else {
+        options.toolsUS = [
+            options.toolsSubmit, options.toolsUS
+        ];
+      }
+    } else {
+      options.toolsUS = options.toolsSubmit;
     }
   }
 
@@ -1392,6 +1375,7 @@ LK.UI.loadOptions,
    * @param disallowUsingStatusArr 不允许执行的数据状态数组
    * @param allowUsingStatusArr 允许执行的数据状态数组
    * @param saveUrl 表单提交地址
+   * @param saveData 表单提交额外参数
    */
   toolsRemove : null,
   /**
@@ -1412,7 +1396,10 @@ LK.UI.loadOptions,
    * @param icon 按钮图标
    * @param text 按钮文字
    * @param beforeClick 点击事件执行前操作，返回值为true继续执行，返回值为false不继续执行。
+   * @param disallowUsingStatusArr 不允许执行的数据状态数组
+   * @param allowUsingStatusArr 允许执行的数据状态数组
    * @param saveUrl 表单提交地址
+   * @param saveData 表单提交额外参数
    */
   toolsSubmit : null,
   /**
@@ -1424,6 +1411,7 @@ LK.UI.loadOptions,
    * @param disallowUsingStatusArr 不允许执行的数据状态数组
    * @param allowUsingStatusArr 允许执行的数据状态数组
    * @param saveUrl 表单提交地址
+   * @param saveData 表单提交额外参数
    * @param usingStatus 在用状态
    */
   toolsUS : null,
