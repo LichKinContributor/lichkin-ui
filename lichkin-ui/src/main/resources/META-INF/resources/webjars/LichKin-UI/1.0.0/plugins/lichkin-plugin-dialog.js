@@ -291,7 +291,7 @@ LK.UI('plugins', 'openDialog', function(options) {
     LKUI.icon(options.icon, 24).appendTo($titleBar);
   }
   // 标题栏标题
-  var $titleTitle = $('<div class="lichkin-title">' + $.LKGetI18N(options.title) + '</div>').appendTo($titleBar);
+  var $titleTitle = $('<div class="lichkin-title">' + $.LKGetI18NWithPrefix('', options.title) + '</div>').appendTo($titleBar);
   // 标题栏按钮
   var $titleButtons = $('<div class="lichkin-buttons"></div>').appendTo($titleBar);
   // 标题栏关闭按钮
