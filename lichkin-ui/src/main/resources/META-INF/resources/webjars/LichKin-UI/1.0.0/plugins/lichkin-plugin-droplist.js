@@ -40,7 +40,7 @@ LK.UI._droplist = {
         var $that = $(this);
         var data = $that.data();
         for (var i = 0; i < values.length; i++) {
-          if (data.value == values[i]) {
+          if (data.value == '' + values[i]) {
             $that.addClass('selected');
             valueArr.push(data.value);
             textArr.push(data.text);

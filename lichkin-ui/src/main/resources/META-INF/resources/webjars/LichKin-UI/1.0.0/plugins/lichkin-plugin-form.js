@@ -37,8 +37,8 @@ LK.UI._form = {
         continue;
       }
       if (plugin.plugin == 'droplist') {
-        if (plugin.options.value == null) {
-          plugin.options.value = '-';
+        if (plugin.options.value === null) {
+          plugin.options.value = 'null';
         }
       }
       LK.UI[plugin.plugin](plugin.options);
@@ -128,11 +128,6 @@ $.fn.extend({
           }
         }
         value = value == '' ? null : value;
-        if (plugin == 'droplist') {
-          if (value == '-') {
-            value = null;
-          }
-        }
         if (!ignoreNullValue || value != null) {
           if (typeof json[name] == 'undefined') {
             json[name] = value;
