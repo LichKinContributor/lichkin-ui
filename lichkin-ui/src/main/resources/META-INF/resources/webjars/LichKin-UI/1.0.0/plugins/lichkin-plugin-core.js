@@ -408,7 +408,8 @@ $.fn.extend({
    * @param datas 数据集
    */
   LKInvokeAddDatas : function(datas) {
-    this.data('LKDatas', this.LKGetDatas().concat(datas));
+    var originalDatas = this.LKGetDatas();
+    this.data('LKDatas', originalDatas ? originalDatas.concat(datas) : datas);
     this.LKGetImplementor().addDatas(this, this.LKGetDataContainer(), datas);
     this.LKValidate();
   },
