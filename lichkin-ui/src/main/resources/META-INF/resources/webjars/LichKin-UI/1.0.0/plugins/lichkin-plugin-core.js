@@ -924,6 +924,38 @@ LK.UI('plugins', 'load', function(opts) {
 
   // 数据方式增加行
   if (options.data != null) {
+    if (options.param) {
+      // 包含条件过滤
+      if (options.param.includes) {
+        options.data = options.data.slice();
+        var includes = options.param.includes.split(LK.SPLITOR);
+        for (var i = options.data.length - 1; i >= 0; i--) {
+          var uninclude = true;
+          for (var j = 0; j < includes.length; j++) {
+            if (options.data[i].value == includes[j]) {
+              uninclude = false;
+              break;
+            }
+          }
+          if (uninclude) {
+            options.data.splice(i, 1);
+          }
+        }
+      }
+      // 排除条件过滤
+      if (options.param.excludes) {
+        options.data = options.data.slice();
+        var excludes = options.param.excludes.split(LK.SPLITOR);
+        for (var i = options.data.length - 1; i >= 0; i--) {
+          for (var j = 0; j < excludes.length; j++) {
+            if (options.data[i].value == excludes[j]) {
+              options.data.splice(i, 1);
+              break;
+            }
+          }
+        }
+      }
+    }
     $plugin.LKClearDatas(opts.isCreateEvent || (opts.linkage != null && opts.linkage.isCreateEvent == true));
     $plugin.LKInvokeAddDatas(options.data);
     $plugin.data('LKDatas', options.data);
