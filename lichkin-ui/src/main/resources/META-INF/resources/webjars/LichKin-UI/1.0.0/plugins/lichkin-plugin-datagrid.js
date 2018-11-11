@@ -150,8 +150,8 @@ LK.UI._datagrid = {
               'readonly' : options.readonly == true ? true : text.options.readonly,
               'width' : column.width - 12,
               'style' : {
-                'margin-left' : '3px',
-                'margin-right' : '3px',
+                'margin-left' : '4px',
+                'margin-right' : '4px',
                 'margin-top' : '3px',
                 'margin-bottom' : '3px'
               }
