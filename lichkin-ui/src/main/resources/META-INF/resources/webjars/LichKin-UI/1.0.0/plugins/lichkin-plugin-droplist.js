@@ -137,7 +137,12 @@ LK.UI('plugins', 'droplist', function(options) {
 
   // 默认地址
   if (options.data == null && options.url == '') {
-    options.url = '/SysDictionary/LD';
+    var cachedDictionaryDatas = LK.cachedDictionaryDatas(options.param.categoryCode);
+    if (cachedDictionaryDatas && cachedDictionaryDatas.length != 0) {
+      options.data = cachedDictionaryDatas;
+    } else {
+      options.url = '/SysDictionary/LD';
+    }
   }
 
   // 加载数据
@@ -214,3 +219,46 @@ $('body').mousedown(function(e) {
     }
   }
 });
+
+/**
+ * 字典缓存处理
+ */
+// 需要缓存的字典类目编码
+LK.needCacheCategoryCodes = [];
+// 字典数据缓存对象
+LK.dictionaryCache = {};
+
+/**
+ * 是否需要缓存字典数据
+ * @param categoryCode 类目编码
+ */
+LK.needCacheCategoryCode = function(categoryCode) {
+  for (var i = 0; i < LK.needCacheCategoryCodes.length; i++) {
+    if (LK.needCacheCategoryCodes[i] == categoryCode) {
+      return true;
+    }
+  }
+  return false;
+};
+
+/**
+ * 缓存字典数据
+ * @param categoryCode 类目编码
+ * @param datas 数据
+ */
+LK.cacheDictionaryDatas = function(categoryCode, datas) {
+  if (LK.needCacheCategoryCode(categoryCode)) {
+    LK.dictionaryCache[categoryCode] = datas;
+  }
+};
+
+/**
+ * 获取缓存的字典数据
+ * @param categoryCode 类目编码
+ */
+LK.cachedDictionaryDatas = function(categoryCode) {
+  if (LK.needCacheCategoryCode(categoryCode)) {
+    return LK.dictionaryCache[categoryCode];
+  }
+  return null;
+};
