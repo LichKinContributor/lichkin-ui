@@ -223,6 +223,8 @@ LK.UI('plugins', 'icon', function(options) {
   var $plugin = LK.UI.plugin(options);
   // 缓存参数
   $plugin.data('LKOPTIONS', options);
+  // 设置类型
+  $plugin.data('plugin-type', 'icon');
   // 返回控件对象
   return $plugin;
 }, LK.UI.iconOptions);

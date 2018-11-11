@@ -158,6 +158,22 @@ LK.UI._datagrid = {
               'height' : 22
             }));
             text.data('gridRowData', data);
+          } else {
+            try {
+              var p = text.LKGetPluginType();
+              switch (p) {
+                case 'icon':
+                  text.css({
+                    'margin-left' : ((column.width - 16) / 2) + 'px',
+                    'margin-right' : ((column.width - 16) / 2) + 'px',
+                    'margin-top' : '5px',
+                  });
+                  break;
+                default:
+                  break;
+              }
+            } catch (e) {
+            }
           }
           $td.append(text);
           continue;
