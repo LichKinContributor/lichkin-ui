@@ -460,7 +460,7 @@ LK.web.alert = function(options, callback) {
   $.LKOpenDialog({
     title : 'tip',
     icon : 'tip',
-    content : '<div style="padding:30px 10px;height:40px;line-height:40px;text-align:center;font-size:16px;color:' + LK.pluginFontColor + ';">' + $.LKGetI18N(options.msg) + '</div>',
+    content : '<div style="padding:30px 10px;height:40px;line-height:40px;text-align:center;font-size:16px;color:' + LK.pluginFontColor + ';">' + (typeof options.original != 'undefined' && options.original == true ? options.msg : $.LKGetI18N(options.msg)) + '</div>',
     size : {
       width : 300,
       height : 100,
