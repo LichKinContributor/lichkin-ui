@@ -223,11 +223,15 @@ $.fn.extend({
    * 设置控件值
    * @param values 值
    * @param isCreateEvent 是否为创建是调用
+   * @param undoOnChange true:不触发onChange事件;false:触发onChange事件;
    */
-  LKSetValues : function(values, isCreateEvent) {
+  LKSetValues : function(values, isCreateEvent, undoOnChange) {
     var currentValue = values;
     if (Array.isArray(values)) {
       currentValue = values.join(LK.SPLITOR);
+    }
+    if ((typeof undoOnChange == 'undefined' || undoOnChange == false) && (typeof isCreateEvent == 'undefined' || isCreateEvent != true)) {
+      this.data('LKOPTIONS').onChange(this, this.LKGetValues(), this.LKGetValue(), currentValue);
     }
     if (this.LKGetPluginType() == 'ueditor') {
       if (typeof values == 'undefined') {
@@ -239,9 +243,6 @@ $.fn.extend({
       });
     } else {
       this.LKGetValueObj().val(currentValue);
-    }
-    if (typeof isCreateEvent == 'undefined' || isCreateEvent != true) {
-      this.data('LKOPTIONS').onChange(this, this.LKGetValues(), this.LKGetValue(), currentValue);
     }
   },
 
@@ -418,8 +419,9 @@ $.fn.extend({
    * 调用设置值方法
    * @param values 值
    * @param isCreateEvent 是否为创建是调用
+   * @param undoOnChange true:不触发onChange事件;false:触发onChange事件;
    */
-  LKInvokeSetValues : function(values, isCreateEvent) {
+  LKInvokeSetValues : function(values, isCreateEvent, undoOnChange) {
     if (typeof values == 'undefined') {
       values = [];
     } else if (isString(values)) {
@@ -427,9 +429,9 @@ $.fn.extend({
     }
     var plugin = this.LKGetPluginType();
     if (plugin == 'droplist' || plugin == 'datagrid' || plugin == 'tree' || plugin == 'cropper' || plugin == 'selector') {
-      this.LKGetImplementor().setValues(this, this.LKGetDataContainer(), values, isCreateEvent);
+      this.LKGetImplementor().setValues(this, this.LKGetDataContainer(), values, isCreateEvent, undoOnChange);
     } else {
-      this.LKSetValues(values, isCreateEvent);
+      this.LKSetValues(values, isCreateEvent, undoOnChange);
     }
   },
 

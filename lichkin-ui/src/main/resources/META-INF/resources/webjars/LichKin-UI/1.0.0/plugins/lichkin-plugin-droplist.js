@@ -16,8 +16,9 @@ LK.UI._droplist = {
    * @param $container 数据容器对象
    * @param values 值数组
    * @param isCreateEvent 是否为创建是调用
+   * @param undoOnChange true:不触发onChange事件;false:触发onChange事件;
    */
-  setValues : function($plugin, $container, values, isCreateEvent) {
+  setValues : function($plugin, $container, values, isCreateEvent, change) {
     var valueArr = [];
     var textArr = [];
 
@@ -50,7 +51,7 @@ LK.UI._droplist = {
       });
     }
 
-    $plugin.LKSetValues(valueArr, isCreateEvent);
+    $plugin.LKSetValues(valueArr, isCreateEvent, change);
     $plugin.LKSetTexts(textArr);
   },
 
