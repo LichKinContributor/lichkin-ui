@@ -1541,3 +1541,18 @@ $('body').mousedown(function(e) {
     options.onRowClick($plugin, $node, data);
   }
 });
+
+/**
+ * 常用formatter
+ */
+LK.UI.formatter = {
+
+  /**
+   * 布尔型
+   * @param value 值
+   */
+  bool : function(value) {
+    return value ? LKUI.icon('check') : '-';
+  }
+
+};
