@@ -1553,7 +1553,7 @@ LK.UI.formatter = {
    * @param value 值
    */
   bool : function(value) {
-    return value ? LKUI.icon('check') : '-';
+    return (value == null) ? '-' : (value == true ? LKUI.icon('check') : LKUI.icon('uncheck'));
   }
 
 };
