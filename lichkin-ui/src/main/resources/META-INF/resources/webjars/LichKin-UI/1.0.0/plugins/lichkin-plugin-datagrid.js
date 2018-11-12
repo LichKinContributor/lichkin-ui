@@ -1068,10 +1068,10 @@ LK.UI('plugins', 'datagrid', function(options) {
       value : 1,
       onChange : function($numberspinner, numberspinnerValues, numberspinnerValue, currentValue) {
         var maxValue = $plugin.data('totalPages');
-        if (numberspinnerValue > maxValue) {
+        if (currentValue > maxValue) {
           $numberspinner.LKGetValueObj().val(maxValue);
         }
-        if (numberspinnerValue < 1) {
+        if (currentValue < 1) {
           $numberspinner.LKGetValueObj().val(1);
         }
         $plugin.LKLoad({
