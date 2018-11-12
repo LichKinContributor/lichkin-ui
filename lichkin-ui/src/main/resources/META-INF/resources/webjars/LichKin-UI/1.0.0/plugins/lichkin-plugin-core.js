@@ -191,11 +191,15 @@ $.fn.extend({
   /**
    * 清空数据
    * @param isCreateEvent 是否为创建是调用
+   * @param clearDataDatas 是否清空data中的datas值
    */
-  LKClearDatas : function(isCreateEvent) {
+  LKClearDatas : function(isCreateEvent, clearDataDatas) {
     this.LKGetDataContainer().children().remove();
     this.LKSetValues([], isCreateEvent);
     this.LKSetTexts([]);
+    if (typeof clearDataDatas != 'undefined' && clearDataDatas == true) {
+      this.data('LKDatas', []);
+    }
   },
 
   /**
