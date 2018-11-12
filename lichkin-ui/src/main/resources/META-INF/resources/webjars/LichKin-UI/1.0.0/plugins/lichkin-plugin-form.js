@@ -308,8 +308,9 @@ LK.UI.formUtils = {
    * @param pluginName 待修改参数的插件字段名
    * @param replace true:替换;false:添加.
    * @param newOptions 参数
+   * @param arrayRepalce true:值为数组时直接替换;false:值为数组时追加值;
    */
-  changeOptions : function(plugins, pluginName, replace, newOptions) {
+  changeOptions : function(plugins, pluginName, replace, newOptions, arrayRepalce) {
     for (var i = 0; i < plugins.length; i++) {
       var plugin = plugins[i];
       if (plugin == '-') {
@@ -321,7 +322,7 @@ LK.UI.formUtils = {
           plugin.options = newOptions;
           plugin.options.name = pluginName;
         } else {
-          plugin.options = $.extend(true, plugin.options, newOptions);
+          plugin.options = $.extend(((typeof arrayRepalce != 'undeinfed' && arrayRepalce == true) ? {} : true), plugin.options, newOptions);
         }
         break;
       }
