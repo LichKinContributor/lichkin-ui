@@ -600,6 +600,9 @@ LK.UI('plugins', 'datagrid', function(options) {
       options.toolsSubmit.text = 'submit';
     }
     options.toolsSubmit.usingStatus = 'USING';
+    if (isString(options.processCode)) {
+      options.saveUrl = '/' + options.processCode + '/StartProcess';
+    }
     if (options.toolsUS != null) {
       if (Array.isArray(options.toolsUS)) {
         options.toolsUS.unshift(options.toolsSubmit);
@@ -1423,6 +1426,7 @@ LK.UI.loadOptions,
    * @param allowUsingStatusArr 允许执行的数据状态数组
    * @param saveUrl 表单提交地址
    * @param saveData 表单提交额外参数
+   * @param processCode 流程编码（启动流程用，将忽略saveUrl值。）
    */
   toolsSubmit : null,
   /**
