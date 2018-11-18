@@ -392,8 +392,8 @@ $.fn.extend({
       };
       for (var i = 0; i < linkagesLength; i++) {
         var $plugins = $linkage.LKGetSiblingPlugins(linkages[i]);
-        for (var i = 0; i < $plugins.length; i++) {
-          var $plugin = $plugins[i];
+        for (var j = 0; j < $plugins.length; j++) {
+          var $plugin = $plugins[j];
           $plugin.data('LKOPTIONS').onLinkaged($plugin, linkage);
           $plugin.LKValidate();
         }
