@@ -600,8 +600,8 @@ LK.UI('plugins', 'datagrid', function(options) {
       options.toolsSubmit.text = 'submit';
     }
     options.toolsSubmit.usingStatus = 'USING';
-    if (isString(options.processCode)) {
-      options.saveUrl = '/' + options.processCode + '/StartProcess';
+    if (isString(options.toolsSubmit.processCode)) {
+      options.toolsSubmit.saveUrl = '/' + options.toolsSubmit.processCode + '/StartProcess';
     }
     if (options.toolsUS != null) {
       if (Array.isArray(options.toolsUS)) {
