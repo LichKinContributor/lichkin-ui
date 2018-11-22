@@ -860,10 +860,19 @@ $.extend(LK, {
   /**
    * 跳转页面
    * @param url 跳转地址
-   * @param params 参数
+   * @param param 参数
    */
   Go : function(url, param) {
     window.location.href = LK.resolveUrl(url, true, param);
+  },
+
+  /**
+   * 打开新页面
+   * @param url 页面地址
+   * @param param 参数
+   */
+  openWin : function(url, param) {
+    window.open(LK.resolveUrl(url, true, param));
   },
 
   /**
