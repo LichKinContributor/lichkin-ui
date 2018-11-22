@@ -784,9 +784,10 @@ $.extend(LK, {
    * 将参数转为URL地址
    * @param startFromQuestion 是否从问号开始
    * @param param [JSON] 参数
+   * @param withoutCalc 排除计算逻辑
    */
-  paramUrl : function(startFromQuestion, param) {
-    var url = (startFromQuestion ? '?' : '&') + '_$=' + new Date().getTime();
+  paramUrl : function(startFromQuestion, param, withoutCalc) {
+    var url = (startFromQuestion ? '?' : '&') + (withoutCalc ? 'timestamp=' : '_$=') + new Date().getTime();
     if (isJSON(param)) {
       for ( var key in param) {
         var value = param[key];
@@ -803,8 +804,9 @@ $.extend(LK, {
    * @param url 地址
    * @param isPageUrl 是否为页面地址
    * @param param [JSON] 参数
+   * @param withoutCalc 排除计算逻辑
    */
-  resolveUrl : function(url, isPageUrl, param) {
+  resolveUrl : function(url, isPageUrl, param, withoutCalc) {
     if (!isString(url)) {
       return null;
     }
@@ -831,7 +833,7 @@ $.extend(LK, {
       }
     }
 
-    return url + LK.paramUrl((url.indexOf('?') < 0), param);
+    return url + LK.paramUrl((url.indexOf('?') < 0), param, withoutCalc);
   },
 
   /**
@@ -840,7 +842,7 @@ $.extend(LK, {
    * @param param 参数
    */
   Go : function(url, param) {
-    window.location.href = LK.resolveUrl(url, true, param);
+    window.location.href = LK.resolveUrl(url, true, param, true);
   },
 
   /**
@@ -849,7 +851,7 @@ $.extend(LK, {
    * @param param 参数
    */
   openWin : function(url, param) {
-    window.open(LK.resolveUrl(url, true, param));
+    window.open(LK.resolveUrl(url, true, param, true));
   },
 
   /**
