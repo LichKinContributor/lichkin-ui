@@ -1152,7 +1152,7 @@ var LK_loadPage_timeout = function(options) {
 };
 
 // ajax请求超时跳转页面
-LK.ajax.timeoutPageUrl = _CTX + '/index' + _MAPPING_PAGES;
+LK.ajax.timeoutPageUrl = '/index';
 // ajax请求超时时长
 LK.ajax.timeoutValue = 30000;
 
@@ -1163,7 +1163,7 @@ LK.ajax.timeoutValue = 30000;
 var LK_ajax_timeout = function(options) {
   LK.toast($.LKGetI18N('timeout'));
   setTimeout(function() {
-    window.location.href = LK.ajax.timeoutPageUrl;
+    LK.Go(LK.ajax.timeoutPageUrl);
   }, 2000);
 };
 
