@@ -827,11 +827,7 @@ $.extend(LK, {
           url = url.substring(_MAPPING_API.length);
         }
 
-        if (url.startsWith('/Web')) {
-          url = url.substring('/Web'.length);
-        }
-
-        url = _CTX + _MAPPING_API + '/Web' + url;
+        url = _CTX + _MAPPING_API + url;
       }
     }
 
