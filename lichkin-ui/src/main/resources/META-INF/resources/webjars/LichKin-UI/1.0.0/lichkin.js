@@ -799,25 +799,6 @@ $.extend(LK, {
   },
 
   /**
-   * 转换为标准路径，即使用/作为分隔符，并以/开头，不以/结尾。
-   * @param path 路径
-   * @return 标准路径
-   */
-  toStandardPath : function(path) {
-    if (typeof path == 'undefined' || '' == path || '/' == path) {
-      return '';
-    }
-    path = path.replace(new RegExp("\\\\"), '/');
-    if (!path.startsWith('/')) {
-      path = '/' + path;
-    }
-    if (path.endsWith('/')) {
-      path = path.substring(0, path.lastIndexOf('/'));
-    }
-    return path;
-  },
-
-  /**
    * 解析URL
    * @param url 地址
    * @param isPageUrl 是否为页面地址
@@ -1145,9 +1126,6 @@ $.extend(LK, {
   }
 
 });
-
-// 转为标准路径
-_CTX = LK.toStandardPath(_CTX);
 
 // loadPage请求超时时长
 LK.loadPage.timeoutValue = 30000;

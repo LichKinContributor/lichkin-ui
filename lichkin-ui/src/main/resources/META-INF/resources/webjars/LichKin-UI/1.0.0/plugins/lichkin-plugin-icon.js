@@ -145,7 +145,7 @@ LK.UI._icon = {
  * 绑定图标
  */
 LK.UI('plugins', 'bindIcon', function(options) {
-  $('#lichkin-icons').append('.lichkin-icon-' + options.icon + '{background-image:url("' + LK.toStandardPath(_CTX) + '/res/img/icons/' + options.icon + '.' + ((options.icon == 'loading') ? 'gif' : 'png') + '");}');
+  $('#lichkin-icons').append('.lichkin-icon-' + options.icon + '{background-image:url("' + _IMG + '/icons/' + options.icon + '.' + ((options.icon == 'loading') ? 'gif' : 'png') + '");}');
 
   if (options.fontAwesome != '') {
     LK.UI._icon.mappings[options.icon] = options.fontAwesome;

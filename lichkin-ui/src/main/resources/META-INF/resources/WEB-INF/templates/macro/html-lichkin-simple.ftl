@@ -71,7 +71,36 @@
 			<#nested "body-content"/>
 		</#if>
 		<#if section="javascript-contents-before-links">
-			let LK={},_CTX='${ctx}',_LANG='${locale}',_MAPPING_PAGES='${mappingPages}',_MAPPING_API='${mappingApi}',_WEB_DEBUG=false,_COMPRESS_SUFFIX='${compressSuffix}',LKI18N={};
+			let LK = {
+			  /**
+			   * 转换为标准路径，即使用/作为分隔符，并以/开头，不以/结尾。
+			   * @param path 路径
+			   * @return 标准路径
+			   */
+			  toStandardPath : function(path) {
+			    if (typeof path == 'undefined' || '' == path || '/' == path) {
+			      return '';
+			    }
+			    path = path.replace(new RegExp("\\\\"), '/');
+			    if (!path.startsWith('/')) {
+			      path = '/' + path;
+			    }
+			    if (path.endsWith('/')) {
+			      path = path.substring(0, path.lastIndexOf('/'));
+			    }
+			    return path;
+			  }
+			};
+
+			// 转为标准路径
+			let _CTX = LK.toStandardPath('${ctx}');
+			let _RES = _CTX + '/res';
+			let _JS = _RES + '/js';
+			let _CSS = _RES + '/css';
+			let _IMG = _RES + '/img';
+
+			// 其它服务器参数
+			_LANG='${locale}',_MAPPING_PAGES='${mappingPages}',_MAPPING_API='${mappingApi}',_WEB_DEBUG=false,_COMPRESS_SUFFIX='${compressSuffix}',LKI18N={};
 			<#if webDebug==true>_WEB_DEBUG=true;</#if>
 			<#nested "javascript-contents-before-links"/>
 		</#if>

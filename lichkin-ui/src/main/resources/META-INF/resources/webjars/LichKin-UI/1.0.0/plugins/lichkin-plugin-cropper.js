@@ -71,7 +71,7 @@ LK.UI._cropper = {
     } else {
       var options = $plugin.data('LKOPTIONS');
       $icon.hide();
-      var src = values.startsWith('http') || values.startsWith(_CTX + '/res/img') ? values : 'data:image/' + options.imageType + ';base64,' + values;
+      var src = values.startsWith('http') || values.startsWith(_IMG) ? values : 'data:image/' + options.imageType + ';base64,' + values;
       $img.attr('src', src);
       $('#' + options.id + '_popup').find('img').attr('src', src);
       $img.show();
@@ -230,7 +230,7 @@ LK.UI('plugins', 'cropper', function(options) {
         var value = $plugin.LKGetValue();
         if (value != '') {
           $dialogIcon.hide();
-          $cropper.attr('src', value.startsWith('http') || value.startsWith(_CTX + '/res/img') ? value : 'data:image/' + options.imageType + ';base64,' + value);
+          $cropper.attr('src', value.startsWith('http') || value.startsWith(_IMG) ? value : 'data:image/' + options.imageType + ';base64,' + value);
           $cropper.cropper($.extend({}, cropperOptions, {
             autoCropArea : 1
           }));
