@@ -858,6 +858,15 @@ $.extend(LK, {
   },
 
   /**
+   * 跳转页面
+   * @param url 跳转地址
+   * @param params 参数
+   */
+  Go : function(url, param) {
+    window.location.href = LK.resolveUrl(url, true, param);
+  },
+
+  /**
    * 基于JQuery.ajax实现动态加载内嵌式页面
    * @param options 自定义的参数
    * @param options[$obj] [$Object] 页面内容要写入的DOM元素对应的JQuery对象
