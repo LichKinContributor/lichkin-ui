@@ -407,7 +407,7 @@ LK.UI._datagrid = {
           }
         }
 
-        LK.web.confirm(options.i18nKey + 'confirm.' + toolsUS.text, function() {
+        LK.confirm(options.i18nKey + 'confirm.' + toolsUS.text, function() {
           LK.ajax({
             url : toolsUS.saveUrl,
             data : $.extend({
