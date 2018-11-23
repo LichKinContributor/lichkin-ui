@@ -44,6 +44,21 @@ LK.app = {
     }
   },
 
+  confirm : function(options, callbackOk, callbackCancel) {
+    options.msg = (typeof options.original != 'undefined' && options.original == true ? options.msg : $.LKGetI18N(options.msg));
+    window.WebViewJavascriptBridge.callHandler('confirm', options, function(responseData) {
+      if (responseData.ok) {
+        if (typeof callbackOk == 'function') {
+          callbackOk();
+        }
+      } else {
+        if (typeof callbackCancel == 'function') {
+          callbackCancel();
+        }
+      }
+    });
+  },
+
   showLoading : function() {
     window.WebViewJavascriptBridge.callHandler('showLoading');
   },

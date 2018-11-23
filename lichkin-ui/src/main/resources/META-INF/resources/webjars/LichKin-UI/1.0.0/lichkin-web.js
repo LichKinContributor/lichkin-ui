@@ -58,6 +58,15 @@ LK.web = {
     }
   },
 
+  confirm : function(options, callbackOk, callbackCancel) {
+    // 默认无使用实现，交由控件做具体实现。
+    LK.log({
+      type : 'assert',
+      msg : 'confirm does not has implements.'
+    });
+    return;
+  },
+
   showLoading : function() {
     var loadingId = 'loading_' + randomInRange(10000, 99999);
     if (!isJSON(this.loadingIds)) {

@@ -763,6 +763,120 @@ $.extend(LK, {
   },
 
   /**
+   * 确认提示窗
+   * @param options [string|number|JSON] 自定义的参数
+   * @param callbackOk 确定按钮回调方法
+   * @param callbackCancel 取消按钮回调方法
+   */
+  confirm : function(options, callbackOk, callbackCancel) {
+    // 根据各种支持的类型将options转换为标准JSON格式
+    if (typeof options == 'undefined') {
+      // 没有传入参数，则全部设置成默认值。
+      options = {
+        msg : 'undefined',
+        jsonMsg : false
+      };
+    } else if (isNumber(options)) {
+      // 传入的是数字，则转换为标准格式。
+      options = {
+        msg : String(options),
+        jsonMsg : false
+      };
+    } else if (isString(options)) {
+      // 传入的是字符串，则转换为标准格式。
+      options = {
+        msg : options,
+        jsonMsg : false
+      };
+    } else if (isJSON(options)) {
+      // 传入的是JOSN数据格式
+      // 处理msg参数
+      if (typeof options.msg == 'undefined') {
+        // 没有传入msg参数
+        options.msg = JSON.stringify(options);
+        options.jsonMsg = true;
+        for ( var key in options) {
+          if (key != 'msg' && key != 'jsonMsg') {
+            delete options[key];
+          }
+        }
+      } else if (isNumber(options.msg)) {
+        // 传入的msg是数字类型，则将数字转为字符串。
+        options.msg = String(options.msg);
+        options.jsonMsg = false;
+      } else if (isString(options.msg)) {
+        // 传入的msg是字符串类型，不做处理。
+        options.jsonMsg = false;
+      } else if (isJSON(options.msg)) {
+        // 传入的msg是JSON类型，则将msg转为JSON对应的字符串。
+        options.msg = JSON.stringify(options.msg);
+        options.jsonMsg = true;
+      } else {
+        // 传入的参数不支持，报错！
+        this.log({
+          type : 'assert',
+          msg : 'Invalid format for param options.msg when invoke LK.confirm'
+        });
+        return;
+      }
+    } else {
+      // 传入的参数不支持，报错！
+      this.log({
+        type : 'assert',
+        msg : 'Invalid format for param options when invoke LK.confirm'
+      });
+      return;
+    }
+
+    if (typeof callbackOk == 'undefined') {
+      callbackOk = function() {
+      };
+    } else if (isString(callbackOk)) {
+      callbackOk = window[callbackOk];
+      if (typeof callbackOk != 'function') {
+        // 传入的参数不支持，报错！
+        this.log({
+          type : 'assert',
+          msg : 'Invalid format for param options.callbackOk when invoke LK.confirm'
+        });
+        return;
+      }
+    } else if (typeof callbackOk != 'function') {
+      // 传入的参数不支持，报错！
+      this.log({
+        type : 'assert',
+        msg : 'Invalid format for param options.callbackOk when invoke LK.confirm'
+      });
+      return;
+    }
+
+    if (typeof callbackCancel == 'undefined') {
+      callbackCancel = function() {
+      };
+    } else if (isString(callbackCancel)) {
+      callbackCancel = window[callbackCancel];
+      if (typeof callbackCancel != 'function') {
+        // 传入的参数不支持，报错！
+        this.log({
+          type : 'assert',
+          msg : 'Invalid format for param options.callbackCancel when invoke LK.confirm'
+        });
+        return;
+      }
+    } else if (typeof callbackCancel != 'function') {
+      // 传入的参数不支持，报错！
+      this.log({
+        type : 'assert',
+        msg : 'Invalid format for param options.callbackCancel when invoke LK.confirm'
+      });
+      return;
+    }
+
+    // 调用具体实现方法
+    LK[this.type].confirm(options, callbackOk, callbackCancel);
+  },
+
+  /**
    * 显示加载效果
    * @return loadingId 加载对话框ID
    */
