@@ -1,9 +1,9 @@
 <#include "/_define.ftl"/>
 
-<#macro html type="",css=false,js=true,i18nJs=true,i18nJsAddition=false,iconsJs=true,iconsJsAddition=false>
+<#macro html css=false,js=true,i18nJs=true,i18nJsAddition=false,iconsJs=true,iconsJsAddition=false>
 	<#include "html-lichkin-simple.ftl"/>
 
-	<@html type=type css=css js=js i18nJs=i18nJs i18nJsAddition=i18nJsAddition iconsJs=iconsJs iconsJsAddition=iconsJsAddition;section>
+	<@html css=css js=js i18nJs=i18nJs i18nJsAddition=i18nJsAddition iconsJs=iconsJs iconsJsAddition=iconsJsAddition;section>
 		<#if section="meta">
 			<#nested "meta"/>
 		</#if>

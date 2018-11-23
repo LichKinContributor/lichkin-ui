@@ -1,11 +1,17 @@
 <#include "/_define.ftl"/>
 
-<#macro html type="",css=false,js=true,i18nJs=false,i18nJsAddition=false,iconsJs=false,iconsJsAddition=false>
+<#macro html css=false,js=true,i18nJs=false,i18nJsAddition=false,iconsJs=false,iconsJsAddition=false>
 
 <#assign _$=_$!"">
-<#assign calculateType=type>
-<#if type=="" && _$=="">
-	<#assign calculateType="web">
+<#assign jsBridge=jsBridge!"">
+
+<#assign calculateType="">
+<#if _$=="">
+	<#if jsBridge=="">
+		<#assign calculateType="web">
+	<#else>
+		<#assign calculateType="app">
+	</#if>
 </#if>
 
 <#if calculateType!="">
@@ -30,7 +36,10 @@
 		<#if section="link">
 			<link href="${ctx}/res/img/favicon.ico" type="image/x-icon" rel="shortcut icon">
 			<@lichkin@cssTag url="/webjars/font-awesome/web-fonts-with-css/css/fontawesome-all" />
-			<@lichkin@cssTag url="/webjars/LichKin-UI/themes/default/lichkin-${calculateType}" />
+			<@lichkin@cssTag url="/webjars/LichKin-UI/themes/default/lichkin-web" />
+			<#if calculateType=="app">
+			<@lichkin@cssTag url="/webjars/LichKin-UI/themes/default/lichkin-app" />
+			</#if>
 			<@lichkin@cssTag url="/webjars/datepicker/datepicker" />
 			<@lichkin@cssTag url="/webjars/timepicker/timePicker" />
 			<#nested "link-bofore-plugins"/>
