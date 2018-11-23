@@ -455,63 +455,60 @@ $('body').keydown(function(e) {
   }
 });
 
-// 重新实现
-LK.web.alert = function(options, callback) {
-  $.LKOpenDialog({
-    title : 'tip',
-    icon : 'tip',
-    content : '<div style="padding:30px 10px;height:40px;line-height:40px;text-align:center;font-size:16px;color:' + LK.pluginFontColor + ';">' + (typeof options.original != 'undefined' && options.original == true ? options.msg : $.LKGetI18N(options.msg)) + '</div>',
-    size : {
-      width : 300,
-      height : 100,
-    },
-    onAfterClose : function() {
-      callback();
-    }
-  });
-};
+if (LK.type == 'web') {
+  // 重新实现
+  LK.web.alert = function(options, callback) {
+    $.LKOpenDialog({
+      title : 'tip',
+      icon : 'tip',
+      content : '<div style="padding:30px 10px;height:40px;line-height:40px;text-align:center;font-size:16px;color:' + LK.pluginFontColor + ';">' + (typeof options.original != 'undefined' && options.original == true ? options.msg : $.LKGetI18N(options.msg)) + '</div>',
+      size : {
+        width : 300,
+        height : 100,
+      },
+      onAfterClose : function() {
+        callback();
+      }
+    });
+  };
 
-/**
- * 确认提示窗
- * @param msg 提示信息
- * @param callbackOk 确定按钮回调方法
- * @param callbackCancel 取消按钮回调方法
- */
-LK.web.confirm = function(msg, callbackOk, callbackCancel) {
-  if (typeof callbackOk == 'undefined') {
-    callbackOk = function() {
-    };
-  }
-  if (typeof callbackCancel == 'undefined') {
-    callbackCancel = function() {
-    };
-  }
-  $.LKOpenDialog({
-    title : 'warning',
-    icon : 'warning',
-    content : '<div style="padding:30px 10px;height:40px;line-height:40px;text-align:center;font-size:16px;color:' + LK.pluginFontColor + ';">' + $.LKGetI18N(msg) + '</div>',
-    size : {
-      width : 300,
-      height : 100,
-    },
-    buttons : [
-        {
-          icon : 'ok',
-          text : 'ok',
-          cls : 'success',
-          click : function($button, $dialog) {
-            callbackOk();
-            $dialog.LKCloseDialog();
+  // 重新实现
+  LK.web.confirm = function(options, callbackOk, callbackCancel) {
+    if (typeof callbackOk == 'undefined') {
+      callbackOk = function() {
+      };
+    }
+    if (typeof callbackCancel == 'undefined') {
+      callbackCancel = function() {
+      };
+    }
+    $.LKOpenDialog({
+      title : 'warning',
+      icon : 'warning',
+      content : '<div style="padding:30px 10px;height:40px;line-height:40px;text-align:center;font-size:16px;color:' + LK.pluginFontColor + ';">' + (typeof options.original != 'undefined' && options.original == true ? options.msg : $.LKGetI18N(options.msg)) + '</div>',
+      size : {
+        width : 300,
+        height : 100,
+      },
+      buttons : [
+          {
+            icon : 'ok',
+            text : 'ok',
+            cls : 'success',
+            click : function($button, $dialog) {
+              $dialog.LKCloseDialog();
+              callbackOk();
+            }
+          }, {
+            icon : 'cancel',
+            text : 'cancel',
+            cls : 'danger',
+            click : function($button, $dialog) {
+              $dialog.LKCloseDialog();
+              callbackCancel();
+            }
           }
-        }, {
-          icon : 'cancel',
-          text : 'cancel',
-          cls : 'danger',
-          click : function($button, $dialog) {
-            callbackCancel();
-            $dialog.LKCloseDialog();
-          }
-        }
-    ]
-  });
+      ]
+    });
+  };
 };
