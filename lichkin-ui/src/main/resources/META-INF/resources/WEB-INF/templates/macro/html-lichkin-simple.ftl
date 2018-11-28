@@ -179,9 +179,13 @@
             	<@lichkin@jsTag url="/res/js/app" />
 			</#if>
             <script type="text/javascript">
+            <#if calculateType=="app">
+              var serverDatas = JSON.parse('${serverDatasJson}');
+            <#else>
               if (typeof window['${mappingUri}'.replace(/\//g,'_')] != 'undefined') {
                 window['${mappingUri}'.replace(/\//g,'_')](JSON.parse('${serverDatasJson}'));
               }
+            </#if>
             </script>
 		</#if>
 		<#if section="javascript-contents-after-links">
