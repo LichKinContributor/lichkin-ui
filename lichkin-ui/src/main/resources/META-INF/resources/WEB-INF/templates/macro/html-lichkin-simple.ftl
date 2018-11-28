@@ -172,21 +172,23 @@
 
 			<#nested "javascript-links"/>
 
-			<#if js==true>
-				<@lichkin@jsTag/>
-			</#if>
+            <script type="text/javascript">
+              var serverDatas = JSON.parse('${serverDatasJson}');
+            </script>
 			<#if ctx!="/ui">
             	<@lichkin@jsTag url="/res/js/app" />
 			</#if>
+			<#if js==true>
+				<@lichkin@jsTag/>
+			</#if>
+
+            <#if calculateType!="app">
             <script type="text/javascript">
-            <#if calculateType=="app">
-              var serverDatas = JSON.parse('${serverDatasJson}');
-            <#else>
               if (typeof window['${mappingUri}'.replace(/\//g,'_')] != 'undefined') {
-                window['${mappingUri}'.replace(/\//g,'_')](JSON.parse('${serverDatasJson}'));
+                window['${mappingUri}'.replace(/\//g,'_')](serverDatas);
               }
-            </#if>
             </script>
+            </#if>
 		</#if>
 		<#if section="javascript-contents-after-links">
 			let $win = $(window), $doc = $(document), $body = $('body');
