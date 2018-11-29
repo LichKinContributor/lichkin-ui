@@ -584,21 +584,21 @@ $.extend(LK, {
     if (typeof options == 'undefined') {
       // 没有传入参数，则全部设置成默认值。
       options = {
-        timeout : 1000,
+        timeout : 3000,
         msg : 'undefined',
         jsonMsg : false
       };
     } else if (isNumber(options)) {
       // 传入的是数字，则转换为标准格式。
       options = {
-        timeout : 1000,
+        timeout : 3000,
         msg : String(options),
         jsonMsg : false
       };
     } else if (isString(options)) {
       // 传入的是字符串，则转换为标准格式。
       options = {
-        timeout : 1000,
+        timeout : 3000,
         msg : options,
         jsonMsg : false
       };
