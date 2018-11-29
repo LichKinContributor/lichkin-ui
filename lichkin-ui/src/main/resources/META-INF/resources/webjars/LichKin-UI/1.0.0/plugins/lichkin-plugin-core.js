@@ -1003,12 +1003,12 @@ LK.UI('plugins', 'load', function(opts) {
   if (options.url != '') {
     LK.ajax({
       url : options.url,
-      async : !(options.url == '/SysDictionary/LD' && LK.needCacheCategoryCode(options.param.categoryCode)),
+      async : !(options.url == '/GetDictionaryList' && LK.needCacheCategoryCode(options.param.categoryCode)),
       data : options.param,
       success : function(responseDatas) {
         $plugin.LKClearDatas(opts.isCreateEvent || (opts.linkage != null && opts.linkage.isCreateEvent == true));
         if (responseDatas) {
-          if (options.url == '/SysDictionary/LD') {
+          if (options.url == '/GetDictionaryList') {
             LK.cacheDictionaryDatas(options.param.categoryCode, responseDatas);
           }
           responseDatas = options.onBeforeAddDatas($plugin, responseDatas, options.url, options.param);

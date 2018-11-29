@@ -142,7 +142,7 @@ LK.UI('plugins', 'droplist', function(options) {
     if (cachedDictionaryDatas && cachedDictionaryDatas.length != 0) {
       options.data = cachedDictionaryDatas;
     } else {
-      options.url = '/SysDictionary/LD';
+      options.url = '/GetDictionaryList';
     }
   }
 
