@@ -55,7 +55,7 @@
     <dependency>
       <groupId>com.lichkin.ui</groupId>
       <artifactId>lichkin-icons</artifactId>
-      <version>1.0.1.RELEASE</version>
+      <version>1.0.2.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>com.lichkin.ui</groupId>
