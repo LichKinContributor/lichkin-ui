@@ -154,6 +154,34 @@ LK.UI._dialog = {
     } else {
       $mask.css('z-index', (zIndex - 1));
     }
+  },
+
+  /**
+   * 添加按钮
+   * @param $dialog 对话框对象
+   * @pararm $buttonsBar 按钮栏
+   * @param buttons 按钮数组
+   */
+  addButtons : function($dialog, $buttonsBar, buttons) {
+    if (buttons.length != 0) {
+      $buttonsBar.appendTo($dialog);
+      for (var i = 0; i < buttons.length; i++) {
+        var button = buttons[i];
+        (function(button) {
+          var click = button.click;
+          if (typeof click != 'function') {
+            click = function() {
+            };
+          }
+          $buttonsBar.append(LK.UI.button($.extend(button, {
+            click : function($button) {
+              var $dialog = $button.parents('.lichkin-dialog:first');
+              click($button, $dialog, $dialog.find('.lichkin-dialog-contentBar'));
+            }
+          })));
+        })(button);
+      }
+    }
   }
 
 };
@@ -169,8 +197,6 @@ LK.UI.dialogOptions = {
   url : '',
   // 对话框加载页面参数
   param : {},
-  // 对话框加载页面数据
-  data : {},
   // 对话框文本内容
   content : '',
   // 是否增加遮罩层
@@ -196,6 +222,9 @@ LK.UI.dialogOptions = {
    */
   buttons : [],
 
+  // true:弹窗创建后调用动态按钮方法创建按钮;false:不创建动态按钮;
+  dynamicButtons : false,
+
   // 事件
   /**
    * 控件创建结束
@@ -203,18 +232,6 @@ LK.UI.dialogOptions = {
    * @param $contentBar 内容栏
    */
   onAfterCreate : function($plugin, $contentBar) {
-  },
-  /**
-   * 页面加载前
-   * @param $plugin 当前对话框对象
-   */
-  onBeforeLoading : function($plugin) {
-  },
-  /**
-   * 页面加载后
-   * @param $plugin 当前对话框对象
-   */
-  onAfterLoading : function($plugin) {
   },
   /**
    * 对话框被聚焦后
@@ -300,13 +317,6 @@ LK.UI('plugins', 'openDialog', function(options) {
     implementor.close(null, $plugin);
   });
 
-  if (options.fitContent == true) {
-    options.size = {
-      width : 333,
-      height : 333
-    };
-  }
-
   if (typeof options.size.width == 'undefined') {
     if (typeof options.size.cols == 'undefined') {
       options.size.cols = 2;
@@ -327,68 +337,24 @@ LK.UI('plugins', 'openDialog', function(options) {
     'height' : options.size.height
   });
 
+  // 按钮栏
+  var $buttonsBar = $('<div class="lichkin-dialog-buttonsBar"></div>');
+
   if (options.url != '') {// 加载页面
-    // 触发页面加载前事件
-    options.onBeforeLoading($plugin);
-    LK.loadPage({
-      $obj : $contentBar,
+    LK.ajax({
       url : options.url,
-      param : options.param,
-      data : options.data,
-      onAfterLoading : function(opts) {
-        // 触发页面加载后事件
-        options.onAfterLoading($plugin);
-      },
-      onAfterRender : function(opts) {
-        var $contentBody = $contentBar.find('.lichkin-body');
-        if (options.fitContent == true) {
-          var w = 0;
-          var h = 0;
-          var $children = $contentBody.children('.lichkin-plugin');
-          if ($children.length == 1 && $children.is('.lichkin-datagrid')) {
-            w = $children.outerWidth() - 2;
-            $children.css('width', w + 'px');
-            h = $children.outerHeight();
-          } else {
-            var $formDiv = $contentBody.find('.lichkin-dialog-form-div');
-            if ($formDiv.length == 1) {
-              w = $formDiv.data('cols') * LK.colWidth + $formDiv.data('cols-with-field') * (LK.leftGap + LK.fieldKeyWidth + LK.colWidth) + $formDiv.data('width-fix');
-              $formDiv.children().each(function() {
-                if ($(this).outerHeight() > h) {
-                  h = $(this).outerHeight();
-                }
-              });
-              $formDiv.children().each(function() {
-                $(this).height(h);
-              });
-            } else {
-              $contentBody.children().each(function() {
-                if ($(this).outerWidth() > w) {
-                  w = $(this).outerWidth();
-                }
-                if ($(this).outerHeight() > h) {
-                  h = $(this).outerHeight();
-                }
-              });
-              $contentBody.find('.lichkin-table').each(function() {
-                if ($(this).width() > w) {
-                  w = $(this).width();
-                }
-              });
-            }
+      isPageUrl : true,
+      success : function(text) {
+        // 添加内容
+        $contentBar.append(text);
+
+        // 添加动态按钮
+        if (options.dynamicButtons == true) {
+          var dynamicButtons = window[options.url.replace(/\//g, '_') + '_dynamicButtons'];
+          if (Array.isArray(dynamicButtons)) {
+            // 添加按钮栏
+            LK.UI._dialog.addButtons($plugin, $buttonsBar, dynamicButtons);
           }
-          $contentBar.animate({
-            'width' : w + 'px',
-            'height' : h + 'px'
-          }, 'slow');
-          $plugin.animate({
-            'left' : ($doc.width() - w) / 2 + 'px',
-            'top' : ($doc.height() - h - $titleBar.height() - (h != 0 ? $buttonsBar.height() : 0)) / 2 + 'px'
-          }, 'slow');
-          return;
-        }
-        if ($contentBody.height() > $contentBar.height()) {
-          $contentBar.css('width', $contentBar.outerWidth() + 17);
         }
       }
     });
@@ -397,32 +363,65 @@ LK.UI('plugins', 'openDialog', function(options) {
   }
 
   // 添加按钮栏
-  var $buttonsBar = $('<div class="lichkin-dialog-buttonsBar"></div>');
-  if (options.buttons.length != 0) {
-    $buttonsBar.appendTo($plugin);
-    for (var i = 0; i < options.buttons.length; i++) {
-      var button = options.buttons[i];
-      (function(button) {
-        var click = button.click;
-        if (typeof click != 'function') {
-          click = function() {
-          };
-        }
-        $buttonsBar.append(LK.UI.button($.extend(button, {
-          click : function($button) {
-            var $dialog = $button.parents('.lichkin-dialog:first');
-            click($button, $dialog, $dialog.find('.lichkin-dialog-contentBar'));
-          }
-        })));
-      })(button);
-    }
-  }
+  LK.UI._dialog.addButtons($plugin, $buttonsBar, options.buttons);
 
   // 定位&大小
   $plugin.css({
     'left' : ($doc.width() - options.size.width) / 2 + 'px',
     'top' : ($doc.height() - options.size.height - $titleBar.height() - (options.buttons.length != 0 ? $buttonsBar.height() : 0)) / 2 + 'px'
   });
+
+  // 自适应处理
+  var $contentBody = $contentBar.find('.lichkin-body');
+  if (options.fitContent == true) {
+    var w = 0;
+    var h = 0;
+    var $children = $contentBody.children('.lichkin-plugin');
+    if ($children.length == 1 && $children.is('.lichkin-datagrid')) {
+      w = $children.outerWidth() - 2;
+      $children.css('width', w + 'px');
+      h = $children.outerHeight();
+    } else {
+      var $formDiv = $contentBody.find('.lichkin-dialog-form-div');
+      if ($formDiv.length == 1) {
+        w = $formDiv.data('cols') * LK.colWidth + $formDiv.data('cols-with-field') * (LK.leftGap + LK.fieldKeyWidth + LK.colWidth) + $formDiv.data('width-fix');
+        $formDiv.children().each(function() {
+          if ($(this).outerHeight() > h) {
+            h = $(this).outerHeight();
+          }
+        });
+        $formDiv.children().each(function() {
+          $(this).height(h);
+        });
+      } else {
+        $contentBody.children().each(function() {
+          if ($(this).outerWidth() > w) {
+            w = $(this).outerWidth();
+          }
+          if ($(this).outerHeight() > h) {
+            h = $(this).outerHeight();
+          }
+        });
+        $contentBody.find('.lichkin-table').each(function() {
+          if ($(this).width() > w) {
+            w = $(this).width();
+          }
+        });
+      }
+    }
+    $contentBar.animate({
+      'width' : w + 'px',
+      'height' : h + 'px'
+    }, 'slow');
+    $plugin.animate({
+      'left' : ($doc.width() - w) / 2 + 'px',
+      'top' : ($doc.height() - h - $titleBar.height() - (h != 0 ? $buttonsBar.height() : 0)) / 2 + 'px'
+    }, 'slow');
+  } else {
+    if ($contentBody.height() > $contentBar.height()) {
+      $contentBar.css('width', $contentBar.outerWidth() + 17);
+    }
+  }
 
   // 切换
   implementor.active($plugin, false);
@@ -440,6 +439,7 @@ LK.UI('plugins', 'openDialog', function(options) {
     }
   }
 
+  // 触发创建后事件
   options.onAfterCreate($plugin, $contentBar);
 
   // 返回控件对象

@@ -182,13 +182,15 @@
 				<@lichkin@jsTag/>
 			</#if>
 
-            <#if calculateType!="app">
             <script type="text/javascript">
-              if (typeof window['${mappingUri}'.replace(/\//g,'_')] != 'undefined') {
-                window['${mappingUri}'.replace(/\//g,'_')](serverDatas);
+              var dynamicButtons = window['${mappingUri}'.replace(/\//g, '_') + '_dynamicButtons'];
+              if (typeof dynamicButtons != 'undefined') {
+                var $dialog = $('<div class="lichkin-dialog"></div>').appendTo('body');
+                $dialog.addClass('lichkin-dialog-focus');
+                $dialog.css('width', $('body').find('.lichkin-plugin').width());
+                LK.UI._dialog.addButtons($dialog, $('<div class="lichkin-dialog-buttonsBar"></div>').appendTo($dialog), dynamicButtons);
               }
             </script>
-            </#if>
 		</#if>
 		<#if section="javascript-contents-after-links">
 			let $win = $(window), $doc = $(document), $body = $('body');
@@ -198,21 +200,6 @@
 <#else>
 	<div id="${mappingUri}" class="lichkin-body" <#nested "body-attributes"/>>
 		<style><#nested "style"/></style>
-        <script type="text/javascript">
-           window['${mappingUri}' + '_invoke'] = function() {
-             var functionName = '${mappingUri}'.replace(/\//g, '_');
-             if (typeof window[functionName] != 'undefined') {
-               window[functionName](JSON.parse('${serverDatasJson}'));
-             } else {
-               window[functionName + '_Interval'] = setInterval(function loadPage() {
-                 if (typeof window[functionName] != 'undefined') {
-                   clearInterval(window[functionName + '_Interval']);
-                   window[functionName](JSON.parse('${serverDatasJson}'));
-                 }
-               }, 100);
-             }
-           }
-        </script>
 		<#nested "body-content"/>
 		<#if js==true>
 			<@lichkin@jsTag/>

@@ -969,124 +969,10 @@ $.extend(LK, {
   },
 
   /**
-   * 基于JQuery.ajax实现动态加载内嵌式页面
-   * @param options 自定义的参数
-   * @param options[$obj] [$Object] 页面内容要写入的DOM元素对应的JQuery对象
-   * @param options[url] [string] 自动拼接前缀与后缀
-   * @param options[param] [JSON] 参数将转为URL地址。
-   * @param options[data] [JSON] 自动转换为RequestBody内容。
-   * @param options[showLoading] [boolean] 是否显示加载效果
-   * @param options[timeout] [function|string] 超时回调时，方法或方法名。
-   * @param options[onAfterLoading] [function] 页面加载后事件
-   * @param options[onAfterRender] [function] 页面渲染后事件
-   */
-  loadPage : function(options) {
-    var scriptId = options.url;
-    var loadingId = '';
-    var loadingTimeout = true;
-    options = $.extend({
-      showLoading : true
-    }, options, {
-      method : 'POST',
-      dataType : 'text',
-      contentType : 'text/html;charset=UTF-8',
-      headers : {
-        'Accept-Language' : _LANG
-      },
-      url : LK.resolveUrl(options.url, true, options.param),
-      data : JSON.stringify($.extend({}, options.data)),
-      success : function(text) {
-        setTimeout(function() {
-          options.onAfterLoading(options);
-        }, 333);
-        loadingTimeout = false;
-        setTimeout(function() {
-          if (options.showLoading) {
-            LK.closeLoading(loadingId);
-          }
-        }, 333);
-        var $obj = options.$obj;
-        $obj[0].innerHTML = text;
-        var head = document.getElementsByTagName("head")[0];
-        var functionName = scriptId.replace(/\//g, '_');
-        if ($('script[id="' + scriptId + '"]').length == 0) {
-          $obj.find('script').each(function() {
-            var that = $(this).remove()[0];
-            var src = that.src;
-            var script = document.createElement("script");
-            script.type = "text/javascript";
-            if (src) {
-              script.id = scriptId;
-              script.src = src;
-              head.appendChild(script);
-            } else {
-              script.innerHTML = that.innerHTML;
-              head.appendChild(script);
-              window[scriptId + '_invoke']();
-            }
-          });
-          window[functionName + '_Interval_clear'] = setInterval(function loadPage() {
-            if (options.$obj.find('.lichkin-plugin').length != 0) {
-              clearInterval(window[functionName + '_Interval_clear']);
-              clearInterval(window[functionName + '_Interval']);
-            }
-          }, 300);
-        } else {
-          if (typeof window[functionName] != 'undefined') {
-            window[scriptId + '_invoke']();
-          } else {
-            var currentScript = $('script[id="' + scriptId + '"]');
-            var script = document.createElement("script");
-            script.type = "text/javascript";
-            script.id = scriptId;
-            script.src = currentScript.attr('src');
-            currentScript.remove();
-            head.appendChild(script);
-          }
-        }
-        setTimeout(function() {
-          options.onAfterRender(options);
-        }, 333);
-      },
-      error : function() {
-        loadingTimeout = false;
-        setTimeout(function() {
-          if (options.showLoading) {
-            LK.closeLoading(loadingId);
-          }
-        }, 333);
-      }
-    });
-
-    var timeout = options.timeout;
-    if (typeof timeout == 'number') {
-      timeout = 'LK_loadPage_timeout';
-    }
-    if (isString(timeout)) {
-      timeout = window[timeout];
-    }
-    delete options.timeout;
-
-    if (options.showLoading) {
-      loadingId = LK.showLoading();
-    }
-
-    $.ajax(options);
-
-    setTimeout(function() {
-      if (loadingTimeout) {
-        if (options.showLoading) {
-          LK.closeLoading(loadingId);
-        }
-        timeout(options);
-      }
-    }, LK.ajax.timeoutValue);
-  },
-
-  /**
    * AJAX请求
    * @param options 自定义的参数
    * @param options[url] [string] 自动拼接前缀与后缀
+   * @param options[isPageUrl] [boolean] 是否为页面url
    * @param options[data] [JSON] 转换为RequestBody内容
    * @param options[showLoading] [boolean] 是否显示加载效果
    * @param options[showSuccess] [boolean] 调用默认业务成功回调方法时是否显示提示信息
@@ -1099,6 +985,7 @@ $.extend(LK, {
     var loadingId = '';
     var loadingTimeout = true;
     options = $.extend({
+      isPageUrl : false,
       showLoading : true,
       showSuccess : false,
       showError : true,
@@ -1106,7 +993,7 @@ $.extend(LK, {
       success : 'LK_ajax_success',
       error : 'LK_ajax_error'
     }, options, {
-      url : LK.resolveUrl(options.url, false),
+      url : LK.resolveUrl(options.url, options.isPageUrl, options.param),
       data : JSON.stringify($.extend(true, {}, options.data, {
         datas : {
           clientType : 'JAVASCRIPT'
@@ -1115,11 +1002,16 @@ $.extend(LK, {
         datas : LK.VERSION
       })),
       method : 'POST',
-      dataType : 'json',
-      contentType : 'application/json;charset=UTF-8',
       headers : {
         'Accept-Language' : _LANG
       }
+    }, options.isPageUrl ? {
+      async : false,
+      dataType : 'text',
+      contentType : 'text/html;charset=UTF-8',
+    } : {
+      dataType : 'json',
+      contentType : 'application/json;charset=UTF-8',
     });
 
     var timeout = options.timeout;
@@ -1148,10 +1040,14 @@ $.extend(LK, {
           LK.closeLoading(loadingId);
         }
       }, 333);
-      if (responseDatas.errorCode == 0) {
-        success(responseDatas.datas, options);
+      if (options.isPageUrl) {
+        success(responseDatas, options);
       } else {
-        error(responseDatas.errorCode, responseDatas.errorMessage, options);
+        if (responseDatas.errorCode == 0) {
+          success(responseDatas.datas, options);
+        } else {
+          error(responseDatas.errorCode, responseDatas.errorMessage, options);
+        }
       }
     };
 
@@ -1238,17 +1134,6 @@ $.extend(LK, {
   }
 
 });
-
-// loadPage请求超时时长
-LK.loadPage.timeoutValue = 30000;
-
-/**
- * loadPage超时默认回调方法。
- * @param options 调用loadPage方法时传入的参数
- */
-var LK_loadPage_timeout = function(options) {
-  LK.loadPage(options);
-};
 
 // ajax请求超时跳转页面
 LK.ajax.timeoutPageUrl = '/index';
