@@ -129,10 +129,15 @@ $.fn.extend({
         }
         value = value == '' ? null : value;
         if (!ignoreNullValue || value != null) {
-          if (typeof json[name] == 'undefined') {
-            json[name] = value;
+          // 值为json
+          if (isJSON(value)) {
+            json = $.extend(json, value);
           } else {
-            json[name] += LK.SPLITOR + value;
+            if (typeof json[name] == 'undefined') {
+              json[name] = value;
+            } else {
+              json[name] += LK.SPLITOR + value;
+            }
           }
         }
       }

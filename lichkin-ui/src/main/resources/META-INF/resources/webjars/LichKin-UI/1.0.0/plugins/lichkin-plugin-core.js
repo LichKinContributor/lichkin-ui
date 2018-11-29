@@ -220,6 +220,9 @@ $.fn.extend({
     if (this.LKGetPluginType() == 'ueditor') {
       return this.data('ue').getContent();
     }
+    if (this.LKGetPluginType() == 'map') {
+      return this.LKGetValueObj().val() == '' ? '' : $.parseJSON(this.LKGetValueObj().val());
+    }
     return this.LKGetValueObj().val();
   },
 
@@ -237,17 +240,27 @@ $.fn.extend({
     if ((typeof undoOnChange == 'undefined' || undoOnChange == false) && (typeof isCreateEvent == 'undefined' || isCreateEvent != true)) {
       this.data('LKOPTIONS').onChange(this, this.LKGetValues(), this.LKGetValue(), currentValue);
     }
-    if (this.LKGetPluginType() == 'ueditor') {
-      if (typeof values == 'undefined') {
-        currentValue = '';
-      }
-      var ue = this.data('ue');
-      ue.ready(function() {
-        ue.setContent(currentValue);
-      });
-    } else {
-      this.LKGetValueObj().val(currentValue);
+
+    switch (this.LKGetPluginType()) {
+      case 'ueditor':
+        if (typeof values == 'undefined') {
+          currentValue = '';
+        }
+        var ue = this.data('ue');
+        ue.ready(function() {
+          ue.setContent(currentValue);
+        });
+        break;
+      case 'map':
+        if (typeof values == 'undefined') {
+          currentValue = '';
+        }
+        this.LKGetValueObj().val(currentValue == '' ? '' : JSON.stringify(currentValue));
+        break;
+      default:
+        this.LKGetValueObj().val(currentValue);
     }
+
   },
 
   /**
@@ -756,7 +769,11 @@ LK.UI('plugins', 'create', function(opts) {
 
   // 设置值
   if (plugin != 'ueditor' && options.value != null) {
-    $value.val(options.value);
+    if (plugin == 'map') {
+      $value.val(options.value == '' ? '' : JSON.stringify(options.value));
+    } else {
+      $value.val(options.value);
+    }
   }
 
   if (options.$appendTo == true) {

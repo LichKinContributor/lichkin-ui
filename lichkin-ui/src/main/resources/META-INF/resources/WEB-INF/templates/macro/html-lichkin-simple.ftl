@@ -4,6 +4,7 @@
 
 <#assign _$=_$!"">
 <#assign jsBridge=jsBridge!"">
+<#assign AmapParams=AmapParams!"">
 
 <#assign calculateType="">
 <#if _$=="">

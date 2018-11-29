@@ -9,13 +9,14 @@
 		</#if>
 		<#if section="link-bofore-plugins">
 			<@lichkin@cssTag url="/webjars/ueditor/themes/default/css/ueditor" />
-            <@lichkin@cssTag url="/webjars/cropper/cropper" />
+			<@lichkin@cssTag url="/webjars/cropper/cropper" />
 			<#nested "link-bofore-plugins"/>
 		</#if>
 		<#if section="link">
 			<#if webDebug==true>
 				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-ueditor" />
 				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-cropper" />
+				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-map" />
 				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-selector" />
 			<#else>
 				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugins-complex" />
@@ -41,12 +42,14 @@
 			<@lichkin@jsTag url="/webjars/ueditor/ueditor.all" />
 			<@lichkin@jsTag url="/webjars/ueditor/lang/${locale}/${locale}" />
 			<@lichkin@jsTag url="/webjars/cropper/cropper" />
+			<script src="https://webapi.amap.com/maps?${AmapParams}"></script>
 			<#nested "javascript-links-bofore-plugins"/>
 		</#if>
 		<#if section="javascript-links-after-plugins">
 			<#if webDebug==true>
 				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-ueditor" />
 				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-cropper" />
+				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-map" />
 				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-selector" />
 	
 				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-selector-employee" />
