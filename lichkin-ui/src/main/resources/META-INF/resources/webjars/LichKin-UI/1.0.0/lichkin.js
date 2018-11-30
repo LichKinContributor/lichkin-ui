@@ -91,11 +91,54 @@ Date.prototype.format = function(fmt) {
 };
 
 /**
+ * 重新设置时间
+ * @param type [string] 格式化单key
+ * @param cnt [int] 数量
+ * @return 时间
+ */
+Date.prototype.reset = function(type, cnt) {
+  switch (type) {
+    case 'y':
+      this.setFullYear(this.getFullYear() + cnt);
+      break;
+    case 'M':
+      this.setMonth(this.getMonth() + cnt);
+      break;
+    case 'd':
+      this.setDate(this.getDate() + cnt);
+      break;
+    case 'H':
+      this.setHours(this.getHours() + cnt);
+      break;
+    case 'm':
+      this.setMinutes(this.getMinutes() + cnt);
+      break;
+    case 's':
+      this.setSeconds(this.getSeconds() + cnt);
+      break;
+    case 'S':
+      this.setMilliseconds(this.getMilliseconds() + cnt);
+      break;
+    default:
+      break;
+  }
+  return this;
+};
+
+/**
  * 当前日期
  * @return yyyy-MM-dd
  */
 var today = function() {
   return new Date().format('yyyy-MM-dd');
+};
+
+/**
+ * 当前日期的上个月日期
+ * @return yyyy-MM-dd
+ */
+var lastMonthDay = function() {
+  return new Date().reset('M', -1).format('yyyy-MM-dd');
 };
 
 /**
