@@ -1002,6 +1002,7 @@ LK.UI('plugins', 'load', function(opts) {
   // 请求方式增加行
   if (options.url != '') {
     LK.ajax({
+      showLoading : !opts.isCreateEvent,
       url : options.url,
       async : !(options.url == '/GetDictionaryList' && LK.needCacheCategoryCode(options.param.categoryCode)),
       data : options.param,

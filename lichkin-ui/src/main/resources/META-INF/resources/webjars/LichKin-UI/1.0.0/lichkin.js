@@ -971,8 +971,13 @@ $.extend(LK, {
   /**
    * AJAX请求
    * @param options 自定义的参数
+   * @param options[async] [boolean] 是否为异步调用（仅数据请求生效）
+   * @param options[method] [string] 约定值（设置无效）
+   * @param options[headers] [string] 约定值（设置无效）
+   * @param options[dataType] [string] 约定值（设置无效）
+   * @param options[contentType] [string] 约定值（设置无效）
    * @param options[url] [string] 自动拼接前缀与后缀
-   * @param options[isPageUrl] [boolean] 是否为页面url
+   * @param options[isPageUrl] [boolean] true:页面请求;false:数据请求;
    * @param options[data] [JSON] 转换为RequestBody内容
    * @param options[showLoading] [boolean] 是否显示加载效果
    * @param options[showSuccess] [boolean] 调用默认业务成功回调方法时是否显示提示信息
@@ -986,7 +991,7 @@ $.extend(LK, {
     var loadingTimeout = true;
     options = $.extend({
       isPageUrl : false,
-      showLoading : true,
+      showLoading : options.isPageUrl ? false : true,
       showSuccess : false,
       showError : true,
       timeout : 'LK_ajax_timeout',
