@@ -110,7 +110,7 @@
 			let _IMG = _RES + '/img';
 
 			// 其它服务器参数
-			_LANG='${locale}',_MAPPING_PAGES='${mappingPages}',_MAPPING_API='${mappingApi}',_WEB_DEBUG=false,_COMPRESS_SUFFIX='${compressSuffix}',LKI18N={};
+			let _LANG='${locale}',_MAPPING_PAGES='${mappingPages}',_MAPPING_API='${mappingApi}',_WEB_DEBUG=false,_COMPRESS_SUFFIX='${compressSuffix}',LKI18N={};
 			<#if webDebug==true>_WEB_DEBUG=true;</#if>
 			<#nested "javascript-contents-before-links"/>
 		</#if>
@@ -188,7 +188,7 @@
               if (typeof dynamicButtons != 'undefined') {
                 var $dialog = $('<div class="lichkin-dialog"></div>').appendTo('body');
                 $dialog.addClass('lichkin-dialog-focus');
-                $dialog.css('width', $('body').find('.lichkin-plugin').width());
+                $dialog.css('width', $('body').find('.lichkin-plugin').width()+LK.fieldKeyWidth+LK.leftGap+2);
                 LK.UI._dialog.addButtons($dialog, $('<div class="lichkin-dialog-buttonsBar"></div>').appendTo($dialog), dynamicButtons);
               }
             </script>
