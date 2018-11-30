@@ -18,6 +18,9 @@ var LKUI = {
           $plugin.find('.edui-default .edui-editor-iframeholder iframe').contents().find('body').css('color', LK.pluginInvalidFontColor);
         });
         break;
+      case 'map':
+        $plugin.data('map').setMapStyle('amap://styles/wine');
+        break;
     }
     $plugin.parents('.lichkin-form-field:first').addClass('lichkin-form-field-invalid');
   }
@@ -151,6 +154,9 @@ $.fn.extend({
             $plugin.find('.edui-default .edui-editor-iframeholder iframe').contents().find('body').css('color', $plugin.data('LKOPTIONS').readonly == true ? '#999999' : LK.pluginFontColor);
           });
           break;
+        case 'map':
+          $plugin.data('map').setMapStyle('amap://styles/normal');
+          break;
       }
       $plugin.parents('.lichkin-form-field:first').removeClass('lichkin-form-field-invalid');
     }
@@ -221,7 +227,7 @@ $.fn.extend({
       return this.data('ue').getContent();
     }
     if (this.LKGetPluginType() == 'map') {
-      return this.LKGetValueObj().val() == '' ? '' : $.parseJSON(this.LKGetValueObj().val());
+      return this.data('mapJson');
     }
     return this.LKGetValueObj().val();
   },
@@ -252,10 +258,9 @@ $.fn.extend({
         });
         break;
       case 'map':
-        if (typeof values == 'undefined') {
-          currentValue = '';
+        if (isJSON(values) && !isEmptyJSON(values)) {
+          this.LKGetImplementor().setValues(this, values, false);
         }
-        this.LKGetValueObj().val(currentValue == '' ? '' : JSON.stringify(currentValue));
         break;
       default:
         this.LKGetValueObj().val(currentValue);
@@ -768,12 +773,8 @@ LK.UI('plugins', 'create', function(opts) {
   }
 
   // 设置值
-  if (plugin != 'ueditor' && options.value != null) {
-    if (plugin == 'map') {
-      $value.val(options.value == '' ? '' : JSON.stringify(options.value));
-    } else {
-      $value.val(options.value);
-    }
+  if (plugin != 'ueditor' && plugin != 'map' && options.value != null) {
+    $value.val(options.value);
   }
 
   if (options.$appendTo == true) {

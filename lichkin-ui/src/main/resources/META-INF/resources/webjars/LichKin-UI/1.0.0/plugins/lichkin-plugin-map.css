@@ -1,1 +1,10 @@
 @charset "UTF-8";
+
+.lichkin-plugin-map-marker-label {
+  font-size: 16px;
+  padding: 5px;
+}
+
+.amap-marker-label {
+  border-color: var(--lichkin-plugin-border-color);;
+}

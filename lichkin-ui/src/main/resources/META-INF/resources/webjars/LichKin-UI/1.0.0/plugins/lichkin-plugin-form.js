@@ -88,13 +88,22 @@ $.fn.extend({
           value = '';
         }
         var plugin = $subPlugin.LKGetPluginType();
-        if (plugin == 'hidden') {
-          if (!keepHidden) {
-            $subPlugin.val(value);
+
+        switch (plugin) {
+          case 'hidden': {
+            if (!keepHidden) {
+              $subPlugin.val(value);
+            }
           }
-        } else {
-          $subPlugin.LKInvokeSetValues(value);
-          $subPlugin.LKlinkage(value, false);
+            break;
+          case 'map':
+            $subPlugin.LKSetValues(data, false, true);
+            break;
+          default: {
+            $subPlugin.LKInvokeSetValues(value);
+            $subPlugin.LKlinkage(value, false);
+          }
+            break;
         }
       }
     });
@@ -115,17 +124,24 @@ $.fn.extend({
       if (isString(name) && name != '') {
         var plugin = $subPlugin.LKGetPluginType();
         var value = '';
-        if (plugin == 'hidden') {
-          value = $subPlugin.val();
-        } else {
-          var options = $subPlugin.data('LKOPTIONS');
-          if (options.readonly == true) {
-            if (options.commitable == true) {// 只读情况下该参数才起作用
+        switch (plugin) {
+          case 'hidden':
+            value = $subPlugin.val();
+            break;
+          case 'map':
+            value = $subPlugin.data('mapJson');
+            break;
+          default: {
+            var options = $subPlugin.data('LKOPTIONS');
+            if (options.readonly == true) {
+              if (options.commitable == true) {// 只读情况下该参数才起作用
+                value = $subPlugin.LKGetValue();
+              }
+            } else {
               value = $subPlugin.LKGetValue();
             }
-          } else {
-            value = $subPlugin.LKGetValue();
           }
+            break;
         }
         value = value == '' ? null : value;
         if (!ignoreNullValue || value != null) {
@@ -189,6 +205,10 @@ LK.UI('plugins', 'form', function(options) {
               var plugin = opts.plugins[i];
               if (plugin == '-') {
                 continue;
+              }
+              if (plugin.plugin == 'map') {
+                plugin.options.value = responseDatas;
+                continue out;
               }
               var name = plugin.options.name;
               if (name == key) {
