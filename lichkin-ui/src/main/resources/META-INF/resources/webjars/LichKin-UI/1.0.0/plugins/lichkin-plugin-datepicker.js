@@ -20,14 +20,74 @@ LK.UI('plugins', 'datepicker', function(options) {
     options : options
   });
 
+  var currentDateName = $plugin.LKGetName();
+  if (currentDateName == 'startDate') {
+    if (options.maxDateObj == null) {
+      options.maxDateObj = 'endDate';
+    }
+  } else if (currentDateName == 'endDate') {
+    if (options.minDateObj == null) {
+      options.minDateObj = 'startDate';
+    }
+  }
+
   var $value = $plugin.LKGetValueObj();
   $value.attr('title', $.LKGetI18N('datepicker'));
+
+  var minDateObj = options.minDateObj;
+  var maxDateObj = options.maxDateObj;
+
+  var minDate = options.minDate;
+  var maxDate = options.maxDate;
 
   // 加载日期控件
   $value.datepicker({
     format : options.format,
     autoHide : true,
-    language : _LANG
+    language : _LANG,
+    startDate : minDate,
+    endDate : maxDate,
+    show : function() {
+      var $container = $.LKGetTopDialog();
+      if (!$container) {
+        $container = $('body');
+      }
+      var minValue = minDate;
+      if (minDateObj != null) {
+        var $minDatePlugin = $container.LKGetSubPlugin(minDateObj);
+        if ($minDatePlugin != null) {
+          var minDatePluginValue = $minDatePlugin.LKGetValue();
+          if (minDatePluginValue) {
+            if (minValue) {
+              minValue = minDatePluginValue < minValue ? minValue : minDatePluginValue;
+            } else {
+              minValue = minDatePluginValue;
+            }
+          }
+        }
+      }
+      if (minValue != null) {
+        $plugin.LKGetValueObj().datepicker('setStartDate', minValue);
+      }
+
+      var maxValue = maxDate;
+      if (maxDateObj != null) {
+        var $maxDatePlugin = $container.LKGetSubPlugin(maxDateObj);
+        if ($maxDatePlugin != null) {
+          var maxDatePluginValue = $maxDatePlugin.LKGetValue();
+          if (maxDatePluginValue) {
+            if (maxValue) {
+              maxValue = maxDatePluginValue > maxValue ? maxValue : maxDatePluginValue;
+            } else {
+              maxValue = maxDatePluginValue;
+            }
+          }
+        }
+      }
+      if (maxValue != null) {
+        $plugin.LKGetValueObj().datepicker('setEndDate', maxValue);
+      }
+    }
   });
 
   $value.bind({
@@ -58,5 +118,9 @@ LK.UI('plugins', 'datepicker', function(options) {
 LK.UI.createOptions,
 // 控件特有参数
 {
-  format : 'yyyy-mm-dd'
+  format : 'yyyy-mm-dd',
+  minDate : '2018-11-01',
+  maxDate : new Date().format('yyyy-MM-dd'),
+  minDateObj : null,
+  maxDateObj : null
 }));
