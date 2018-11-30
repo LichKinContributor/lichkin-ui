@@ -999,7 +999,16 @@ $.extend(LK, {
    * @param param 参数
    */
   Go : function(url, param) {
-    window.location.href = LK.resolveUrl(url, true, param, true);
+    window.location.href = LK.resolveUrl(url, true, $.extend(param, {
+      backUrl : window.location.href.substr(window.location.href.indexOf(window.location.host) + window.location.host.length).replace(/timestamp=\d{13}/g,'').replace(/\?\&/g,'?')
+    }), true);
+  },
+
+  /**
+   * 返回页面
+   */
+  GoBack : function() {
+    window.location.href = serverDatas.backUrl;
   },
 
   /**
