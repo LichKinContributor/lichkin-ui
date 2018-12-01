@@ -495,21 +495,15 @@ LK.UI('plugins', 'datagrid', function(options) {
   var $searchForm;
   var $searchFormToolsBar;
   if (hasSearchFormBar) {
-    // 判断是否都是hidden
-    var allHidden = true;
-    $(options.searchForm).each(function() {
-      if (this.plugin != 'hidden') {
-        allHidden = false;
-        return false;
-      }
-    });
     $searchFormBar.appendTo($plugin);
-    // 如果不全部是hidden才设置样式
-    if (!allHidden) {
-      $searchFormBar.css({
-        'width' : width - 2,
-        'padding-bottom' : LK.topGap + 'px'
-      });
+    for (var i = 0; i < options.searchForm.length; i++) {
+      if (options.searchForm[i].plugin != 'hidden') {
+        $searchFormBar.css({
+          'width' : width - 2,
+          'padding-bottom' : LK.topGap + 'px'
+        });
+        break;
+      }
     }
     $searchForm = LK.UI.form({
       i18nKey : options.i18nKey + 'columns.',
