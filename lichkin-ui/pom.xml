@@ -166,6 +166,7 @@
               <includes>
                 <include>lichkin-plugin-ueditor.css</include>
                 <include>lichkin-plugin-cropper.css</include>
+                <include>lichkin-plugin-map.css</include>
                 <include>lichkin-plugin-selector.css</include>
               </includes>
             </aggregation>
@@ -177,6 +178,7 @@
               <includes>
                 <include>lichkin-plugin-ueditor.js</include>
                 <include>lichkin-plugin-cropper.js</include>
+                <include>lichkin-plugin-map.js</include>
                 <include>lichkin-plugin-selector.js</include>
                 <include>lichkin-plugin-selector-employee.js</include>
                 <include>lichkin-plugin-selector-product.js</include>
