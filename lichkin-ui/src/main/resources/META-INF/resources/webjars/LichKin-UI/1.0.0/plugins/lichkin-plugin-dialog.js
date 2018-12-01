@@ -368,7 +368,7 @@ LK.UI('plugins', 'openDialog', function(options) {
   // 定位&大小
   $plugin.css({
     'left' : ($doc.width() - options.size.width) / 2 + 'px',
-    'top' : ($doc.height() - options.size.height - $titleBar.height() - (options.buttons.length != 0 ? $buttonsBar.height() : 0)) / 2 + 'px'
+    'top' : (window.screen.availHeight - options.size.height - $titleBar.height() - (options.buttons.length != 0 ? $buttonsBar.height() : 0)) / 2 + 'px'
   });
 
   // 自适应处理
