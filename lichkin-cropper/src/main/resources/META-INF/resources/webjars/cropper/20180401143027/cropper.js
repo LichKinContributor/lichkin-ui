@@ -3432,7 +3432,7 @@
           if (crossOrigin) {
             crossOriginUrl = url;
           } else {
-            crossOrigin = 'anonymous';
+            crossOrigin = '';
 
             // Bust cache when there is not a "crossOrigin" property
             crossOriginUrl = addTimestamp(url);
