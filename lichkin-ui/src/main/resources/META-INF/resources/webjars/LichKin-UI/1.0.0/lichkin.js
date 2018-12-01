@@ -962,8 +962,9 @@ $.extend(LK, {
    * @param isPageUrl 是否为页面地址
    * @param param [JSON] 参数
    * @param withoutCalc 排除计算逻辑
+   * @param ignoreMappingPages 忽略页面映射
    */
-  resolveUrl : function(url, isPageUrl, param, withoutCalc) {
+  resolveUrl : function(url, isPageUrl, param, withoutCalc, ignoreMappingPages) {
     if (!isString(url)) {
       return null;
     }
@@ -974,7 +975,7 @@ $.extend(LK, {
         if (!url.startsWith(_CTX)) {
           url = _CTX + url;
         }
-        if (!url.endsWith(_MAPPING_PAGES)) {
+        if (!url.endsWith(_MAPPING_PAGES) && !ignoreMappingPages) {
           if (url.indexOf('?') > 0) {
             url = url.replace('?', _MAPPING_PAGES + '?');
           } else {
@@ -1006,14 +1007,15 @@ $.extend(LK, {
       backUrl : window.location.href.substr(window.location.href.indexOf(window.location.host) + window.location.host.length).replace(/timestamp=\d{13}/g, '').replace(/\?\&/g, '?')
     }
 
-    ), true);
+    ), true, false);
   },
 
   /**
    * 返回页面
+   * @param param 参数
    */
-  GoBack : function() {
-    window.location.href = _BACK_URL;
+  GoBack : function(param) {
+    window.location.href = isJSON(param) ? LK.resolveUrl(_BACK_URL, true, param, true, true) : _BACK_URL;
   },
 
   /**
@@ -1022,7 +1024,7 @@ $.extend(LK, {
    * @param param 参数
    */
   openWin : function(url, param) {
-    window.open(LK.resolveUrl(url, true, param, true));
+    window.open(LK.resolveUrl(url, true, param, true, false));
   },
 
   /**
@@ -1055,7 +1057,7 @@ $.extend(LK, {
       success : 'LK_ajax_success',
       error : 'LK_ajax_error'
     }, options, {
-      url : LK.resolveUrl(options.url, options.isPageUrl, options.param),
+      url : LK.resolveUrl(options.url, options.isPageUrl, options.param, false),
       data : JSON.stringify($.extend(true, {}, options.data, {
         datas : {
           clientType : 'JAVASCRIPT'
