@@ -13,7 +13,7 @@
 			<#nested "link-bofore-plugins"/>
 		</#if>
 		<#if section="link">
-			<#if webDebug==true>
+			<#if webDebug==true || uiDebug==true>
 				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-ueditor" />
 				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-cropper" />
 				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-map" />
@@ -46,7 +46,7 @@
 			<#nested "javascript-links-bofore-plugins"/>
 		</#if>
 		<#if section="javascript-links-after-plugins">
-			<#if webDebug==true>
+			<#if webDebug==true || uiDebug==true>
 				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-ueditor" />
 				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-cropper" />
 				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-map" />

@@ -44,7 +44,7 @@
 			<@lichkin@cssTag url="/webjars/datepicker/datepicker" />
 			<@lichkin@cssTag url="/webjars/timepicker/timePicker" />
 			<#nested "link-bofore-plugins"/>
-			<#if webDebug==true>
+			<#if webDebug==true || uiDebug==true>
 				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-icon" />
 				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-text" />
 				<@lichkin@cssTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-button" />
@@ -110,7 +110,7 @@
 			let _IMG = _RES + '/img';
 
 			// 其它服务器参数
-			let _LANG='${locale}',_MAPPING_PAGES='${mappingPages}',_MAPPING_API='${mappingApi}',_WEB_DEBUG=${webDebug},_COMPRESS_SUFFIX='${compressSuffix}',_BACK_URL='${backUrl}',LKI18N={};
+			let _LANG='${locale}',_MAPPING_PAGES='${mappingPages}',_MAPPING_API='${mappingApi}',_WEB_DEBUG=${webDebug?c},_COMPRESS_SUFFIX='${compressSuffix}',_BACK_URL='${backUrl}',LKI18N={};
 			<#nested "javascript-contents-before-links"/>
 		</#if>
 		<#if section="javascript-links">
@@ -136,7 +136,7 @@
 			<@lichkin@jsTag url="/webjars/datepicker/datepicker" />
 			<@lichkin@jsTag url="/webjars/datepicker/i18n/datepicker.${locale}" />
 			<@lichkin@jsTag url="/webjars/timepicker/jquery-timepicker" />
-			<#if webDebug==true>
+			<#if webDebug==true || uiDebug==true>
 				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-core" />
 				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-icon" />
 				<@lichkin@jsTag url="/webjars/LichKin-UI/plugins/lichkin-plugin-text" />
