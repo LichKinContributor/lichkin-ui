@@ -1001,10 +1001,15 @@ $.extend(LK, {
    * @param withoutBackUrl 不包含backUrl参数
    */
   Go : function(url, param, withoutBackUrl) {
+    var backUrl = window.location.href;
+    if (isJSON(param) && isString(param.tabName)) {
+      backUrl = backUrl.replace(/tabName=[A-Za-z]*/g, '');
+    }
+
     window.location.href = LK.resolveUrl(url, true, $.extend(param,
 
     withoutBackUrl == true ? {} : {
-      backUrl : window.location.href.substr(window.location.href.indexOf(window.location.host) + window.location.host.length).replace(/timestamp=\d{13}/g, '').replace(/\?\&/g, '?')
+      backUrl : backUrl.substr(backUrl.indexOf(window.location.host) + window.location.host.length).replace(/timestamp=\d{13}/g, '').replace(/\?\&/g, '?')
     }
 
     ), true, false);
