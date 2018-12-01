@@ -997,11 +997,16 @@ $.extend(LK, {
    * 跳转页面
    * @param url 跳转地址
    * @param param 参数
+   * @param withoutBackUrl 不包含backUrl参数
    */
-  Go : function(url, param) {
-    window.location.href = LK.resolveUrl(url, true, $.extend(param, {
-      backUrl : window.location.href.substr(window.location.href.indexOf(window.location.host) + window.location.host.length).replace(/timestamp=\d{13}/g,'').replace(/\?\&/g,'?')
-    }), true);
+  Go : function(url, param, withoutBackUrl) {
+    window.location.href = LK.resolveUrl(url, true, $.extend(param,
+
+    withoutBackUrl == true ? {} : {
+      backUrl : window.location.href.substr(window.location.href.indexOf(window.location.host) + window.location.host.length).replace(/timestamp=\d{13}/g, '').replace(/\?\&/g, '?')
+    }
+
+    ), true);
   },
 
   /**
@@ -1204,7 +1209,7 @@ LK.ajax.timeoutValue = 30000;
 var LK_ajax_timeout = function(options) {
   LK.toast($.LKGetI18N('timeout'));
   setTimeout(function() {
-    LK.Go(LK.ajax.timeoutPageUrl);
+    LK.Go(LK.ajax.timeoutPageUrl, {}, true);
   }, 2000);
 };
 
