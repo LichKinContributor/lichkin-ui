@@ -1013,7 +1013,7 @@ $.extend(LK, {
    * 返回页面
    */
   GoBack : function() {
-    window.location.href = serverDatas.backUrl;
+    window.location.href = _BACK_URL;
   },
 
   /**
