@@ -42,3 +42,7 @@
 .lichkin-button.warning {color:#ffffff;background-color:#f0ad4e;border-color:#eea236;}
 .lichkin-button.danger  {color:#ffffff;background-color:#d9534f;border-color:#d43f3a;}
 .lichkin-button.disable {color:#ffffff;background-color:#cccccc;border-color:#dddddd;}
+
+.lichkin-button-unclickable {
+  background-color: lightGray !important;
+}

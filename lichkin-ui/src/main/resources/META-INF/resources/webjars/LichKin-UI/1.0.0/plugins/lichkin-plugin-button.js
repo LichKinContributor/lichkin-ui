@@ -1,5 +1,22 @@
 ;
 
+/**
+ * 控件功能性方法，提供JQuery扩展。
+ */
+$.fn.extend({
+
+  /**
+   * 按钮可点击
+   */
+  LKClickable : function() {
+    if (this.hasClass('lichkin-button')) {
+      this.data('LKOPTIONS').clickable = true;
+      this.removeClass('lichkin-button-unclickable');
+    }
+  }
+
+});
+
 // 按钮控件参数
 LK.UI.buttonOptions = $.extend({},
 // @see LK.UI.plugin
@@ -19,7 +36,9 @@ LK.UI.coreOptions,
   // 按钮提示信息
   tip : 'click',
   // 按钮高度
-  height : LK.rowHeight
+  height : LK.rowHeight,
+  // 是否可点击
+  clickable : true
 });
 
 /**
@@ -80,9 +99,14 @@ LK.UI('plugins', 'button', function(options) {
       LK.UI.text(options.text).appendTo($span);
     }
 
+    if (!options.clickable) {
+      $plugin.addClass('lichkin-button-unclickable');
+    }
     // 点击事件
     $plugin.click(function() {
-      options.click($plugin);
+      if ($plugin.data('LKOPTIONS').clickable) {
+        options.click($plugin);
+      }
     });
 
     // 提示信息
