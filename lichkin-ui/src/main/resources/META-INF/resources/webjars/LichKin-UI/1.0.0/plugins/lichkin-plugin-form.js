@@ -198,8 +198,8 @@ LK.UI('plugins', 'form', function(options) {
       url : options.url,
       data : options.param,
       success : function(responseDatas) {
+        var opts = $.extend(true, {}, options);
         if (responseDatas) {
-          var opts = $.extend(true, {}, options);
           out: for ( var key in responseDatas) {
             for (var i = 0; i < opts.plugins.length; i++) {
               var plugin = opts.plugins[i];
@@ -218,6 +218,10 @@ LK.UI('plugins', 'form', function(options) {
             }
           }
           LK.UI._form.createSubPlugin($plugin, opts);
+        } else {
+          if (options.createSubPluginNoDatas == true) {
+            LK.UI._form.createSubPlugin($plugin, opts);
+          }
         }
       }
     });
@@ -255,7 +259,9 @@ LK.UI('plugins', 'form', function(options) {
    * @param $plugin 控件对象
    */
   onAfterCreate : function($plugin) {
-  }
+  },
+  // 没有响应数据是否创建表单
+  createSubPluginNoDatas : false,
 });
 
 /**
