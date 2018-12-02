@@ -229,6 +229,9 @@ LK.UI('plugins', 'cropper', function(options) {
 
   // 弹窗
   $plugin.click(function() {
+    value = $plugin.LKGetValue();
+    var clickable = !value.startsWith('http') || value.indexOf(window.location.origin) >= 0;
+    
     if (options.readonly == true) {
       return;
     }
@@ -299,6 +302,10 @@ LK.UI('plugins', 'cropper', function(options) {
               } else {
                 $cropper.cropper('destroy').attr('src', imageFileURL).cropper(cropperOptions);
               }
+
+              $dialog.find('.lichkin-dialog-buttonsBar').find('.lichkin-button').each(function() {
+                $(this).LKClickable();
+              });
             } else {
               LK.alert('noSelectImage');
             }
@@ -316,6 +323,7 @@ LK.UI('plugins', 'cropper', function(options) {
           }, {
             icon : 'reset',
             text : 'clear',
+            clickable : clickable,
             cls : 'warning',
             click : function($button, $dialog) {
               var $cropper = $dialog.find('img.lichkin-cropper-image');
@@ -330,6 +338,7 @@ LK.UI('plugins', 'cropper', function(options) {
           }, {
             icon : 'zoomIn',
             text : 'zoomIn',
+            clickable : clickable,
             cls : 'info',
             click : function($button, $dialog) {
               var $cropper = $dialog.find('img.lichkin-cropper-image');
@@ -340,6 +349,7 @@ LK.UI('plugins', 'cropper', function(options) {
           }, {
             icon : 'zoomOut',
             text : 'zoomOut',
+            clickable : clickable,
             cls : 'info',
             click : function($button, $dialog) {
               var $cropper = $dialog.find('img.lichkin-cropper-image');
@@ -350,6 +360,7 @@ LK.UI('plugins', 'cropper', function(options) {
           }, {
             icon : 'reverseX',
             text : 'reverseX',
+            clickable : clickable,
             cls : 'info',
             click : function($button, $dialog) {
               var $cropper = $dialog.find('img.lichkin-cropper-image');
@@ -363,6 +374,7 @@ LK.UI('plugins', 'cropper', function(options) {
           }, {
             icon : 'reverseY',
             text : 'reverseY',
+            clickable : clickable,
             cls : 'info',
             click : function($button, $dialog) {
               var $cropper = $dialog.find('img.lichkin-cropper-image');
@@ -376,6 +388,7 @@ LK.UI('plugins', 'cropper', function(options) {
           }, {
             icon : 'ok',
             text : 'ok',
+            clickable : clickable,
             cls : 'success',
             click : function($button, $dialog) {
               var $cropper = $dialog.find('img.lichkin-cropper-image');
