@@ -83,6 +83,56 @@ LK.UI._cropper = {
     if (!isCreateEvent) {
       $plugin.LKSetValues(values, isCreateEvent);
     }
+  },
+
+  /**
+   * 设置图片显示样式
+   * @param $plugin 控件对象
+   * @param $img 图片对象
+   * @param $popup 弹框预览对象
+   * @param cutWidth 图片裁剪高度
+   * @param cutheight 图片裁剪宽度
+   */
+  setImgCss : function($plugin, $img, $popup, cutWidth, cutheight) {
+    var width = $plugin.width();
+    var height = $plugin.height();
+
+    var imgAspectRatio = 1 / 1;
+    if (cutWidth != null && cutheight != null) {
+      imgAspectRatio = cutWidth / cutheight;
+    }
+
+    var maxShowWidth = width - LK.leftGap * 2, maxShowHeight = height - LK.topGap * 2;
+    var aspectRatio = maxShowWidth / maxShowHeight;
+
+    var showWidth = 0, showHeight = 0, marginLeft = 0, marginTop = 0;
+    if (imgAspectRatio > aspectRatio) {// 横向图
+      showWidth = maxShowWidth;
+      showHeight = LKImageUtils.calcHeight(showWidth, imgAspectRatio);
+      marginLeft = LK.leftGap;
+      marginTop = (height - showHeight) / 2;
+    } else {// 纵向图
+      showHeight = maxShowHeight;
+      showWidth = LKImageUtils.calcWidth(showHeight, imgAspectRatio);
+      marginTop = LK.topGap;
+      marginLeft = (width - showWidth) / 2;
+    }
+
+    $img.css({
+      'width' : showWidth,
+      'height' : showHeight,
+      'margin-left' : marginLeft + 'px',
+      'margin-top' : marginTop + 'px'
+    });
+
+    $popup.css({
+      'width' : cutWidth,
+      'height' : cutheight,
+    });
+    $popup.children('img').css({
+      'width' : cutWidth,
+      'height' : cutheight,
+    });
   }
 
 };
@@ -127,36 +177,16 @@ LK.UI('plugins', 'cropper', function(options) {
 
   // 显示图片
   var $img = $('<img>').appendTo($plugin);
-  var imgAspectRatio = options.compressWidth / options.compressHeight;
-  var maxShowWidth = width - LK.leftGap * 2, maxShowHeight = height - LK.topGap * 2;
-  var aspectRatio = maxShowWidth / maxShowHeight;
-  var showWidth = 0, showHeight = 0, marginLeft = 0, marginTop = 0;
-  if (imgAspectRatio > aspectRatio) {// 横向图
-    showWidth = maxShowWidth;
-    showHeight = LKImageUtils.calcHeight(showWidth, imgAspectRatio);
-    marginLeft = LK.leftGap;
-    marginTop = (height - showHeight) / 2;
-  } else {// 纵向图
-    showHeight = maxShowHeight;
-    showWidth = LKImageUtils.calcWidth(showHeight, imgAspectRatio);
-    marginTop = LK.topGap;
-    marginLeft = (width - showWidth) / 2;
+
+  // 裁剪比例
+  if (options.compressWidth != null && options.compressHeight != null) {
+    options.aspectRatio = options.compressWidth / options.compressHeight;
   }
-  $img.css({
-    'width' : showWidth,
-    'height' : showHeight,
-    'margin-left' : marginLeft + 'px',
-    'margin-top' : marginTop + 'px'
-  });
 
   var id = $plugin.attr('id');
   // 放大查看
   var $popup = $('<div id="' + id + '_popup"><img /></div>').appendTo('body').LKAddPluginClass(plugin, 'popup');
   $popup.data('plugin-id', id);
-  $popup.css({
-    'width' : options.compressWidth,
-    'height' : options.compressHeight,
-  });
   $plugin.mouseover(function() {
     var value = $plugin.LKGetValue();
     if (value != '') {
@@ -170,6 +200,24 @@ LK.UI('plugins', 'cropper', function(options) {
   }).mouseout(function() {
     $popup.hide();
   });
+
+  // 设置图片显示的宽高
+  var value = $plugin.LKGetValue();
+  if (value != '') {
+    if (typeof options.aspectRatio == 'undefined') {
+      var image = new Image();
+      image.src = value;
+      image.onload = function() {
+        LK.UI._cropper.setImgCss($plugin, $img, $popup, this.width, this.height);
+      }
+    } else {
+      LK.UI._cropper.setImgCss($plugin, $img, $popup, options.compressWidth, options.compressHeight);
+    }
+  } else {
+    if (typeof options.aspectRatio != 'undefined') {
+      LK.UI._cropper.setImgCss($plugin, $img, $popup, options.compressWidth, options.compressHeight);
+    }
+  }
 
   var dialogWidth = 800;
   var dialogHeight = 600;
@@ -220,7 +268,7 @@ LK.UI('plugins', 'cropper', function(options) {
         var $cropper = $('<img class="lichkin-cropper-image">').appendTo($contentBar);
         var cropperOptions = {
           viewMode : 1,
-          aspectRatio : imgAspectRatio,
+          aspectRatio : options.aspectRatio,
           autoCrop : true,
           mouseWheelZoom : false,
           disable : true,
@@ -334,9 +382,12 @@ LK.UI('plugins', 'cropper', function(options) {
               var value = $plugin.LKGetValue();
               if ((value != '' && $cropper.attr('src') != '' && ($cropper.attr('src') == value || $cropper.attr('src').replace('data:image/' + options.imageType + ';base64,', '') == value)) || $dialog.find("input[type=file]")[0].files[0]) {
                 if ($cropper.data('cropper')) {
+                  if (typeof options.aspectRatio == 'undefined') {
+                    var cropperData = $cropper.cropper('getData');
+                    // 动态调整裁剪大小 动态设置图片显示的宽高
+                    LK.UI._cropper.setImgCss($plugin, $img, $popup, cropperData.width, cropperData.height);
+                  }
                   var canvas = $cropper.cropper('getCroppedCanvas', {
-                    width : options.compressWidth,
-                    height : options.compressHeight,
                     imageSmoothingEnabled : false,
                     imageSmoothingQuality : 'high'
                   });
@@ -377,9 +428,9 @@ LK.UI.createOptions,
 // 控件特有参数
 {
   // 压缩宽度
-  compressWidth : 256,
+  compressWidth : null,
   // 压缩高度
-  compressHeight : 144,
+  compressHeight : null,
   // 图像类型
   imageType : 'png'
 }));
