@@ -60,7 +60,7 @@
     <dependency>
       <groupId>com.lichkin.ui</groupId>
       <artifactId>lichkin-cropper</artifactId>
-      <version>1.0.0.RELEASE</version>
+      <version>1.0.1.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>com.lichkin.ui</groupId>
