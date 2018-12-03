@@ -3355,7 +3355,7 @@
         // 跨域图片不支持编辑，直接显示图片。
         if (url.indexOf(window.location.origin) < 0) {
           var $img = $(_this.element);
-          LK.dropImageToContainer($img.parents('.lichkin-dialog-contentBar').first(), $img);
+          LKImageUtils.dropImageToContainer($img.parents('.lichkin-dialog-contentBar').first(), $img);
           return;
         }
 

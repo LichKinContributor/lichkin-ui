@@ -38,6 +38,63 @@ var LKImageUtils = {
   },
 
   /**
+   * 计算图片高度
+   * @param maxWidth 最大宽度
+   * @param maxHeight 最大高度
+   * @param imgWidth 图片宽度
+   * @param imgHeight 图片高度
+   */
+  calcImageSize : function(maxWidth, maxHeight, imgWidth, imgHeight) {
+    var showWidth = 0, showHeight = 0;// 计算值
+
+    if (imgWidth < maxWidth && imgHeight < maxHeight) {
+      showWidth = imgWidth;
+      showHeight = imgHeight;
+    } else {
+      if (imgWidth > imgHeight) {// 横向图
+        showWidth = imgWidth < maxWidth ? imgWidth : maxWidth;
+        showHeight = imgHeight * (showWidth / imgWidth);
+        if (showHeight > maxHeight) {// 横向缩放后，高度仍然超出，补充计算。
+          showHeight = maxHeight;
+          showWidth = imgWidth * (showHeight / imgHeight);
+        }
+      } else {// 纵向图
+        showHeight = imgHeight < maxHeight ? imgHeight : maxHeight;
+        showWidth = imgWidth * (showHeight / imgHeight);
+        if (showHeight > maxHeight) {// 纵向缩放后，宽度仍然超出，补充计算。
+          showWidth = maxWidth;
+          showHeight = imgHeight * (showWidth / imgWidth);
+        }
+      }
+    }
+
+    return {
+      showWidth : showWidth,
+      showHeight : showHeight
+    };
+  },
+
+  /**
+   * 将图片放入容器中
+   * @param $container 容器对象
+   * @param $img 图片对象
+   * @param maxRatio [number] 最大可用范围。默认值0.9。
+   */
+  dropImageToContainer : function($container, $img, maxRatio) {
+    maxRatio = isNumber(maxRatio) ? maxRatio : 0.9;
+    var contentHeight = $container.height();// 图片最大可展示大小
+    var size = LKImageUtils.calcImageSize($container.width() * maxRatio, contentHeight * maxRatio, $img.width(), $img.height());
+
+    $container.css('text-align', 'center');// 图片水平居中展示
+    // 设置计算值
+    $img.css({
+      'width' : size.showWidth,
+      'height' : size.showHeight,
+      'margin-top' : (contentHeight - size.showHeight) / 2
+    });
+  },
+
+  /**
    * 获取base64图片格式
    * @param base64Data base64图片
    * @return 图片格式
@@ -131,7 +188,7 @@ LK.UI._cropper = {
         image.onload = function() {
           var maxRatio = 0.9;
           var contentHeight = $plugin.height();// 图片最大可展示大小
-          var size = LK.calcImageSize($plugin.width() * maxRatio, contentHeight * maxRatio, this.width, this.height);
+          var size = LKImageUtils.calcImageSize($plugin.width() * maxRatio, contentHeight * maxRatio, this.width, this.height);
           $plugin.css('text-align', 'center');// 图片水平居中展示
           // 设置计算值
           $img.css({
