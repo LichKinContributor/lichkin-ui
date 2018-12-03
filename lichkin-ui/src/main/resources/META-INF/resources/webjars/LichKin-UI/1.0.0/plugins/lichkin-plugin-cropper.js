@@ -35,6 +35,52 @@ var LKImageUtils = {
    */
   calcHeight : function(width, aspectRatio) {
     return width / aspectRatio;
+  },
+
+  /**
+   * 获取base64图片格式
+   * @param base64Data base64图片
+   * @return 图片格式
+   */
+  getMimeType : function(base64Data) {
+    var arr = base64Data.split(',');
+    var mime = arr[0].match(/:(.*?);/)[1];
+    return mime;
+  },
+
+  /**
+   * 压缩图片
+   * @param base64Data base64图片
+   * @param maxValue 压缩最大值
+   * @param quality 压缩质量
+   * @param imageType 图片类型
+   * @return base64图片
+   */
+  compressImg : function(base64Data, maxValue, quality, imageType) {
+    var newImage = new Image();
+    var promise = new Promise(function(resolve) {
+      newImage.onload = resolve;
+    });
+    newImage.src = base64Data;
+    return promise.then(function() {
+      var imgWidth = newImage.width;
+      var imgHeight = newImage.height;
+      if (Math.max(imgWidth, imgHeight) > maxValue) {
+        var canvas = document.createElement("canvas");
+        var ctx = canvas.getContext("2d");
+        if (imgWidth > imgHeight) {
+          canvas.width = maxValue;
+          canvas.height = imgHeight * maxValue / imgWidth;
+        } else {
+          canvas.height = maxValue;
+          canvas.width = imgWidth * maxValue / imgHeight;
+        }
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(newImage, 0, 0, canvas.width, canvas.height);
+        return canvas.toDataURL(isString(imageType) ? imageType : getMimeType(base64Data), quality);
+      }
+      return base64Data;
+    });
   }
 
 };
@@ -72,67 +118,39 @@ LK.UI._cropper = {
       var options = $plugin.data('LKOPTIONS');
       $icon.hide();
       var src = values.startsWith('http') || values.startsWith(_IMG) ? values : 'data:image/' + options.imageType + ';base64,' + values;
-      $img.attr('src', src);
-      $('#' + options.id + '_popup').find('img').attr('src', src);
-      $img.show();
-      $img.css({
-        'display' : 'block'
-      });
+
+      if (typeof options.aspectRatio != 'undefined' && !isCreateEvent) {
+        $img.attr('src', src);
+        $img.show();
+        $img.css({
+          'display' : 'inline-block'
+        });
+      } else {
+        var image = new Image();
+        image.src = src;
+        image.onload = function() {
+          var maxRatio = 0.9;
+          var contentHeight = $plugin.height();// 图片最大可展示大小
+          var size = LK.calcImageSize($plugin.width() * maxRatio, contentHeight * maxRatio, this.width, this.height);
+          $plugin.css('text-align', 'center');// 图片水平居中展示
+          // 设置计算值
+          $img.css({
+            'width' : size.showWidth,
+            'height' : size.showHeight,
+            'margin-top' : (contentHeight - size.showHeight) / 2
+          });
+          $img.attr('src', src);
+          $img.show();
+          $img.css({
+            'display' : 'inline-block'
+          });
+        }
+      }
     }
 
     if (!isCreateEvent) {
       $plugin.LKSetValues(values, isCreateEvent);
     }
-  },
-
-  /**
-   * 设置图片显示样式
-   * @param $plugin 控件对象
-   * @param $img 图片对象
-   * @param $popup 弹框预览对象
-   * @param cutWidth 图片裁剪高度
-   * @param cutheight 图片裁剪宽度
-   */
-  setImgCss : function($plugin, $img, $popup, cutWidth, cutheight) {
-    var width = $plugin.width();
-    var height = $plugin.height();
-
-    var imgAspectRatio = 1 / 1;
-    if (cutWidth != null && cutheight != null) {
-      imgAspectRatio = cutWidth / cutheight;
-    }
-
-    var maxShowWidth = width - LK.leftGap * 2, maxShowHeight = height - LK.topGap * 2;
-    var aspectRatio = maxShowWidth / maxShowHeight;
-
-    var showWidth = 0, showHeight = 0, marginLeft = 0, marginTop = 0;
-    if (imgAspectRatio > aspectRatio) {// 横向图
-      showWidth = maxShowWidth;
-      showHeight = LKImageUtils.calcHeight(showWidth, imgAspectRatio);
-      marginLeft = LK.leftGap;
-      marginTop = (height - showHeight) / 2;
-    } else {// 纵向图
-      showHeight = maxShowHeight;
-      showWidth = LKImageUtils.calcWidth(showHeight, imgAspectRatio);
-      marginTop = LK.topGap;
-      marginLeft = (width - showWidth) / 2;
-    }
-
-    $img.css({
-      'width' : showWidth,
-      'height' : showHeight,
-      'margin-left' : marginLeft + 'px',
-      'margin-top' : marginTop + 'px'
-    });
-
-    $popup.css({
-      'width' : cutWidth,
-      'height' : cutheight,
-    });
-    $popup.children('img').css({
-      'width' : cutWidth,
-      'height' : cutheight,
-    });
   }
 
 };
@@ -183,42 +201,6 @@ LK.UI('plugins', 'cropper', function(options) {
     options.aspectRatio = options.compressWidth / options.compressHeight;
   }
 
-  var id = $plugin.attr('id');
-  // 放大查看
-  var $popup = $('<div id="' + id + '_popup"><img /></div>').appendTo('body').LKAddPluginClass(plugin, 'popup');
-  $popup.data('plugin-id', id);
-  $plugin.mouseover(function() {
-    var value = $plugin.LKGetValue();
-    if (value != '') {
-      var offset = $plugin.offset();
-      $popup.css({
-        'top' : offset.top + $plugin.height() + 1,
-        'left' : offset.left
-      });
-      $popup.show();
-    }
-  }).mouseout(function() {
-    $popup.hide();
-  });
-
-  // 设置图片显示的宽高
-  var value = $plugin.LKGetValue();
-  if (value != '') {
-    if (typeof options.aspectRatio == 'undefined') {
-      var image = new Image();
-      image.src = value;
-      image.onload = function() {
-        LK.UI._cropper.setImgCss($plugin, $img, $popup, this.width, this.height);
-      }
-    } else {
-      LK.UI._cropper.setImgCss($plugin, $img, $popup, options.compressWidth, options.compressHeight);
-    }
-  } else {
-    if (typeof options.aspectRatio != 'undefined') {
-      LK.UI._cropper.setImgCss($plugin, $img, $popup, options.compressWidth, options.compressHeight);
-    }
-  }
-
   var dialogWidth = 800;
   var dialogHeight = 600;
   var wRatio = dialogWidth / options.compressWidth;
@@ -231,7 +213,7 @@ LK.UI('plugins', 'cropper', function(options) {
   $plugin.click(function() {
     value = $plugin.LKGetValue();
     var clickable = !value.startsWith('http') || value.indexOf(window.location.origin) >= 0;
-    
+
     if (options.readonly == true) {
       return;
     }
@@ -391,27 +373,34 @@ LK.UI('plugins', 'cropper', function(options) {
             clickable : clickable,
             cls : 'success',
             click : function($button, $dialog) {
-              var $cropper = $dialog.find('img.lichkin-cropper-image');
-              var value = $plugin.LKGetValue();
-              if ((value != '' && $cropper.attr('src') != '' && ($cropper.attr('src') == value || $cropper.attr('src').replace('data:image/' + options.imageType + ';base64,', '') == value)) || $dialog.find("input[type=file]")[0].files[0]) {
-                if ($cropper.data('cropper')) {
-                  if (typeof options.aspectRatio == 'undefined') {
-                    var cropperData = $cropper.cropper('getData');
-                    // 动态调整裁剪大小 动态设置图片显示的宽高
-                    LK.UI._cropper.setImgCss($plugin, $img, $popup, cropperData.width, cropperData.height);
+              // 压缩图片
+              var loadingId = LK.showLoading();
+              setTimeout(function() {
+                var $cropper = $dialog.find('img.lichkin-cropper-image');
+                var value = $plugin.LKGetValue();
+                if ((value != '' && $cropper.attr('src') != '' && ($cropper.attr('src') == value || $cropper.attr('src').replace('data:image/' + options.imageType + ';base64,', '') == value)) || $dialog.find("input[type=file]")[0].files[0]) {
+                  if ($cropper.data('cropper')) {
+                    var canvas = $cropper.cropper('getCroppedCanvas', {
+                      imageSmoothingEnabled : false,
+                      imageSmoothingQuality : 'high'
+                    });
+
+                    var base64url = canvas.toDataURL('image/' + options.imageType);
+                    LKImageUtils.compressImg(base64url, options.maxValue, 1, options.imageType).then(function(dataURL) {
+                      $plugin.LKInvokeSetValues(dataURL.replace('data:image/' + options.imageType + ';base64,', ''), false);
+                      LK.closeLoading(loadingId);
+                      $plugin.LKValidate();
+                      $dialog.LKCloseDialog();
+                    });
+                    return;
+                  } else {
+                    LK.closeLoading(loadingId);
                   }
-                  var canvas = $cropper.cropper('getCroppedCanvas', {
-                    imageSmoothingEnabled : false,
-                    imageSmoothingQuality : 'high'
-                  });
-                  var base64url = canvas.toDataURL('image/' + options.imageType);
-                  $plugin.LKInvokeSetValues(base64url.replace('data:image/' + options.imageType + ';base64,', ''), false);
-                  $plugin.LKValidate();
-                  $dialog.LKCloseDialog();
-                  return;
+                } else {
+                  LK.closeLoading(loadingId);
                 }
-              }
-              LK.alert('noSelectImage');
+                LK.alert('noSelectImage');
+              }, 300);
             }
           }, {
             icon : 'cancel',
@@ -444,6 +433,8 @@ LK.UI.createOptions,
   compressWidth : null,
   // 压缩高度
   compressHeight : null,
+  // 图片最大值
+  maxValue : 1024,
   // 图像类型
   imageType : 'png'
 }));
