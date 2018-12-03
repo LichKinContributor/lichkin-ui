@@ -73,8 +73,9 @@ $.fn.extend({
    * 绑定表单数据
    * @param data 数据集
    * @param keepHidden 保留hidden控件值
+   * @param keepInitValue 保留初始化控件值
    */
-  LKFormBindData : function(data, keepHidden) {
+  LKFormBindData : function(data, keepHidden, keepInitValue) {
     var $frm = this.LKGetFormPlugin();
     var $subPlugins = $frm.find('.lichkin-plugin');
     var notClear = isJSON(data) && !$.isEmptyObject(data);
@@ -84,9 +85,11 @@ $.fn.extend({
       var name = $subPlugin.data('LKName');
       if (isString(name) && name != '') {
         var value = notClear ? data[name] : '';
-        if (typeof value == 'undefined') {
-          value = '';
+        if (keepInitValue && (typeof value == 'undefined' || value == '')) {
+          // 如果值为空，有默认值 则设置为默认值
+          value = $subPlugin.data('initValue') ? $subPlugin.data('initValue') : '';
         }
+
         var plugin = $subPlugin.LKGetPluginType();
 
         switch (plugin) {
