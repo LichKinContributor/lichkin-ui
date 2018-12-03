@@ -1137,7 +1137,7 @@ LK.UI('plugins', 'datagrid', function(options) {
         $appendTo : $buttonsBarRight,
         icon : 'reset',
         click : function($button) {
-          $searchForm.LKFormBindData({}, true);
+          $searchForm.LKFormBindData({}, true, true);
           $searchForm.LKValidate();
         }
       });
@@ -1165,7 +1165,7 @@ LK.UI('plugins', 'datagrid', function(options) {
             size : 24
           },
           click : function($button) {
-            $searchForm.LKFormBindData({}, true);
+            $searchForm.LKFormBindData({}, true, true);
             $searchForm.LKValidate();
           }
         });
@@ -1200,7 +1200,7 @@ LK.UI('plugins', 'datagrid', function(options) {
             cls : 'warning',
             height : LK.rowHeight - 2 * LK.topGap,
             click : function($button) {
-              $searchForm.LKFormBindData({}, true);
+              $searchForm.LKFormBindData({}, true, true);
               $searchForm.LKValidate();
             }
           });
