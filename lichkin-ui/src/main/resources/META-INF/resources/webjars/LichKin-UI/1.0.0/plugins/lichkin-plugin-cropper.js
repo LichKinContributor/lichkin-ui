@@ -168,11 +168,23 @@ LK.UI._cropper = {
     var $img = $plugin.find('img');
     var $icon = $plugin.find('.lichkin-icon');
 
+    var maxRatio = 0.9;
+    var options = $plugin.data('LKOPTIONS');
+    var contentHeight = $plugin.height();// 图片最大可展示大小
     if (values == '') {
+      if (typeof options.aspectRatio != 'undefined' && isCreateEvent) {
+        var size = LKImageUtils.calcImageSize($plugin.width() * maxRatio, contentHeight * maxRatio, options.compressWidth, options.compressHeight);
+        $plugin.css('text-align', 'center');// 图片水平居中展示
+        // 设置计算值
+        $img.css({
+          'width' : size.showWidth,
+          'height' : size.showHeight,
+          'margin-top' : (contentHeight - size.showHeight) / 2
+        });
+      }
       $img.hide();
       $icon.show();
     } else {
-      var options = $plugin.data('LKOPTIONS');
       $icon.hide();
       var src = values.startsWith('http') || values.startsWith(_IMG) ? values : 'data:image/' + options.imageType + ';base64,' + values;
 
@@ -186,8 +198,6 @@ LK.UI._cropper = {
         var image = new Image();
         image.src = src;
         image.onload = function() {
-          var maxRatio = 0.9;
-          var contentHeight = $plugin.height();// 图片最大可展示大小
           var size = LKImageUtils.calcImageSize($plugin.width() * maxRatio, contentHeight * maxRatio, this.width, this.height);
           $plugin.css('text-align', 'center');// 图片水平居中展示
           // 设置计算值
