@@ -1152,9 +1152,13 @@ LK.UI('plugins', 'datagrid', function(options) {
         icon : 'search',
         click : function($button) {
           if (!$searchForm || $searchForm.LKValidate()) {
-            $plugin.LKLoad({
-              param : LK.UI._datagrid.getParam($plugin, options)
-            });
+            if (hasPageBar) {
+              $pageBar.find('.pageNumber').LKInvokeSetValues(1, false);
+            } else {
+              $plugin.LKLoad({
+                param : LK.UI._datagrid.getParam($plugin, options)
+              });
+            }
           }
         }
       });
@@ -1183,9 +1187,13 @@ LK.UI('plugins', 'datagrid', function(options) {
           },
           click : function($button) {
             if (!$searchForm || $searchForm.LKValidate()) {
-              $plugin.LKLoad({
-                param : LK.UI._datagrid.getParam($plugin, options)
-              });
+              if (hasPageBar) {
+                $pageBar.find('.pageNumber').LKInvokeSetValues(1, false);
+              } else {
+                $plugin.LKLoad({
+                  param : LK.UI._datagrid.getParam($plugin, options)
+                });
+              }
             }
           }
         });
@@ -1221,9 +1229,13 @@ LK.UI('plugins', 'datagrid', function(options) {
             },
             click : function($button) {
               if ($searchForm.LKValidate()) {
-                $plugin.LKLoad({
-                  param : LK.UI._datagrid.getParam($plugin, options)
-                });
+                if (hasPageBar) {
+                  $pageBar.find('.pageNumber').LKInvokeSetValues(1, false);
+                } else {
+                  $plugin.LKLoad({
+                    param : LK.UI._datagrid.getParam($plugin, options)
+                  });
+                }
               }
             }
           });
