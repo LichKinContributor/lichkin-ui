@@ -244,7 +244,11 @@ $.fn.extend({
       currentValue = values.join(LK.SPLITOR);
     }
     if ((typeof undoOnChange == 'undefined' || undoOnChange == false) && (typeof isCreateEvent == 'undefined' || isCreateEvent != true)) {
-      this.data('LKOPTIONS').onChange(this, this.LKGetValues(), this.LKGetValue(), currentValue);
+      var returnVal = this.data('LKOPTIONS').onChange(this, this.LKGetValues(), this.LKGetValue(), currentValue);
+      if (typeof returnVal != 'undefined' && returnVal == false) {
+        this.data('LKOPTIONS').onAfterChange(this, this.LKGetValues(), this.LKGetValue());
+        return;
+      }
     }
 
     switch (this.LKGetPluginType()) {
@@ -266,6 +270,7 @@ $.fn.extend({
         this.LKGetValueObj().val(currentValue);
     }
 
+    this.data('LKOPTIONS').onAfterChange(this, this.LKGetValues(), this.LKGetValue());
   },
 
   /**
@@ -689,8 +694,17 @@ LK.UI.coreOptions,
    * @param pluginValues 控件值
    * @param pluginValue 控件值
    * @param currentValue 当前值
+   * @return 需要中断返回false
    */
   onChange : function($plugin, pluginValues, pluginValue, currentValue) {
+  },
+  /**
+   * 值改变后事件
+   * @param $plugin 当前控件
+   * @param pluginValues 控件值
+   * @param pluginValue 控件值
+   */
+  onAfterChange : function($plugin, pluginValues, pluginValue) {
   }
 });
 
