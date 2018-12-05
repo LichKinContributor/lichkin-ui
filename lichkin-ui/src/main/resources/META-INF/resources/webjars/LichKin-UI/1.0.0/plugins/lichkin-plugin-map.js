@@ -117,10 +117,10 @@ LK.UI('plugins', 'map', function(options) {
         title : options.markerTitle == null ? null : options.markerTitle,
       });
 
-      if (mapJson.markerTitle) {
+      if (mapJson.markerLabel) {
         marker.setLabel({
           offset : new AMap.Pixel(20, -20),
-          content : '<div class="lichkin-plugin-map-marker-label">' + mapJson.address + '</div>'
+          content : '<div class="lichkin-plugin-map-marker-label">' + mapJson.markerLabel + '</div>'
         });
       }
 
@@ -150,6 +150,8 @@ LK.UI.createOptions,
   overlay : 'Marker',
   // Marker标题（overlay为Marker时生效）
   markerTitle : null,
-  // Marker图表（overlay为Marker时生效）
+  // Marker图标（overlay为Marker时生效）
   markerIcon : null,
+  // Marker文本（overlay为Marker时生效）
+  markerLabel : null
 }));
