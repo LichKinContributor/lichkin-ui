@@ -1123,7 +1123,12 @@ $.extend(LK, {
         if (responseDatas.errorCode == 0) {
           success(responseDatas.datas, options);
         } else {
-          error(responseDatas.errorCode, responseDatas.errorMessage, options);
+          // 登录超时
+          if (responseDatas.errorCode == 29000) {
+            window.location.href = _CTX;
+          } else {
+            error(responseDatas.errorCode, responseDatas.errorMessage, options);
+          }
         }
       }
     };
