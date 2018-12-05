@@ -1077,7 +1077,7 @@ LK.UI('plugins', 'datagrid', function(options) {
       onChange : function($numberspinner, numberspinnerValues, numberspinnerValue, currentValue) {
         var maxValue = $plugin.data('totalPages');
         if (currentValue > maxValue) {
-          $numberspinner.LKGetValueObj().val(maxValue);
+          $numberspinner.LKGetValueObj().val(maxValue == 0 ? 1 : maxValue);
           return false;
         }
         if (currentValue < 1) {
@@ -1119,9 +1119,13 @@ LK.UI('plugins', 'datagrid', function(options) {
       icon : 'search',
       click : function() {
         if (!$searchForm || $searchForm.LKValidate()) {
-          $plugin.LKLoad({
-            param : LK.UI._datagrid.getParam($plugin, options)
-          });
+          if (hasPageBar) {
+            $pageBar.find('.pageNumber').LKInvokeSetValues(1, false);
+          } else {
+            $plugin.LKLoad({
+              param : LK.UI._datagrid.getParam($plugin, options)
+            });
+          }
         }
       },
       style : {
