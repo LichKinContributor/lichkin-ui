@@ -62,7 +62,8 @@ LK.UI._droplist = {
    * @param datas 数据集
    */
   addDatas : function($plugin, $container, datas) {
-    var height = $plugin.data('LKOPTIONS').height;
+    var options = $plugin.data('LKOPTIONS');
+    var height = options.height;
     for (var i = 0; i < datas.length; i++) {
       var data = datas[i];
       if (data.value == null) {
@@ -75,6 +76,11 @@ LK.UI._droplist = {
         text : data.text,
         height : height + 1
       }));
+    }
+
+    // 选中第一个值
+    if (options.selectFirst && !options.value && datas.length > 0) {
+      LK.UI._droplist.setValues($plugin, $container, datas[0].value, true, true);
     }
   }
 
@@ -167,7 +173,9 @@ LK.UI.loadOptions,
   // 支持多选
   multiSelect : false,
   // 是否可以取消选中（仅在单选情况下起作用）
-  cancelable : true
+  cancelable : true,
+  // 是否选中第一个
+  selectFirst : false
 }));
 
 $('body').mousedown(function(e) {
