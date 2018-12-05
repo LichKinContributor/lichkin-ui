@@ -142,6 +142,14 @@ var lastMonthDay = function() {
 };
 
 /**
+ * 当前日期的下个月日期
+ * @return yyyy-MM-dd
+ */
+var nextMonthDay = function() {
+  return new Date().reset('M', 1).format('yyyy-MM-dd');
+};
+
+/**
  * 判断字符串开头
  */
 String.prototype.startsWith = function(str) {
