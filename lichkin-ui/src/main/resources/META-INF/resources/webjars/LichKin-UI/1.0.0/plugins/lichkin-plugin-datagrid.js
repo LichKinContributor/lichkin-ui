@@ -1141,6 +1141,24 @@ LK.UI('plugins', 'datagrid', function(options) {
     $pageBar.append('<div style="clear:both;"></div>');
   }
 
+  // 查询表单回车事件
+  if ($searchForm) {
+    $searchForm.keydown(function(event) {
+      if (event.keyCode == 13) {
+        if ($searchForm.LKValidate()) {
+          if (hasPageBar) {
+            $pageBar.find('.pageNumber').LKInvokeSetValues(1, false);
+          } else {
+            $plugin.LKLoad({
+              param : LK.UI._datagrid.getParam($plugin, options)
+            });
+          }
+        }
+        return false;
+      }
+    });
+  }
+
   // 有查询表单补充重置按钮
   // 补充查询按钮
   // 补充位置，工具栏>标题栏>查询表单>分页栏
