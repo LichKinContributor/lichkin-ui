@@ -1032,6 +1032,7 @@ LK.UI('plugins', 'datagrid', function(options) {
       data : pageListData,
       value : options.pageSize,
       onChange : function($pageList, pluginValues, pluginValue, currentValue) {
+        $pageList.LKSetValues(currentValue, false, true);
         $pageBar.find('.pageNumber').LKInvokeSetValues(1, false);
       },
       cancelable : false,
