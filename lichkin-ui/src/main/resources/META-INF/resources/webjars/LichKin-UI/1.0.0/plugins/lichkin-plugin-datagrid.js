@@ -257,6 +257,11 @@ LK.UI._datagrid = {
       }
     }
 
+    // 绑定双击事件
+    $tr.dblclick(function() {
+      options.onRowDblClick($plugin, $tr, data);
+    });
+
     // 添加子节点
     if (treeFieldName != null && data.children.length != 0) {
       this.addNodes($plugin, $container, data.children, level, options, columns, treeFieldName, i18nKey);
@@ -1504,6 +1509,14 @@ LK.UI.loadOptions,
    * @param rowData 行数据
    */
   onRowClick : function($plugin, $row, rowData) {
+  },
+  /**
+   * 行双击事件
+   * @param $plugin 当前控件对象
+   * @param $row 行对象
+   * @param rowData 行数据
+   */
+  onRowDblClick : function($plugin, $row, rowData) {
   },
   /**
    * 重新加载时参数
