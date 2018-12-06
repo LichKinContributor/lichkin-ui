@@ -299,6 +299,9 @@ LK.UI._datagrid = {
    * @param toolsAdd 添加按钮参数
    */
   addToolsAdd : function($plugin, options, toolsAdd) {
+    if (typeof toolsAdd.sortIdx == 'undefined') {
+      toolsAdd.sortIdx = 0;
+    }
     if (typeof toolsAdd.icon == 'undefined') {
       toolsAdd.icon = 'add';
     }
@@ -306,6 +309,7 @@ LK.UI._datagrid = {
       toolsAdd.text = 'add';
     }
     var json = {
+      sortIdx : toolsAdd.sortIdx,
       singleCheck : null,
       icon : toolsAdd.icon,
       text : toolsAdd.text,
@@ -379,7 +383,11 @@ LK.UI._datagrid = {
    * @param toolsUS 添加按钮参数
    */
   addToolsUS : function($plugin, options, toolsUS) {
+    if (typeof toolsUS.sortIdx == 'undefined') {
+      toolsUS.sortIdx = 0;
+    }
     var json = {
+      sortIdx : toolsUS.sortIdx,
       singleCheck : false,
       icon : toolsUS.icon,
       text : options.i18nKey + toolsUS.text,
@@ -454,6 +462,16 @@ LK.UI._datagrid = {
     : (LK.colWidth * cols)
 
     ) - columnsLength - 17 - 2 + contentGap;
+  },
+
+  /**
+   * 按钮排序
+   * @param one 按钮对象
+   * @param another 按钮对象
+   * @return 排序索引差
+   */
+  buttonSort : function(one, another) {
+    return one.sortIdx - another.sortIdx;
   }
 
 };
@@ -520,6 +538,9 @@ LK.UI('plugins', 'datagrid', function(options) {
 
   // 查看按钮
   if (options.readonly == false && options.toolsView != null) {
+    if (typeof options.toolsView.sortIdx == 'undefined') {
+      options.toolsView.sortIdx = 0;
+    }
     if (typeof options.toolsView.icon == 'undefined') {
       options.toolsView.icon = 'view';
     }
@@ -527,6 +548,7 @@ LK.UI('plugins', 'datagrid', function(options) {
       options.toolsView.text = 'view';
     }
     var json = {
+      sortIdx : options.toolsView.sortIdx,
       singleCheck : true,
       icon : options.toolsView.icon,
       text : options.toolsView.text,
@@ -581,6 +603,9 @@ LK.UI('plugins', 'datagrid', function(options) {
 
   // 删除按钮
   if (options.readonly == false && options.toolsRemove != null) {
+    if (typeof options.toolsRemove.sortIdx == 'undefined') {
+      options.toolsRemove.sortIdx = 0;
+    }
     if (typeof options.toolsRemove.icon == 'undefined') {
       options.toolsRemove.icon = 'remove';
     }
@@ -603,6 +628,9 @@ LK.UI('plugins', 'datagrid', function(options) {
 
   // 提交按钮
   if (options.readonly == false && options.toolsSubmit != null) {
+    if (typeof options.toolsSubmit.sortIdx == 'undefined') {
+      options.toolsSubmit.sortIdx = 0;
+    }
     if (typeof options.toolsSubmit.icon == 'undefined') {
       options.toolsSubmit.icon = 'upload';
     }
@@ -643,6 +671,9 @@ LK.UI('plugins', 'datagrid', function(options) {
 
   // 删除数据按钮
   if (options.readonly == false && options.toolsRemoveData != null) {
+    if (typeof options.toolsRemoveData.sortIdx == 'undefined') {
+      options.toolsRemoveData.sortIdx = 0;
+    }
     if (typeof options.toolsRemoveData.icon == 'undefined') {
       options.toolsRemoveData.icon = 'remove';
     }
@@ -650,6 +681,7 @@ LK.UI('plugins', 'datagrid', function(options) {
       options.toolsRemoveData.text = 'remove';
     }
     var json = {
+      sortIdx : options.toolsRemoveData.sortIdx,
       singleCheck : false,
       icon : options.toolsRemoveData.icon,
       text : options.toolsRemoveData.text,
@@ -692,6 +724,9 @@ LK.UI('plugins', 'datagrid', function(options) {
 
   // 编辑按钮
   if (options.readonly == false && options.toolsEdit != null) {
+    if (typeof options.toolsEdit.sortIdx == 'undefined') {
+      options.toolsEdit.sortIdx = 0;
+    }
     if (typeof options.toolsEdit.icon == 'undefined') {
       options.toolsEdit.icon = 'edit';
     }
@@ -699,6 +734,7 @@ LK.UI('plugins', 'datagrid', function(options) {
       options.toolsEdit.text = 'edit';
     }
     var json = {
+      sortIdx : options.toolsEdit.sortIdx,
       singleCheck : true,
       icon : options.toolsEdit.icon,
       text : options.toolsEdit.text,
@@ -802,6 +838,9 @@ LK.UI('plugins', 'datagrid', function(options) {
 
   // 新增数据按钮
   if (options.readonly == false && options.toolsAddData != null) {
+    if (typeof options.toolsAddData.sortIdx == 'undefined') {
+      options.toolsAddData.sortIdx = 0;
+    }
     if (typeof options.toolsAddData.icon == 'undefined') {
       options.toolsAddData.icon = 'add';
     }
@@ -809,6 +848,7 @@ LK.UI('plugins', 'datagrid', function(options) {
       options.toolsAddData.text = 'add';
     }
     var json = {
+      sortIdx : options.toolsAddData.sortIdx,
       singleCheck : null,
       icon : options.toolsAddData.icon,
       text : options.toolsAddData.text,
@@ -906,6 +946,9 @@ LK.UI('plugins', 'datagrid', function(options) {
 
     // 标题工具栏
     if (options.titleTools.length != 0) {
+      // 按钮排序
+      options.titleTools.sort(LK.UI._datagrid.buttonSort);
+
       for (var i = 0; i < options.titleTools.length; i++) {
         var button = options.titleTools[i];
         if (typeof button.singleCheck == 'undefined') {
@@ -962,6 +1005,9 @@ LK.UI('plugins', 'datagrid', function(options) {
   var $toolsBar = $('<div></div>').LKAddPluginClass(plugin, 'toolsBar');
   var $buttonsBarRight;
   if (hasToolsBar) {
+    // 按钮排序
+    options.tools.sort(LK.UI._datagrid.buttonSort);
+
     $toolsBar.appendTo($plugin);
     $toolsBar.css('width', width - 2);
     var $buttonsBar = $('<div class="lichkin-buttons"></div>').appendTo($toolsBar);
