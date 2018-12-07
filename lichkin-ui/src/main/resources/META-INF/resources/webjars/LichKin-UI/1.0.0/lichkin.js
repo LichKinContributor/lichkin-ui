@@ -1017,7 +1017,7 @@ $.extend(LK, {
     window.location.href = LK.resolveUrl(url, true, $.extend(param,
 
     withoutBackUrl == true ? {} : {
-      backUrl : backUrl.substr(backUrl.indexOf(window.location.host) + window.location.host.length).replace(/timestamp=\d{13}/g, '').replace(/\?\&/g, '?')
+      backUrl : escape(backUrl.substr(backUrl.indexOf(window.location.host) + window.location.host.length).replace(/timestamp=\d{13}/g, '').replace(/\?\&/g, '?'))
     }
 
     ), true, false);
