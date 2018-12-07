@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <packaging>jar</packaging>
+
+  <groupId>com.lichkin.ui</groupId>
+  <artifactId>lichkin-echarts</artifactId>
+  <version>1.0.0.RELEASE</version>
+
+  <name>lichkin-echarts</name>
+  <description>将echarts转为webjars</description>
+  <url>http://codes.lichkin.com/lichkin-echarts</url>
+  <organization>
+    <name>SuZhou LichKin Information Technology Co., Ltd.</name>
+    <url>http://www.lichkin.com</url>
+  </organization>
+  <developers>
+    <developer>
+      <name>XuXin Zhuang</name>
+      <email>zhuangxuxin@hotmail.com</email>
+    </developer>
+  </developers>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+
+</project>
