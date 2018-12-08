@@ -8,10 +8,10 @@
 
 <#assign calculateType="">
 <#if _$=="">
-	<#if jsBridge=="">
-		<#assign calculateType="web">
-	<#else>
+	<#if jsBridge=="true">
 		<#assign calculateType="app">
+	<#else>
+		<#assign calculateType="web">
 	</#if>
 </#if>
 
@@ -38,7 +38,7 @@
 			<link href="${ctx}/res/img/favicon.ico" type="image/x-icon" rel="shortcut icon">
 			<@lichkin@cssTag url="/webjars/font-awesome/web-fonts-with-css/css/fontawesome-all" />
 			<@lichkin@cssTag url="/webjars/LichKin-UI/themes/default/lichkin-web" />
-			<#if calculateType=="app">
+			<#if jsBridge!="">
 			<@lichkin@cssTag url="/webjars/LichKin-UI/themes/default/lichkin-app" />
 			</#if>
 			<@lichkin@cssTag url="/webjars/datepicker/datepicker" />
