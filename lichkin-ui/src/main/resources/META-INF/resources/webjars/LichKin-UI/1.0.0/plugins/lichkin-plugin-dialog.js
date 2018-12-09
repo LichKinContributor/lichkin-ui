@@ -446,7 +446,7 @@ LK.UI('plugins', 'openDialog', function(options) {
   return $plugin;
 }, LK.UI.dialogOptions);
 
-$('body').keydown(function(e) {
+$body.keydown(function(e) {
   if (e.keyCode == 27) {// ESC关闭最顶层对话框
     var $plugin = $.LKGetTopDialog();
     if ($plugin && $plugin.length != 0) {

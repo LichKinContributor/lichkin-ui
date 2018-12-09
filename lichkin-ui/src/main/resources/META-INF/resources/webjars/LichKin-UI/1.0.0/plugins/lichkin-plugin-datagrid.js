@@ -1616,7 +1616,7 @@ LK.UI.loadOptions,
   rowStyler : null,
 }));
 
-$('body').mousedown(function(e) {
+$body.mousedown(function(e) {
   var $that = $(e.target);
   if ($that.is('.lichkin-datagrid .lichkin-datagrid-dataBodyBar .lichkin-table .lichkin-table-row .lichkin-table-cell') || $that.is('.lichkin-datagrid .lichkin-datagrid-dataBodyBar .lichkin-table .lichkin-table-row .lichkin-table-cell .lichkin-text')) {
     if (!$that.is('td')) {

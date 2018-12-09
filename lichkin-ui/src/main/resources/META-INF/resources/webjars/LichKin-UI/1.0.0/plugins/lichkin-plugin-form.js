@@ -183,7 +183,7 @@ LK.UI('plugins', 'form', function(options) {
     if ($topDialog) {
       options.$appendTo = $topDialog.find('.lichkin-body');
     } else {
-      options.$appendTo = $('body');
+      options.$appendTo = $body;
     }
   }
 

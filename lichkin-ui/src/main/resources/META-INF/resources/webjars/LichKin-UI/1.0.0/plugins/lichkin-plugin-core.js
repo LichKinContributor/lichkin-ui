@@ -600,7 +600,7 @@ LK.UI('plugins', 'plugin', function(options) {
     if ($topDialog) {
       options.$appendTo = $topDialog.find('.lichkin-body');
     } else {
-      options.$appendTo = $('body');
+      options.$appendTo = $body;
     }
   }
 
@@ -796,7 +796,7 @@ LK.UI('plugins', 'create', function(opts) {
     if ($topDialog) {
       options.$appendTo = $topDialog.find('.lichkin-body');
     } else {
-      options.$appendTo = $('body');
+      options.$appendTo = $body;
     }
   }
 

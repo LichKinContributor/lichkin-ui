@@ -50,7 +50,7 @@ LK.UI('plugins', 'datepicker', function(options) {
     show : function() {
       var $container = $.LKGetTopDialog();
       if (!$container) {
-        $container = $('body');
+        $container = $body;
       }
       var minValue = minDate;
       if (minDateObj != null) {

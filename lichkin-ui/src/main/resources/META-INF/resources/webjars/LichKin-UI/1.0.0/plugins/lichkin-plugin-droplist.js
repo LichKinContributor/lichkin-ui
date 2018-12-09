@@ -178,7 +178,7 @@ LK.UI.loadOptions,
   selectFirst : false
 }));
 
-$('body').mousedown(function(e) {
+$body.mousedown(function(e) {
   var $that = $(e.target);
   if ($that.is('.lichkin-droplist-wrapper') || $that.is('.lichkin-droplist-wrapper .lichkin-droplist-text')) {
     var $plugin = $that.parents('.lichkin-droplist:first');
