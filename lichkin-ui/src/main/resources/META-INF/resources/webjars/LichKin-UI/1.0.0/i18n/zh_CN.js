@@ -97,4 +97,6 @@ $.LKExtendI18N({
   'set' : '设置',
   'cut' : '剪切',
 
+  'No more datas' : '没有更多数据了',
+
 });
