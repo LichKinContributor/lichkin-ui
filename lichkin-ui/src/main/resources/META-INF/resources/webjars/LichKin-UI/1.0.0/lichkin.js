@@ -46,8 +46,8 @@ var isNumber = function(number) {
  * 判断是否为布尔
  * @param boolean 布尔
  */
-var isBoolean = function(boolean) {
-  return typeof boolean == 'boolean';
+var isBoolean = function(bool) {
+  return typeof bool == 'boolean';
 };
 
 /**
