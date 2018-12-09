@@ -50,6 +50,25 @@ var isBoolean = function(bool) {
   return typeof bool == 'boolean';
 };
 
+// BASE64编码正则
+var _BASE64_CODE_REGEXP_STR = '([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)';
+
+/**
+ * 判断是否为BASE64编码
+ * @param base64 BASE64编码
+ */
+var isBASE64 = function(base64) {
+  return new RegExp('^\s*data:([a-z]+\/[a-z0-9-+.]+(;[a-z-]+=[a-z0-9-]+)?)?(;base64)?,' + _BASE64_CODE_REGEXP_STR + '$').test(base64);
+};
+
+/**
+ * 判断是否为BASE64编码
+ * @param base64 BASE64编码
+ */
+var isSubBASE64 = function(base64) {
+  return new RegExp('^' + _BASE64_CODE_REGEXP_STR + '$').test(base64);
+};
+
 /**
  * 生成随机值
  * @param min 最小值
@@ -1008,6 +1027,25 @@ $.extend(LK, {
     }
 
     return url + LK.paramUrl((url.indexOf('?') < 0), param, withoutCalc);
+  },
+
+  /**
+   * 解析图片地址
+   * @param src 图片地址
+   * @param prefix src为地址时需要补充的前缀
+   * @return 解析后的图片地址
+   */
+  resolveImgSrc : function(src, prefix) {
+    if (isBASE64(src)) {
+      return src;
+    }
+    if (isSubBASE64(src)) {
+      return 'data:image/jpeg;base64,' + src;
+    }
+    if (prefix) {
+      return prefix + src;
+    }
+    return src;
   },
 
   /**
