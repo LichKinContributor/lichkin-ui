@@ -115,6 +115,9 @@
 		</#if>
 		<#if section="javascript-links">
 			<@lichkin@jsTag url="/webjars/jquery/jquery"/>
+			<script type="text/javascript">
+				let $win = $(window), $doc = $(document), $body = $('body');
+			</script>
 			<@lichkin@jsTag url="/webjars/LichKin-UI/lichkin" />
 			<@lichkin@jsTag url="/webjars/LichKin-UI/i18n/${locale}" />
 
@@ -191,16 +194,15 @@
             <script type="text/javascript">
               var dynamicButtons = window['${mappingUri}'.replace(/\//g, '_') + '_dynamicButtons'];
               if (typeof dynamicButtons != 'undefined') {
-                var $dialog = $('<div class="lichkin-dialog"></div>').appendTo('body');
+                var $dialog = $('<div class="lichkin-dialog"></div>').appendTo($body);
                 $dialog.addClass('lichkin-dialog-focus');
-                $dialog.css('width', $('body').find('.lichkin-plugin').width()+LK.fieldKeyWidth+LK.leftGap+2);
+                $dialog.css('width', $body.find('.lichkin-plugin').width()+LK.fieldKeyWidth+LK.leftGap+2);
                 LK.UI._dialog.addButtons($dialog, $('<div class="lichkin-dialog-buttonsBar"></div>').appendTo($dialog), dynamicButtons);
               }
             </script>
 			</#if>
 		</#if>
 		<#if section="javascript-contents-after-links">
-			let $win = $(window), $doc = $(document), $body = $('body');
 			<#nested "javascript-contents-after-links"/>
 		</#if>
 	</@html>
