@@ -178,10 +178,16 @@
 			<#if ctx!="/ui">
             	<@lichkin@jsTag url="/res/js/app" />
 			</#if>
+			<#if jsBridge!="">
+            <script type="text/javascript">
+				<#nested "javascript-contents-before-self-link"/>
+            </script>
+			</#if>
 			<#if js==true>
 				<@lichkin@jsTag/>
 			</#if>
 
+			<#if jsBridge=="">
             <script type="text/javascript">
               var dynamicButtons = window['${mappingUri}'.replace(/\//g, '_') + '_dynamicButtons'];
               if (typeof dynamicButtons != 'undefined') {
@@ -191,6 +197,7 @@
                 LK.UI._dialog.addButtons($dialog, $('<div class="lichkin-dialog-buttonsBar"></div>').appendTo($dialog), dynamicButtons);
               }
             </script>
+			</#if>
 		</#if>
 		<#if section="javascript-contents-after-links">
 			let $win = $(window), $doc = $(document), $body = $('body');
