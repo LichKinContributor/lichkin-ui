@@ -43,6 +43,14 @@ var isNumber = function(number) {
 };
 
 /**
+ * 判断是否为布尔
+ * @param boolean 布尔
+ */
+var isBoolean = function(boolean) {
+  return typeof boolean == 'boolean';
+};
+
+/**
  * 生成随机值
  * @param min 最小值
  * @param max 最大值
@@ -956,7 +964,7 @@ $.extend(LK, {
     if (isJSON(param)) {
       for ( var key in param) {
         var value = param[key];
-        if (isString(value) || isNumber(value)) {
+        if (isString(value) || isNumber(value) || isBoolean(value)) {
           url += '&' + key + '=' + value;
         }
       }
@@ -1028,7 +1036,9 @@ $.extend(LK, {
    * @param param 参数
    */
   GoBack : function(param) {
-    window.location.href = isJSON(param) ? LK.resolveUrl(_BACK_URL, true, param, true, true) : _BACK_URL;
+    window.location.href = isJSON(param) ? LK.resolveUrl(_BACK_URL, true, $.extend(param, {
+      fromBack : true
+    }), true, true) : (_BACK_URL.indexOf('?') ? '&' : '?') + 'fromBack=true';
   },
 
   /**
