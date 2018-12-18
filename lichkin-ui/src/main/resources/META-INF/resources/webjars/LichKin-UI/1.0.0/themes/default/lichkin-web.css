@@ -45,6 +45,10 @@
   --lichkin-plugin-title-font-size: 14px;
 }
 
+* {
+  font-family: "Microsoft YaHei";
+}
+
 /** DIV */
 DIV.lichkin-div.default {
   color: #ffffff;
@@ -130,6 +134,9 @@ TABLE.lichkin-table .lichkin-table .lichkin-table-row .lichkin-table-cell:last-c
 }
 
 /** loading */
+@-o-keyframes loadingAnimate {50%{-ms-transform:scaleY(0);-webkit-transform:scaleY(0);transform:scaleY(0);}}
+@-moz-keyframes loadingAnimate {50%{-ms-transform:scaleY(0);-webkit-transform:scaleY(0);transform:scaleY(0);}}
+@-webkit-keyframes loadingAnimate {50%{-ms-transform:scaleY(0);-webkit-transform:scaleY(0);transform:scaleY(0);}}
 @keyframes loadingAnimate {50%{-ms-transform:scaleY(0);-webkit-transform:scaleY(0);transform:scaleY(0);}}
 
 .lichkin-loading {
@@ -185,7 +192,9 @@ TABLE.lichkin-table .lichkin-table .lichkin-table-row .lichkin-table-cell:last-c
   position: relative;
   vertical-align: top;
   display: inline-block;
+  border: 1px solid #2e6da4;
   border: 1px solid var(--lichkin-plugin-border-color);
+  background-color: #ffffff;
   background-color: var(--lichkin-plugin-background-color);
 }
 
@@ -193,7 +202,9 @@ TABLE.lichkin-table .lichkin-table .lichkin-table-row .lichkin-table-cell:last-c
   position: absolute;
   overflow: auto;
   border: none;
+  color: #2e6da4;
   color: var(--lichkin-plugin-font-color);
+  font-size: 12px;
   font-size: var(--lichkin-plugin-font-size);
   font-family: Arial;
 }
@@ -203,10 +214,12 @@ TABLE.lichkin-table .lichkin-table .lichkin-table-row .lichkin-table-cell:last-c
   position: absolute;
   right: 0px;
   top: 0px;
+  background-color: #ffffff;
   background-color: var(--lichkin-plugin-background-color);
 }
 
 .lichkin-plugin .lichkin-plugin-button .lichkin-icon i {
+  color: #2e6da4;
   color: var(--lichkin-plugin-font-color);
 }
 
@@ -221,50 +234,65 @@ TABLE.lichkin-table .lichkin-table .lichkin-table-row .lichkin-table-cell:last-c
   cursor: pointer;
   border-bottom-width: 1px;
   border-bottom-style: dotted;
+  background-color: #ffffff;
   background-color: var(--lichkin-plugin-background-color);
+  border-color: #2e6da4;
   border-color: var(--lichkin-plugin-border-color);
 }
 
 .lichkin-plugin .lichkin-plugin-dataContainer .lichkin-plugin-node .lichkin-plugin .lichkin-text {
+  color: #2e6da4;
   color: var(--lichkin-plugin-font-color);
 }
 
 .lichkin-plugin .lichkin-plugin-dataContainer .lichkin-plugin-node.selected {
+  background-color: #6eade4;
   background-color: var(--lichkin-plugin-background-color-selected);
+  border-color: #ffffff;
   border-color: var(--lichkin-plugin-border-color-selected);
 }
 
 .lichkin-plugin .lichkin-plugin-dataContainer .lichkin-plugin-node.selected .lichkin-text {
+  color: #ffffff;
   color: var(--lichkin-plugin-font-color-selected);
 }
 
 .lichkin-plugin .lichkin-plugin-dataContainer .lichkin-plugin-node.selected .lichkin-plugin .lichkin-text {
+  color: #2e6da4;
   color: var(--lichkin-plugin-font-color);
 }
 
 .lichkin-plugin .lichkin-plugin-dataContainer .lichkin-plugin-node:hover {
+  background-color: #002d64;
   background-color: var(--lichkin-plugin-background-color-hover);
+  border-color: #ffffff;
   border-color: var(--lichkin-plugin-border-color-hover);
 }
 
 .lichkin-plugin .lichkin-plugin-dataContainer .lichkin-plugin-node:hover .lichkin-text {
+  color: #ffffff;
   color: var(--lichkin-plugin-font-color-hover);
 }
 
 .lichkin-plugin .lichkin-plugin-dataContainer .lichkin-plugin-node:hover .lichkin-plugin .lichkin-text {
+  color: #2e6da4;
   color: var(--lichkin-plugin-font-color);
 }
 
 .lichkin-plugin .lichkin-plugin-dataContainer .lichkin-plugin-node.selected:hover {
+  background-color: #0e4d84;
   background-color: var(--lichkin-plugin-background-color-selected-hover);
+  border-color: #ffffff;
   border-color: var(--lichkin-plugin-border-color-selected-hover);
 }
 
 .lichkin-plugin .lichkin-plugin-dataContainer .lichkin-plugin-node.selected:hover .lichkin-text {
+  color: #ffffff;
   color: var(--lichkin-plugin-font-color-selected-hover);
 }
 
 .lichkin-plugin .lichkin-plugin-dataContainer .lichkin-plugin-node.selected:hover .lichkin-plugin .lichkin-text {
+  color: #2e6da4;
   color: var(--lichkin-plugin-font-color);
 }
 
@@ -273,10 +301,14 @@ TABLE.lichkin-table .lichkin-table .lichkin-table-row .lichkin-table-cell:last-c
   padding: 3px 0px;
   height: 30px;
   line-height: 30px;
+  background-color: #2e6da4;
   background-color: var(--lichkin-plugin-border-color);
+  border-top: 1px solid #2e6da4;
   border-top: 1px solid var(--lichkin-plugin-border-color);
+  border-right: 1px solid #2e6da4;
   border-right: 1px solid var(--lichkin-plugin-border-color);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-left: 1px solid #2e6da4;
   border-left: 1px solid var(--lichkin-plugin-border-color);
 }
 
@@ -287,6 +319,7 @@ TABLE.lichkin-table .lichkin-table .lichkin-table-row .lichkin-table-cell:last-c
 }
 
 .lichkin-plugin .lichkin-plugin-titleBar .lichkin-icon i {
+  color: #ffffff;
   color: var(--lichkin-plugin-background-color);
 }
 
@@ -296,7 +329,9 @@ TABLE.lichkin-table .lichkin-table .lichkin-table-row .lichkin-table-cell:last-c
   top: 0px;
   height: 29px !important;
   line-height: 29px !important;
+  color: #ffffff;
   color: var(--lichkin-plugin-background-color);
+  font-size: 14px;
   font-size: var(--lichkin-plugin-title-font-size);
 }
 
@@ -317,43 +352,57 @@ TABLE.lichkin-table .lichkin-table .lichkin-table-row .lichkin-table-cell:last-c
 }
 
 .lichkin-plugin-invalid .lichkin-plugin {
+  border: 1px solid #d43f3a;
   border: 1px solid var(--lichkin-plugin-border-color-invalid);
+  background-color: #ffe6e6;
   background-color: var(--lichkin-plugin-background-color-invalid);
 }
 
 .lichkin-plugin-invalid {
+  border: 1px solid #d43f3a;
   border: 1px solid var(--lichkin-plugin-border-color-invalid);
+  background-color: #ffe6e6;
   background-color: var(--lichkin-plugin-background-color-invalid);
 }
 
 .lichkin-plugin-invalid .lichkin-plugin-text {
+  color: #d43f3a;
   color: var(--lichkin-plugin-font-color-invalid);
+  background-color: #ffe6e6;
   background-color: var(--lichkin-plugin-background-color-invalid);
 }
 
 .lichkin-plugin-invalid .lichkin-plugin-button {
+  background-color: #ffe6e6;
   background-color: var(--lichkin-plugin-background-color-invalid);
 }
 
 .lichkin-plugin-invalid .lichkin-plugin-button .lichkin-icon i {
+  color: #d43f3a;
   color: var(--lichkin-plugin-font-color-invalid);
 }
 
 .lichkin-plugin-invalid .lichkin-plugin-dataContainer .lichkin-plugin-node {
+  background-color: #ffe6e6;
   background-color: var(--lichkin-plugin-background-color-invalid);
+  border-color: #d43f3a;
   border-color: var(--lichkin-plugin-border-color-invalid);
 }
 
 .lichkin-plugin-invalid .lichkin-plugin-dataContainer .lichkin-plugin-node .lichkin-icon i {
+  color: #d43f3a;
   color: var(--lichkin-plugin-font-color-invalid);
 }
 
 .lichkin-plugin-invalid .lichkin-plugin-dataContainer .lichkin-plugin-node .lichkin-text {
+  color: #d43f3a;
   color: var(--lichkin-plugin-font-color-invalid);
 }
 
 .lichkin-plugin-invalid .lichkin-plugin-titleBar {
+  background-color: #d43f3a;
   background-color: var(--lichkin-plugin-border-color-invalid);
+  border-color: #d43f3a;
   border-color: var(--lichkin-plugin-border-color-invalid);
 }
 
@@ -410,13 +459,17 @@ TABLE.lichkin-table .lichkin-table .lichkin-table-row .lichkin-table-cell:last-c
   overflow: auto;
   left: -1px;
   z-index: 99999;
+  border: 1px solid #2e6da4;
   border: 1px solid var(--lichkin-plugin-border-color);
   border-top: none;
+  background-color: #ffffff;
   background-color: var(--lichkin-plugin-background-color);
 }
 
 .lichkin-plugin-popup-invalid {
+  border-color: #d43f3a;
   border-color: var(--lichkin-plugin-border-color-invalid);
+  background-color: #ffe6e6;
   background-color: var(--lichkin-plugin-background-color-invalid);
 }
 
@@ -431,42 +484,56 @@ TABLE.lichkin-table .lichkin-table .lichkin-table-row .lichkin-table-cell:last-c
   cursor: pointer;
   border-bottom-width: 1px;
   border-bottom-style: dotted;
+  background-color: #ffffff;
   background-color: var(--lichkin-plugin-background-color);
+  border-color: #2e6da4;
   border-color: var(--lichkin-plugin-border-color);
 }
 
 .lichkin-plugin-popup .lichkin-plugin-dataContainer .lichkin-plugin-node.selected {
+  background-color: #6eade4;
   background-color: var(--lichkin-plugin-background-color-selected);
+  border-color: #ffffff;
   border-color: var(--lichkin-plugin-border-color-selected);
 }
 
 .lichkin-plugin-popup .lichkin-plugin-dataContainer .lichkin-plugin-node.selected .lichkin-text {
+  color: #ffffff;
   color: var(--lichkin-plugin-font-color-selected);
 }
 
 .lichkin-plugin-popup .lichkin-plugin-dataContainer .lichkin-plugin-node:hover {
+  background-color: #002d64;
   background-color: var(--lichkin-plugin-background-color-hover);
+  border-color: #ffffff;
   border-color: var(--lichkin-plugin-border-color-hover);
 }
 
 .lichkin-plugin-popup .lichkin-plugin-dataContainer .lichkin-plugin-node:hover .lichkin-text {
+  color: #ffffff;
   color: var(--lichkin-plugin-font-color-hover);
 }
 
 .lichkin-plugin-popup .lichkin-plugin-dataContainer .lichkin-plugin-node.selected:hover {
+  background-color: #0e4d84;
   background-color: var(--lichkin-plugin-background-color-selected-hover);
+  border-color: #ffffff;
   border-color: var(--lichkin-plugin-border-color-selected-hover);
 }
 
 .lichkin-plugin-popup .lichkin-plugin-dataContainer .lichkin-plugin-node.selected:hover .lichkin-text {
+  color: #ffffff;
   color: var(--lichkin-plugin-font-color-selected-hover);
 }
 
 .lichkin-plugin-popup-invalid .lichkin-plugin-dataContainer .lichkin-plugin-node {
+  background-color: #ffe6e6;
   background-color: var(--lichkin-plugin-background-color-invalid);
+  border-color: #d43f3a;
   border-color: var(--lichkin-plugin-border-color-invalid);
 }
 
 .lichkin-plugin-popup-invalid .lichkin-plugin-dataContainer .lichkin-plugin-node .lichkin-text {
+  color: #d43f3a;
   color: var(--lichkin-plugin-font-color-invalid);
 }

@@ -9,6 +9,7 @@
  */
 
 .datepicker-container {
+  background-color: #ffffff;
   background-color: var(--lichkin-plugin-background-color);
   direction: ltr;
   font-size: 12px;
@@ -39,6 +40,7 @@
 }
 
 .datepicker-dropdown {
+  border: 1px solid #2e6da4;
   border: 1px solid var(--lichkin-plugin-border-color);
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
@@ -52,6 +54,7 @@
 
 .datepicker-top-left,
 .datepicker-top-right {
+  border-top-color: #2e6da4;
   border-top-color: var(--lichkin-plugin-border-color);
 }
 
@@ -66,17 +69,20 @@
 
 .datepicker-top-left::before,
 .datepicker-top-right::before {
+  border-bottom-color: #2e6da4;
   border-bottom-color: var(--lichkin-plugin-border-color);
 }
 
 .datepicker-top-left::after,
 .datepicker-top-right::after {
+  border-bottom-color: #ffffff;
   border-bottom-color: var(--lichkin-plugin-background-color);
   top: -4px;
 }
 
 .datepicker-bottom-left,
 .datepicker-bottom-right {
+  border-bottom-color: #2e6da4;
   border-bottom-color: var(--lichkin-plugin-border-color);
 }
 
@@ -91,11 +97,13 @@
 
 .datepicker-bottom-left::before,
 .datepicker-bottom-right::before {
+  border-top-color: #2e6da4;
   border-top-color: var(--lichkin-plugin-border-color);
 }
 
 .datepicker-bottom-left::after,
 .datepicker-bottom-right::after {
+  border-top-color: #ffffff;
   border-top-color: var(--lichkin-plugin-background-color);
   bottom: -4px;
 }
@@ -125,8 +133,11 @@
 }
 
 .datepicker-panel > ul > li {
+  border: 1px solid #ffffff;
   border: 1px solid var(--lichkin-plugin-background-color);
+  background-color: #ffffff;
   background-color: var(--lichkin-plugin-background-color);
+  color: #2e6da4;
   color: var(--lichkin-plugin-font-color);
   cursor: pointer;
   float: left;
@@ -140,8 +151,11 @@
 }
 
 .datepicker-panel > ul > li:hover {
+  border-color: #ffffff;
   border-color: var(--lichkin-plugin-border-color-hover);
+  color: #ffffff;
   color: var(--lichkin-plugin-font-color-hover);
+  background-color: #002d64;
   background-color: var(--lichkin-plugin-background-color-hover);
 }
 
@@ -151,6 +165,7 @@
 }
 
 .datepicker-panel > ul > li.highlighted {
+  border-color: #2e6da4;
   border-color: var(--lichkin-plugin-border-color);
   opacity: 1.0;
 }
@@ -159,20 +174,28 @@
 }
 
 .datepicker-panel > ul > li.picked {
+  border-color: #2e6da4;
   border-color: var(--lichkin-plugin-border-color);
+  color: #ffffff;
   color: var(--lichkin-plugin-font-color-selected);
+  background-color: #6eade4;
   background-color: var(--lichkin-plugin-background-color-selected);
 }
 
 .datepicker-panel > ul > li.picked:hover {
+  color: #ffffff;
   color: var(--lichkin-plugin-font-color-selected-hover);
+  background-color: #0e4d84;
   background-color: var(--lichkin-plugin-background-color-selected-hover);
 }
 
 .datepicker-panel > ul > li.disabled,
 .datepicker-panel > ul > li.disabled:hover {
+  border-color: #d43f3a;
   border-color: var(--lichkin-plugin-border-color-invalid);
+  color: #d43f3a;
   color: var(--lichkin-plugin-font-color-invalid);
+  background-color: #ffe6e6;
   background-color: var(--lichkin-plugin-background-color-invalid);
   cursor: default;
 }

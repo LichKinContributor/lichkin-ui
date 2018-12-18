@@ -5,6 +5,7 @@
 }
 
 .lichkin-ueditor .edui-default .edui-editor-bottomContainer td {
+  border-color:#2e6da4;
   border-color:var(--lichkin-plugin-border-color);
 }
 
@@ -13,6 +14,7 @@
 }
 
 .lichkin-ueditor .edui-default .edui-editor-bottomContainer td .edui-editor-breadcrumb {
+  color: #2e6da4;
   color:var(--lichkin-plugin-font-color);
 }
 
@@ -25,13 +27,16 @@
 }
 
 .lichkin-ueditor-invalid .edui-default .edui-editor-bottomContainer td {
+  border-color:#d43f3a;
   border-color:var(--lichkin-plugin-border-color-invalid);
 }
 
 .lichkin-ueditor-invalid .edui-default .edui-editor-bottomContainer td .edui-editor-breadcrumb {
+  color:#d43f3a;
   color:var(--lichkin-plugin-font-color-invalid);
 }
 
 .lichkin-ueditor-invalid .edui-default .edui-editor-iframeholder {
+  background-color:#ffe6e6;
   background-color:var(--lichkin-plugin-background-color-invalid);
 }

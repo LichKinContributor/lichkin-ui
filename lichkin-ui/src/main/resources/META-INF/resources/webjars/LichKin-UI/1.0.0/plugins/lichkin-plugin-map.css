@@ -6,5 +6,6 @@
 }
 
 .amap-marker-label {
-  border-color: var(--lichkin-plugin-border-color);;
+  border-color: #2e6da4;
+  border-color: var(--lichkin-plugin-border-color);
 }

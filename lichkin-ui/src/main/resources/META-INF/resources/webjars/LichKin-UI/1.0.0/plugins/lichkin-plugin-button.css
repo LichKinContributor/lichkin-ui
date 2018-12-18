@@ -11,17 +11,21 @@
   margin: 0;
   padding: 0;
   cursor: pointer;
+  background-color: #5bc0de;
   background-color: var(--lichkin-button-background-color);
+  border: 1px solid #46b8da;
   border: 1px solid var(--lichkin-button-border-color);
   vertical-align: middle;
   overflow: hidden;
 }
 
 .lichkin-button .lichkin-text {
+  color: #ffffff;
   color: var(--lichkin-button-font-color);
 }
 
 .lichkin-button .lichkin-icon i {
+  color: #ffffff;
   color: var(--lichkin-button-font-color);
 }
 

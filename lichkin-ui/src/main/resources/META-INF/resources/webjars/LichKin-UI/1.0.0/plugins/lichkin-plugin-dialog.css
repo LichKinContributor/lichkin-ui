@@ -11,11 +11,13 @@
 
 .lichkin-dialog .lichkin-dialog-contentBar .lichkin-plugin .lichkin-plugin-button .lichkin-icon i
 {
+  color: #4e8dc4;
   color: var(--lichkin-plugin-light-border-color);
 }
 
 .lichkin-dialog .lichkin-dialog-contentBar .lichkin-plugin
 {
+  border-color: #4e8dc4;
   border-color: var(--lichkin-plugin-light-border-color);
 }
 
@@ -40,6 +42,7 @@
 }
 
 .lichkin-dialog .lichkin-dialog-titleBar {
+  background-color: #4e8dc4;
   background-color: var(--lichkin-plugin-light-border-color);
   border-width: 1px 1px 0px 1px;
   position: relative;
@@ -105,16 +108,19 @@
 .lichkin-dialog-focus .lichkin-dialog-contentBar,
 .lichkin-dialog-focus .lichkin-dialog-buttonsBar
 {
+  border-color: #2e6da4;
   border-color: var(--lichkin-plugin-border-color);
 }
 
 .lichkin-dialog-focus .lichkin-dialog-contentBar .lichkin-plugin .lichkin-plugin-button .lichkin-icon i
 {
+  color: #2e6da4;
   color: var(--lichkin-plugin-border-color);
 }
 
 .lichkin-dialog-focus .lichkin-dialog-contentBar .lichkin-plugin
 {
+  border-color: #2e6da4;
   border-color: var(--lichkin-plugin-border-color);
 }
 
@@ -126,17 +132,20 @@
 }
 
 .lichkin-dialog-focus .lichkin-dialog-titleBar {
+  background-color: #2e6da4;
   background-color: var(--lichkin-plugin-border-color);
 }
 
 /** invalid */
 .lichkin-dialog .lichkin-dialog-contentBar .lichkin-plugin-invalid .lichkin-plugin-button .lichkin-icon i
 {
+  color: #d43f3a;
   color: var(--lichkin-plugin-border-color-invalid);
 }
 
 .lichkin-dialog .lichkin-dialog-contentBar .lichkin-plugin-invalid
 {
+  border-color: #d43f3a;
   border-color: var(--lichkin-plugin-border-color-invalid);
 }
 

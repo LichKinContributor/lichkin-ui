@@ -13,6 +13,7 @@
 }
 
 .lichkin-cropper-invalid .lichkin-icon i {
+  color: #d43f3a;
   color: var(--lichkin-plugin-font-color-invalid);
 }
 

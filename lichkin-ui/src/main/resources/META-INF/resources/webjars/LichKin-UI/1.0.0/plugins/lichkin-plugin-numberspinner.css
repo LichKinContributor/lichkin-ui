@@ -7,6 +7,7 @@
 .lichkin-numberspinner .lichkin-numberspinner-button-container {
   display: inline-block;
   margin: 3.5px 0px;
+  background-color: #ffffff;
   background-color: var(--lichkin-plugin-background-color);
 }
 
@@ -15,12 +16,14 @@
   top: 0px;
   position: relative;
   display: block;
+  background-color: #2e6da4;
   background-color: var(--lichkin-plugin-font-color);
 }
 
 .lichkin-numberspinner-readonly .lichkin-numberspinner-button .lichkin-numberspinner-button-container .lichkin-icon {background-color:#CCCCCC;}
 
 .lichkin-numberspinner .lichkin-numberspinner-button .lichkin-numberspinner-button-container .lichkin-icon i {
+  color: #ffffff !important;
   color: var(--lichkin-plugin-background-color) !important;
 }
 
@@ -35,17 +38,21 @@
 }
 
 .lichkin-numberspinner-invalid .lichkin-numberspinner-button-container {
+  background-color: #ffe6e6;
   background-color: var(--lichkin-plugin-background-color-invalid);
 }
 
 .lichkin-numberspinner-invalid .lichkin-numberspinner-button .lichkin-numberspinner-button-container .lichkin-icon {
+  background-color: #d43f3a;
   background-color: var(--lichkin-plugin-font-color-invalid);
 }
 
 .lichkin-numberspinner-invalid .lichkin-numberspinner-button .lichkin-numberspinner-button-container .lichkin-icon i {
+  color: #ffe6e6 !important;
   color: var(--lichkin-plugin-background-color-invalid) !important;
 }
 
 .lichkin-plugin-invalid .lichkin-numberspinner .lichkin-numberspinner-button .lichkin-numberspinner-button-container .lichkin-icon {
+  background-color: #d43f3a;
   background-color: var(--lichkin-plugin-font-color-invalid);
 }

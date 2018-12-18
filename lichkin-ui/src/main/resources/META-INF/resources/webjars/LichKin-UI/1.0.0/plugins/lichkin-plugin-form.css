@@ -16,6 +16,7 @@
 }
 
 .lichkin-form-field-invalid .lichkin-form-field-key .lichkin-text {
+  color: #d43f3a;
   color: var(--lichkin-plugin-font-color-invalid);
 }
 

@@ -3,9 +3,11 @@
 .lichkin-text {
   display: inline-block;
   vertical-align: middle;
+  color: #2e6da4;
   color: var(--lichkin-plugin-font-color);
 }
 
 .lichkin-plugin-invalid .lichkin-text {
+  color: #d43f3a;
   color: var(--lichkin-plugin-font-color-invalid);
 }

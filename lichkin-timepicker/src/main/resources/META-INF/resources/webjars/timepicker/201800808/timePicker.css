@@ -1,5 +1,7 @@
 .Hunter-time-picker {
+  border: 1px solid #2e6da4;
   border: 1px solid var(--lichkin-plugin-border-color);
+  background: #ffffff;
   background: var(--lichkin-plugin-background-color);
   position: absolute;
   width: 390px;
@@ -20,15 +22,18 @@
 
 .Hunter-time-picker:before {
   top: -5px;
+  border-bottom-color: #2e6da4;
   border-bottom-color: var(--lichkin-plugin-border-color);
 }
 
 .Hunter-time-picker:after {
+  border-bottom-color: #ffffff;
   border-bottom-color: var(--lichkin-plugin-background-color);
   top: -4px;
 }
 
 .Hunter-time-picker * {
+  color: #2e6da4;
   color: var(--lichkin-plugin-font-color);
   box-sizing: border-box;
   margin: 0 auto;
@@ -56,7 +61,9 @@
 }
 
 .Hunter-time-picker .Hunter-wrap {
+  background-color: #ffffff;
   background-color: var(--lichkin-plugin-background-color);
+  color: #2e6da4;
   color: var(--lichkin-plugin-font-color);
   position: relative;
   width: 100%;
@@ -64,8 +71,11 @@
 }
 
 .Hunter-time-picker .Hunter-hour-name {
+  border: 1px solid #2e6da4;
   border: 1px solid var(--lichkin-plugin-border-color);
+  background-color: #ffffff;
   background-color: var(--lichkin-plugin-background-color);
+  color: #2e6da4;
   color: var(--lichkin-plugin-font-color);
   display: inline-block;
   width: 50px;
@@ -76,8 +86,11 @@
 }
 
 .Hunter-time-picker .Hunter-hour-name:hover {
+  border-color: #ffffff;
   border-color: var(--lichkin-plugin-border-color-hover);
+  background-color: #002d64;
   background-color: var(--lichkin-plugin-background-color-hover);
+  color: #ffffff;
   color: var(--lichkin-plugin-font-color-hover);
 }
 
@@ -86,20 +99,29 @@
 }
 
 .Hunter-time-picker .active .Hunter-hour-name {
+  border-color: #ffffff;
   border-color: var(--lichkin-plugin-border-color-selected);
+  background-color: #6eade4;
   background-color: var(--lichkin-plugin-background-color-selected);
+  color: #ffffff;
   color: var(--lichkin-plugin-font-color-selected);
 }
 
 .Hunter-time-picker .active:hover .Hunter-hour-name {
+  border-color: #ffffff;
   border-color: var(--lichkin-plugin-border-color-selected-hover);
+  background-color: #0e4d84;
   background-color: var(--lichkin-plugin-background-color-selected-hover);
+  color: #ffffff;
   color: var(--lichkin-plugin-font-color-selected-hover);
 }
 
 .Hunter-time-picker .Hunter-minute-wrap {
+  border: 1px solid #2e6da4;
   border: 1px solid var(--lichkin-plugin-border-color);
+  background-color: #ffffff;
   background-color: var(--lichkin-plugin-background-color);
+  color: #2e6da4;
   color: var(--lichkin-plugin-font-color);
   display: none;
   position: absolute;
@@ -109,8 +131,11 @@
 }
 
 .Hunter-time-picker .Hunter-minute {
+  border: 1px solid #2e6da4;
   border: 1px solid var(--lichkin-plugin-border-color);
+  background-color: #ffffff;
   background-color: var(--lichkin-plugin-background-color);
+  color: #2e6da4;
   color: var(--lichkin-plugin-font-color);
   width: 50px;
   height: 30px;
@@ -122,26 +147,38 @@
 }
 
 .Hunter-time-picker .Hunter-minute:hover {
+  border-color: #ffffff;
   border-color: var(--lichkin-plugin-border-color-hover);
+  background-color: #002d64;
   background-color: var(--lichkin-plugin-background-color-hover);
+  color: #ffffff;
   color: var(--lichkin-plugin-font-color-hover);
 }
 
 .Hunter-time-picker .Hunter-minute.active {
+  border-color: #ffffff;
   border-color: var(--lichkin-plugin-border-color-selected);
+  background-color: #6eade4;
   background-color: var(--lichkin-plugin-background-color-selected);
+  color: #ffffff;
   color: var(--lichkin-plugin-font-color-selected);
 }
 
 .Hunter-time-picker .Hunter-minute.active:hover {
+  border-color: #ffffff;
   border-color: var(--lichkin-plugin-border-color-selected-hover);
+  background-color: #0e4d84;
   background-color: var(--lichkin-plugin-background-color-selected-hover);
+  color: #ffffff;
   color: var(--lichkin-plugin-font-color-selected-hover);
 }
 
 .Hunter-time-picker .Hunter-clean-btn {
+  background-color: #2e6da4;
   background-color: var(--lichkin-plugin-border-color);
+  color: #ffffff;
   color: var(--lichkin-plugin-background-color);
+  border: 5px solid #2e6da4;
   border: 5px solid var(--lichkin-plugin-border-color);
   width: 108px;
   height: 30px;
