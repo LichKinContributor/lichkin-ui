@@ -100,3 +100,6 @@ $.LKExtendI18N({
   'No more datas' : 'No more datas',
 
 });
+
+// week array
+var weekArr = new Array("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
