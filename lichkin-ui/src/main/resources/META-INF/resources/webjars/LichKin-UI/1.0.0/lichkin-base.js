@@ -100,7 +100,7 @@ Date.prototype.format = function(fmt) {
   var o = {
     "M+" : this.getMonth() + 1,
     "d+" : this.getDate(),
-    "h+" : this.getHours(),
+    "H+" : this.getHours(),
     "m+" : this.getMinutes(),
     "s+" : this.getSeconds(),
     "q+" : Math.floor((this.getMonth() + 3) / 3),
