@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+.Title {
+  width: 100%;
+  background-color: #d43f3a;
+  text-align: center;
+  font-weight: bold;
+}
+
+.Title2 {
+  background-color: #eea236;
+}
+
+.SubTitle {
+  background-color: #4cae4c;
+  text-align: left;
+}
+
+.lichkin-form {
+  margin-bottom: 3px;
+}
+
+.lichkin-form-field .lichkin-form-field-key .lichkin-text {
+  color: #2e6da4 !important;
+}
+
+.lichkin-plugin-readonly .lichkin-plugin-text {
+  color: #2e6da4 !important;
+}
+
+.lichkin-button {
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
