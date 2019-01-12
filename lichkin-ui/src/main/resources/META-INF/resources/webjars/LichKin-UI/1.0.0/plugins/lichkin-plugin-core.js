@@ -733,6 +733,9 @@ LK.UI('plugins', 'create', function(opts) {
       width = options.width = options.inForm ? (LK.colWidth * options.cols) + ((options.cols - 1) * (LK.fieldKeyWidth + LK.leftGap)) - 2 : ((options.withField ? (LK.leftGap + LK.fieldKeyWidth + LK.colWidth) : (LK.colWidth)) * options.cols);
     } else {
       width = options.width = (LK.colWidth * options.cols) + (options.inForm ? (options.cols - 1) * (LK.fieldKeyWidth + LK.leftGap) : 0) - 2;
+      if ((plugin == 'textbox' || plugin == 'textarea') && LK.asApp) {
+        width = options.width = $body.width() - 2 - LK.leftGap - (options.inForm ? (LK.fieldKeyWidth + LK.leftGap) : 0)
+      }
     }
   } else {
     width = options.width = options.width + 2;
