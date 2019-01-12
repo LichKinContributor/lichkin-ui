@@ -69,6 +69,24 @@ LK.app = {
 
   reload : function(loadingId) {
     window.WebViewJavascriptBridge.callHandler('reload');
+  },
+
+  openWin : function(url) {
+    url = url.replace(/\&timestamp=[0-9]*&/, '&').replace(/\&timestamp=[0-9]*/, '').replace(/\?timestamp=[0-9]*&/, '?').replace(/\?timestamp=[0-9]*/, '');
+    if (!url.startsWith('http')) {
+      var prefix = window.location.protocol + '//' + window.location.hostname;
+      if (window.location.port != 80) {
+        prefix += ':' + window.location.port;
+      }
+      url = prefix + url;
+    }
+    window.WebViewJavascriptBridge.callHandler('openWin', {
+      url : url
+    });
+  },
+
+  closeWin : function() {
+    window.WebViewJavascriptBridge.callHandler('closeWin');
   }
 
 };

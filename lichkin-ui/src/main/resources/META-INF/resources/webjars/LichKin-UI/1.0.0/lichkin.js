@@ -885,16 +885,14 @@ $.extend(LK, {
     if (typeof ignoreMappingPages == 'undefined') {
       ignoreMappingPages = false;
     }
-    window.open(LK.resolveUrl(url, true, param, normalPage, ignoreMappingPages));
+    LK[this.type].openWin(LK.resolveUrl(url, true, param, normalPage, ignoreMappingPages));
   },
 
   /**
    * 关闭页面
    */
   closeWin : function() {
-    window.opener = null;
-    window.open('', '_self');
-    window.close();
+    LK[this.type].closeWin();
   },
 
   /**

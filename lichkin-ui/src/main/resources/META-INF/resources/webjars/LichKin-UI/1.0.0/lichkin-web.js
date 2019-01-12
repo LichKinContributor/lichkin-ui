@@ -97,6 +97,18 @@ LK.web = {
 
   reload : function(loadingId) {
     window.location.reload();
+  },
+
+  openWin : function(url) {
+    window.open(url);
+  },
+
+  closeWin : function() {
+    if (window.opener != null) {
+      window.opener = null;
+    }
+    window.open('', '_self');
+    window.close();
   }
 
 };
