@@ -890,6 +890,13 @@ $.extend(LK, {
   },
 
   /**
+   * 重新加载页面
+   */
+  reload : function() {
+    LK[this.type].reload();
+  },
+
+  /**
    * AJAX请求
    * @param options 自定义的参数
    * @param options[async] [boolean] 是否为异步调用（仅数据请求生效）

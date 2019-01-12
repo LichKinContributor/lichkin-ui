@@ -65,6 +65,10 @@ LK.app = {
 
   closeLoading : function() {
     window.WebViewJavascriptBridge.callHandler('closeLoading');
+  },
+
+  reload : function(loadingId) {
+    window.WebViewJavascriptBridge.callHandler('reload');
   }
 
 };

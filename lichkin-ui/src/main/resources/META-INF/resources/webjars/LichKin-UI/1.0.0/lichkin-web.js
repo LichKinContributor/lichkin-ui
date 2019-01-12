@@ -93,6 +93,10 @@ LK.web = {
         $loading.remove();
       }
     }
+  },
+
+  reload : function(loadingId) {
+    window.location.reload();
   }
 
 };
