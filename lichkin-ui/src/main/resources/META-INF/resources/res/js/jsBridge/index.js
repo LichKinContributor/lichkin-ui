@@ -137,6 +137,20 @@ addCode('Reload', [
   }
 ]);
 
+/* Open */
+addCode('Open', [
+  function() {
+    LK.openWin('/jsBridge/index');
+  }
+]);
+
+/* Close */
+addCode('Close', [
+  function() {
+    LK.closeWin();
+  }
+]);
+
 /* Log */
 addCode('Log', [
     function() {

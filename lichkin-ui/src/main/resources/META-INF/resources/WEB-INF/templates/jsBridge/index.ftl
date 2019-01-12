@@ -1,4 +1,4 @@
-<#include "/macro/html-lichkin.ftl"/>
+<#include "/macro/html-lichkin-simple.ftl"/>
 
 <@html css=true js=true i18nJs=true i18nJsAddition=false iconsJs=false iconsJsAddition=false;section>
 	<#if section="javascript-contents-before-self">

@@ -29,6 +29,8 @@ $.LKExtendI18N({
   'Execute' : '执行',
 
   'Reload' : 'Reload',
+  'Open' : 'Open',
+  'Close' : 'Close',
   'Log' : 'Log',
   'Toast' : 'Toast',
   'Alert' : 'Alert',
