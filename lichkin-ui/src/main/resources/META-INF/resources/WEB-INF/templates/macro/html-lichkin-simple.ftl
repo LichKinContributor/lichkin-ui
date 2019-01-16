@@ -26,7 +26,7 @@
 <#assign jsBridgeTest=jsBridgeTest!"false">
 <#assign calculateType="">
 <#if _$=="">
-	<#if jsBridge=="false">
+	<#if jsBridge=="">
 		<#assign calculateType="web">
 	<#else>
 		<#assign calculateType="app">
