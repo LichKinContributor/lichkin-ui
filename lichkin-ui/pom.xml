@@ -70,7 +70,7 @@
     <dependency>
       <groupId>com.lichkin.ui</groupId>
       <artifactId>lichkin-timepicker</artifactId>
-      <version>1.0.0.RELEASE</version>
+      <version>1.0.1.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>com.lichkin.ui</groupId>
