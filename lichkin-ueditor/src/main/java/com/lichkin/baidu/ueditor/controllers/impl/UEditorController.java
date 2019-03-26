@@ -32,13 +32,13 @@ import lombok.Cleanup;
 @RequestMapping(value = "/webjars/ueditor/1.4.3.3/jsp")
 public class UEditorController {
 
+	/** 文件服务器URL根路径 */
+	@Value("${com.lichkin.files.server.rootUrl:http://files.lichkin.com}")
+	private String filesServerRootUrl;
+
 	/** 文件服务器保存根路径 */
 	@Value("${com.lichkin.files.save.path:/opt/files}")
-	private String fileSaveRootPath;
-
-	/** 文件服务器URL根路径 */
-	@Value("${com.lichkin.files.server.rootUrl}")
-	private String fileServerRootUrl;
+	private String filesSaveRootPath;
 
 	/** 内容中的图片保存子路径 */
 	private static final String CONTENT_IMAGES_PAGE = "/images/content";
@@ -52,12 +52,12 @@ public class UEditorController {
 				try {
 					String originalFilename = upfile.getOriginalFilename();
 					String extName = originalFilename.substring(originalFilename.lastIndexOf("."));
-					String filePath = LKFileUtils.createFilePath(fileSaveRootPath + CONTENT_IMAGES_PAGE, extName);
+					String filePath = LKFileUtils.createFilePath(filesSaveRootPath + CONTENT_IMAGES_PAGE, extName);
 					@Cleanup
 					FileOutputStream outputStream = new FileOutputStream(filePath);
 					outputStream.write(upfile.getBytes());
 					state.put("state", "SUCCESS");
-					state.put("url", fileServerRootUrl + filePath.replace(fileSaveRootPath, ""));
+					state.put("url", filesServerRootUrl + filePath.replace(filesSaveRootPath, ""));
 					state.put("type", extName);
 					state.put("original", originalFilename);
 				} catch (Exception e) {
