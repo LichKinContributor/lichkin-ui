@@ -155,7 +155,8 @@ $.extend(LK, {
   defaultTheme : {
     size : {
       primary : {
-        font : 12
+        font : 12,
+        titleFont : 14
       }
     },
     color : {
@@ -333,6 +334,7 @@ $.extend(LK, {
     theme += '--lichkin-plugin-font-color-invalid:' + color.invalid.font + ';\r\n';
 
     theme += '--lichkin-plugin-font-size:' + size.primary.font + 'px;\r\n';
+    theme += '--lichkin-plugin-title-font-size:' + size.primary.titleFont + 'px;\r\n';
 
     theme += '}\r\n';
     $('#lichkin-themes').html(theme);

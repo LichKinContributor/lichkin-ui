@@ -4,10 +4,10 @@
   --lichkin-datagrid-header-background-color: var(--lichkin-plugin-border-color);
   --lichkin-datagrid-header-light-background-color: #f0f0f0;
   --lichkin-datagrid-header-font-color: var(--lichkin-plugin-background-color);
-  --lichkin-datagrid-header-font-size: 14px;
+  --lichkin-datagrid-header-font-size: var(--lichkin-plugin-title-font-size);
   --lichkin-datagrid-body-border-color: #CCCCCC;
   --lichkin-datagrid-body-font-color: var(--lichkin-plugin-font-color);
-  --lichkin-datagrid-body-font-size: 12px;
+  --lichkin-datagrid-body-font-size: var(--lichkin-plugin-font-size);
 }
 
 .lichkin-datagrid {
