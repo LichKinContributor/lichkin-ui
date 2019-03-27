@@ -141,7 +141,7 @@ let _CSS = _RES + '/css';
 let _IMG = _RES + '/img';
 
 // 其它服务器参数
-let _LANG='${locale}',_MAPPING_PAGES='${mappingPages}',_MAPPING_API='${mappingApi}',_WEB_DEBUG=${webDebug?c},_COMPRESS_SUFFIX='${compressSuffix}',_BACK_URL='${backUrl}',LKI18N={};
+let _LANG='${locale}',_MAPPING_PAGES='${mappingPages}',_MAPPING_API='${mappingApi}',_WEB_DEBUG=${webDebug?c},_UI_DEBUG=${uiDebug?c},_UI_DEV=${uiDev?c},_COMPRESS_SUFFIX='${compressSuffix}',_BACK_URL='${backUrl}',LKI18N={};
 
 			<#nested "javascript-contents-before-links@"/>
 		</#if>
