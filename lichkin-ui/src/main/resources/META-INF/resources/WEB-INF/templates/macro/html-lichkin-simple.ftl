@@ -62,7 +62,7 @@
 
 <#-- 三方控件css -->
 <#-- fontawesome-all.css -->
-<@lichkin@cssTag url="/webjars/font-awesome/web-fonts-with-css/css/fontawesome-all" />
+<@lichkin@cssTag url="/webjars/font-awesome/css/all" />
 <#-- datepicker.css -->
 <@lichkin@cssTag url="/webjars/datepicker/datepicker" />
 <#-- timePicker.css -->
