@@ -31,6 +31,39 @@ LK.UI._map = {
         $plugin.LKValidate();
       }
         break;
+      case 'Marker': {
+        if (options.readonly && !isDefaultValue) {
+          return;
+        }
+
+        var marker = new AMap.Marker({
+          position : new AMap.LngLat(jsonValue.longitude, jsonValue.latitude),
+          icon : options.markerIcon == null ? null : options.markerIcon,
+          title : options.markerTitle == null ? null : options.markerTitle,
+        });
+
+        if (jsonValue.markerLabel) {
+          marker.setLabel({
+            offset : new AMap.Pixel(20, -20),
+            content : '<div class="lichkin-plugin-map-marker-label">' + jsonValue.markerLabel + '</div>'
+          });
+        }
+
+        if (!options.readonly) {
+          if (window['mapMarkers_' + options.id]) {
+            map.remove(window['mapMarkers_' + options.id]);
+          }
+          window['mapMarkers_' + options.id] = [];
+          window['mapMarkers_' + options.id].push(marker);
+        }
+
+        map.add(marker);
+        map.setFitView([
+          marker
+        ]);
+        $plugin.data('mapJson', jsonValue);
+      }
+        break;
       default:
         break;
     }
@@ -53,11 +86,22 @@ LK.UI('plugins', 'map', function(options) {
 
   var $value = $plugin.LKGetValueObj();
 
-  var mapJson = $.extend({
+  var mapJson = {
     longitude : 120.7449066639,
     latitude : 31.2692525940,
     radius : 1000
-  }, (options.value == null || isEmptyJSON(options.value)) ? {} : options.value);
+  };
+  if (options.value != null && !isEmptyJSON(options.value)) {
+    if (options.value.longitude) {
+      mapJson.longitude = options.value.longitude;
+    }
+    if (options.value.latitude) {
+      mapJson.latitude = options.value.latitude;
+    }
+    if (options.value.radius) {
+      mapJson.radius = options.value.radius;
+    }
+  }
   $plugin.data('mapJson', mapJson);
 
   // 创建map对象
@@ -111,23 +155,7 @@ LK.UI('plugins', 'map', function(options) {
     }
       break;
     case 'Marker': {
-      var marker = new AMap.Marker({
-        position : new AMap.LngLat(mapJson.longitude, mapJson.latitude),
-        icon : options.markerIcon == null ? null : options.markerIcon,
-        title : options.markerTitle == null ? null : options.markerTitle,
-      });
-
-      if (mapJson.markerLabel) {
-        marker.setLabel({
-          offset : new AMap.Pixel(20, -20),
-          content : '<div class="lichkin-plugin-map-marker-label">' + mapJson.markerLabel + '</div>'
-        });
-      }
-
-      map.add(marker);
-      map.setFitView([
-        marker
-      ]);
+      LK.UI._map.setValues($plugin, mapJson, true);
     }
       break;
     default:
